@@ -6,11 +6,12 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/04 11:57:59 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/04 11:59:45 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/06 16:09:52 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
 SRCS = ft_memccpy.c ft_memcpy.c ft_memset.c ft_bzero.c ft_memmove.c \
 	   ft_isalpha.c ft_isalnum.c ft_isdigit.c ft_isascii.c ft_isprint.c \
 	   ft_putchar_fd.c ft_putchar.c ft_putstr.c ft_putstr_fd.c ft_strlen.c \
@@ -24,9 +25,13 @@ SRCS = ft_memccpy.c ft_memcpy.c ft_memset.c ft_bzero.c ft_memmove.c \
 	   ft_strsplit.c ft_itoa.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 	   ft_lstadd.c ft_lstiter.c ft_lstmap.c \
 	   ft_abs.c get_next_line.c ft_strjoin_free.c
+
 INCLUDES = ../includes
+
 OBJ = $(SRCS:.c=.o)
+
 CFLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
+
 RED := "\033[0;31m"
 GREEN := "\033[0;32m"
 BLUE := "\033[0;34m"
