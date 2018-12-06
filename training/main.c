@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/06 11:19:48 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/06 11:30:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "test.h"
 
-int		key_input(int key, void *param)
+int		key_press(int key, void *param)
 {
 	t_env	*data;
 	
@@ -32,6 +32,13 @@ int		key_input(int key, void *param)
 	return (0);
 }
 
+int		close_window(void *param)
+{
+	(void)param;
+	ft_putendl("CLOSE");
+	exit(0);
+}
+
 int		main(void)
 {
 	t_env	data;
@@ -41,7 +48,8 @@ int		main(void)
 	i = 0;
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 500, 500, "Test");
-	mlx_key_hook(data.win_ptr, key_input, &data);
+	mlx_hook(data.win_ptr, 3, 1L<<0 , key_press, &data);
+	mlx_hook(data.win_ptr, 17, 1L<<17, close_window, &data);
 	//draw_segment(240, 240, 260, 260, data.mlx_ptr, data.win_ptr);
 	data.img_ptr = mlx_new_image(data.mlx_ptr, 500, 500);
 	img.str = mlx_get_data_addr(data.img_ptr, &(img.bit_per_pixels), &(img.size_line), &(img.endian));
