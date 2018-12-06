@@ -6,14 +6,15 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/04 17:57:56 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/06 11:19:23 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "libft.h"
+#include "test.h"
 
-int		plotLineLow(int x1, int y1, int x2, int y2, void *mlx_ptr, void *win_ptr)
+int		plotLineLow(int x1, int y1, int x2, int y2, t_img img)
 {
 	int	dx;
 	int	dy;
@@ -31,7 +32,11 @@ int		plotLineLow(int x1, int y1, int x2, int y2, void *mlx_ptr, void *win_ptr)
 	e = 2 * dy - dx;
 	while (x1 <= x2)
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, x1, y1, 0xFFFFFF);
+		//mlx_pixel_put(mlx_ptr, win_ptr, x1, y1, 0xFFFFFF);
+		img.str[x1 * (img.bit_per_pixels / 8) + y1 * img.size_line] = 0xFF;
+		img.str[x1 * (img.bit_per_pixels / 8) + y1 * img.size_line + 1] = 0xFF;
+		img.str[x1 * (img.bit_per_pixels / 8) + y1 * img.size_line + 2] = 0xFF;
+		//img.str[x1 * (img.bit_per_pixels / 8) + y1 * img.size_line * 4 + 3] = 0xFF;
 		if (e > 0)
 		{
 			y1 += yi;
@@ -43,7 +48,7 @@ int		plotLineLow(int x1, int y1, int x2, int y2, void *mlx_ptr, void *win_ptr)
 	return (0);
 };
 
-int		plotLineHigh(int x1, int y1, int x2, int y2, void *mlx_ptr, void *win_ptr)
+int		plotLineHigh(int x1, int y1, int x2, int y2, t_img img)
 {
 	int	dx;
 	int	dy;
@@ -61,7 +66,11 @@ int		plotLineHigh(int x1, int y1, int x2, int y2, void *mlx_ptr, void *win_ptr)
 	e = 2 * dx - dy;
 	while (y1 <= y2)
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, x1, y1, 0xFFFFFF);
+		//mlx_pixel_put(mlx_ptr, win_ptr, x1, y1, 0xFFFFFF);
+		img.str[x1 * (img.bit_per_pixels / 8) + y1 * img.size_line] = 0xFF;
+		img.str[x1 * (img.bit_per_pixels / 8) + y1 * img.size_line + 1] = 0xFF;
+		img.str[x1 * (img.bit_per_pixels / 8) + y1 * img.size_line + 2] = 0xFF;
+		//img.str[x1 * (img.bit_per_pixels / 8) + y1 * img.size_line * 4 + 3] = 0xFF;
 		if (e > 0)
 		{
 			x1 += xi;
@@ -73,17 +82,17 @@ int		plotLineHigh(int x1, int y1, int x2, int y2, void *mlx_ptr, void *win_ptr)
 	return (0);
 };
 
-int		plotLine(int x1, int y1, int x2, int y2, void *mlx_ptr, void *win_ptr)
+int		plotLine(int x1, int y1, int x2, int y2, t_img img)
 {
 	if (ft_abs(y2 - y1) < ft_abs(x2 - x1))
 		if (x1 > x2)
-			plotLineLow(x2, y2, x1, y1, mlx_ptr, win_ptr);
+			plotLineLow(x2, y2, x1, y1, img);
 		else
-			plotLineLow(x1, y1, x2, y2, mlx_ptr, win_ptr);
+			plotLineLow(x1, y1, x2, y2, img);
 	else
 		if (y1 > y2)
-			plotLineHigh(x2, y2, x1, y1, mlx_ptr, win_ptr);
+			plotLineHigh(x2, y2, x1, y1, img);
 		else
-			plotLineHigh(x1, y1, x2, y2, mlx_ptr, win_ptr);
+			plotLineHigh(x1, y1, x2, y2, img);
 	return (0);
 }

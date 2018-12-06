@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/04 17:55:48 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/06 11:19:48 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,19 @@ int		main(void)
 {
 	t_env	data;
 	int		i;
+	t_img	img;
 
 	i = 0;
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 500, 500, "Test");
 	mlx_key_hook(data.win_ptr, key_input, &data);
 	//draw_segment(240, 240, 260, 260, data.mlx_ptr, data.win_ptr);
-	plotLine(0, 200, 500, 400, data.mlx_ptr, data.win_ptr);
+	data.img_ptr = mlx_new_image(data.mlx_ptr, 500, 500);
+	img.str = mlx_get_data_addr(data.img_ptr, &(img.bit_per_pixels), &(img.size_line), &(img.endian));
+	ft_putstr("bit_per_pixels: "); ft_putnbr(img.bit_per_pixels); ft_putchar('\n');
+	ft_putstr("size_line: "); ft_putnbr(img.size_line); ft_putchar('\n');
+	plotLine(0, 0, 500, 500, img);
+	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }
