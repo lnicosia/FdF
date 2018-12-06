@@ -1,0 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/04 15:00:21 by lnicosia          #+#    #+#             */
+/*   Updated: 2018/12/06 12:54:11 by lnicosia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef UTILS_H
+# define UTILS_H
+
+typedef struct	s_env
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_ptr;
+}				t_env;
+
+typedef struct	s_img
+{
+	int		bit_per_pixels;
+	int		size_line;
+	int		endian;
+	char	*str;
+}				t_img;
+
+typedef struct	s_coord
+{
+	int		x;
+	int		y;
+}				t_coord;
+
+int				plot_line(t_coord c1, t_coord c2, t_img img);
+int				key_press(int key, void *param);
+int				key_release(int key, void *param);
+int				mouse_press(int button, int x, int y, void *param);
+int				mouse_release(int button, int x, int y, void *param);
+int				mouse_move(int x, int y, void *param);
+int				expose(void *param);
+int				close_window(void *param);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 13:19:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/04 14:29:49 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/06 12:57:43 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # define MLX_KEYCODE_H
 
 /*
- * ** Macros for mlx_hook function
- * */
+** Macros for mlx_hook function
+*/
 
 # define NOEVENTMASK 0L
 # define KEYPRESSMASK (1L<<0)
@@ -70,8 +70,8 @@
 # define GRAVITYNOTIFY 24
 
 /*
- * ** Mouse button keycodes
- * */
+** Mouse button keycodes
+*/
 
 # define BUT1_KEY 1
 # define BUT2_KEY 2
@@ -82,12 +82,12 @@
 # define SCROLLRIGHT_KEY 7
 
 /*
- * ** Keyboard keys
- * */
+** Keyboard keys
+*/
 
 /*
- * ** Letters keys
- * */
+** Letters keys
+*/
 
 # define A_KEY 0
 # define B_KEY 11
@@ -117,8 +117,8 @@
 # define Z_KEY 6
 
 /*
- * ** Numbers (not numeric keypad ones)
- * */
+** Numbers (not numeric keypad ones)
+*/
 
 # define K1_KEY 18
 # define K2_KEY 19
@@ -132,20 +132,20 @@
 # define K0_KEY 29
 
 /*
- * ** Special characters
- * ** SP_KEY is the space ( ) key
- * ** BQ_KEY is the back quote (`) and tilde (~) key
- * ** MN_KEY is the minus (-) and underscore (_) key
- * ** PL_KEY is the plus (+) and equal (=) key
- * ** SBO_KEY is the square bracket opening ([) and brace opening ({) key
- * ** SBC_KEY is the square bracket closing (]) and brace closing (}) key
- * ** BSL_KEY is the backslash (\) and pipe (|) key
- * ** SC_KEY is the semicolon (;) and colon (:) key
- * ** SQ_KEY is the simple quote (') and double quote (") key
- * ** CM_KEY is the comma (,) and angle bracket opening (<) key
- * ** PT_KEY is the point (.) and angle bracket closing (>) key
- * ** SL_KEY is the slash (/) and question mark (?) key
- * */
+** Special characters
+** SP_KEY is the space ( ) key
+** BQ_KEY is the back quote (`) and tilde (~) key
+** MN_KEY is the minus (-) and underscore (_) key
+** PL_KEY is the plus (+) and equal (=) key
+** SBO_KEY is the square bracket opening ([) and brace opening ({) key
+** SBC_KEY is the square bracket closing (]) and brace closing (}) key
+** BSL_KEY is the backslash (\) and pipe (|) key
+** SC_KEY is the semicolon (;) and colon (:) key
+** SQ_KEY is the simple quote (') and double quote (") key
+** CM_KEY is the comma (,) and angle bracket opening (<) key
+** PT_KEY is the point (.) and angle bracket closing (>) key
+** SL_KEY is the slash (/) and question mark (?) key
+*/
 
 # define SP_KEY 49
 # define BQ_KEY 50
@@ -161,9 +161,9 @@
 # define SL_KEY 44
 
 /*
- * ** Functions keys, you might use fn key to use them
- * ** I didn't find the F11_KEY value
- * */
+** Functions keys, you might use fn key to use them
+** I didn't find the F11_KEY value
+*/
 
 # define F1_KEY 122
 # define F2_KEY 120
@@ -186,8 +186,8 @@
 # define F19_KEY 80
 
 /*
- * ** Arrow keys
- * */
+** Arrow keys
+*/
 
 # define UP_KEY 126
 # define DOWN_KEY 125
@@ -195,18 +195,18 @@
 # define LEFT_KEY 123
 
 /*
- * ** Special keys
- * ** CL_KEY is the caps lock key
- * ** LSFT_KEY and RLFT_KEY are the left shift and right shift keys
- * ** LCTRL_KEY and RCTRL_KEY are the left control and right control keys
- * ** LOPT_KEY and ROPT_KEY are the left option and right option keys
- * ** LCMD_KEY and RCMD_KEY are the left command and right command keys
- * ** LDEL_KEY and RDEL_KEY are the left delete and right delete keys
- * ** RTN_KEY is the return key
- * ** EJ_KEY is the eject key and doesn't react
- * ** PUP_KEY and PDOWN_KEY are the page up and page down keys
- * ** CLR_KEY is the clear key
- * */
+** Special keys
+** CL_KEY is the caps lock key
+** LSFT_KEY and RLFT_KEY are the left shift and right shift keys
+** LCTRL_KEY and RCTRL_KEY are the left control and right control keys
+** LOPT_KEY and ROPT_KEY are the left option and right option keys
+** LCMD_KEY and RCMD_KEY are the left command and right command keys
+** LDEL_KEY and RDEL_KEY are the left delete and right delete keys
+** RTN_KEY is the return key
+** EJ_KEY is the eject key and doesn't react
+** PUP_KEY and PDOWN_KEY are the page up and page down keys
+** CLR_KEY is the clear key
+*/
 
 # define ESC_KEY 53
 # define TAB_KEY 48
@@ -231,15 +231,15 @@
 # define CLR_KEY 71
 
 /*
- * ** Numeric keyboard keys, preceded by NK
- * ** NKEQ_KEY is the equal (=) key
- * ** NKSL_KEY is the slash (/) key
- * ** NKWC_KEY is the wildcard (*) key
- * ** NKMN_KEY is the minus (-) key
- * ** NKPL_KEY is the plus (+) key
- * ** NKPT_KEY is the point (.) key
- * ** NKNTR_KEY is the enter key
- * */
+** Numeric keyboard keys, preceded by NK
+** NKEQ_KEY is the equal (=) key
+** NKSL_KEY is the slash (/) key
+** NKWC_KEY is the wildcard (*) key
+** NKMN_KEY is the minus (-) key
+** NKPL_KEY is the plus (+) key
+** NKPT_KEY is the point (.) key
+** NKNTR_KEY is the enter key
+*/
 
 # define NK1_KEY 83
 # define NK2_KEY 84
