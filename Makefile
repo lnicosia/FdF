@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/06 16:09:37 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/06 16:14:54 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	@gcc $(CFLAGS) $(OBJ) -L /usr/local/lib -lmlx -framework OpenGL -framework \
+	@gcc $(CFLAGS) $(OBJ) -O3 -L /usr/local/lib -lmlx -framework OpenGL -framework \
 		Appkit libft/libft.a -o $(NAME)
 	@echo ${GREEN}"[INFO] Compiled [$(NAME)] executable successfully!"
 
