@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:00:21 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/07 15:50:43 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/07 17:04:28 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ typedef struct	s_env
 	void	*win_ptr;
 	void	*img_ptr;
 	int		***map;
+	int		map_height;
+	int		map_width;
+	int		s_height;
+	int		s_width;
 }				t_env;
 
 typedef struct	s_img
@@ -52,8 +56,9 @@ int				mouse_release(int button, int x, int y, void *param);
 int				mouse_move(int x, int y, void *param);
 int				expose(void *param);
 int				close_window(void *param);
-int				parser(t_list **map, char *file);
+int				parser(t_list **map, char *file, int *map_height, int *map_width);
 int				clear_map(t_list **map);
 void			del_map_link(void *content, size_t content_size);
+int				***init_map(t_list *map);
 
 #endif
