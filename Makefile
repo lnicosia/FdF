@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/07 16:57:53 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/07 18:16:10 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ OBJ = $(SRC:.c=.o)
 
 INCLUDES = libft
 
-CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES)
+CFLAGS = -O3 -g -Wall -Wextra -Werror -I $(INCLUDES)
+
+LIB = /usr/local/lib -lmlx -framework OpenGL -framework Appkit libft/libft.a
 
 RED := "\033[0;31m"
 GREEN := "\033[0;32m"
@@ -31,8 +33,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	@gcc $(CFLAGS) $(OBJ) -O3 -g -L /usr/local/lib -lmlx -framework OpenGL -framework \
-		Appkit libft/libft.a -o $(NAME)
+	@gcc $(CFLAGS) $(OBJ) -L $(LIB) -o $(NAME)
 	@echo ${GREEN}"[INFO] Compiled [$(NAME)] executable successfully!"
 
 clean: 

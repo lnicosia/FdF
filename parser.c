@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:11:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/07 17:05:27 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/07 19:34:57 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,19 @@ static int	check_line(char *line, int *line_size)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	*line_size = 0;
-	while (line[++i])
+	while (line[i] && line[i] == ' ')
+		i++;
+	while (line[i])
 	{
-		if (line[i] != ' ' && line[i] != '-' && (line[i] < '0' || line[i] > '9'))
-			return (LINE_FORMAT_ERROR);
-		while(line[i] == ' ' || line[i] == '-')
+		while (line[i] && line[i] != ' ')
+		{
+			if (line[i] != '-' && (line[i] < '0' || line[i] > '9'))
+				return (LINE_FORMAT_ERROR);
+			i++;
+		}
+		while (line[i] && line[i] == ' ')
 			i++;
 		(*line_size)++;
 	}
@@ -46,6 +52,7 @@ int			clear_map(t_list **map)
 int			parser(t_list **map, char *file, int *map_height, int *map_width)
 {
 	int		fd;
+	int		tmp;
 	char	*line;
 
 	*map_height = 0;
@@ -53,10 +60,11 @@ int			parser(t_list **map, char *file, int *map_height, int *map_width)
 		return (OPEN_ERROR);
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (*map_width != 0 && *map_width != (int)ft_strlen(line))
-			return (LINE_ERROR);
-		if (check_line(line, map_width) != 0)
+		if (check_line(line, &tmp) != 0)
 			return (clear_map(map));
+		if (*map_width != 0 && tmp != *map_width)
+			return (LINE_ERROR);
+		*map_width = tmp;
 		(*map_height)++;
 		ft_lstpushback(map, ft_lstnew(line, ft_strlen(line) + 1));
 		ft_strdel(&line);

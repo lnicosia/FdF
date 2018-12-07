@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/07 17:06:38 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/07 19:08:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int		main(int argc, char **argv)
 {
 	t_env	data;
 	int		i;
+	int		j;
+	int		ret;
 	t_img	img;
 	t_list	*map;
-	t_list	*tmp;
 
-	i = 0;
 	map = NULL;
 	data.s_height = 600;
 	data.s_width = 800;
@@ -34,23 +34,28 @@ int		main(int argc, char **argv)
 	mlx_hook(data.win_ptr, 17, 1L << 17, close_window, &data);
 	data.img_ptr = mlx_new_image(data.mlx_ptr, data.s_width, data.s_height);
 	img.str = mlx_get_data_addr(data.img_ptr, &(img.bit_per_pixels), &(img.size_line), &(img.endian));
-	if ((data.map_height = parser(&map, argv[1], &(data.map_height), &(data.map_width))) != 0)
+	if ((ret = parser(&map, argv[1], &(data.map_height), &(data.map_width))) != 0)
 	{
-		ft_putendl("parse error");
-		return (data.map_height);
+		ft_putendl("parse error "); ft_putnbr(ret); ft_putchar('\n');
+		return (ret);
 	}
 	ft_putnbr(data.s_width); ft_putstr(" X "); ft_putnbr(data.s_height); ft_putchar('\n');
 	ft_putstr("map size: "); ft_putnbr(data.map_height);
-	ft_putstr(" x "); ft_putnbr(ft_strlen((char *)(map->content))); ft_putchar('\n');
+	ft_putstr(" x "); ft_putnbr(data.map_width); ft_putchar('\n');
 	ft_putendl("TXT MAP:");
-	tmp = map;
-	while (tmp)
+	data.map = init_map(data.map_height, data.map_width, map);
+	i = 0;
+	while (i < data.map_height)
 	{
-		//ft_putstr("len: "); ft_putnbr(map->content_size); ft_putstr(" ("); ft_putnbr(ft_strlen((char *)(map->content))); ft_putstr(") ");
-		ft_putendl((char *)tmp->content);
-		tmp = tmp->next;
+		j = 0;
+		while (j < data.map_width)
+		{
+			ft_putnbr(data.map[i][j]); ft_putchar(' ');
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
 	}
-	data.map = init_map(map);
 	ft_putstr("bit_per_pixels: "); ft_putnbr(img.bit_per_pixels); ft_putchar('\n');
 	ft_putstr("size_line: "); ft_putnbr(img.size_line); ft_putchar('\n');
 	t_coord2 c1;
