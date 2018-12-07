@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/06 12:52:08 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/07 10:01:50 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "utils.h"
 
-static int	plot_line_low(t_coord c1, t_coord c2, t_img img)
+static int	plot_line_low(t_coord2 c1, t_coord2 c2, t_img img)
 {
 	int	dx;
 	int	dy;
@@ -42,7 +42,7 @@ static int	plot_line_low(t_coord c1, t_coord c2, t_img img)
 	return (0);
 }
 
-static int	plot_line_high(t_coord c1, t_coord c2, t_img img)
+static int	plot_line_high(t_coord2 c1, t_coord2 c2, t_img img)
 {
 	int	dx;
 	int	dy;
@@ -70,7 +70,7 @@ static int	plot_line_high(t_coord c1, t_coord c2, t_img img)
 	return (0);
 }
 
-int			plot_line(t_coord c1, t_coord c2, t_img img)
+int			plot_line(t_coord2 c1, t_coord2 c2, t_img img)
 {
 	if (ft_abs(c2.y - c1.y) < ft_abs(c2.x - c1.x))
 		if (c1.x > c2.x)

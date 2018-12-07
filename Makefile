@@ -6,13 +6,13 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/06 16:14:54 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/07 10:26:10 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = main.c plot_line.c hook_key_and_mouse.c hook_more.c
+SRC = main.c plot_line.c hook_key_and_mouse.c hook_more.c parser.c coord_utils.c
 
 OBJ = $(SRC:.c=.o)
 

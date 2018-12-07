@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/06 12:23:17 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/07 12:16:56 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,29 @@
 #include "libft.h"
 #include "utils.h"
 
-int		main(void)
+int		main(int argc, char **argv)
 {
 	t_env	data;
 	int		i;
 	t_img	img;
+	t_list	*map;
 
 	i = 0;
+	map = NULL;
+	(void)argc;
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 500, 500, "Test");
 	mlx_hook(data.win_ptr, 3, 1L << 0, key_press, &data);
 	mlx_hook(data.win_ptr, 17, 1L << 17, close_window, &data);
 	data.img_ptr = mlx_new_image(data.mlx_ptr, 500, 500);
 	img.str = mlx_get_data_addr(data.img_ptr, &(img.bit_per_pixels), &(img.size_line), &(img.endian));
+	parser(&map, argv[1]);
+	ft_putstr("map size: "); ft_putnbr(parser(&map, argv[1]));
+	ft_putstr(" x ");ft_putnbr(ft_strlen((char *)(map->content))); ft_putchar('\n');
 	ft_putstr("bit_per_pixels: "); ft_putnbr(img.bit_per_pixels); ft_putchar('\n');
 	ft_putstr("size_line: "); ft_putnbr(img.size_line); ft_putchar('\n');
-	t_coord c1;
-	t_coord c2;
+	t_coord2 c1;
+	t_coord2 c2;
 	c1.x = 0;
 	c1.y = 0;
 	c2.x = 500;
