@@ -6,14 +6,14 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:00:21 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/07 12:05:05 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/07 15:50:43 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
-#include "error.h"
-#include "libft.h"
+# include "error.h"
+# include "libft.h"
 
 typedef struct	s_env
 {
@@ -53,5 +53,7 @@ int				mouse_move(int x, int y, void *param);
 int				expose(void *param);
 int				close_window(void *param);
 int				parser(t_list **map, char *file);
+int				clear_map(t_list **map);
+void			del_map_link(void *content, size_t content_size);
 
 #endif
