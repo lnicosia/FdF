@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/10 12:13:36 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/10 19:12:30 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,33 @@
 #include "libft.h"
 #include "utils.h"
 
+void	print_map(t_env data)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	k = 0;
+	i = 0;
+	while (i < data.map_height)
+	{
+		j = 0;
+		while (j < data.map_width)
+		{
+			ft_putnbr(data.map[k].x); ft_putchar(' ');
+			ft_putnbr(data.map[k].y); ft_putchar(' ');
+			ft_putnbr(data.map[k].z); ft_putchar('\n');
+			j++;
+			k++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	t_env	data;
-	int		i;
-	int		j;
 	int		ret;
 	t_img	img;
 	t_list	*map;
@@ -42,24 +64,18 @@ int		main(int argc, char **argv)
 	ft_putnbr(data.s_width); ft_putstr(" X "); ft_putnbr(data.s_height); ft_putchar('\n');
 	ft_putstr("map size: "); ft_putnbr(data.map_height);
 	ft_putstr(" x "); ft_putnbr(data.map_width); ft_putchar('\n');
-	ft_putendl("TXT MAP:");
 	data.map = init_map(data.map_height, data.map_width, map);
-	i = 0;
-	while (i < data.map_height)
-	{
-		j = 0;
-		while (j < data.map_width)
-		{
-			ft_putnbr(data.map[i][j]); ft_putchar(' ');
-			j++;
-		}
-		ft_putchar('\n');
-		i++;
-	}
+	/*ft_putendl("Pre process MAP:");
+	print_map(data);*/
 	ft_putstr("bit_per_pixels: "); ft_putnbr(img.bit_per_pixels); ft_putchar('\n');
 	ft_putstr("size_line: "); ft_putnbr(img.size_line); ft_putchar('\n');
+	fill_map(data);
+	/*ft_putendl("Pre filled map:");
+	print_map(data);*/
+	project(data);
+	/*ft_putendl("Post project map:");
+	print_map(data);*/
 	trace(data, img);
-	//plot_line(new_coord2(200, 0), new_coord2(800,600), img);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
 	return (0);

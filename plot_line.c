@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/07 10:01:50 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/10 19:08:31 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,22 @@
 #include "libft.h"
 #include "utils.h"
 
-static int	plot_line_low(t_coord2 c1, t_coord2 c2, t_img img)
+static void	fill_img(t_coord2 c, t_img img, t_env data)
+{
+	(void)data;
+	if (c.x * (img.bit_per_pixels / 8) + c.y * img.size_line + 3
+			<= data.s_height * data.s_width * img.bit_per_pixels)
+	{
+		img.str[c.x * (img.bit_per_pixels / 8) +
+			c.y * img.size_line] = 0xFF;
+		img.str[c.x * (img.bit_per_pixels / 8) +
+			c.y * img.size_line + 1] = 0xFF;
+		img.str[c.x * (img.bit_per_pixels / 8) +
+			c.y * img.size_line + 2] = 0xFF;
+	}
+}
+
+static int	plot_line_low(t_coord2 c1, t_coord2 c2, t_img img, t_env data)
 {
 	int	dx;
 	int	dy;
@@ -28,12 +43,7 @@ static int	plot_line_low(t_coord2 c1, t_coord2 c2, t_img img)
 	e = 2 * dy - dx;
 	while (c1.x <= c2.x)
 	{
-		img.str[c1.x * (img.bit_per_pixels / 8) +
-			c1.y * img.size_line] = 0xFF;
-		img.str[c1.x * (img.bit_per_pixels / 8) +
-			c1.y * img.size_line + 1] = 0xFF;
-		img.str[c1.x * (img.bit_per_pixels / 8) +
-			c1.y * img.size_line + 2] = 0xFF;
+		fill_img(c1, img, data);
 		c1.y = e > 0 ? c1.y + yi : c1.y;
 		e = e > 0 ? e - 2 * dx : e;
 		e += 2 * dy;
@@ -42,7 +52,7 @@ static int	plot_line_low(t_coord2 c1, t_coord2 c2, t_img img)
 	return (0);
 }
 
-static int	plot_line_high(t_coord2 c1, t_coord2 c2, t_img img)
+static int	plot_line_high(t_coord2 c1, t_coord2 c2, t_img img, t_env data)
 {
 	int	dx;
 	int	dy;
@@ -56,12 +66,7 @@ static int	plot_line_high(t_coord2 c1, t_coord2 c2, t_img img)
 	e = 2 * dx - dy;
 	while (c1.y <= c2.y)
 	{
-		img.str[c1.x * (img.bit_per_pixels / 8) +
-			c1.y * img.size_line] = 0xFF;
-		img.str[c1.x * (img.bit_per_pixels / 8) +
-			c1.y * img.size_line + 1] = 0xFF;
-		img.str[c1.x * (img.bit_per_pixels / 8) +
-			c1.y * img.size_line + 2] = 0xFF;
+		fill_img(c1, img, data);
 		c1.x = e > 0 ? c1.x + xi : c1.x;
 		e = e > 0 ? e - 2 * dy : e;
 		e += 2 * dx;
@@ -70,19 +75,19 @@ static int	plot_line_high(t_coord2 c1, t_coord2 c2, t_img img)
 	return (0);
 }
 
-int			plot_line(t_coord2 c1, t_coord2 c2, t_img img)
+int			plot_line(t_coord2 c1, t_coord2 c2, t_img img, t_env data)
 {
 	if (ft_abs(c2.y - c1.y) < ft_abs(c2.x - c1.x))
 		if (c1.x > c2.x)
-			plot_line_low(c2, c1, img);
+			plot_line_low(c2, c1, img, data);
 		else
-			plot_line_low(c1, c2, img);
+			plot_line_low(c1, c2, img, data);
 	else
 	{
 		if (c1.y > c2.y)
-			plot_line_high(c2, c1, img);
+			plot_line_high(c2, c1, img, data);
 		else
-			plot_line_high(c1, c2, img);
+			plot_line_high(c1, c2, img, data);
 	}
 	return (0);
 }

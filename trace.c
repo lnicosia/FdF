@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 11:45:55 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/10 16:25:44 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/10 19:10:01 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,44 +26,76 @@ static void	iso(int *x, int *y, int z)
 	*y = -(z) + (previous_x + previous_y) * sin(0.523599);
 }
 
-void		trace(t_env data, t_img img)
+void		fill_map(t_env data)
 {
 	float		x_scale;
 	float		y_scale;
 	int			x;
 	int			y;
-	t_coord2	c1;
-	t_coord2	c2;
-	t_coord2	c3;
+	int			k;
 
-	x_scale = data.s_width / data.map_width * cos(0.523599);
-	y_scale = data.s_width / data.map_width * sin(0.523599);
-	ft_putstr("x_scale: "); printf("%f\n", x_scale);
-	ft_putstr("y_scale: "); printf("%f\n", y_scale);
+	x_scale = data.s_width / data.map_width;
+	y_scale = data.s_width / data.map_width;
 	y = 0;
+	k = 0;
 	while (y < data.map_height)
 	{
 		x = 0;
 		while (x < data.map_width)
 		{
-			c1 = new_coord2(x * x_scale, y * y_scale);
-			c2 = new_coord2((x + 1) * x_scale, y * y_scale);
-			c3 = new_coord2(x * x_scale, (y + 1) * y_scale);
-			iso(&c1.x, &c1.y, data.map[y][x]);
-			//c1.x += data.s_width * 30 / 100;
-			if (x < data.map_width - 1)
-			{
-				iso(&c2.x, &c2.y, data.map[y][x + 1]);
-				//c2.x += data.s_width * 30 / 100;
-				plot_line(new_coord2(c1.x, c1.y), new_coord2(c2.x, c2.y), img);
-			}
-			if (y < data.map_height - 1)
-			{
-				iso(&c3.x, &c3.y, data.map[y + 1][x]);
-				//c3.x += data.s_width * 30 / 100;
-				plot_line(new_coord2(c1.x, c1.y), new_coord2(c3.x, c3.y), img);
-			}
+			data.map[k].x = x * x_scale;
+			data.map[k].y = y * y_scale;
 			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void		project(t_env data)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			iso(&data.map[k].x, &data.map[k].y, data.map[k].z);
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void		trace(t_env data, t_img img)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			if (x < data.map_width - 1)
+				plot_line(new_coord2(data.map[k].x, data.map[k].y),
+						new_coord2(data.map[k + 1].x, data.map[k + 1].y),
+						img, data);
+			if (y < data.map_height - 1)
+				plot_line(new_coord2(data.map[k].x, data.map[k].y),
+						new_coord2(data.map[k + data.map_width].x,
+							data.map[k + data.map_width].y), img, data);
+			x++;
+			k++;
 		}
 		y++;
 	}
