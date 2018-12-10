@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/07 18:16:10 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/10 11:02:33 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,15 @@ NAME = fdf
 SRC = main.c plot_line.c hook_key_and_mouse.c hook_more.c parser.c \
 	  coord_utils.c init_map.c
 
+LIBFT = libft/libft.a
+
 OBJ = $(SRC:.c=.o)
 
 INCLUDES = libft
 
 CFLAGS = -O3 -g -Wall -Wextra -Werror -I $(INCLUDES)
 
-LIB = /usr/local/lib -lmlx -framework OpenGL -framework Appkit libft/libft.a
+LIB = /usr/local/lib -lmlx -framework OpenGL -framework Appkit
 
 RED := "\033[0;31m"
 GREEN := "\033[0;32m"
@@ -29,11 +31,13 @@ CYAN := "\033[0;36m"
 RESET :="\033[0m"
 BLINK := "\033[5m"
 
-all: $(NAME)
+all: libft $(NAME)
 
-$(NAME): $(OBJ)
-	@make -C libft
-	@gcc $(CFLAGS) $(OBJ) -L $(LIB) -o $(NAME)
+libft:
+	make -C libft all
+	
+$(NAME): $(OBJ) $(LIBFT)
+	gcc $(CFLAGS) $(OBJ) -L $(LIB) $(LIBFT) -o $(NAME)
 	@echo ${GREEN}"[INFO] Compiled [$(NAME)] executable successfully!"
 
 clean: 
@@ -43,9 +47,9 @@ clean:
 
 fclean: clean
 	@rm -Rf fdf
-	@echo ${CYAN}"[INFO] Removed everything because SKIBIDI PA PA"
+	@echo ${CYAN}"[INFO] Removed everything because SKIBIDI PA PA"${RESET}
 
 re: fclean all
 
-.SILENT: $(OBJ)
-.PHONY: fclean all clean
+//.SILENT: $(OBJ)
+.PHONY: fclean all clean libft
