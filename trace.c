@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 11:45:55 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/10 16:00:26 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/10 16:25:44 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void		trace(t_env data, t_img img)
 	t_coord2	c2;
 	t_coord2	c3;
 
-	x_scale = data.s_width / data.map_width;
-	y_scale = data.s_width / data.map_width;
+	x_scale = data.s_width / data.map_width * cos(0.523599);
+	y_scale = data.s_width / data.map_width * sin(0.523599);
 	ft_putstr("x_scale: "); printf("%f\n", x_scale);
 	ft_putstr("y_scale: "); printf("%f\n", y_scale);
 	y = 0;
