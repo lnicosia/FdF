@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/07 19:08:07 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/10 12:13:36 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,8 @@ int		main(int argc, char **argv)
 	}
 	ft_putstr("bit_per_pixels: "); ft_putnbr(img.bit_per_pixels); ft_putchar('\n');
 	ft_putstr("size_line: "); ft_putnbr(img.size_line); ft_putchar('\n');
-	t_coord2 c1;
-	t_coord2 c2;
-	c1.x = 300;
-	c1.y = 500;
-	c2.x = 0;
-	c2.y = 0;
-	plot_line(c1, c2, img);
+	trace(data, img);
+	//plot_line(new_coord2(200, 0), new_coord2(800,600), img);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
 	return (0);

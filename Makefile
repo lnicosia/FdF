@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/10 11:22:55 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/10 11:47:10 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = fdf
 LEAKS = fdf_leaks
 
 SRC = main.c plot_line.c hook_more.c parser.c \
-	  coord_utils.c init_map.c
+	  coord_utils.c init_map.c trace.c
 
 NO_LEAKS_SRC = hook_key_and_mouse.c
 
@@ -43,7 +43,7 @@ BLINK := "\033[5m"
 
 all: libft $(NAME)
 
-leaks: $(LEAKS)
+leaks: libft $(LEAKS)
 
 libft:
 	@make -C libft all

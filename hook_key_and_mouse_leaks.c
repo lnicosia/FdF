@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/06 11:45:37 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/10 11:43:01 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int		key_press(int key, void *param)
 		ft_putendl("ESCAPE");
 		mlx_clear_window(data->mlx_ptr, data->win_ptr);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		while (1)
+		{
+		}
 		exit(0);
 	}
 	else
