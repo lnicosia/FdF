@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:40:57 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/06 11:47:52 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/10 11:09:10 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int		expose(void *param)
 
 int		close_window(void *param)
 {
-	(void)param;
+	t_env *data;
+
+	data = (t_env*)param;
 	ft_putendl("CLOSE");
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	exit(0);
 }
