@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/10 11:02:33 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/10 11:05:13 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,10 @@ BLINK := "\033[5m"
 all: libft $(NAME)
 
 libft:
-	make -C libft all
+	@make -C libft all
 	
 $(NAME): $(OBJ) $(LIBFT)
-	gcc $(CFLAGS) $(OBJ) -L $(LIB) $(LIBFT) -o $(NAME)
+	@gcc $(CFLAGS) $(OBJ) -L $(LIB) $(LIBFT) -o $(NAME)
 	@echo ${GREEN}"[INFO] Compiled [$(NAME)] executable successfully!"
 
 clean: 
@@ -51,5 +51,5 @@ fclean: clean
 
 re: fclean all
 
-//.SILENT: $(OBJ)
+.SILENT: $(OBJ)
 .PHONY: fclean all clean libft

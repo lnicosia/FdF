@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/04 11:57:59 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/10 10:33:27 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/10 11:04:55 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,5 +58,5 @@ compil : all clean
 
 re : fclean all
 
-//.SILENT: $(OBJ)
+.SILENT: $(OBJ)
 .PHONY: fclean all re clean
