@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 11:45:55 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/11 14:34:29 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 17:23:34 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,24 @@ void		fill_map(t_env data)
 	}
 }
 
+void		get_ranges(t_env *data)
+{
+	t_coord3	min;
+	t_coord3	max;
+
+	max.x = max3(data->map, data->map_height * data->map_width, 'x');
+	max.y = max3(data->map, data->map_height * data->map_width, 'y');
+	min.x = min3(data->map, data->map_height * data->map_width, 'x');
+	min.y = min3(data->map, data->map_height * data->map_width, 'y');
+	max.z = max3(data->map, data->map_height * data->map_width, 'z');
+	min.z = min3(data->map, data->map_height * data->map_width, 'z');
+	data->z_scale = (float)data->map_height / (float)(max.z - min.z);
+	data->x_scale = (float)data->s_width / (float)(max.x - min.x);
+	data->y_scale = (float)data->s_height / (float)(max.y - min.y);
+	data->start.x = ft_abs(min.x * data->x_scale);
+	data->start.y = ft_abs(min.y * data->y_scale);
+}
+
 void		project(t_env data)
 {
 	int	y;
@@ -65,7 +83,7 @@ void		project(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			iso(&data.map[k].x, &data.map[k].y, data.map[k].z * data.z_scale);
+			iso(&data.map[k].x, &data.map[k].y, data.map[k].z);
 			x++;
 			k++;
 		}
@@ -95,12 +113,15 @@ void		scale(t_env data)
 	}
 }
 
-void		trace(t_env data, t_img img, t_coord2 start)
+void		trace(t_env data)
 {
 	int	y;
 	int	x;
 	int	k;
 
+	project(data);
+	get_ranges(&data);
+	scale(data);
 	y = 0;
 	k = 0;
 	while (y < data.map_height)
@@ -109,13 +130,9 @@ void		trace(t_env data, t_img img, t_coord2 start)
 		while (x < data.map_width)
 		{
 			if (x < data.map_width - 1)
-				plot_line(new_coord2(data.map[k].x + start.x, data.map[k].y +
-start.y), new_coord2(data.map[k + 1].x + start.x, data.map[k + 1].y + start.y),
-img, data);
+				plot_line(new_coord2(data.map[k].x + data.start.x, data.map[k].y + data.start.y), new_coord2(data.map[k + 1].x + data.start.x, data.map[k + 1].y + data.start.y), data);
 			if (y < data.map_height - 1)
-				plot_line(new_coord2(data.map[k].x + start.x, data.map[k].y +
-start.y), new_coord2(data.map[k + data.map_width].x + start.x, data.map[k +
-data.map_width].y + start.y), img, data);
+				plot_line(new_coord2(data.map[k].x + data.start.x, data.map[k].y + data.start.y), new_coord2(data.map[k + data.map_width].x + data.start.x, data.map[k + data.map_width].y + data.start.y), data);
 			x++;
 			k++;
 		}
