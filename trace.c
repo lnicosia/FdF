@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 11:45:55 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/11 12:48:24 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 14:16:09 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,12 @@ void		trace(t_env data, t_img img, t_coord2 start)
 start.y), new_coord2(data.map[k + 1].x + start.x, data.map[k + 1].y + start.y),
 img, data);
 			if (y < data.map_height - 1)
+			{
+				ft_putstr("k + data.map_width = "); ft_putnbr(k + data.map_width); ft_putchar('\n');
 				plot_line(new_coord2(data.map[k].x + start.x, data.map[k].y +
 start.y), new_coord2(data.map[k + data.map_width].x + start.x, data.map[k +
 data.map_width].y + start.y), img, data);
+			}
 			x++;
 			k++;
 		}

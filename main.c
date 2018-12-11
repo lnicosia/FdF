@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/11 13:19:01 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 14:12:59 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int		main(int argc, char **argv)
 	start.x = ft_abs(min.x * data.x_scale);
 	start.y = ft_abs(min.y * data.y_scale);
 	//print_map(data);
+	printf("x_start = %d\ny_start = %d\n", start.x, start.y);
 	scale(data);
 	trace(data, img, start);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);

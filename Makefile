@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/10 16:21:58 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/11 14:13:42 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LEAKS_OBJ = $(LEAKS_SRC:.c=.o)
 
 INCLUDES = libft
 
-CFLAGS = -O3 -g -Wall -Wextra -Werror -I $(INCLUDES)
+CFLAGS = -O3 -g -Wall -Wextra -Werror -I $(INCLUDES) -fsanitize=address
 
 LIB = /usr/local/lib -lmlx -framework OpenGL -framework Appkit
 
