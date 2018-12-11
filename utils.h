@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:00:21 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/11 17:23:40 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 18:32:41 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void			del_map_link(void *content, size_t content_size);
 t_coord3		*init_map(int height, int width, t_list *r_map);
 void			fill_map(t_env data);
 void			project(t_env data);
+void			get_ranges(t_env *data);
 void			scale(t_env data);
 void			trace(t_env data);
 t_coord2		new_coord2(int x, int y);
