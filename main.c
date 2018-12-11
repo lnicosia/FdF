@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/11 12:32:41 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 13:19:01 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int		main(int argc, char **argv)
 	data.s_width = 800;
 	data.map_height = 0;
 	data.map_width = 0;
-	data.x_scale = 0;
-	data.y_scale = 0;
-	data.z_scale = 0;
+	data.x_scale = 1;
+	data.y_scale = 1;
+	data.z_scale = 1;
 	(void)argc;
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, data.s_width, data.s_height, "Test");
@@ -95,7 +95,7 @@ int		main(int argc, char **argv)
 
 	max.z = max3(data.map, data.map_height * data.map_width, 'z'); 
 	min.z = min3(data.map, data.map_height * data.map_width, 'z');	
-	data.z_scale = (float)data.s_height / (float)(max.z - min.z);
+	//data.z_scale = (float)(max.z - min.z);
 	//ft_putendl("Pre filled map:");
 	//print_map(data);
 	//print_ranges(data);
