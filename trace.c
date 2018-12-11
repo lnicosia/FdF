@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 11:45:55 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/10 19:10:01 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 12:48:24 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		fill_map(t_env data)
 	int			k;
 
 	x_scale = data.s_width / data.map_width;
-	y_scale = data.s_width / data.map_width;
+	y_scale = data.s_height / data.map_height;
 	y = 0;
 	k = 0;
 	while (y < data.map_height)
@@ -65,7 +65,7 @@ void		project(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			iso(&data.map[k].x, &data.map[k].y, data.map[k].z);
+			iso(&data.map[k].x, &data.map[k].y, data.map[k].z * data.z_scale);
 			x++;
 			k++;
 		}
@@ -73,7 +73,29 @@ void		project(t_env data)
 	}
 }
 
-void		trace(t_env data, t_img img)
+void		scale(t_env data)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			data.map[k].x *= data.x_scale;
+			data.map[k].y *= data.y_scale;
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void		trace(t_env data, t_img img, t_coord2 start)
 {
 	int	y;
 	int	x;
@@ -87,13 +109,13 @@ void		trace(t_env data, t_img img)
 		while (x < data.map_width)
 		{
 			if (x < data.map_width - 1)
-				plot_line(new_coord2(data.map[k].x, data.map[k].y),
-						new_coord2(data.map[k + 1].x, data.map[k + 1].y),
-						img, data);
+				plot_line(new_coord2(data.map[k].x + start.x, data.map[k].y +
+start.y), new_coord2(data.map[k + 1].x + start.x, data.map[k + 1].y + start.y),
+img, data);
 			if (y < data.map_height - 1)
-				plot_line(new_coord2(data.map[k].x, data.map[k].y),
-						new_coord2(data.map[k + data.map_width].x,
-							data.map[k + data.map_width].y), img, data);
+				plot_line(new_coord2(data.map[k].x + start.x, data.map[k].y +
+start.y), new_coord2(data.map[k + data.map_width].x + start.x, data.map[k +
+data.map_width].y + start.y), img, data);
 			x++;
 			k++;
 		}

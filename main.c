@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/10 19:12:30 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 12:32:41 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx_keycode.h"
 #include "libft.h"
 #include "utils.h"
+#include <stdio.h>
 
 void	print_map(t_env data)
 {
@@ -39,16 +40,37 @@ void	print_map(t_env data)
 	}
 }
 
+void	print_ranges(t_env data)
+{
+	ft_putstr("min x = "); ft_putnbr(min3(data.map, data.map_height * data.map_width, 'x')); 
+	ft_putstr(" max x = "); ft_putnbr(max3(data.map, data.map_height * data.map_width, 'x'));
+	ft_putchar('\n');
+	ft_putstr("min y = "); ft_putnbr(min3(data.map, data.map_height * data.map_width, 'y')); 
+	ft_putstr(" max y = "); ft_putnbr(max3(data.map, data.map_height * data.map_width, 'y'));
+	ft_putchar('\n');
+	ft_putstr("min z = "); ft_putnbr(min3(data.map, data.map_height * data.map_width, 'z')); 
+	ft_putstr(" max z = "); ft_putnbr(max3(data.map, data.map_height * data.map_width, 'z'));
+	ft_putchar('\n');
+}
+
 int		main(int argc, char **argv)
 {
-	t_env	data;
-	int		ret;
-	t_img	img;
-	t_list	*map;
+	t_env		data;
+	int			ret;
+	t_img		img;
+	t_list		*map;
+	t_coord3	max;
+	t_coord3	min;
+	t_coord2	start;
 
 	map = NULL;
 	data.s_height = 600;
 	data.s_width = 800;
+	data.map_height = 0;
+	data.map_width = 0;
+	data.x_scale = 0;
+	data.y_scale = 0;
+	data.z_scale = 0;
 	(void)argc;
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, data.s_width, data.s_height, "Test");
@@ -70,12 +92,30 @@ int		main(int argc, char **argv)
 	ft_putstr("bit_per_pixels: "); ft_putnbr(img.bit_per_pixels); ft_putchar('\n');
 	ft_putstr("size_line: "); ft_putnbr(img.size_line); ft_putchar('\n');
 	fill_map(data);
-	/*ft_putendl("Pre filled map:");
-	print_map(data);*/
+
+	max.z = max3(data.map, data.map_height * data.map_width, 'z'); 
+	min.z = min3(data.map, data.map_height * data.map_width, 'z');	
+	data.z_scale = (float)data.s_height / (float)(max.z - min.z);
+	//ft_putendl("Pre filled map:");
+	//print_map(data);
+	//print_ranges(data);
 	project(data);
-	/*ft_putendl("Post project map:");
-	print_map(data);*/
-	trace(data, img);
+	//ft_putendl("Post project map:");
+	//print_ranges(data);
+
+	max.x = max3(data.map, data.map_height * data.map_width, 'x'); 
+	max.y = max3(data.map, data.map_height * data.map_width, 'y'); 
+	min.x = min3(data.map, data.map_height * data.map_width, 'x'); 
+	min.y = min3(data.map, data.map_height * data.map_width, 'y');
+
+	data.x_scale = (float)data.s_width / (float)(max.x - min.x);
+	data.y_scale = (float)data.s_height / (float)(max.y - min.y);
+	printf("x_scale = %f\ny_scale = %f\nz_scale = %f\n", data.x_scale, data.y_scale, data.z_scale);
+	start.x = ft_abs(min.x * data.x_scale);
+	start.y = ft_abs(min.y * data.y_scale);
+	//print_map(data);
+	scale(data);
+	trace(data, img, start);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:11:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/07 19:34:57 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 11:45:37 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int			parser(t_list **map, char *file, int *map_height, int *map_width)
 	char	*line;
 
 	*map_height = 0;
+	*map_width = 0;
 	if ((fd = open(file, O_RDONLY)) < 0)
 		return (OPEN_ERROR);
 	while (get_next_line(fd, &line) > 0)

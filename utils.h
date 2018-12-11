@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:00:21 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/10 19:05:02 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 12:29:52 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ typedef struct	s_env
 	int			map_width;
 	int			s_height;
 	int			s_width;
+	float		x_scale;
+	float		y_scale;
+	float		z_scale;
 }				t_env;
 
 typedef struct	s_img
@@ -63,8 +66,11 @@ void			del_map_link(void *content, size_t content_size);
 t_coord3		*init_map(int height, int width, t_list *r_map);
 void			fill_map(t_env data);
 void			project(t_env data);
-void			trace(t_env data, t_img img);
+void			scale(t_env data);
+void			trace(t_env data, t_img img, t_coord2 start);
 t_coord2		new_coord2(int x, int y);
 t_coord3		new_coord3(int x, int y, int z);
+int				min3(t_coord3 *map, int size, char mode);
+int				max3(t_coord3 *map, int size, char mode);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:46:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/10 18:06:12 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 11:20:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static void	fill_map(char *str, t_coord3 *map, int *k, int i)
+static void	parse_str(char *str, t_coord3 *map, int *k, int i)
 {
 	int	j;
 
@@ -44,7 +44,7 @@ t_coord3	*init_map(int height, int width, t_list *r_map)
 	while (i < height)
 	{
 		str = r_map->content;
-		fill_map(str, map, &k, i);
+		parse_str(str, map, &k, i);
 		r_map = r_map->next;
 		i++;
 	}
