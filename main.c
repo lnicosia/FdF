@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/11 14:12:59 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:32:56 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int		main(int argc, char **argv)
 	t_coord2	start;
 
 	map = NULL;
-	data.s_height = 600;
-	data.s_width = 800;
+	data.s_width = 1920;
+	data.s_height = 1080;
 	data.map_height = 0;
 	data.map_width = 0;
 	data.x_scale = 1;
@@ -95,7 +95,7 @@ int		main(int argc, char **argv)
 
 	max.z = max3(data.map, data.map_height * data.map_width, 'z'); 
 	min.z = min3(data.map, data.map_height * data.map_width, 'z');	
-	//data.z_scale = (float)(max.z - min.z);
+	data.z_scale = (float)data.map_height / (float)(max.z - min.z);
 	//ft_putendl("Pre filled map:");
 	//print_map(data);
 	//print_ranges(data);
