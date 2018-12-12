@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 11:35:16 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 12:45:33 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	print_ranges(t_env data)
 
 void	init_data(t_env *data)
 {
-	data->s_width = 1280;
-	data->s_height = 720;
+	data->s_width = 800;
+	data->s_height = 600;
 	data->map_height = 0;
 	data->map_width = 0;
 	data->scale.x = 1;
@@ -94,7 +94,6 @@ int		main(int argc, char **argv)
 	ft_putstr("size_line: "); ft_putnbr(data.img.size_line); ft_putchar('\n');
 	fill_map(data);
 	get_ranges(&data);
-	//scale(data);
 	trace(data);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
