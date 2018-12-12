@@ -5,16 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2018/12/12 16:16:36 by lnicosia         ###   ########.fr       */
-=======
-/*   Updated: 2018/12/12 11:35:16 by lnicosia         ###   ########.fr       */
->>>>>>> parent of 7b90603... file clean.
-=======
-/*   Updated: 2018/12/12 11:35:16 by lnicosia         ###   ########.fr       */
->>>>>>> parent of 7b90603... file clean.
+/*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
+/*   Updated: 2018/12/12 16:46:11 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +55,8 @@ void	print_ranges(t_env data)
 
 void	init_data(t_env *data)
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
 	data->s_width = 1920;
 	data->s_height = 1080;
-=======
-	data->s_width = 1280;
-	data->s_height = 720;
->>>>>>> parent of 7b90603... file clean.
-=======
-	data->s_width = 1280;
-	data->s_height = 720;
->>>>>>> parent of 7b90603... file clean.
 	data->map_height = 0;
 	data->map_width = 0;
 	data->scale.x = 1;
@@ -111,17 +93,10 @@ int		main(int argc, char **argv)
 	//print_map(data);
 	ft_putstr("bit_per_pixels: "); ft_putnbr(data.img.bit_per_pixels); ft_putchar('\n');
 	ft_putstr("size_line: "); ft_putnbr(data.img.size_line); ft_putchar('\n');
-<<<<<<< HEAD
-	//fill_map(data);
-	set_ranges(&data);
-=======
 	fill_map(data);
-	get_ranges(&data);
+	set_ranges(&data);
+	fill_map(data);
 	//scale(data);
-<<<<<<< HEAD
->>>>>>> parent of 7b90603... file clean.
-=======
->>>>>>> parent of 7b90603... file clean.
 	trace(data);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
