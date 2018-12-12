@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 17:37:52 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 18:24:28 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void		fill_map(t_env data)
 	int			y;
 	int			k;
 
-	scale = ft_fmin(data.s_width / data.map_width,
-			data.s_height / data.map_height);
+	scale = ft_fmin((float)data.s_width / (float)data.map_width,
+			(float)data.s_height / (float)data.map_height);
 	y = 0;
 	k = 0;
 	while (y < data.map_height)

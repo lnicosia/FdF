@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 17:13:24 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 18:26:16 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void	escape(t_env *data)
 
 void	key_up(t_env *data)
 {
-	ft_putendl("UP_KEY");
 	data->scale.z += data->z_scale;
-	printf("z_scale = %f\n", data->scale.z);
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->s_width, data->s_height);
 	data->img.str = mlx_get_data_addr(data->img_ptr,
@@ -38,9 +36,7 @@ void	key_up(t_env *data)
 
 void	key_down(t_env *data)
 {
-	ft_putendl("DOWN_KEY");
 	data->scale.z -= data->z_scale;
-	printf("z_scale = %f\n", data->scale.z);
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->s_width, data->s_height);
 	data->img.str = mlx_get_data_addr(data->img_ptr,

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 17:07:17 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 18:15:46 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,22 @@ int		main(int argc, char **argv)
 		ft_putendl("parse error "); ft_putnbr(ret); ft_putchar('\n');
 		return (ret);
 	}
+	ft_putendl("--PARSE OK--");
 	ft_putnbr(data.s_width); ft_putstr(" X "); ft_putnbr(data.s_height); ft_putchar('\n');
 	ft_putstr("map size: "); ft_putnbr(data.map_height);
 	ft_putstr(" x "); ft_putnbr(data.map_width); ft_putchar('\n');
-	data.map = init_map(data.map_height, data.map_width, map);
-	//print_map(data);
 	ft_putstr("bit_per_pixels: "); ft_putnbr(data.img.bit_per_pixels); ft_putchar('\n');
 	ft_putstr("size_line: "); ft_putnbr(data.img.size_line); ft_putchar('\n');
+	data.map = init_map(data.map_height, data.map_width, map);
+	ft_putendl("--MAP INIT--");
+	//print_map(data);
 	fill_map(data);
+	ft_putendl("--MAP PRE FILLED--");
 	set_ranges(&data);
+	ft_putendl("--MAP SCALED--");
+	printf("scale = %f\n", data.scale.x);
 	trace(data);
+	ft_putendl("--MAP TRACED--");
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
 	return (0);
