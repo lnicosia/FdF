@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 11:45:55 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 15:28:35 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 16:19:30 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,31 @@ void		set_ranges(t_env *data)
 	t_fcoord2	left;
 	t_fcoord2	up;
 	t_fcoord2	down;
+	int			z;
 
 	up.x = 0;
-	up.y = 0;
+	up.y = data->map[0].z;
 	left.x = -(float)data->map_height * cos(0.523599);
-	left.y = (float)data->map_height * sin(0.523599);
+	left.y = -data->map[data->map_height].z + (float)data->map_height * sin(0.523599);
 	right.x = (float)data->map_width * cos(0.523599);
-	right.y = (float)data->map_width * sin(0.523599);
+	right.y = -data->map[data->map_width].z + (float)data->map_width * sin(0.523599);
 	down.x = ((float)data->map_width - (float)data->map_height) * cos(0.523599);
-	down.y = ((float)data->map_width + (float)data->map_height) * sin(0.523599);
+	down.y = -data->map[data->map_height * data->map_width - 1].z + ((float)data->map_width + (float)data->map_height) * sin(0.523599);
+	z = max3(data->map, data->map_height * data->map_width, 'z');
 	printf("up.x = %f up.y = %f\n", up.x, up.y);
 	printf("down.x = %f down.y = %f\n", down.x, down.y);
 	printf("left.x = %f left.y = %f\n", left.x, left.y);
 	printf("right.x = %f right.y = %f\n", right.x, right.y);
-	data->scale.x = (float)data->s_width / (float)(right.x - left.x);
-	data->scale.y = (float)data->s_height / (float)(down.y - up.y);
+	printf("max z = %d\n", z);
+	data->scale.x = (float)data->s_width / (right.x - left.x);
+	data->scale.y = (float)data->s_height / (down.y - up.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y);
+	printf("scale = %f\n", data->scale.x);
 	data->start.x = ft_abs(left.x) * data->scale.x;
 	data->start.y = ft_abs(up.y) * data->scale.x;
-	//data->start.y = ft_fmax(ft_abs(up.y) * data->scale.x, max3(data->map, data->map_height * data->map_width, 'z'));
+	data->scale.z = z / ((float)data->map_height * (float)data->map_width);
+	printf("scale_z = %f\n", data->scale.z);
+	//data->start.y = ft_fmax(ft_abs(up.y) * data->scale.x, max3(data->map, data->map_height * data->map_width, 'z') * data->scale.x);
 }
 
 void		trace(t_env data)
