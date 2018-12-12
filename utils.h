@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:00:21 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 12:12:31 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 15:11:24 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define UTILS_H
 # include "error.h"
 # include "libft.h"
+# define ISO 400
+# define PARA 401
 
 typedef struct	s_coord2
 {
@@ -27,6 +29,12 @@ typedef struct	s_coord3
 	int		y;
 	int		z;
 }				t_coord3;
+
+typedef struct	s_fcoord2
+{
+	float	x;
+	float	y;
+}				t_fcoord2;
 
 typedef struct	s_fcoord3
 {
@@ -54,6 +62,7 @@ typedef struct	s_env
 	int			map_width;
 	int			s_height;
 	int			s_width;
+	int			project_type;
 	t_fcoord3	scale;
 	t_coord2	start;
 }				t_env;
@@ -72,7 +81,7 @@ int				clear_map(t_list **map);
 void			del_map_link(void *content, size_t content_size);
 t_coord3		*init_map(int height, int width, t_list *r_map);
 void			fill_map(t_env data);
-void			get_ranges(t_env *data);
+void			set_ranges(t_env *data);
 void			trace(t_env data);
 t_coord2		new_coord2(int x, int y);
 t_coord3		new_coord3(int x, int y, int z);
