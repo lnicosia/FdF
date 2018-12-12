@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 16:46:11 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 17:07:17 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	init_data(t_env *data)
 	data->scale.z = 1;
 	data->start.x = 0;
 	data->start.y = 0;
+	data->z_scale = 1;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->s_width, data->s_height, "Test");
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->s_width, data->s_height);
@@ -95,8 +96,6 @@ int		main(int argc, char **argv)
 	ft_putstr("size_line: "); ft_putnbr(data.img.size_line); ft_putchar('\n');
 	fill_map(data);
 	set_ranges(&data);
-	fill_map(data);
-	//scale(data);
 	trace(data);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);

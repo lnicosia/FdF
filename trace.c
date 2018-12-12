@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 16:48:18 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 17:29:33 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 #include <math.h>
 #include "utils.h"
 #include <stdio.h>
-
-static void	iso(int *x, int *y, int z)
-{
-	int previous_x;
-	int previous_y;
-
-	previous_x = *x;
-	previous_y = *y;
-	*x = (previous_x - previous_y) * cos(0.523599);
-	*y = -(z) + (previous_x + previous_y) * sin(0.523599);
-}
 
 void		fill_map(t_env data)
 {
@@ -51,28 +40,6 @@ void		fill_map(t_env data)
 	}
 }
 
-
-void		project(t_env data)
-{
-	int	y;
-	int	x;
-	int	k;
-
-	y = 0;
-	k = 0;
-	while (y < data.map_height)
-	{
-		x = 0;
-		while (x < data.map_width)
-		{
-			iso(&data.map[k].x, &data.map[k].y, data.map[k].z);
-			x++;
-			k++;
-		}
-		y++;
-	}
-}
-
 t_coord2	iso_project(t_coord3 t, t_env data)
 {
 	t_coord2	res;
@@ -92,38 +59,17 @@ void		set_ranges(t_env *data)
 
 	up = iso_project(data->map[0], *data);
 	right = iso_project(data->map[data->map_width - 1], *data);
-	left = iso_project(data->map[data->map_width * (data->map_height - 1)], *data);
-	down = iso_project(data->map[data->map_width * data->map_height - 1], *data);
-	ft_putstr("vertical delta  = "); ft_putnbr(down.y - up.y); ft_putstr("\nhorizontal delta = "); ft_putnbr(right.x - left.x); ft_putchar('\n');
+	left = iso_project(data->map[data->map_width *
+			(data->map_height - 1)], *data);
+	down = iso_project(data->map[data->map_width *
+			data->map_height - 1], *data);
 	data->scale.x = (float)data->s_width / (float)(right.x - left.x);
 	data->scale.y = (float)data->s_height / (float)(down.y - up.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y);
+	data->z_scale = 1 / pow(10, ft_count(max3(data->map, data->map_height
+					* data->map_width, 'z')) - 1);
 	data->start.x = ft_abs(left.x) * data->scale.x;
 	data->start.y = ft_abs(up.y) * data->scale.x;
-	printf("x_scale = %f\ny_scale = %f\n", data->scale.x, data->scale.y);
-	printf("x_start = %d\ny_start = %d\n", data->start.x, data->start.y);
-}
-
-void		scale(t_env data)
-{
-	int	y;
-	int	x;
-	int	k;
-
-	y = 0;
-	k = 0;
-	while (y < data.map_height)
-	{
-		x = 0;
-		while (x < data.map_width)
-		{
-			data.map[k].x *= data.scale.x;
-			data.map[k].y *= data.scale.y;
-			x++;
-			k++;
-		}
-		y++;
-	}
 }
 
 void		trace(t_env data)
@@ -140,9 +86,11 @@ void		trace(t_env data)
 		while (x < data.map_width)
 		{
 			if (x < data.map_width - 1)
-				plot_line(iso_project(data.map[k], data), iso_project(data.map[k + 1], data), data);
+				plot_line(iso_project(data.map[k], data),
+						iso_project(data.map[k + 1], data), data);
 			if (y < data.map_height - 1)
-				plot_line(iso_project(data.map[k], data), iso_project(data.map[k + data.map_width], data), data);
+				plot_line(iso_project(data.map[k], data),
+						iso_project(data.map[k + data.map_width], data), data);
 			x++;
 			k++;
 		}

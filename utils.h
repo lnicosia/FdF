@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 16:41:18 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 17:07:09 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	s_env
 	int			project_type;
 	t_fcoord3	scale;
 	t_coord2	start;
+	float		z_scale;
 }				t_env;
 
 int				plot_line(t_coord2 c1, t_coord2 c2, t_env data);

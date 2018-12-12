@@ -6,13 +6,13 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:46:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 14:04:13 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 17:28:08 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static int	parse_str(char *str, t_coord3 *map, int k, int y)
+static int	parse_str(char *str, t_coord3 *map, int k, int size)
 {
 	int	j;
 	int	i;
@@ -21,9 +21,12 @@ static int	parse_str(char *str, t_coord3 *map, int k, int y)
 	i = 0;
 	while (str[j])
 	{
+		if (k < size)
+		{
 			map[k].x = i;
-			map[k].y = y;
+			map[k].y = 0;
 			map[k].z = ft_atoi(str + j);
+		}
 		while (str[j] && str[j] != ' ')
 			j++;
 		while (str[j] && str[j] == ' ')
@@ -50,7 +53,7 @@ t_coord3	*init_map(int height, int width, t_list *r_map)
 	while (k < size)
 	{
 		str = r_map->content;
-		k = parse_str(str, map, k, j);
+		k = parse_str(str, map, k, size);
 		r_map = r_map->next;
 		j++;
 	}
