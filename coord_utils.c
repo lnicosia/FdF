@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 10:23:59 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/11 10:49:04 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 11:55:25 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ t_coord2	new_coord2(int x, int y)
 t_coord3	new_coord3(int x, int y, int z)
 {
 	t_coord3 c;
+
+	c.x = x;
+	c.y = y;
+	c.z = z;
+	return (c);
+}
+
+t_fcoord3	new_fcoord3(float x, float y, float z)
+{
+	t_fcoord3 c;
 
 	c.x = x;
 	c.y = y;

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:00:21 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/11 18:32:41 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 11:32:34 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ typedef struct	s_coord3
 	int		z;
 }				t_coord3;
 
+typedef struct	s_fcoord3
+{
+	float	x;
+	float	y;
+	float	z;
+}				t_fcoord3;
+
 typedef struct	s_img
 {
 	int		bit_per_pixels;
@@ -47,9 +54,7 @@ typedef struct	s_env
 	int			map_width;
 	int			s_height;
 	int			s_width;
-	float		x_scale;
-	float		y_scale;
-	float		z_scale;
+	t_fcoord3	scale;
 	t_coord2	start;
 }				t_env;
 
@@ -73,6 +78,7 @@ void			scale(t_env data);
 void			trace(t_env data);
 t_coord2		new_coord2(int x, int y);
 t_coord3		new_coord3(int x, int y, int z);
+t_fcoord3		new_fcoord3(float x, float y, float z);
 int				min3(t_coord3 *map, int size, char mode);
 int				max3(t_coord3 *map, int size, char mode);
 

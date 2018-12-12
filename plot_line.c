@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/11 17:55:28 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/12 12:07:17 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	fill_img(t_coord2 c, t_env data)
 {
 	(void)data;
 	if (c.x * (data.img.bit_per_pixels / 8) + c.y * data.img.size_line + 3
-			< data.s_height * data.s_width * 4 - 1 && c.x * (data.img.bit_per_pixels / 8) + c.y * data.img.size_line + 3 > 0)
+			< data.s_height * data.s_width * 4 - 1 && c.x *
+			(data.img.bit_per_pixels / 8) + c.y * data.img.size_line >= 0)
 	{
 		data.img.str[c.x * (data.img.bit_per_pixels / 8) +
 			c.y * data.img.size_line] = 0xFF;
