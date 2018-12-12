@@ -7,7 +7,11 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 14:24:26 by lnicosia          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2018/12/12 16:16:36 by lnicosia         ###   ########.fr       */
+=======
+/*   Updated: 2018/12/12 11:35:16 by lnicosia         ###   ########.fr       */
+>>>>>>> parent of 7b90603... file clean.
 =======
 /*   Updated: 2018/12/12 11:35:16 by lnicosia         ###   ########.fr       */
 >>>>>>> parent of 7b90603... file clean.
@@ -60,8 +64,13 @@ void	print_ranges(t_env data)
 void	init_data(t_env *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->s_width = 1920;
 	data->s_height = 1080;
+=======
+	data->s_width = 1280;
+	data->s_height = 720;
+>>>>>>> parent of 7b90603... file clean.
 =======
 	data->s_width = 1280;
 	data->s_height = 720;
@@ -109,6 +118,9 @@ int		main(int argc, char **argv)
 	fill_map(data);
 	get_ranges(&data);
 	//scale(data);
+<<<<<<< HEAD
+>>>>>>> parent of 7b90603... file clean.
+=======
 >>>>>>> parent of 7b90603... file clean.
 	trace(data);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);

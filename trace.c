@@ -7,7 +7,11 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 11:45:55 by lnicosia          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2018/12/12 16:19:30 by lnicosia         ###   ########.fr       */
+=======
+/*   Updated: 2018/12/12 11:55:06 by lnicosia         ###   ########.fr       */
+>>>>>>> parent of 7b90603... file clean.
 =======
 /*   Updated: 2018/12/12 11:55:06 by lnicosia         ###   ########.fr       */
 >>>>>>> parent of 7b90603... file clean.
@@ -77,14 +81,41 @@ void		project(t_env data)
 	}
 }
 
+
+void		project(t_env data)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			iso(&data.map[k].x, &data.map[k].y, data.map[k].z);
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
 t_coord2	iso_project(t_coord3 t, t_env data)
 {
 	t_coord2	res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res.x = data.start.x + data.scale.x * (t.x - t.y) * cos(0.523599);
 	res.y = data.start.y + data.scale.x * (-(float)(t.z * data.scale.z) +
 			(t.x + t.y) * sin(0.523599));
+=======
+	res.x = data.start.x + data.scale.x * (t.x - t.y ) * cos(0.523599);
+	res.y = data.start.y + data.scale.y * (-(t.z * data.scale.z) + (t.x + t.y) * sin(0.523599));
+>>>>>>> parent of 7b90603... file clean.
 =======
 	res.x = data.start.x + data.scale.x * (t.x - t.y ) * cos(0.523599);
 	res.y = data.start.y + data.scale.y * (-(t.z * data.scale.z) + (t.x + t.y) * sin(0.523599));
@@ -158,6 +189,9 @@ void		scale(t_env data)
 		}
 		y++;
 	}
+<<<<<<< HEAD
+>>>>>>> parent of 7b90603... file clean.
+=======
 >>>>>>> parent of 7b90603... file clean.
 }
 

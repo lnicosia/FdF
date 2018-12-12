@@ -7,7 +7,11 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:00:21 by lnicosia          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2018/12/12 15:11:24 by lnicosia         ###   ########.fr       */
+=======
+/*   Updated: 2018/12/12 11:32:34 by lnicosia         ###   ########.fr       */
+>>>>>>> parent of 7b90603... file clean.
 =======
 /*   Updated: 2018/12/12 11:32:34 by lnicosia         ###   ########.fr       */
 >>>>>>> parent of 7b90603... file clean.
@@ -86,7 +90,13 @@ void			del_map_link(void *content, size_t content_size);
 t_coord3		*init_map(int height, int width, t_list *r_map);
 void			fill_map(t_env data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void			set_ranges(t_env *data);
+=======
+void			project(t_env data);
+void			get_ranges(t_env *data);
+void			scale(t_env data);
+>>>>>>> parent of 7b90603... file clean.
 =======
 void			project(t_env data);
 void			get_ranges(t_env *data);
