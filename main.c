@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 15:22:51 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/13 16:47:58 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	print_ranges(t_env data)
 
 void	init_data(t_env *data)
 {
-	data->s_width = 1920;
-	data->s_height = 1080;
+	data->s_width = 1000;
+	data->s_height = 1000;
 	data->map_height = 0;
 	data->map_width = 0;
 	data->scale.x = 1;
@@ -64,8 +64,8 @@ void	init_data(t_env *data)
 	data->scale.z = 1;
 	data->start.x = 0;
 	data->start.y = 0;
-	data->delta.x = 1;
-	data->delta.y = 1;
+	data->delta.x = 2;
+	data->delta.y = 2;
 	data->delta.z = 0;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->s_width, data->s_height, "Test");
@@ -100,11 +100,8 @@ int		main(int argc, char **argv)
 	data.map = init_map(data.map_height, data.map_width, map);
 	ft_putendl("--MAP INIT--");
 	//print_map(data);
-	//fill_map(data);
-	ft_putendl("--MAP PRE FILLED--");
 	set_ranges(&data);
-	ft_putendl("--MAP SCALED--");
-	printf("scale = %f\n", data.scale.x);
+	ft_putendl("--MAP SCALED AND CENTERED--");
 	trace(data);
 	ft_putendl("--MAP TRACED--");
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);

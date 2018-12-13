@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 11:44:20 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/13 16:31:45 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ int				parser(
 int				clear_map(t_list **map);
 void			del_map_link(void *content, size_t content_size);
 t_coord3		*init_map(int height, int width, t_list *r_map);
-void			fill_map(t_env data);
 void			set_ranges(t_env *data);
-void			project(t_env data);
-void			scale(t_env data);
+t_coord2		iso_project(t_coord3 c, t_env data);
+t_fcoord2		fiso_project(t_coord3 c);
+void			recenter(t_env *data);
 void			trace(t_env data);
 t_coord2		new_coord2(int x, int y);
 t_coord3		new_coord3(int x, int y, int z);
