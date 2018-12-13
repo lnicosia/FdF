@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 17:36:21 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/13 17:42:54 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,13 @@ void		recenter(t_env *data)
 {
 	t_coord2	center;
 
+	printf("recenter\n");
 	center = iso_project(data->map[(data->map_width * data->map_height)
 			/ 2], *data);
+	printf("center.x = %d\ncenter.y = %d\n", center.x, center.y);
 	data->start.x += (float)data->s_width / 2 - center.x;
 	data->start.y += (float)data->s_height / 2 - center.y;
+	printf("start.x = %d\nstart.y = %d\n", data->start.x, data->start.y);
 }
 
 void		set_ranges(t_env *data)
@@ -57,7 +60,12 @@ void		set_ranges(t_env *data)
 	left = fiso_project(data->map[data->map_width * (data->map_height - 1)]);
 	down = fiso_project(data->map[data->map_width * data->map_height - 1]);
 	zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
+	/*printf("up.x = %f\nup.y = %f\n", up.x, up.y);
+	printf("down.x = %f\ndown.y = %f\n", down.x, down.y);
+	printf("left.x = %f\nleft.y = %f\n", left.x, left.y);
+	printf("right.x = %f\nright.y = %f\n", right.x, right.y);*/
 	data->scale.x = (float)data->s_width / (right.x - left.x);
+	//printf("scale.x = %f\n", data->scale.x);
 	data->scale.y = (float)data->s_height / (down.y - up.y);
 	//printf("scale.y = %f\n", data->scale.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.66;
