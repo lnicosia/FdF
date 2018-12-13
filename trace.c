@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 13:57:48 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/13 15:27:21 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,33 +58,6 @@ t_fcoord2	fiso_project(t_coord3 t)
 	res.y = ((float)t.x + (float)t.y) * sin(0.523599);
 	return (res);
 }
-/*void		set_ranges(t_env *data)
-{
-	t_coord2	right;
-	t_coord2	left;
-	t_coord2	up;
-	t_coord2	down;
-	int			zmax;
-
-	up = iso_project(data->map[0], *data);
-	right = iso_project(data->map[data->map_width - 1], *data);
-	left = iso_project(data->map[data->map_width *
-			(data->map_height - 1)], *data);
-	down = iso_project(data->map[data->map_width *
-			data->map_height - 1], *data);
-	data->scale.x = (float)data->s_width / (float)(right.x - left.x);
-	data->scale.y = (float)data->s_height / (float)(down.y - up.y);
-	data->scale.x = ft_fmin(data->scale.x, data->scale.y);
-	zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
-	data->scale.z = (float)data->s_height / ((float)zmax * 4);
-	data->delta.z = 1.5 * 1 / pow(10, ft_count(zmax) - 2);
-	data->delta.x = 50 / (float)data->s_width;
-	data->delta.y = 50 / (float)data->s_height;
-	printf("z max = %d\nz_scale = %f\n", zmax, data->scale.z);
-	data->start.x = ft_abs(left.x) * data->scale.x;
-	data->start.y = ft_abs(up.y) * data->scale.x + data->s_height * 0.2;
-	data->scale.x *= 0.8;
-}*/
 
 void	set_ranges(t_env *data)
 {
@@ -92,6 +65,7 @@ void	set_ranges(t_env *data)
 	t_fcoord2	left;
 	t_fcoord2	up;
 	t_fcoord2	down;
+	t_fcoord2	center;
 	int			zmax;
 
 	up = fiso_project(data->map[0]);
@@ -109,9 +83,16 @@ void	set_ranges(t_env *data)
 	printf("scale.y = %f\n", data->scale.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.66;
 	printf("final scale = %f\n", data->scale.x);
-	data->scale.z = (down.y - up.y) / ((float)zmax * 5);
+	center = fiso_project(data->map[(data->map_width * data->map_height) / 2]);
+	center.x *= data->scale.x;
+	center.y *= data->scale.x;
+	printf("center.x = %f\ncenter.y = %f\n", center.x, center.y);
+	data->start.x = (float)data->s_width / 2 - center.x;
+	data->start.y = (float)data->s_height / 2 - center.y;
+	printf("start.x = %d\nstart.y = %d\n", data->start.x, data->start.y);
+	data->scale.z = data->map_width / ((float)zmax * 5);
 	printf("scale.z = %f\n", data->scale.z);
-	data->delta.z = 1 / pow(10, ft_count(zmax) - 2);
+	data->delta.z = 1 / pow(10, ft_count(zmax));
 	printf("zmax = %d\ndelta.z = %f\n", zmax, data->delta.z);
 }
 
