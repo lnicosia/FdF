@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 18:32:23 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/13 12:09:57 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	init_data(t_env *data)
 	data->scale.z = 1;
 	data->start.x = 0;
 	data->start.y = 0;
-	data->z_delta = 1;
+	data->delta.x = 1;
+	data->delta.y = 1;
+	data->delta.z = 1;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->s_width, data->s_height, "Test");
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->s_width, data->s_height);
@@ -80,8 +82,10 @@ int		main(int argc, char **argv)
 	(void)argc;
 	map = NULL;
 	init_data(&data);
-	mlx_hook(data.win_ptr, 2, 1L << 0, key_press, &data);
-	mlx_hook(data.win_ptr, 17, 1L << 17, close_window, &data);
+	mlx_hook(data.win_ptr, KEYPRESS, KEYPRESSMASK, key_press, &data);
+	mlx_hook(data.win_ptr, DESTROYNOTIFY, STRUCTURENOTIFYMASK, close_window, &data);
+	mlx_hook(data.win_ptr, BUTTONPRESS, BUTTONPRESSMASK, mouse_press, &data);
+	//mlx_hook(data.win_ptr, MOTIONNOTIFY, BUTTONMOTIONMASK, mouse_press, &data);
 	if ((ret = parser(&map, argv[1], &(data.map_height), &(data.map_width))) != 0)
 	{
 		ft_putendl("parse error "); ft_putnbr(ret); ft_putchar('\n');

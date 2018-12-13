@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 18:32:14 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/13 11:44:20 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct	s_env
 	int			project_type;
 	t_fcoord3	scale;
 	t_coord2	start;
-	float		z_delta;
+	t_fcoord3	delta;
 }				t_env;
 
 int				plot_line(t_coord2 c1, t_coord2 c2, t_env data);
@@ -91,5 +91,6 @@ t_coord3		new_coord3(int x, int y, int z);
 t_fcoord3		new_fcoord3(float x, float y, float z);
 int				min3(t_coord3 *map, int size, char mode);
 int				max3(t_coord3 *map, int size, char mode);
+void			redraw(t_env *data);
 
 #endif

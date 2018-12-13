@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 10:39:29 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/13 12:14:33 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ void		set_ranges(t_env *data)
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y);
 	zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
 	data->scale.z = (float)data->s_height / ((float)zmax * 4);
-	data->z_delta = 1.5 * 1 / pow(10, ft_count(zmax) - 2);
+	data->delta.z = 1.5 * 1 / pow(10, ft_count(zmax) - 2);
+	data->delta.x = 50 / (float)data->s_width;
+	data->delta.y = 50 / (float)data->s_height;
 	printf("z max = %d\nz_scale = %f\n", zmax, data->scale.z);
 	data->start.x = ft_abs(left.x) * data->scale.x;
 	data->start.y = ft_abs(up.y) * data->scale.x + data->s_height * 0.2;

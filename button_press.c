@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_press.c                                        :+:      :+:    :+:   */
+/*   mouse_press.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 11:45:16 by lnicosia         ###   ########.fr       */
+/*   Created: 2018/12/13 10:44:26 by lnicosia          #+#    #+#             */
+/*   Updated: 2018/12/13 11:57:30 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "utils.h"
-#include <stdio.h>
 
-void	escape(t_env *data)
+void	scroll_up(t_env *data)
 {
-	ft_putendl("ESCAPE");
-	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	exit(0);
-}
-
-void	key_up(t_env *data)
-{
-	data->scale.z += data->delta.z;
+	data->scale.x += data->delta.x;
 	redraw(data);
 }
 
-void	key_down(t_env *data)
+void	scroll_down(t_env *data)
 {
-	data->scale.z -= data->delta.z;
+	if (data->scale.x - data->delta.x >= 0)
+		data->scale.x -= data->delta.x;
 	redraw(data);
 }
