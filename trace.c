@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 18:44:08 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/13 10:39:29 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void		set_ranges(t_env *data)
 	t_coord2	left;
 	t_coord2	up;
 	t_coord2	down;
+	int			zmax;
 
 	up = iso_project(data->map[0], *data);
 	right = iso_project(data->map[data->map_width - 1], *data);
@@ -66,12 +67,13 @@ void		set_ranges(t_env *data)
 	data->scale.x = (float)data->s_width / (float)(right.x - left.x);
 	data->scale.y = (float)data->s_height / (float)(down.y - up.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y);
-	data->z_delta = 1.5 * 1 / pow(10, ft_count(max3(data->map, data->map_height
-					* data->map_width, 'z')) - 2);
-	printf("z max = %d\n", (max3(data->map, data->map_height *
-					data->map_width, 'z')));
+	zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
+	data->scale.z = (float)data->s_height / ((float)zmax * 4);
+	data->z_delta = 1.5 * 1 / pow(10, ft_count(zmax) - 2);
+	printf("z max = %d\nz_scale = %f\n", zmax, data->scale.z);
 	data->start.x = ft_abs(left.x) * data->scale.x;
-	data->start.y = ft_abs(up.y) * data->scale.x;
+	data->start.y = ft_abs(up.y) * data->scale.x + data->s_height * 0.2;
+	data->scale.x *= 0.8;
 }
 
 void		trace(t_env data)
