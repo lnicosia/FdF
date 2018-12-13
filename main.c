@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 12:09:57 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/13 13:18:21 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int		main(int argc, char **argv)
 	data.map = init_map(data.map_height, data.map_width, map);
 	ft_putendl("--MAP INIT--");
 	//print_map(data);
-	fill_map(data);
+	//fill_map(data);
 	ft_putendl("--MAP PRE FILLED--");
 	set_ranges(&data);
 	ft_putendl("--MAP SCALED--");

@@ -6,13 +6,13 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:46:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 17:28:08 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/13 13:08:21 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static int	parse_str(char *str, t_coord3 *map, int k, int size)
+static int	parse_str(char *str, t_coord3 *map, t_coord2 c, int size)
 {
 	int	j;
 	int	i;
@@ -21,41 +21,40 @@ static int	parse_str(char *str, t_coord3 *map, int k, int size)
 	i = 0;
 	while (str[j])
 	{
-		if (k < size)
+		if (c.x < size)
 		{
-			map[k].x = i;
-			map[k].y = 0;
-			map[k].z = ft_atoi(str + j);
+			map[c.x].x = i;
+			map[c.x].y = c.y;
+			map[c.x].z = ft_atoi(str + j);
 		}
 		while (str[j] && str[j] != ' ')
 			j++;
 		while (str[j] && str[j] == ' ')
 			j++;
+		c.x++;
 		i++;
-		k++;
 	}
-	return (k);
+	return (c.x);
 }
 
 t_coord3	*init_map(int height, int width, t_list *r_map)
 {
 	t_coord3	*map;
-	int			k;
-	int			j;
+	t_coord2	c;
 	int			size;
 	char		*str;
 
 	size = height * width;
 	if (!(map = (t_coord3*)malloc(sizeof(*map) * size)))
 		return (NULL);
-	j = 0;
-	k = 0;
-	while (k < size)
+	c.y = 0;
+	c.x = 0;
+	while (c.y < height)
 	{
 		str = r_map->content;
-		k = parse_str(str, map, k, size);
+		c.x = parse_str(str, map, c, size);
 		r_map = r_map->next;
-		j++;
+		c.y++;
 	}
 	return (map);
 }
