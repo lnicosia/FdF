@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 12:00:53 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/14 17:50:06 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct	s_fcoord3
 
 typedef struct	s_img
 {
-	int		bit_per_pixels;
-	int		size_line;
-	int		endian;
-	char	*str;
+	int				bit_per_pixels;
+	int				size_line;
+	int				endian;
+	unsigned int	*str;
 }				t_img;
 
 typedef struct	s_env
@@ -68,7 +68,8 @@ typedef struct	s_env
 	t_fcoord3	delta;
 }				t_env;
 
-int				plot_line(t_coord2 c1, t_coord2 c2, t_env data);
+int				plot_line(t_coord2 c1, t_coord2 c2, t_env data, int color);
+int				plot_line_aa(t_coord2 c1, t_coord2 c2, t_env data, int color);
 int				key_press(int key, void *param);
 int				key_release(int key, void *param);
 int				mouse_press(int button, int x, int y, void *param);
