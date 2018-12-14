@@ -6,13 +6,14 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 12:59:04 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/14 14:53:14 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "mlx_keycode.h"
 #include "libft.h"
+#include "color.h"
 #include "utils.h"
 #include <stdio.h>
 
@@ -55,8 +56,8 @@ void	print_ranges(t_env data)
 
 void	init_data(t_env *data)
 {
-	data->s_width = 1000;
-	data->s_height = 1000;
+	data->s_width = 1920;
+	data->s_height = 1080;
 	data->map_height = 0;
 	data->map_width = 0;
 	data->scale.x = 1;
@@ -91,20 +92,20 @@ int		main(int argc, char **argv)
 		ft_putendl("parse error "); ft_putnbr(ret); ft_putchar('\n');
 		return (ret);
 	}
-	ft_putendl("--PARSE OK--");
+	ft_putstr(GREEN); ft_putstr("[PARSE OK]"); ft_putendl(RESET);
 	ft_putnbr(data.s_width); ft_putstr(" X "); ft_putnbr(data.s_height); ft_putchar('\n');
 	ft_putstr("map size: "); ft_putnbr(data.map_height);
 	ft_putstr(" x "); ft_putnbr(data.map_width); ft_putchar('\n');
 	ft_putstr("bit_per_pixels: "); ft_putnbr(data.img.bit_per_pixels); ft_putchar('\n');
 	ft_putstr("size_line: "); ft_putnbr(data.img.size_line); ft_putchar('\n');
 	data.map = init_map(data.map_height, data.map_width, map);
-	ft_putendl("--MAP INIT--");
+	ft_putstr(GREEN); ft_putstr("[MAP INITIALIZED]"); ft_putendl(RESET);
 	//print_map(data);
 	set_ranges(&data);
 	//recenter(&data);
-	ft_putendl("--MAP SCALED AND CENTERED--");
+	ft_putstr(GREEN); ft_putstr("[MAP SCALED AND CENTERED]"); ft_putendl(RESET);
 	trace(data);
-	ft_putendl("--MAP TRACED--");
+	ft_putstr(GREEN); ft_putstr("[MAP TRACED]"); ft_putendl(RESET);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
 	return (0);

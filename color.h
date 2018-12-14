@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_press.c                                      :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 10:44:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 15:44:53 by lnicosia         ###   ########.fr       */
+/*   Created: 2018/12/14 14:15:45 by lnicosia          #+#    #+#             */
+/*   Updated: 2018/12/14 14:17:38 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#ifndef COLOR_H
+# define COLOR_H
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define CYAN "\033[0;36m"
+# define RESET "\033[0m"
 
-void	scroll_up(t_env *data)
-{
-	data->scale.x += data->delta.x;
-	recenter(data);
-	redraw(data);
-}
-
-void	scroll_down(t_env *data)
-{
-	if (data->scale.x - data->delta.x >= 0)
-	{
-		data->scale.x -= data->delta.x;
-		recenter(data);
-	}
-	redraw(data);
-}
+#endif
