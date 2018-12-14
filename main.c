@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 14:53:14 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/14 16:35:37 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	init_data(t_env *data)
 	data->scale.z = 1;
 	data->start.x = 0;
 	data->start.y = 0;
-	data->delta.x = 2;
-	data->delta.y = 2;
+	data->delta.x = data->s_width / 25;
+	data->delta.y = data->s_height / 25;
 	data->delta.z = 0;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->s_width, data->s_height, "Test");

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 16:04:25 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/14 16:30:26 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@ int		key_press(int key, void *param)
 	data = (t_env*)param;
 	if (key == ESC_KEY)
 		quit(data);
-	else if (key == UP_KEY)
+	else if (key == NKPL_KEY)
 		increase_z(data);
-	else if (key == DOWN_KEY)
+	else if (key == NKMN_KEY)
 		decrease_z(data);
+	else if (key == UP_KEY)
+		move_up(data);
+	else if (key == DOWN_KEY)
+		move_down(data);
+	else if (key == RIGHT_KEY)
+		move_right(data);
+	else if (key == LEFT_KEY)
+		move_left(data);
 	else
 		ft_putendl("Coucou");
 	return (0);
