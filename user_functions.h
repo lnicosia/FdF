@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_press.c                                        :+:      :+:    :+:   */
+/*   user_functions.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 11:45:16 by lnicosia         ###   ########.fr       */
+/*   Created: 2018/12/14 15:52:40 by lnicosia          #+#    #+#             */
+/*   Updated: 2018/12/14 16:07:36 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include "utils.h"
-#include <stdio.h>
+#ifndef USER_FUNCTIONS_H
+# define USER_FUNCTIONS_H
 
-void	escape(t_env *data)
-{
-	ft_putendl("ESCAPE");
-	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	exit(0);
-}
+void	quit(t_env *data);
+void	redraw(t_env *data);
+void	increase_z(t_env *data);
+void	decrease_z(t_env *data);
+void	zoom_in(t_env *data);
+void	zoom_out(t_env *data);
 
-void	key_up(t_env *data)
-{
-	data->scale.z += data->delta.z;
-	redraw(data);
-}
-
-void	key_down(t_env *data)
-{
-	data->scale.z -= data->delta.z;
-	redraw(data);
-}
+#endif

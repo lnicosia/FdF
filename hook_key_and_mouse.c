@@ -6,14 +6,14 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 11:07:49 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/14 16:04:25 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "libft.h"
 #include "utils.h"
-#include "press.h"
+#include "user_functions.h"
 #include "mlx_keycode.h"
 
 int		key_press(int key, void *param)
@@ -22,11 +22,11 @@ int		key_press(int key, void *param)
 
 	data = (t_env*)param;
 	if (key == ESC_KEY)
-		escape(data);
+		quit(data);
 	else if (key == UP_KEY)
-		key_up(data);
+		increase_z(data);
 	else if (key == DOWN_KEY)
-		key_down(data);
+		decrease_z(data);
 	else
 		ft_putendl("Coucou");
 	return (0);
@@ -45,9 +45,9 @@ int		mouse_press(int button, int x, int y, void *param)
 
 	data = (t_env*)param;
 	if (button == SCROLLUP_KEY)
-		scroll_up(data);
+		zoom_in(data);
 	else if (button == SCROLLDOWN_KEY)
-		scroll_down(data);
+		zoom_out(data);
 	(void)x;
 	(void)y;
 	return (0);

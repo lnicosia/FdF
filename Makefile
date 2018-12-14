@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/14 15:43:10 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/14 16:07:58 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = fdf
 
 LEAKS = fdf_leaks
 
-SRC = main.c plot_line.c hook_more.c parser.c key_press.c \
-	  coord_utils.c init_map.c trace.c button_press.c
+SRC = main.c plot_line.c hook_more.c parser.c zoom.c event_utils.c \
+	  coord_utils.c init_map.c trace.c z_increase.c 
 
 NO_LEAKS_SRC = hook_key_and_mouse.c
 
