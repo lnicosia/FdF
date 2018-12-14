@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 12:59:46 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/14 11:25:45 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,38 +37,19 @@ t_fcoord2	fiso_project(t_coord3 c)
 void		recenter(t_env *data)
 {
 	t_fcoord2	center;
-	t_fcoord2	right;
-	t_fcoord2	left;
-	t_fcoord2	up;
-	t_fcoord2	down;
+	float		tmp;
 
-	up = fiso_project(data->map[0]);
-	right = fiso_project(data->map[data->map_width - 1]);
-	left = fiso_project(data->map[data->map_width * (data->map_height - 1)]);
-	down = fiso_project(data->map[data->map_width * data->map_height - 1]);
-	printf("up.x = %f\nup.y = %f\n", up.x, up.y);
-	printf("down.x = %f\ndown.y = %f\n", down.x, down.y);
-	printf("left.x = %f\nleft.y = %f\n", left.x, left.y);
-	printf("right.x = %f\nright.y = %f\n", right.x, right.y);
-	center.x = (data->scale.x * (right.x - left.x)) / 2;
-	center.y = (data->scale.x * (down.y - up.y)) / 2;
-	printf("center.x = %f\ncenter.y = %f\n", center.x, center.y);
-	data->start.x = (float)data->s_width / 2 - center.x;
-	data->start.y = (float)data->s_height / 2 - center.y;
+	printf("recenter\n");
+	center.x = (float)data->map[(data->map_width * data->map_height) / 2].x;
+	center.y = (float)data->map[(data->map_width * data->map_height) / 2].y;
+	printf("center.x = %d\ncenter.y = %d\n", center.x, center.y);
+	tmp = center.x;
+	center.x = data->start.x + (center.x - center.y) * cos(0.523599) * data->scale.x;
+	center.y = data->start.y + (tmp + center.y) * sin(0.523599) * data->scale.x;
+	printf("center.x = %d\ncenter.y = %d\n", center.x, center.y);
+	data->start.x += (float)data->s_width / 2 - center.x;
+	data->start.y += (float)data->s_height / 2 - center.y;
 	printf("start.x = %d\nstart.y = %d\n", data->start.x, data->start.y);
-	/*float		tmp;
-
-	  printf("recenter\n");
-	  center.x = (float)data->map[(data->map_width * data->map_height) / 2].x;
-	  center.y = (float)data->map[(data->map_width * data->map_height) / 2].y;
-	  printf("center.x = %f\ncenter.y = %f\n", center.x, center.y);
-	  tmp = center.x;
-	  center.x = data->start.x + (center.x - center.y) * cos(0.523599) * data->scale.x;
-	  center.y = data->start.y + (tmp + center.y) * sin(0.523599) * data->scale.x;
-	  printf("center.x = %f\ncenter.y = %f\n", center.x, center.y);
-	  data->start.x += (float)data->s_width / 2 - center.x;
-	  data->start.y += (float)data->s_height / 2 - center.y;
-	  printf("start.x = %d\nstart.y = %d\n", data->start.x, data->start.y);*/
 }
 
 void		set_ranges(t_env *data)
@@ -85,9 +66,9 @@ void		set_ranges(t_env *data)
 	down = fiso_project(data->map[data->map_width * data->map_height - 1]);
 	zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
 	/*printf("up.x = %f\nup.y = %f\n", up.x, up.y);
-	  printf("down.x = %f\ndown.y = %f\n", down.x, down.y);
-	  printf("left.x = %f\nleft.y = %f\n", left.x, left.y);
-	  printf("right.x = %f\nright.y = %f\n", right.x, right.y);*/
+	printf("down.x = %f\ndown.y = %f\n", down.x, down.y);
+	printf("left.x = %f\nleft.y = %f\n", left.x, left.y);
+	printf("right.x = %f\nright.y = %f\n", right.x, right.y);*/
 	data->scale.x = (float)data->s_width / (right.x - left.x);
 	//printf("scale.x = %f\n", data->scale.x);
 	data->scale.y = (float)data->s_height / (down.y - up.y);
@@ -109,8 +90,6 @@ void		trace(t_env data)
 
 	y = 0;
 	k = 0;
-	plot_line(new_coord2(0, data.s_height / 2), new_coord2(data.s_width, data.s_height / 2), data);
-	plot_line(new_coord2(data.s_width / 2, 0), new_coord2(data.s_width / 2, data.s_height), data);
 	while (y < data.map_height)
 	{
 		x = 0;

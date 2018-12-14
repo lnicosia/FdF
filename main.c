@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 16:47:58 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/14 12:59:04 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int		main(int argc, char **argv)
 	ft_putendl("--MAP INIT--");
 	//print_map(data);
 	set_ranges(&data);
+	//recenter(&data);
 	ft_putendl("--MAP SCALED AND CENTERED--");
 	trace(data);
 	ft_putendl("--MAP TRACED--");
