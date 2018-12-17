@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 21:23:56 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 12:19:52 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,41 @@ void		trace(t_env data)
 		while (x < data.map_width)
 		{
 			if (x < data.map_width - 1)
-				plot_line(iso_project(data.map[k], data), iso_project(
-							data.map[k + 1], data), data, 0xFFFFFF);
-				/*plot_line_aa(iso_project(data.map[k], data), iso_project(
+				/*plot_line(iso_project(data.map[k], data), iso_project(
 							data.map[k + 1], data), data, 0xFFFFFF);*/
+				plot_line_aa(iso_project(data.map[k], data), iso_project(
+							data.map[k + 1], data), data, 0xFFFFFF);
 			if (y < data.map_height - 1)
-				plot_line(iso_project(data.map[k], data), iso_project(data.map[
-							k + data.map_width], data), data, 0xFFFFFF);
-				/*plot_line_aa(iso_project(data.map[k], data), iso_project(data.map[
+				/*plot_line(iso_project(data.map[k], data), iso_project(data.map[
 							k + data.map_width], data), data, 0xFFFFFF);*/
+				plot_line_aa(iso_project(data.map[k], data), iso_project(data.map[
+							k + data.map_width], data), data, 0xFFFFFF);
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void		trace_aa(t_env data)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			if (x < data.map_width - 1)
+				plot_line_aa(iso_project(data.map[k], data), iso_project(
+							data.map[k + 1], data), data, 0xFF0000);
+			if (y < data.map_height - 1)
+				plot_line_aa(iso_project(data.map[k], data), iso_project(data.map[
+							k + data.map_width], data), data, 0xFF0000);
 			x++;
 			k++;
 		}

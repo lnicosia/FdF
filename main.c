@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 21:19:36 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 12:22:12 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,19 +104,8 @@ int		main(int argc, char **argv)
 	set_ranges(&data);
 	ft_putstr(GREEN); ft_putstr("[MAP SCALED AND CENTERED]"); ft_putendl(RESET);
 	trace(data);
-	/*plot_line_aa(new_coord2(data.s_width / 2, 0), new_coord2(data.s_width / 2, data.s_height), data, 0xFFFFFF);
-	plot_line_aa(new_coord2(0, data.s_height / 2), new_coord2(data.s_width, data.s_height / 2), data, 0xFFFFFF);
-	plot_line_aa(new_coord2(data.s_width, 0), new_coord2(0, data.s_height), data, 0xFFFFFF);
-	plot_line_aa(new_coord2(0, 0), new_coord2(data.s_width, data.s_height), data, 0xFFFFFF);
-	plot_line(new_coord2(data.s_width / 2, 0), new_coord2(data.s_width / 2, data.s_height), data, 0xFFFFFF);
-	plot_line(new_coord2(0, data.s_height / 2), new_coord2(data.s_width, data.s_height / 2), data, 0xFFFFFF);
-	plot_line(new_coord2(data.s_width, 0), new_coord2(0, data.s_height), data, 0xFFFFFF);
-	plot_line(new_coord2(0, 0), new_coord2(data.s_width, data.s_height), data, 0xFFFFFF);*/
-	/*plot_line_aa(new_coord2(data.s_width / 2 + 100, 0), new_coord2(data.s_width + 100, data.s_height), data, 0xFFFFFF);
-	plot_line(new_coord2(data.s_width / 2, 0), new_coord2(data.s_width, data.s_height), data, 0xFFFFFF);*/
 	ft_putstr(GREEN); ft_putstr("[MAP TRACED]"); ft_putendl(RESET);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
-	//recenter(&data);
 	return (0);
 }

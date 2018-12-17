@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:42:59 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 21:19:27 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 12:27:42 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,26 @@
 #include "utils.h"
 #include <stdio.h>
 
-int	ipart(int x)
+int			ipart(int x)
 {
 	return ((int)x);
 }
 
-int round_(int x)
+int			round_(int x)
 {
-	return ((int)(((double)x)+0.5));
+	return ((int)(((double)x) + 0.5));
 }
 
-float fpart(float x)
+float		fpart(float x)
 {
-	return (((double)x)-(double)ipart(x));
+	return (((double)x) - (double)ipart(x));
 }
-float rfpart(float x)
+
+float		rfpart(float x)
 {
 	return (1.0 - fpart(x));
 }
+
 static void	fill_img_aa(t_coord2 c, t_env data, int color, float brightness)
 {
 	int	red;
@@ -45,7 +47,7 @@ static void	fill_img_aa(t_coord2 c, t_env data, int color, float brightness)
 			c.y * data.s_width >= 0)
 	{
 		red = color >> 16 & 0xFF;
-		green = color  >> 8 & 0xFF;
+		green = color >> 8 & 0xFF;
 		blue = color & 0xFF;
 		/*printf("Color = %08X\n", color);
 		printf("R = %08X	G = %08X	B = %08X\n", red, green, blue);
@@ -54,25 +56,26 @@ static void	fill_img_aa(t_coord2 c, t_env data, int color, float brightness)
 		blue = blue * brightness;
 		green = green * brightness;
 		/*printf("R = %08X	G = %08X	B = %08X\n", red, green, blue);
-		printf("R = %d		G = %d		B = %d\n", red, green, blue);
-		printf("[%d][%d]\n[brightness] = %f [color] = %d\n", c.x, c.y, brightness, (int)(color * brightness));*/
-		data.img.str[c.x + c.y * data.s_width] = ((red << 16) | (green << 8) | blue);
+		printf("R = %d		G = %d		B = %d\n", red, green, blue);*/
+		/*printf("[%d][%d]\n[brightness] = %f [base_color] = %d
+		 * [new color] = %d\n", c.x, c.y, brightness, color, ((red << 16 )
+		 * | (green << 8) | blue));*/
+		data.img.str[c.x + c.y * data.s_width] = ((red << 16) | (green << 8)
+				| blue);
 	}
 }
 
 static int	plot_line_low_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 {
-	float		dx;
-	float		dy;
+	float	dx;
+	float	dy;
 	int		xpx11;
 	int		ypx11;
 	int		xpx12;
 	int		ypx12;
-	float		xend;
-	float		yend;
-	float		intery;
-	float		e;
-	float		yi;
+	float	xend;
+	float	yend;
+	float	intery;
 	float	gradient;
 	float	xgap;
 
@@ -82,9 +85,6 @@ static int	plot_line_low_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 		gradient = 1.0;
 	else
 		gradient = dy / dx;
-	yi = dy < 0 ? -1 : 1;
-	dy = ft_abs(dy);
-	e = 2 * dy - dx;
 	xend = round_(c1.x);
 	yend = c1.y + gradient * (xend - c1.x);
 	xgap = rfpart(c1.x + 0.5);
@@ -100,34 +100,31 @@ static int	plot_line_low_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 	ypx12 = ipart(yend);
 	fill_img_aa(new_coord2(xpx12, ypx12), data, color, rfpart(yend) * xgap);
 	fill_img_aa(new_coord2(xpx12, ypx12 + 1), data, color, fpart(yend) * xgap);
-	while (xpx11 + 1 < xpx12)
+	while (xpx11 < xpx12)
 	{
-		fill_img_aa(new_coord2(xpx11, ipart(intery)), data, color, rfpart(intery));
-		fill_img_aa(new_coord2(xpx11, ipart(intery) + 1), data, color, fpart(intery));
+		fill_img_aa(new_coord2(xpx11, ipart(intery)), data, color,
+				rfpart(intery));
+		fill_img_aa(new_coord2(xpx11, ipart(intery) + 1), data, color,
+				fpart(intery));
 		xpx11++;
-		//intery += gradient;
-		intery = e > 0 ? intery + yi : intery;
-		e = e > 0 ? e - 2 * dx : e;
-		e += 2 * dy;
+		intery += gradient;
 	}
 	return (0);
 }
 
-int	plot_line_high_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
+static int	plot_line_high_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 {
-	float		dx;
-	float		dy;
+	float	dx;
+	float	dy;
 	int		xpx11;
 	int		ypx11;
 	int		xpx12;
 	int		ypx12;
-	float		xend;
-	float		yend;
-	float		intery;
-	float		e;
-	float		xi;
+	float	xend;
+	float	yend;
+	float	intery;
 	float	gradient;
-	float	xgap;
+	float	ygap;
 
 	dy = c2.y - c1.y;
 	dx = c2.x - c1.x;
@@ -135,33 +132,29 @@ int	plot_line_high_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 		gradient = 1.0;
 	else
 		gradient = dx / dy;
-	xi = dx < 0 ? -1 : 1;
-	dx = ft_abs(dx);
-	e = 2 * dx - dy;
 	yend = round_(c1.y);
 	xend = c1.x + gradient * (yend - c1.y);
-	xgap = rfpart(c1.y + 0.5);
+	ygap = rfpart(c1.y + 0.5);
 	ypx11 = yend;
 	xpx11 = ipart(xend);
-	fill_img_aa(new_coord2(xpx11, ypx11), data, color, rfpart(xend) * xgap);
-	fill_img_aa(new_coord2(xpx11, ypx11 + 1), data, color, fpart(xend) * xgap);
+	fill_img_aa(new_coord2(xpx11, ypx11), data, color, rfpart(xend) * ygap);
+	fill_img_aa(new_coord2(xpx11 + 1, ypx11), data, color, fpart(xend) * ygap);
 	intery = xend + gradient;
-	xend = c2.x + gradient * (yend - c2.y);
 	yend = round_(c2.y);
-	xgap = rfpart(c2.y + 0.5);
-	xpx12 = fpart(xend);
+	xend = c2.x + gradient * (yend - c2.y);
+	ygap = fpart(c2.y + 0.5);
 	ypx12 = yend;
-	fill_img_aa(new_coord2(xpx12, ypx12), data, color, rfpart(xend) * xgap);
-	fill_img_aa(new_coord2(xpx12, ypx12 + 1), data, color, fpart(xend) * xgap);
-	while (ypx11 + 1 < ypx12)
+	xpx12 = ipart(xend);
+	fill_img_aa(new_coord2(xpx12, ypx12), data, color, rfpart(xend) * ygap);
+	fill_img_aa(new_coord2(xpx12 + 1, ypx12), data, color, fpart(xend) * ygap);
+	while (ypx11 < ypx12)
 	{
-		fill_img_aa(new_coord2(ipart(intery), ypx11), data, color, rfpart(intery));
-		fill_img_aa(new_coord2(ipart(intery) + 1, ypx11), data, color, fpart(intery));
+		fill_img_aa(new_coord2(ipart(intery), ypx11), data, color,
+				rfpart(intery));
+		fill_img_aa(new_coord2(ipart(intery) + 1, ypx11), data, color,
+				fpart(intery));
 		ypx11++;
-		//intery += gradient;
-		intery = e > 0 ? intery + xi : intery;
-		e = e > 0 ? e - 2 * dy : e;
-		e += 2 * dx;
+		intery += gradient;
 	}
 	return (0);
 }

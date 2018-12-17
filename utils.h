@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 17:50:06 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 10:32:25 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_coord2		iso_project(t_coord3 c, t_env data);
 t_fcoord2		fiso_project(t_coord3 c);
 void			recenter(t_env *data);
 void			trace(t_env data);
+void			trace_aa(t_env data);
 t_coord2		new_coord2(int x, int y);
 t_coord3		new_coord3(int x, int y, int z);
 t_fcoord3		new_fcoord3(float x, float y, float z);
