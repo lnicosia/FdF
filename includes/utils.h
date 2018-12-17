@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 16:01:52 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 16:47:11 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ void			plot_line_low_aa(
 void			plot_line_high(t_coord2 c1, t_coord2 c2, t_env data, int color);
 void			plot_line_high_aa(
 		t_coord2 c1, t_coord2 c2, t_env data, int color);
+int				ipart(int x);
+int				round_(int x);
+float			fpart(float x);
+float			rfpart(float x);
 void			fill_img(t_coord2 c, t_env data, int color, float brightness);
 int				key_press(int key, void *param);
 int				key_release(int key, void *param);
