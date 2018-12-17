@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 16:30:26 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 15:55:18 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		key_press(int key, void *param)
 		move_right(data);
 	else if (key == LEFT_KEY)
 		move_left(data);
+	else if (key == A_KEY)
+		swap_trace_type(data);
 	else
 		ft_putendl("Coucou");
 	return (0);

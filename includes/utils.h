@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 15:31:45 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 16:01:52 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,19 @@ typedef struct	s_env
 	t_fcoord3	scale;
 	t_coord2	start;
 	t_fcoord3	delta;
-	t_coord2 	(*project[2])(t_coord3, struct s_env);
-	
+	t_coord2	(*project[2])(t_coord3, struct s_env);
+	void		(*plot_line_low[2])(t_coord2, t_coord2, struct s_env, int);
+	void		(*plot_line_high[2])(t_coord2, t_coord2, struct s_env, int);
 }				t_env;
 
-int				plot_line(t_coord2 c1, t_coord2 c2, t_env data, int color);
-int				plot_line_aa(t_coord2 c1, t_coord2 c2, t_env data, int color);
+void			plot_line(t_coord2 c1, t_coord2 c2, t_env data, int color);
+void			plot_line_low(t_coord2 c1, t_coord2 c2, t_env data, int color);
+void			plot_line_low_aa(
+		t_coord2 c1, t_coord2 c2, t_env data, int color);
+void			plot_line_high(t_coord2 c1, t_coord2 c2, t_env data, int color);
+void			plot_line_high_aa(
+		t_coord2 c1, t_coord2 c2, t_env data, int color);
+void			fill_img(t_coord2 c, t_env data, int color, float brightness);
 int				key_press(int key, void *param);
 int				key_release(int key, void *param);
 int				mouse_press(int button, int x, int y, void *param);
@@ -98,5 +105,6 @@ t_fcoord3		new_fcoord3(float x, float y, float z);
 int				min3(t_coord3 *map, int size, char mode);
 int				max3(t_coord3 *map, int size, char mode);
 void			redraw(t_env *data);
+void			swap_trace_type(t_env *data);
 
 #endif

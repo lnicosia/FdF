@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 14:02:34 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 15:57:35 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,10 @@ void	redraw(t_env *data)
 			&(data->img.endian));
 	trace(*data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+}
+
+void	swap_trace_type(t_env *data)
+{
+	data->trace_type = data->trace_type == 1 ? 0 : 1;
+	redraw(data);
 }
