@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:42:59 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 12:27:42 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 13:55:32 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ float		rfpart(float x)
 	return (1.0 - fpart(x));
 }
 
-static void	fill_img_aa(t_coord2 c, t_env data, int color, float brightness)
+void		fill_img_aa(t_coord2 c, t_env data, int color, float brightness)
 {
 	int	red;
 	int	green;

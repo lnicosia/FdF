@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 12:22:12 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 15:32:01 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void	init_data(t_env *data)
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->s_width, data->s_height, "Test");
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->s_width, data->s_height);
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr, &(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));
+	data->project_type = ISO;
+	data->trace_type = NORMAL;
+	data->project[ISO] = &iso_project;
 }
 
 int		main(int argc, char **argv)
