@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:11:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 17:00:25 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 18:13:35 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ static int	check_line(char *line, int *line_size)
 	while (line[i])
 	{
 		while (line[i] && line[i] != ' ')
-		{
-			if (line[i] != '-' && (line[i] < '0' || line[i] > '9'))
-				return (LINE_FORMAT_ERROR);
 			i++;
-		}
 		while (line[i] && line[i] == ' ')
 			i++;
 		(*line_size)++;

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 17:07:43 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 18:19:23 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ void	init_data(t_env *data)
 	data->project_type = ISO;
 	data->trace_type = NORMAL;
 	data->project[ISO] = &iso_project;
+	data->project[PARA] = &para_project;
+	data->fproject[ISO] = &fiso_project;
+	data->fproject[PARA] = &fpara_project;
 	data->plot_line_low[0] = &plot_line_low;
 	data->plot_line_low[1] = &plot_line_low_aa;
 	data->plot_line_high[0] = &plot_line_high;

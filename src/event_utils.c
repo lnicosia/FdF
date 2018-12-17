@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 15:57:35 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 18:01:55 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ void	redraw(t_env *data)
 
 void	swap_trace_type(t_env *data)
 {
-	data->trace_type = data->trace_type == 1 ? 0 : 1;
+	data->trace_type = data->trace_type == AA ? NORMAL : AA;
+	redraw(data);
+}
+
+void	swap_project_type(t_env *data)
+{
+	data->project_type = data->project_type == PARA ? ISO : PARA;
+	set_ranges(data);
 	redraw(data);
 }

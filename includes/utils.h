@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 16:47:11 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:58:51 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct	s_env
 	t_coord2	start;
 	t_fcoord3	delta;
 	t_coord2	(*project[2])(t_coord3, struct s_env);
+	t_fcoord2	(*fproject[2])(t_coord3);
 	void		(*plot_line_low[2])(t_coord2, t_coord2, struct s_env, int);
 	void		(*plot_line_high[2])(t_coord2, t_coord2, struct s_env, int);
 }				t_env;
@@ -100,7 +101,9 @@ void			del_map_link(void *content, size_t content_size);
 t_coord3		*init_map(int height, int width, t_list *r_map);
 void			set_ranges(t_env *data);
 t_coord2		iso_project(t_coord3 c, t_env data);
+t_coord2		para_project(t_coord3 c, t_env data);
 t_fcoord2		fiso_project(t_coord3 c);
+t_fcoord2		fpara_project(t_coord3 c);
 void			recenter(t_env *data);
 void			trace(t_env data);
 t_coord2		new_coord2(int x, int y);
@@ -110,5 +113,6 @@ int				min3(t_coord3 *map, int size, char mode);
 int				max3(t_coord3 *map, int size, char mode);
 void			redraw(t_env *data);
 void			swap_trace_type(t_env *data);
+void			swap_project_type(t_env *data);
 
 #endif

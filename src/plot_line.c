@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 16:00:14 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 18:42:49 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,21 @@ void	fill_img(t_coord2 c, t_env data, int color, float brightness)
 	int	green;
 	int blue;
 
-	if (c.x < 0 || c.x > data.s_width || c.y < 0 || c.y > data.s_height)
+	if (c.x < 0 || c.x > data.s_width - 1 || c.y < 0 || c.y > data.s_height - 1)
 		return ;
-	if (c.x + c.y * data.s_width < data.s_height * data.s_width - 1 && c.x +
-			c.y * data.s_width >= 0)
+	if (brightness == 1)
 	{
-		red = color >> 16 & 0xFF;
-		green = color >> 8 & 0xFF;
-		blue = color & 0xFF;
-		red = red * brightness;
-		blue = blue * brightness;
-		green = green * brightness;
-		data.img.str[c.x + c.y * data.s_width] = ((red << 16) | (green << 8)
-				| blue);
+		data.img.str[c.x + c.y * data.s_width] = color;
+		return ;
 	}
+	red = color >> 16 & 0xFF;
+	green = color >> 8 & 0xFF;
+	blue = color & 0xFF;
+	red = red * brightness;
+	blue = blue * brightness;
+	green = green * brightness;
+	data.img.str[c.x + c.y * data.s_width] = ((red << 16) | (green << 8)
+			| blue);
 }
 
 void	plot_line_low(t_coord2 c1, t_coord2 c2, t_env data, int color)
