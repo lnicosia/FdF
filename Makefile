@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/17 15:31:33 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/17 15:35:07 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,14 +49,16 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES)
 	@mkdir -p $(OBJ_DIR)
 	@gcc -c $< -o $@ $(CFLAGS) 
 
-$(NAME): $(OBJ) $(LIBFT)
+$(BIN_DIR)/$(NAME): $(OBJ) $(LIBFT)
 	@gcc $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
 	@echo ${GREEN}"[INFO] Compiled [$(NAME)] executable with success!"${RESET}
 
 clean: 
-	@rm -Rf $(OBJ)
+	@rm -f $(OBJ)
+	@rm -Rf $(OBJ_DIR)
 	@make clean -C libft
 	@echo ${CYAN}"[INFO] Removed [$(OBJ)] with success!"${RESET}
+	@echo ${CYAN}"[INFO] Removed [$(OBJ_DIR)] with success!"${RESET}
 
 fclean: clean
 	@rm -Rf fdf
