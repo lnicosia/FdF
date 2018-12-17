@@ -6,11 +6,12 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:46:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/13 13:08:21 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:01:21 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "color.h"
 
 static int	parse_str(char *str, t_coord3 *map, t_coord2 c, int size)
 {
@@ -56,5 +57,8 @@ t_coord3	*init_map(int height, int width, t_list *r_map)
 		r_map = r_map->next;
 		c.y++;
 	}
+	ft_putstr(GREEN);
+	ft_putstr("[MAP INITIALIZED]");
+	ft_putendl(RESET);
 	return (map);
 }

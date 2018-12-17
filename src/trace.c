@@ -6,13 +6,14 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 16:00:56 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:06:31 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <math.h>
 #include "utils.h"
+#include "color.h"
 #include <stdio.h>
 
 t_coord2	iso_project(t_coord3 c, t_env data)
@@ -67,10 +68,6 @@ void		set_ranges(t_env *data)
 	left = fiso_project(data->map[data->map_width * (data->map_height - 1)]);
 	down = fiso_project(data->map[data->map_width * data->map_height - 1]);
 	zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
-	printf("[up.x] = %f	[up.y] = %f\n", up.x, up.y);
-	printf("[down.x] = %f	[down.y] = %f\n", down.x, down.y);
-	printf("[left.x] = %f	[left.y] = %f\n", left.x, left.y);
-	printf("[right.x] = %f	[right.y] = %f\n", right.x, right.y);
 	data->scale.x = (float)data->s_width / (right.x - left.x);
 	data->scale.y = (float)data->s_height / (down.y - up.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.8;
@@ -80,7 +77,9 @@ void		set_ranges(t_env *data)
 	data->scale.z = data->map_height / ((float)zmax * 10);
 	printf("scale.z = %f\n", data->scale.z);
 	data->delta.z = (float)data->s_height / (100 * zmax * data->scale.x);
-	printf("zmax = %d\ndelta.z = %f\n", zmax, data->delta.z);
+	ft_putstr(GREEN);
+	ft_putstr("[MAP SCALED AND CENTERED]");
+	ft_putendl(RESET);
 }
 
 void		trace(t_env data)

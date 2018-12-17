@@ -6,13 +6,14 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:11:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/11 15:13:26 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:00:25 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "libft.h"
 #include "fcntl.h"
+#include "color.h"
 
 static int	check_line(char *line, int *line_size)
 {
@@ -72,5 +73,8 @@ int			parser(t_list **map, char *file, int *map_height, int *map_width)
 	}
 	if (close(fd) == -1)
 		return (CLOSE_ERROR);
+	ft_putstr(GREEN);
+	ft_putstr("[PARSE OK]");
+	ft_putendl(RESET);
 	return (0);
 }
