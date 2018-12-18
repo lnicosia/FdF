@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 18:29:37 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/18 11:34:33 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,32 @@ t_fcoord2	fpara_project(t_coord3 c)
 	return (res);
 }
 
+int			get_color(int x, int y, t_env data)
+{
+	int		z;
+	int		div;
+
+	z = data.map[y * data.map_width + x].z;
+	div = 25;
+	if (z <= 0)
+		return (0xC3E1FF);
+	if (z <= (data.zmax) / div)
+		return (0x344623);
+	if (z <= (2 * data.zmax) / div)
+		return (0x7E9F5D);
+	if (z <= (3 * data.zmax) / div)
+		return (0xB7CAA4);
+	if (z <= (4 * data.zmax) / div)
+		return (0xCBAC83);
+	if (z <= (5 * data.zmax) / div)
+		return (0x75552D);
+	if (z <= (6 * data.zmax) / div)
+		return (0x583405);
+	if (z <= data.zmax)
+		return (0xFFFFFF);
+	return (0xFFFFFF);
+}
+
 void		recenter(t_env *data)
 {
 	t_fcoord2	center;
@@ -63,8 +89,10 @@ void		recenter(t_env *data)
 
 	up = data->fproject[data->project_type](data->map[0]);
 	right = data->fproject[data->project_type](data->map[data->map_width - 1]);
-	left = data->fproject[data->project_type](data->map[data->map_width * (data->map_height - 1)]);
-	down = data->fproject[data->project_type](data->map[data->map_width * data->map_height - 1]);
+	left = data->fproject[data->project_type](data->map[data->map_width *
+			(data->map_height - 1)]);
+	down = data->fproject[data->project_type](data->map[data->map_width *
+			data->map_height - 1]);
 	center.x = data->scale.x * (right.x - left.x) / 2 - ft_fabs(left.x)
 		* data->scale.x;
 	center.y = data->scale.x * (down.y - up.y) / 2 - ft_fabs(up.y)
@@ -73,33 +101,43 @@ void		recenter(t_env *data)
 	data->start.y = (float)data->s_height / 2 - center.y;
 }
 
+void		set_z_ranges(t_env *data)
+{
+	data->zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
+	printf("zmax: %d\n", data->zmax);
+	if (data->zmax != 0)
+	{
+		data->scale.z = (float)data->map_height / ((float)data->zmax * 10);
+		printf("scale.z = %f\n", data->scale.z);
+		data->delta.z = (float)data->s_height / (100 * data->zmax *
+				data->scale.x);
+	}
+	ft_putstr(GREEN);
+	ft_putstr("[Z SCALED]");
+	ft_putendl(RESET);
+}
+
 void		set_ranges(t_env *data)
 {
 	t_fcoord2	right;
 	t_fcoord2	left;
 	t_fcoord2	up;
 	t_fcoord2	down;
-	int			zmax;
 
 	up = data->fproject[data->project_type](data->map[0]);
 	right = data->fproject[data->project_type](data->map[data->map_width - 1]);
-	left = data->fproject[data->project_type](data->map[data->map_width * (data->map_height - 1)]);
-	down = data->fproject[data->project_type](data->map[data->map_width * data->map_height - 1]);
-	zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
+	left = data->fproject[data->project_type](data->map[data->map_width *
+			(data->map_height - 1)]);
+	down = data->fproject[data->project_type](data->map[data->map_width *
+			data->map_height - 1]);
 	data->scale.x = (float)data->s_width / (right.x - left.x);
 	data->scale.y = (float)data->s_height / (down.y - up.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.8;
 	data->delta.x = data->scale.x * 10 / 100;
 	printf("final scale = %f\n", data->scale.x);
 	recenter(data);
-	if (zmax != 0)
-	{
-		data->scale.z = (float)data->map_height / ((float)zmax * 10);
-		printf("scale.z = %f\n", data->scale.z);
-		data->delta.z = (float)data->s_height / (100 * zmax * data->scale.x);
-	}
 	ft_putstr(GREEN);
-	ft_putstr("[MAP SCALED AND CENTERED]");
+	ft_putstr("[MAP SCALED]");
 	ft_putendl(RESET);
 }
 
@@ -119,11 +157,11 @@ void		trace(t_env data)
 			if (x < data.map_width - 1)
 				plot_line(data.project[data.project_type](data.map[k], data),
 						data.project[data.project_type](data.map[k + 1], data),
-						data, 0xFFFFFF);
+						data, get_color(x, y, data));
 			if (y < data.map_height - 1)
 				plot_line(data.project[data.project_type](data.map[k], data),
 						data.project[data.project_type](data.map[k +
-							data.map_width], data), data, 0xFFFFFF);
+						data.map_width], data), data, get_color(x, y, data));
 			x++;
 			k++;
 		}

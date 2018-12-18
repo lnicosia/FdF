@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 18:19:23 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/18 11:07:38 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	init_data(t_env *data)
 	data->scale.z = 1;
 	data->start.x = 0;
 	data->start.y = 0;
+	data->zmax = 0;
 	data->delta.x = data->s_width / 25;
 	data->delta.y = data->s_height / 25;
 	data->delta.z = 0;
@@ -93,7 +94,6 @@ int		main(int argc, char **argv)
 	(void)argc;
 	map = NULL;
 	init_data(&data);
-	ft_putchar('\n');
 	init_hook(&data);
 	if ((ret = parser(&map, argv[1], &(data.map_height), &(data.map_width)))
 			!= 0)
@@ -105,6 +105,7 @@ int		main(int argc, char **argv)
 	}
 	data.map = init_map(data.map_height, data.map_width, map);
 	set_ranges(&data);
+	set_z_ranges(&data);
 	trace(data);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
