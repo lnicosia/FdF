@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 17:35:42 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:44:24 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	fill_img(t_coord2 c, t_env data, int color, float brightness)
 	int	green;
 	int blue;
 
-	if (c.x < 0 || c.x > data.s_width - 1 || c.y < 0 || c.y > data.s_height - 1
-			|| data.img.str[c.x + c.y * data.s_width] != 0)
+	if (c.x < 0 || c.x > data.s_width - 1 || c.y < 0 || c.y > data.s_height - 1)
 		return ;
 	if (brightness == 1)
 	{
