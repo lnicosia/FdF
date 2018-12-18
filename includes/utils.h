@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 10:47:45 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/18 15:35:49 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ typedef struct	s_fcoord3
 	float	z;
 }				t_fcoord3;
 
+typedef struct	s_quad
+{
+	t_coord2	c1;
+	t_coord2	c2;
+	t_coord2	c3;
+	t_coord2	c4;
+}				t_quad;
+
 typedef struct	s_img
 {
 	int				bit_per_pixels;
@@ -67,9 +75,12 @@ typedef struct	s_env
 	int			project_type;
 	int			trace_type;
 	int			zmax;
+	int			color_div;
+	int			zbuffer;
 	t_fcoord3	scale;
 	t_coord2	start;
 	t_fcoord3	delta;
+	t_fcoord3	angle;
 	t_coord2	(*project[2])(t_coord3, struct s_env);
 	t_fcoord2	(*fproject[2])(t_coord3);
 	void		(*plot_line_low[2])(t_coord2, t_coord2, struct s_env, int);
@@ -113,8 +124,8 @@ t_coord3		new_coord3(int x, int y, int z);
 t_fcoord3		new_fcoord3(float x, float y, float z);
 int				min3(t_coord3 *map, int size, char mode);
 int				max3(t_coord3 *map, int size, char mode);
-void			redraw(t_env *data);
-void			swap_trace_type(t_env *data);
-void			swap_project_type(t_env *data);
+void			x_rotation(t_coord3 *c, t_env data);
+void			y_rotation(t_coord3 *c, t_env data);
+void			z_rotation(t_coord3 *c, t_env data);
 
 #endif

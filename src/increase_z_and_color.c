@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 16:02:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 11:44:48 by lnicosia         ###   ########.fr       */
+/*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
+/*   Updated: 2018/12/18 11:49:02 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "user_functions.h"
 
-void	zoom_in(t_env *data)
+void	increase_z(t_env *data)
 {
-	data->scale.x += data->delta.x;
+	data->scale.z += data->delta.z;
 	redraw(data);
 }
 
-void	zoom_out(t_env *data)
+void	decrease_z(t_env *data)
 {
-	if (data->scale.x - data->delta.x >= 0)
+	data->scale.z -= data->delta.z;
+	redraw(data);
+}
+
+void	increase_color_div(t_env *data)
+{
+	data->color_div++;
+	redraw(data);
+}
+
+void	decrease_color_div(t_env *data)
+{
+	if (data->color_div > 1)
 	{
-		data->scale.x -= data->delta.x;
+		data->color_div--;
 		redraw(data);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 11:34:33 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/18 15:45:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ t_coord2	iso_project(t_coord3 c, t_env data)
 {
 	t_coord2	res;
 
+	x_rotation(&c, data);
+	y_rotation(&c, data);
+	z_rotation(&c, data);
 	res.x = data.start.x + data.scale.x * (c.x - c.y) * cos(0.523599);
 	res.y = data.start.y + data.scale.x * (-(float)(c.z * data.scale.z) +
 			(c.x + c.y) * sin(0.523599));
@@ -56,23 +59,21 @@ t_fcoord2	fpara_project(t_coord3 c)
 int			get_color(int x, int y, t_env data)
 {
 	int		z;
-	int		div;
 
 	z = data.map[y * data.map_width + x].z;
-	div = 25;
 	if (z <= 0)
 		return (0xC3E1FF);
-	if (z <= (data.zmax) / div)
+	if (z <= (data.zmax) / data.color_div)
 		return (0x344623);
-	if (z <= (2 * data.zmax) / div)
+	if (z <= (2 * data.zmax) / data.color_div)
 		return (0x7E9F5D);
-	if (z <= (3 * data.zmax) / div)
+	if (z <= (3 * data.zmax) / data.color_div)
 		return (0xB7CAA4);
-	if (z <= (4 * data.zmax) / div)
+	if (z <= (4 * data.zmax) / data.color_div)
 		return (0xCBAC83);
-	if (z <= (5 * data.zmax) / div)
+	if (z <= (5 * data.zmax) / data.color_div)
 		return (0x75552D);
-	if (z <= (6 * data.zmax) / div)
+	if (z <= (6 * data.zmax) / data.color_div)
 		return (0x583405);
 	if (z <= data.zmax)
 		return (0xFFFFFF);
@@ -167,4 +168,24 @@ void		trace(t_env data)
 		}
 		y++;
 	}
+	/*y = data.map_height -1;
+	k = data.map_height * data.map_width - 1;
+	while (y >= 0)
+	{
+		x = data.map_width - 1;
+		while (x >= 0)
+		{
+			if (x > 0)
+				plot_line(data.project[data.project_type](data.map[k], data),
+						data.project[data.project_type](data.map[k - 1], data),
+						data, get_color(x, y, data));
+			if (y > 0)
+				plot_line(data.project[data.project_type](data.map[k], data),
+						data.project[data.project_type](data.map[k -
+						data.map_width], data), data, get_color(x, y, data));
+			x--;
+			k--;
+		}
+		y--;
+	}*/
 }

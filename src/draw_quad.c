@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_press.c                                        :+:      :+:    :+:   */
+/*   draw_face.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 16:06:59 by lnicosia         ###   ########.fr       */
+/*   Created: 2018/12/18 13:50:13 by lnicosia          #+#    #+#             */
+/*   Updated: 2018/12/18 14:46:55 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include "user_functions.h"
 
-void	increase_z(t_env *data)
+void	draw_face(t_quad q)
 {
-	data->scale.z += data->delta.z;
-	redraw(data);
-}
+	int	x;
+	int	y;
 
-void	decrease_z(t_env *data)
-{
-	data->scale.z -= data->delta.z;
-	redraw(data);
+	(void)q;
+	(void)x;
+	(void)y;
+	
 }

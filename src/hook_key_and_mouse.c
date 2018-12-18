@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 17:50:58 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/18 15:43:09 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,40 @@ int		key_press(int key, void *param)
 		swap_trace_type(data);
 	else if (key == P_KEY)
 		swap_project_type(data);
+	else if (key == PUP_KEY)
+		increase_color_div(data);
+	else if (key == PDOWN_KEY)
+		decrease_color_div(data);
+	else if (key == NK1_KEY)
+	{
+		data->angle.x += 0.1;
+		redraw(data);
+	}
+	else if (key == NK2_KEY)
+	{
+		data->angle.x -= 0.1;
+		redraw(data);
+	}
+	else if (key == NK4_KEY)
+	{
+		data->angle.y += 0.1;
+		redraw(data);
+	}
+	else if (key == NK5_KEY)
+	{
+		data->angle.y -= 0.1;
+		redraw(data);
+	}
+	else if (key == NK7_KEY)
+	{
+		data->angle.z += 0.1;
+		redraw(data);
+	}
+	else if (key == NK8_KEY)
+	{
+		data->angle.z -= 0.1;
+		redraw(data);
+	}
 	else
 		ft_putendl("Coucou");
 	return (0);

@@ -6,11 +6,12 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:28:48 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/14 16:37:18 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/18 11:45:15 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "user_functions.h"
 
 void	move_up(t_env *data)
 {

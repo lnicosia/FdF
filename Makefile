@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/17 16:47:33 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/18 14:59:12 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_RAW = main.c plot_line.c hook_more.c parser.c zoom.c event_utils.c \
-	  coord_utils.c init_map.c trace.c z_increase.c map_movement.c \
-	  plot_line_aa.c hook_key_and_mouse.c math.c
+	  coord_utils.c init_map.c trace.c increase_z_and_color.c map_movement.c \
+	  plot_line_aa.c hook_key_and_mouse.c math.c draw_quad.c rotate.c
 
 HEADERS = utils.h color.h mlx_keycode.h user_functions.h
 
