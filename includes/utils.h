@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 15:35:49 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:36:27 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ t_coord3		new_coord3(int x, int y, int z);
 t_fcoord3		new_fcoord3(float x, float y, float z);
 int				min3(t_coord3 *map, int size, char mode);
 int				max3(t_coord3 *map, int size, char mode);
-void			x_rotation(t_coord3 *c, t_env data);
-void			y_rotation(t_coord3 *c, t_env data);
-void			z_rotation(t_coord3 *c, t_env data);
+void			x_rotation(t_fcoord3 *c, t_env data);
+void			y_rotation(t_fcoord3 *c, t_env data);
+void			z_rotation(t_fcoord3 *c, t_env data);
 
 #endif

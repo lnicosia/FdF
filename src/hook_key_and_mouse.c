@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 15:43:09 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/18 17:22:32 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "utils.h"
 #include "user_functions.h"
 #include "mlx_keycode.h"
+#include <stdio.h>
 
 int		key_press(int key, void *param)
 {
@@ -45,32 +46,34 @@ int		key_press(int key, void *param)
 		decrease_color_div(data);
 	else if (key == NK1_KEY)
 	{
-		data->angle.x += 0.1;
+		data->angle.x += (3.141592 / 8);
+		printf("new angle = %f\n", data->angle.x);
 		redraw(data);
 	}
 	else if (key == NK2_KEY)
 	{
-		data->angle.x -= 0.1;
+		data->angle.x -= (3.141592 / 8);
+		printf("new angle = %f\n", data->angle.x);
 		redraw(data);
 	}
 	else if (key == NK4_KEY)
 	{
-		data->angle.y += 0.1;
+		data->angle.y += 3.141592 / 8;
 		redraw(data);
 	}
 	else if (key == NK5_KEY)
 	{
-		data->angle.y -= 0.1;
+		data->angle.y -= 3.141592 / 8;
 		redraw(data);
 	}
 	else if (key == NK7_KEY)
 	{
-		data->angle.z += 0.1;
+		data->angle.z += 3.141592 / 8;
 		redraw(data);
 	}
 	else if (key == NK8_KEY)
 	{
-		data->angle.z -= 0.1;
+		data->angle.z -= 3.141592 / 8;
 		redraw(data);
 	}
 	else
