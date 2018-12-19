@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/19 12:21:20 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:14:19 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@ t_coord2	iso_project(t_coord3 c, t_env data)
 	ftmp.x = (float)c.x;
 	ftmp.y = (float)c.y;
 	ftmp.z = (float)c.z * data.scale.z;
-	x_rotation(&ftmp, data);
-	y_rotation(&ftmp, data);
-	z_rotation(&ftmp, data);
-	res.x = data.start.x + data.scale.x * (ftmp.x - ftmp.y) * cos(0.523599);
+	if (data.angle.x != 0)
+		x_rotation(&ftmp, data);
+	if (data.angle.y != 0)
+		y_rotation(&ftmp, data);
+	if (data.angle.z != 0)
+		z_rotation(&ftmp, data);
+	res.x = data.start.x + data.scale.x * (ftmp.x - ftmp.y) * COS_30;
 	res.y = data.start.y + data.scale.x * (-(float)(ftmp.z) +
-			(ftmp.x + ftmp.y) * sin(0.523599));
+			(ftmp.x + ftmp.y) * SIN_30);
 	return (res);
 }
 
@@ -41,9 +44,12 @@ t_coord2	para_project(t_coord3 c, t_env data)
 	ftmp.x = (float)c.x;
 	ftmp.y = (float)c.y;
 	ftmp.z = (float)c.z * data.scale.z;
-	x_rotation(&ftmp, data);
-	y_rotation(&ftmp, data);
-	z_rotation(&ftmp, data);
+	if (data.angle.x != 0)
+		x_rotation(&ftmp, data);
+	if (data.angle.y != 0)
+		y_rotation(&ftmp, data);
+	if (data.angle.z != 0)
+		z_rotation(&ftmp, data);
 	res.x = data.start.x + data.scale.x * (ftmp.x - ftmp.y);
 	res.y = data.start.y + data.scale.x * (-ftmp.z+ ftmp.y);
 	return (res);
@@ -53,8 +59,8 @@ t_fcoord2	fiso_project(t_coord3 c)
 {
 	t_fcoord2	res;
 
-	res.x = ((float)c.x - (float)c.y) * cos(0.523599);
-	res.y = ((float)c.x + (float)c.y) * sin(0.523599);
+	res.x = ((float)c.x - (float)c.y) * COS_30;
+	res.y = ((float)c.x + (float)c.y) * SIN_30;
 	return (res);
 }
 
@@ -173,30 +179,30 @@ void		trace(t_env data)
 			if (y < data.map_height - 1)
 				plot_line(data.project[data.project_type](data.map[k], data),
 						data.project[data.project_type](data.map[k +
-						data.map_width], data), data, get_color(x, y, data));
+							data.map_width], data), data, get_color(x, y, data));
 			x++;
 			k++;
 		}
 		y++;
 	}
 	/*y = data.map_height -1;
-	k = data.map_height * data.map_width - 1;
-	while (y >= 0)
-	{
-		x = data.map_width - 1;
-		while (x >= 0)
-		{
-			if (x > 0)
-				plot_line(data.project[data.project_type](data.map[k], data),
-						data.project[data.project_type](data.map[k - 1], data),
-						data, get_color(x, y, data));
-			if (y > 0)
-				plot_line(data.project[data.project_type](data.map[k], data),
-						data.project[data.project_type](data.map[k -
-						data.map_width], data), data, get_color(x, y, data));
-			x--;
-			k--;
-		}
-		y--;
-	}*/
+	  k = data.map_height * data.map_width - 1;
+	  while (y >= 0)
+	  {
+	  x = data.map_width - 1;
+	  while (x >= 0)
+	  {
+	  if (x > 0)
+	  plot_line(data.project[data.project_type](data.map[k], data),
+	  data.project[data.project_type](data.map[k - 1], data),
+	  data, get_color(x, y, data));
+	  if (y > 0)
+	  plot_line(data.project[data.project_type](data.map[k], data),
+	  data.project[data.project_type](data.map[k -
+	  data.map_width], data), data, get_color(x, y, data));
+	  x--;
+	  k--;
+	  }
+	  y--;
+	  }*/
 }

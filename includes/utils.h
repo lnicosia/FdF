@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/19 11:07:41 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:05:52 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define PARA 1
 # define NORMAL 0
 # define AA 1
+# define COS_30 0.86602540378
+# define SIN_30 0.5
 
 typedef struct	s_coord2
 {
@@ -77,6 +79,8 @@ typedef struct	s_env
 	int			zmax;
 	int			color_div;
 	int			zbuffer;
+	float		cos_data[21];
+	float		sin_data[21];
 	t_fcoord3	scale;
 	t_coord2	start;
 	t_fcoord3	delta;
@@ -127,5 +131,7 @@ int				max3(t_coord3 *map, int size, char mode);
 void			x_rotation(t_fcoord3 *c, t_env data);
 void			y_rotation(t_fcoord3 *c, t_env data);
 void			z_rotation(t_fcoord3 *c, t_env data);
+void			init_cos_data(t_env *data);
+void			init_sin_data(t_env *data);
 
 #endif

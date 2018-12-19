@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/19 11:57:21 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/19 17:47:25 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	init_data(t_env *data)
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
 	&(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));
 	data->project_type = ISO;
-	data->trace_type = AA;
+	data->trace_type = NORMAL;
 	data->project[ISO] = &iso_project;
 	data->project[PARA] = &para_project;
 	data->fproject[ISO] = &fiso_project;
@@ -101,6 +101,9 @@ int		main(int argc, char **argv)
 	map = NULL;
 	init_data(&data);
 	init_hook(&data);
+	init_cos_data(&data);
+	init_sin_data(&data);
+	printf("test: %f\n", data.sin_data[5]);
 	if ((ret = parser(&map, argv[1], &(data.map_height), &(data.map_width)))
 			!= 0)
 	{

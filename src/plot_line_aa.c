@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:42:59 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/19 12:53:04 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/19 16:48:06 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void		plot_line_high_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 	intery = c1.x + gradient;
 	while (ypxl1 < ypxl2)
 	{
-		printf("[up] = %f [down] = %f\n", rfpart(intery), fpart(intery));
 		fill_img(new_coord2(ipart(intery), ypxl1), data, color,
 				rfpart(intery));
 		fill_img(new_coord2(ipart(intery) + 1, ypxl1), data, color,
