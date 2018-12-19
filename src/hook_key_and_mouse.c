@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 17:22:32 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/19 10:10:53 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,11 @@ int		key_press(int key, void *param)
 	else if (key == NK1_KEY)
 	{
 		data->angle.x += (3.141592 / 8);
-		printf("new angle = %f\n", data->angle.x);
 		redraw(data);
 	}
 	else if (key == NK2_KEY)
 	{
 		data->angle.x -= (3.141592 / 8);
-		printf("new angle = %f\n", data->angle.x);
 		redraw(data);
 	}
 	else if (key == NK4_KEY)

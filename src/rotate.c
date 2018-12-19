@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:50:51 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 18:37:12 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/19 10:37:50 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	x_rotation(t_fcoord3 *c, t_env data)
 
 	tmp = c->y;
 	c->y = c->y * cos(data.angle.x) + c->z * sin(data.angle.x);
-	c->z = -tmp * sin(data.angle.x) + c->z * cos(data.angle.x);
+	c->z = -tmp * sin(data.angle.x) + c->z * cos(data.angle.x);	
 }
 
 void	y_rotation(t_fcoord3 *c, t_env data)

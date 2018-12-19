@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 15:29:00 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/19 11:57:21 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "libft.h"
 #include "color.h"
 #include "utils.h"
+#include "math.h"
 #include <stdio.h>
 
 void	print_map(t_env data)
@@ -79,7 +80,7 @@ void	init_data(t_env *data)
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
 	&(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));
 	data->project_type = ISO;
-	data->trace_type = NORMAL;
+	data->trace_type = AA;
 	data->project[ISO] = &iso_project;
 	data->project[PARA] = &para_project;
 	data->fproject[ISO] = &fiso_project;

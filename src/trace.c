@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 18:44:43 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/19 12:21:20 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_coord2	iso_project(t_coord3 c, t_env data)
 
 	ftmp.x = (float)c.x;
 	ftmp.y = (float)c.y;
-	ftmp.z = (float)c.z;
+	ftmp.z = (float)c.z * data.scale.z;
 	x_rotation(&ftmp, data);
 	y_rotation(&ftmp, data);
 	z_rotation(&ftmp, data);
 	res.x = data.start.x + data.scale.x * (ftmp.x - ftmp.y) * cos(0.523599);
-	res.y = data.start.y + data.scale.x * (-(float)(ftmp.z * data.scale.z) +
+	res.y = data.start.y + data.scale.x * (-(float)(ftmp.z) +
 			(ftmp.x + ftmp.y) * sin(0.523599));
 	return (res);
 }
@@ -36,9 +36,16 @@ t_coord2	iso_project(t_coord3 c, t_env data)
 t_coord2	para_project(t_coord3 c, t_env data)
 {
 	t_coord2	res;
+	t_fcoord3	ftmp;
 
-	res.x = data.start.x + data.scale.x * (c.x - c.y);
-	res.y = data.start.y + data.scale.x * (-c.z * data.scale.z + c.y);
+	ftmp.x = (float)c.x;
+	ftmp.y = (float)c.y;
+	ftmp.z = (float)c.z * data.scale.z;
+	x_rotation(&ftmp, data);
+	y_rotation(&ftmp, data);
+	z_rotation(&ftmp, data);
+	res.x = data.start.x + data.scale.x * (ftmp.x - ftmp.y);
+	res.y = data.start.y + data.scale.x * (-ftmp.z+ ftmp.y);
 	return (res);
 }
 
