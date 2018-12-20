@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/20 12:35:42 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/20 17:27:57 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 SRC_RAW = main.c plot_line.c hook_more.c parser.c zoom.c event_utils.c \
 	  coord_utils.c init_map.c trace.c increase_z_and_color.c map_movement.c \
 	  plot_line_aa.c hook_key_and_mouse.c math.c draw_quad.c rotate.c \
-	  angle_data.c
+	  angle_data.c global_rotate.c
 
 HEADERS = utils.h color.h mlx_keycode.h user_functions.h
 
@@ -33,7 +33,7 @@ SRC = $(addprefix $(SRC_DIR)/, $(SRC_RAW))
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_RAW:.c=.o))
 INCLUDES = $(addprefix $(INCLUDES_DIR)/, $(HEADERS))
 
-CFLAGS =  -O3 -g3 -Wall -Wextra -Werror -fsanitize=address -I $(INCLUDES_DIR) \
+CFLAGS =  -O3 -Wall -Wextra -Werror -I $(INCLUDES_DIR) \
 		 -I $(LIBFT_DIR)
 
 MLX = -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit

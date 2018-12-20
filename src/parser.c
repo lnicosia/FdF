@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:11:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/20 12:54:27 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/20 14:34:02 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "fcntl.h"
 #include "color.h"
 
-static int	check_line(char *line, int *line_size)
+int	check_line(char *line, int *line_size)
 {
 	int	i;
 
@@ -53,6 +53,7 @@ int			parser(t_list **map, char *file, int *map_height, int *map_width)
 	int		tmp;
 	char	*line;
 
+	(void)map;
 	*map_height = 0;
 	*map_width = 0;
 	if ((fd = open(file, O_RDONLY)) < 0)
@@ -68,6 +69,7 @@ int			parser(t_list **map, char *file, int *map_height, int *map_width)
 		ft_lstpushback(map, ft_lstnew(line, ft_strlen(line) + 1));
 		ft_strdel(&line);
 	}
+	ft_strdel(&line);
 	if (close(fd) == -1)
 		return (CLOSE_ERROR);
 	if (*map_width < 2 || *map_height < 2)
@@ -79,6 +81,5 @@ int			parser(t_list **map, char *file, int *map_height, int *map_width)
 	ft_putstr(" x ");
 	ft_putnbr(*map_height);
 	ft_putchar('\n');
-	exit(0);
 	return (0);
 }

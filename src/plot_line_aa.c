@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:42:59 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/19 16:48:06 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:33:57 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	plot_extremes_low(t_coord2 c1, t_coord2 c2, t_env data, int color)
 	pxl.y = ipart(end.y);
 	//printf("[brightness]: %f (rfpart(end.y) = %f xgap = %f)\n", rfpart(end.y) * xgap, rfpart(end.y), xgap);
 	/*fill_img(new_coord2(pxl.x, pxl.y), data, color, rfpart(end.y) * xgap);
-	fill_img(new_coord2(pxl.x, pxl.y + 1), data, color, fpart(end.y) * xgap);*/
+	  fill_img(new_coord2(pxl.x, pxl.y + 1), data, color, fpart(end.y) * xgap);*/
 	fill_img(new_coord2(pxl.x, pxl.y), data, color, 1);
 	fill_img(new_coord2(pxl.x, pxl.y + 1), data, color, fpart(end.y) * xgap);
 	end.x = (float)round_((float)c2.x);
@@ -63,7 +63,7 @@ void	plot_extremes_high(t_coord2 c1, t_coord2 c2, t_env data, int color)
 	pxl.y = end.y;
 	pxl.x = ipart(end.x);
 	/*fill_img(new_coord2(pxl.x, pxl.y), data, color, rfpart(end.x) * ygap);
-	fill_img(new_coord2(pxl.x + 1, pxl.y), data, color, fpart(end.x) * ygap);*/
+	  fill_img(new_coord2(pxl.x + 1, pxl.y), data, color, fpart(end.x) * ygap);*/
 	fill_img(new_coord2(pxl.x, pxl.y), data, color, 1);
 	fill_img(new_coord2(pxl.x + 1, pxl.y), data, color, fpart(end.x) * ygap);
 	end.y = (float)round_(c2.y);
@@ -132,5 +132,21 @@ void		plot_line_high_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 				fpart(intery));
 		ypxl1++;
 		intery += gradient;
+	}
+}
+
+void	plot_line_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
+{
+	if (ft_abs(c2.y - c1.y) < ft_abs(c2.x - c1.x))
+		if (c1.x > c2.x)
+			plot_line_low_aa(c2, c1, data, color);
+		else
+			plot_line_low_aa(c1, c2, data, color);
+	else
+	{
+		if (c1.y > c2.y)
+			plot_line_high_aa(c2, c1, data, color);
+		else
+			plot_line_high_aa(c1, c2, data, color);
 	}
 }

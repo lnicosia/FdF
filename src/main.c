@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/20 12:46:01 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:13:20 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "math.h"
 #include <stdio.h>
 
-void	print_map(t_env data)
+void	print_map(t_env data, t_coord3 *map)
 {
 	int	i;
 	int	j;
@@ -31,11 +31,11 @@ void	print_map(t_env data)
 		j = 0;
 		while (j < data.map_width)
 		{
-			ft_putnbr(data.map[k].x);
+			ft_putnbr(map[k].x);
 			ft_putchar(' ');
-			ft_putnbr(data.map[k].y);
+			ft_putnbr(map[k].y);
 			ft_putchar(' ');
-			ft_putnbr(data.map[k].z);
+			ft_putnbr(map[k].z);
 			ft_putchar('\n');
 			j++;
 			k++;
@@ -75,7 +75,7 @@ void	init_data(t_env *data)
 	data->color_div = 25;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->s_width, data->s_height,
-			"Test");
+			"Fdf");
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->s_width, data->s_height);
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
 	&(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));
@@ -85,10 +85,6 @@ void	init_data(t_env *data)
 	data->project[PARA] = &para_project;
 	data->fproject[ISO] = &fiso_project;
 	data->fproject[PARA] = &fpara_project;
-	data->plot_line_low[0] = &plot_line_low;
-	data->plot_line_low[1] = &plot_line_low_aa;
-	data->plot_line_high[0] = &plot_line_high;
-	data->plot_line_high[1] = &plot_line_high_aa;
 }
 
 int		main(int argc, char **argv)
@@ -120,9 +116,13 @@ int		main(int argc, char **argv)
 		return (ret);
 	}
 	data.map = init_map(data.map_height, data.map_width, map);
+	data.processed_map = init_map(data.map_height, data.map_width, map);
+	//print_map(data, data.processed_map);
 	set_ranges(&data);
 	set_z_ranges(&data);
+	//exit(0);
 	trace(data);
+	//exit(0);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);
 	return (0);

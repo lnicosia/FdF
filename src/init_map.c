@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:46:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/17 17:01:21 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:51:14 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_coord3	*init_map(int height, int width, t_list *r_map)
 		r_map = r_map->next;
 		c.y++;
 	}
+	clear_map(&r_map);
 	ft_putstr(GREEN);
 	ft_putstr("[MAP INITIALIZED]");
 	ft_putendl(RESET);

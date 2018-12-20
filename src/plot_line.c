@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/19 12:57:29 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:33:45 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,14 @@ void	plot_line(t_coord2 c1, t_coord2 c2, t_env data, int color)
 {
 	if (ft_abs(c2.y - c1.y) < ft_abs(c2.x - c1.x))
 		if (c1.x > c2.x)
-			data.plot_line_low[data.trace_type](c2, c1, data, color);
+			plot_line_low(c2, c1, data, color);
 		else
-			data.plot_line_low[data.trace_type](c1, c2, data, color);
+			plot_line_low(c1, c2, data, color);
 	else
 	{
 		if (c1.y > c2.y)
-			data.plot_line_high[data.trace_type](c2, c1, data, color);
+			plot_line_high(c2, c1, data, color);
 		else
-			data.plot_line_high[data.trace_type](c1, c2, data, color);
+			plot_line_high(c1, c2, data, color);
 	}
 }

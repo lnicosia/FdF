@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/19 18:05:52 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:49:00 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct	s_env
 	void		*img_ptr;
 	t_img		img;
 	t_coord3	*map;
+	t_coord3	*processed_map;
 	int			map_height;
 	int			map_width;
 	int			s_height;
@@ -87,11 +88,10 @@ typedef struct	s_env
 	t_fcoord3	angle;
 	t_coord2	(*project[2])(t_coord3, struct s_env);
 	t_fcoord2	(*fproject[2])(t_coord3);
-	void		(*plot_line_low[2])(t_coord2, t_coord2, struct s_env, int);
-	void		(*plot_line_high[2])(t_coord2, t_coord2, struct s_env, int);
 }				t_env;
 
 void			plot_line(t_coord2 c1, t_coord2 c2, t_env data, int color);
+void			plot_line_aa(t_coord2 c1, t_coord2 c2, t_env data, int color);
 void			plot_line_low(t_coord2 c1, t_coord2 c2, t_env data, int color);
 void			plot_line_low_aa(
 		t_coord2 c1, t_coord2 c2, t_env data, int color);
@@ -123,6 +123,7 @@ t_fcoord2		fiso_project(t_coord3 c);
 t_fcoord2		fpara_project(t_coord3 c);
 void			recenter(t_env *data);
 void			trace(t_env data);
+void			trace_aa(t_env data);
 t_coord2		new_coord2(int x, int y);
 t_coord3		new_coord3(int x, int y, int z);
 t_fcoord3		new_fcoord3(float x, float y, float z);
