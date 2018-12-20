@@ -34,22 +34,22 @@ run ./fdf with one of any file given in test_maps/
 
 * Two projection types: Iso and Para:
 ```
-P
+🄿
 ```
 
 * Map colouring as earth cartography. Can scale it:
 ```
-Page_up / Page_down
+⇞ ⇟ (page_up / page_down)
 ```
 
 * Map movement:
 ```
-Arrow keys:
+⇦ ⇨ ⇧ ⇩
 ```
 
 * Altitude increasing and decreasing:
 ```
-'+' and '-'
++ -
 ```
 
 * Zoom:
@@ -59,14 +59,14 @@ Mouse scroll
 
 * Rotations:
 ```
-1 & 2 for X rotation
-4 & 5 for Y rotation
-7 & 8 for Z rotation
+① ② for X rotation
+④ ⑤ for Y rotation
+⑥ ⑦ for Z rotation
 ```
 
 * Anti-Aliasing (not perfect for line drawing)
 ```
-A
+🄰
 ```
 
 ## Authors
