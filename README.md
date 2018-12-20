@@ -4,11 +4,11 @@ This is my version of Fdf project from 42 (done in solo)
 
 ## User Guide
 	
-How to use Fdf.
+How to use Fdf
 
 ### Prerequisites
 	
-Only working on MacOSX atm. The following frameworks are needed:
+Only working on MacOSX atm. The following frameworks are needed
 ```
 -OpenGL
 -Appkit
@@ -32,14 +32,14 @@ run ./fdf with one of any file given in test_maps/
 		
 * Map scaling and centering for any size.
 
-* Two projection types: Iso and Para:
+* Two projection types: Iso and Para
 ```
 🄿
 ```
 
-* Map colouring as earth cartography. Can scale it:
+* Map colouring as earth cartography. Can scale it
 ```
-⇞ ⇟ (page_up / page_down)
+⇞ ⇟ (page up / page down)
 ```
 
 * Map movement:
@@ -47,7 +47,7 @@ run ./fdf with one of any file given in test_maps/
 ⇦ ⇨ ⇧ ⇩
 ```
 
-* Altitude increasing and decreasing:
+* Altitude increasing and decreasing
 ```
 + -
 ```
@@ -57,7 +57,7 @@ run ./fdf with one of any file given in test_maps/
 Mouse scroll
 ```
 
-* Rotations:
+* Rotations
 ```
 ① ② for X rotation
 ④ ⑤ for Y rotation
@@ -71,4 +71,4 @@ Mouse scroll
 
 ## Authors
 		
-Lucas Nicosia.
+Lucas Nicosia
