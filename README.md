@@ -30,41 +30,41 @@ run ./fdf with one of any file given in test_maps/
 
 ### Functionnalities
 		
-*Map scaling and centering for any size.
+* Map scaling and centering for any size.
 
-*Two projection types: Iso and Para:
+* Two projection types: Iso and Para:
 ```
 P
 ```
 
-*Map colouring as earth cartography. Can scale it:
+* Map colouring as earth cartography. Can scale it:
 ```
 Page_up / Page_down
 ```
 
-*Map movement:
+* Map movement:
 ```
 Arrow keys:
 ```
 
-*Altitude increasing and decreasing:
+* Altitude increasing and decreasing:
 ```
 '+' and '-'
 ```
 
-*Zoom:
+* Zoom:
 ```
 Mouse scroll
 ```
 
-*Rotations:
+* Rotations:
 ```
 1 & 2 for X rotation
 4 & 5 for Y rotation
 7 & 8 for Z rotation
 ```
 
-*Anti-Aliasing (not perfect for line drawing)
+* Anti-Aliasing (not perfect for line drawing)
 ```
 A
 ```
