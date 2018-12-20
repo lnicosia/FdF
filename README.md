@@ -22,13 +22,13 @@ You also need X11 installed on the computer
 make
 ```
 
-## Using Fdf
+### Using Fdf
 		
 ```
 run ./fdf with one of any file given in test_maps/
 ```
 
-### Functionnalities
+## Functionnalities
 		
 * Map scaling and centering for any size.
 

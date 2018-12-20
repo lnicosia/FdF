@@ -6,11 +6,13 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/19 18:17:39 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/20 12:35:42 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
+
+MAKEFILE = Makefile
 
 SRC_DIR = src
 OBJ_DIR = obj
@@ -40,13 +42,12 @@ RED := "\033[0;31m"
 GREEN := "\033[0;32m"
 CYAN := "\033[0;36m"
 RESET :="\033[0m"
-BLINK := "\033[5m"
 
 all:
 	@make -C $(LIBFT_DIR)
 	@make $(BIN_DIR)/$(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE)
 	@mkdir -p $(OBJ_DIR)
 	@gcc -c $< -o $@ $(CFLAGS) 
 

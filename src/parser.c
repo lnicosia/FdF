@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:11:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/20 11:27:46 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/20 12:54:27 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ static int	check_line(char *line, int *line_size)
 
 	i = 0;
 	*line_size = 0;
-	while (line[i] && line[i] == ' ')
-		i++;
 	while (line[i])
 	{
-		while (line[i] && line[i] != ' ')
+		if (line[i] && line[i] != ' ')
+		{
+			(*line_size)++;
+			while (line[i] && line[i] != ' ')
+				i++;
+		}
+		else
 			i++;
-		while (line[i] && line[i] == ' ')
-			i++;
-		(*line_size)++;
 	}
 	return (0);
 }
@@ -78,5 +79,6 @@ int			parser(t_list **map, char *file, int *map_height, int *map_width)
 	ft_putstr(" x ");
 	ft_putnbr(*map_height);
 	ft_putchar('\n');
+	exit(0);
 	return (0);
 }

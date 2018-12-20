@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/20 11:30:45 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/20 12:46:01 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ int		main(int argc, char **argv)
 		ft_putstr(RED);
 		ft_putstr("[PARSE ERROR]");
 		ft_putendl(RESET);
-		/*ft_putnbr(ret);
-		ft_putchar('\n');*/
+		ft_putnbr(ret);
+		ft_putchar('\n');
 		return (ret);
 	}
 	data.map = init_map(data.map_height, data.map_width, map);
