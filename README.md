@@ -2,6 +2,10 @@
 
 		This is my version of Fdf project from 42 (done in solo)
 
+## User Guide
+	
+		How to use Fdf.
+
 ### Prerequisites
 	
 		Only working on MacOSX atm. The following frameworks are needed:
