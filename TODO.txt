@@ -1,0 +1,5 @@
+Opti/perf
+Faces cachees/afficher les faces
+menu
+Zoom centre
+Rotation centree

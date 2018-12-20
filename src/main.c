@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/19 17:47:25 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/20 11:30:45 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,26 @@ int		main(int argc, char **argv)
 	int			ret;
 	t_list		*map;
 
-	(void)argc;
+	if (argc != 2)
+	{
+		ft_putstr(RED);
+		ft_putstr("[WRONG NUMBER OF FILE]");
+		ft_putendl(RESET);
+		return (1);
+	}
 	map = NULL;
 	init_data(&data);
 	init_hook(&data);
 	init_cos_data(&data);
 	init_sin_data(&data);
-	printf("test: %f\n", data.sin_data[5]);
 	if ((ret = parser(&map, argv[1], &(data.map_height), &(data.map_width)))
 			!= 0)
 	{
-		ft_putendl("parse error ");
-		ft_putnbr(ret);
-		ft_putchar('\n');
+		ft_putstr(RED);
+		ft_putstr("[PARSE ERROR]");
+		ft_putendl(RESET);
+		/*ft_putnbr(ret);
+		ft_putchar('\n');*/
 		return (ret);
 	}
 	data.map = init_map(data.map_height, data.map_width, map);
