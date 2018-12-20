@@ -3,3 +3,4 @@ Faces cachees/afficher les faces
 menu
 Zoom centre
 Rotation centree
+activer/desactiver coleurs
