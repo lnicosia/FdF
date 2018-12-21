@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 16:30:30 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 17:11:36 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	init_data(t_env *data)
 			&(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));
 	data->project_type = ISO;
 	data->trace_type = NORMAL;
-	data->project[ISO] = &iso_project;
-	data->project[PARA] = &para_project;
 	data->pre_project[ISO] = &pre_iso_project;
 	data->pre_project[PARA] = &pre_para_project;
 }
