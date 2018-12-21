@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 12:49:52 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 15:05:55 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,9 +180,9 @@ void		scale_map(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			data.processed_map[k].x *= data.scale.x;
-			data.processed_map[k].y *= data.scale.x;
-			//data.processed_map[k].z *= data.scale.z;
+			data.projected_map[k].x *= data.scale.x;
+			data.projected_map[k].y *= data.scale.x;
+			//data.projected_map[k].z *= data.scale.z;
 			x++;
 			k++;
 		}
@@ -203,8 +203,8 @@ void		center_map(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			data.moved_map[k].x = data.processed_map[k].x + data.start.x;
-			data.moved_map[k].y = data.processed_map[k].y + data.start.y;
+			data.moved_map[k].x = data.projected_map[k].x + data.start.x;
+			data.moved_map[k].y = data.projected_map[k].y + data.start.y;
 			x++;
 			k++;
 		}
@@ -225,8 +225,8 @@ void		move_map(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			data.moved_map[k].x = data.processed_map[k].x + data.start.x;
-			data.moved_map[k].y = data.processed_map[k].y + data.start.y;
+			data.moved_map[k].x = data.projected_map[k].x + data.start.x;
+			data.moved_map[k].y = data.projected_map[k].y + data.start.y;
 			x++;
 			k++;
 		}
@@ -248,16 +248,16 @@ void		project_map(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			tmp = (float)data.processed_map[k].x;
+			tmp = data.rotated_map[k].x;
 			if (data.project_type == ISO)
 			{
-				data.processed_map[k].x = ((float)data.processed_map[k].x - (float)data.processed_map[k].y) * COS_30;
-				data.processed_map[k].y = (-(float)(data.scale.z * (float)data.processed_map[k].z) + (tmp + (float)data.processed_map[k].y) * SIN_30);
+				data.projected_map[k].x = (data.rotated_map[k].x - data.rotated_map[k].y) * COS_30;
+				data.projected_map[k].y = (-data.rotated_map[k].z) + (tmp + data.rotated_map[k].y) * SIN_30;
 			}
 			else
 			{
-				data.processed_map[k].x = ((float)data.processed_map[k].x - (float)data.processed_map[k].y);
-				data.processed_map[k].y = (-(float)data.processed_map[k].z * data.scale.z + data.processed_map[k].y);
+				data.projected_map[k].x = (data.map[k].x - data.map[k].y);
+				data.projected_map[k].y = (-data.map[k].z + data.map[k].y);
 			}
 			x++;
 			k++;

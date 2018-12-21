@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 12:42:44 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 15:30:16 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ typedef struct	s_env
 	void		*img_ptr;
 	t_img		img;
 	t_coord3	*map;
-	t_fcoord3	*processed_map;
+	t_fcoord3	*rotated_map;
+	t_fcoord3	*projected_map;
 	t_coord2	*moved_map;
 	int			map_height;
 	int			map_width;
@@ -138,6 +139,8 @@ int				max3(t_coord3 *map, int size, char mode);
 void			x_rotation(t_env data);
 void			y_rotation(t_env data);
 void			z_rotation(t_env data);
+void			rotate(t_env data);
+void			float_map(t_env data);
 void			init_cos_data(t_env *data);
 void			init_sin_data(t_env *data);
 

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 12:47:26 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 15:43:14 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ int		key_press(int key, void *param)
 		decrease_color_div(data);
 	else if (key == NK1_KEY)
 	{
-		//data->angle.x = data->angle.x == 19 ? 0 : data->angle.x + 1;
 		data->angle.x += 0.15707963267;
-		x_rotation(*data);
+		rotate(*data);
 		project_map(*data);
 		scale_map(*data);
 		center_map(*data);
@@ -56,9 +55,8 @@ int		key_press(int key, void *param)
 	}
 	else if (key == NK2_KEY)
 	{
-		//data->angle.x = data->angle.x == 0 ? 19 : data->angle.x - 1;
 		data->angle.x -= 0.15707963267;
-		x_rotation(*data);
+		rotate(*data);
 		project_map(*data);
 		scale_map(*data);
 		center_map(*data);
@@ -66,9 +64,8 @@ int		key_press(int key, void *param)
 	}
 	else if (key == NK4_KEY)
 	{
-	//	data->angle.y = data->angle.y == 19 ? 0 : data->angle.y + 1;
 		data->angle.y += 0.15707963267;
-		y_rotation(*data);
+		rotate(*data);
 		project_map(*data);
 		scale_map(*data);
 		center_map(*data);
@@ -76,9 +73,8 @@ int		key_press(int key, void *param)
 	}
 	else if (key == NK5_KEY)
 	{
-		//data->angle.y = data->angle.y == 0 ? 19 : data->angle.y - 1;
 		data->angle.y -= 0.15707963267;
-		y_rotation(*data);
+		rotate(*data);
 		project_map(*data);
 		scale_map(*data);
 		center_map(*data);
@@ -86,9 +82,8 @@ int		key_press(int key, void *param)
 	}
 	else if (key == NK7_KEY)
 	{
-		//data->angle.z = data->angle.z == 19 ? 0 : data->angle.z + 1;
 		data->angle.z += 0.15707963267;
-		z_rotation(*data);
+		rotate(*data);
 		project_map(*data);
 		scale_map(*data);
 		center_map(*data);
@@ -96,9 +91,8 @@ int		key_press(int key, void *param)
 	}
 	else if (key == NK8_KEY)
 	{
-		//data->angle.z = data->angle.z == 0 ? 19 : data->angle.z - 1;
 		data->angle.z -= 0.15707963267;
-		z_rotation(*data);
+		rotate(*data);
 		project_map(*data);
 		scale_map(*data);
 		center_map(*data);

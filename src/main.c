@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 12:29:19 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 14:54:21 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,14 @@ int		main(int argc, char **argv)
 		return (ret);
 	}
 	data.map = init_map(data.map_height, data.map_width, map);
-	data.processed_map = (t_fcoord3 *)malloc(sizeof(*data.processed_map) * data.map_width * data.map_height);
+	data.rotated_map = (t_fcoord3 *)malloc(sizeof(*data.rotated_map) * data.map_width * data.map_height);
+	data.projected_map = (t_fcoord3 *)malloc(sizeof(*data.projected_map) * data.map_width * data.map_height);
 	data.moved_map = (t_coord2 *)malloc(sizeof(*data.moved_map) * data.map_width * data.map_height);
 	//data.processed_map = init_map(data.map_height, data.map_width, map);
 	//print_map(data, data.map);
 	set_ranges(&data);
 	set_z_ranges(&data);
+	float_map(data);
 	project_map(data);
 	scale_map(data);
 	center_map(data);
