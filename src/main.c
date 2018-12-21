@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/20 17:13:20 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 12:29:19 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	init_data(t_env *data)
 	data->angle.x = 0;
 	data->angle.y = 0;
 	data->angle.z = 0;
+	data->move.x = 0;
+	data->move.y = 0;
 	data->delta.x = data->s_width / 25;
 	data->delta.y = data->s_height / 25;
 	data->delta.z = 0;
@@ -78,7 +80,7 @@ void	init_data(t_env *data)
 			"Fdf");
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->s_width, data->s_height);
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
-	&(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));
+			&(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));
 	data->project_type = ISO;
 	data->trace_type = NORMAL;
 	data->project[ISO] = &iso_project;
@@ -116,10 +118,18 @@ int		main(int argc, char **argv)
 		return (ret);
 	}
 	data.map = init_map(data.map_height, data.map_width, map);
-	data.processed_map = init_map(data.map_height, data.map_width, map);
-	//print_map(data, data.processed_map);
+	data.processed_map = (t_fcoord3 *)malloc(sizeof(*data.processed_map) * data.map_width * data.map_height);
+	data.moved_map = (t_coord2 *)malloc(sizeof(*data.moved_map) * data.map_width * data.map_height);
+	//data.processed_map = init_map(data.map_height, data.map_width, map);
+	//print_map(data, data.map);
 	set_ranges(&data);
 	set_z_ranges(&data);
+	project_map(data);
+	scale_map(data);
+	center_map(data);
+	ft_putstr(GREEN);
+	ft_putstr("[MAP CENTERED]");
+	ft_putendl(RESET);
 	//exit(0);
 	trace(data);
 	//exit(0);

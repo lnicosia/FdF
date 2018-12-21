@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/20 16:49:00 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 12:42:44 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ typedef struct	s_env
 	void		*img_ptr;
 	t_img		img;
 	t_coord3	*map;
-	t_coord3	*processed_map;
+	t_fcoord3	*processed_map;
+	t_coord2	*moved_map;
 	int			map_height;
 	int			map_width;
 	int			s_height;
@@ -83,6 +84,7 @@ typedef struct	s_env
 	float		cos_data[21];
 	float		sin_data[21];
 	t_fcoord3	scale;
+	t_coord2	move;
 	t_coord2	start;
 	t_fcoord3	delta;
 	t_fcoord3	angle;
@@ -116,6 +118,10 @@ int				clear_map(t_list **map);
 void			del_map_link(void *content, size_t content_size);
 t_coord3		*init_map(int height, int width, t_list *r_map);
 void			set_ranges(t_env *data);
+void			scale_map(t_env data);
+void			center_map(t_env data);
+void			move_map(t_env data);
+void			project_map(t_env data);
 void			set_z_ranges(t_env *data);
 t_coord2		iso_project(t_coord3 c, t_env data);
 t_coord2		para_project(t_coord3 c, t_env data);
@@ -129,9 +135,9 @@ t_coord3		new_coord3(int x, int y, int z);
 t_fcoord3		new_fcoord3(float x, float y, float z);
 int				min3(t_coord3 *map, int size, char mode);
 int				max3(t_coord3 *map, int size, char mode);
-void			x_rotation(t_fcoord3 *c, t_env data);
-void			y_rotation(t_fcoord3 *c, t_env data);
-void			z_rotation(t_fcoord3 *c, t_env data);
+void			x_rotation(t_env data);
+void			y_rotation(t_env data);
+void			z_rotation(t_env data);
 void			init_cos_data(t_env *data);
 void			init_sin_data(t_env *data);
 

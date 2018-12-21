@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/20 17:27:57 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/21 10:05:53 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRC = $(addprefix $(SRC_DIR)/, $(SRC_RAW))
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_RAW:.c=.o))
 INCLUDES = $(addprefix $(INCLUDES_DIR)/, $(HEADERS))
 
-CFLAGS =  -O3 -Wall -Wextra -Werror -I $(INCLUDES_DIR) \
+CFLAGS =  -g3 -fsanitize=address -O3 -Wall -Wextra -Werror -I $(INCLUDES_DIR) \
 		 -I $(LIBFT_DIR)
 
 MLX = -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit

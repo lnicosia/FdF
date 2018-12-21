@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 11:49:02 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 12:28:24 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@
 void	increase_z(t_env *data)
 {
 	data->scale.z += data->delta.z;
+	project_map(*data);
+	scale_map(*data);
+	center_map(*data);
 	redraw(data);
 }
 
 void	decrease_z(t_env *data)
 {
 	data->scale.z -= data->delta.z;
+	project_map(*data);
+	scale_map(*data);
+	center_map(*data);
 	redraw(data);
 }
 

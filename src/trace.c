@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/20 16:47:04 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 12:49:52 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ t_coord2	para_project(t_coord3 c, t_env data)
 	ftmp.x = (float)c.x;
 	ftmp.y = (float)c.y;
 	ftmp.z = (float)c.z * data.scale.z;
-	if (data.angle.x != 0)
+	/*if (data.angle.x != 0)
 		x_rotation(&ftmp, data);
 	if (data.angle.y != 0)
 		y_rotation(&ftmp, data);
 	if (data.angle.z != 0)
-		z_rotation(&ftmp, data);
+		z_rotation(&ftmp, data);*/
 	res.x = data.start.x + data.scale.x * (ftmp.x - ftmp.y);
 	res.y = data.start.y + data.scale.x * (-ftmp.z+ ftmp.y);
 	return (res);
@@ -167,7 +167,7 @@ void		set_ranges(t_env *data)
 	ft_putendl(RESET);
 }
 
-void		trace(t_env data)
+void		scale_map(t_env data)
 {
 	int	y;
 	int	x;
@@ -180,14 +180,129 @@ void		trace(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
+			data.processed_map[k].x *= data.scale.x;
+			data.processed_map[k].y *= data.scale.x;
+			//data.processed_map[k].z *= data.scale.z;
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void		center_map(t_env data)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			data.moved_map[k].x = data.processed_map[k].x + data.start.x;
+			data.moved_map[k].y = data.processed_map[k].y + data.start.y;
+			x++;
+			k++;
+		}
+		y++;
+	}	
+}
+
+void		move_map(t_env data)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			data.moved_map[k].x = data.processed_map[k].x + data.start.x;
+			data.moved_map[k].y = data.processed_map[k].y + data.start.y;
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void		project_map(t_env data)
+{
+	int		y;
+	int		x;
+	int		k;
+	float	tmp;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			tmp = (float)data.processed_map[k].x;
+			if (data.project_type == ISO)
+			{
+				data.processed_map[k].x = ((float)data.processed_map[k].x - (float)data.processed_map[k].y) * COS_30;
+				data.processed_map[k].y = (-(float)(data.scale.z * (float)data.processed_map[k].z) + (tmp + (float)data.processed_map[k].y) * SIN_30);
+			}
+			else
+			{
+				data.processed_map[k].x = ((float)data.processed_map[k].x - (float)data.processed_map[k].y);
+				data.processed_map[k].y = (-(float)data.processed_map[k].z * data.scale.z + data.processed_map[k].y);
+			}
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void		trace(t_env data)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+	/*while (y < data.map_height)
+	  {
+	  x = 0;
+	  while (x < data.map_width)
+	  {
+	  if (x < data.map_width - 1)
+	  plot_line(iso_project(data.map[k], data),
+	  iso_project(data.map[k + 1], data),
+	  data, get_color(x, y, data));
+	  if (y < data.map_height - 1)
+	  plot_line(iso_project(data.map[k], data),
+	  iso_project(data.map[k +
+	  data.map_width], data), data, get_color(x, y, data));
+	  x++;
+	  k++;
+	  }
+	  y++;
+	  }*/
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
 			if (x < data.map_width - 1)
-				plot_line(iso_project(data.map[k], data),
-						iso_project(data.map[k + 1], data),
-						data, get_color(x, y, data));
+				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
+				new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
 			if (y < data.map_height - 1)
-				plot_line(iso_project(data.map[k], data),
-						iso_project(data.map[k +
-							data.map_width], data), data, get_color(x, y, data));
+				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
+				new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
 			x++;
 			k++;
 		}
