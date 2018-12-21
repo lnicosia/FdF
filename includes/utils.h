@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 15:30:16 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 16:14:08 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct	s_env
 	t_fcoord3	delta;
 	t_fcoord3	angle;
 	t_coord2	(*project[2])(t_coord3, struct s_env);
-	t_fcoord2	(*fproject[2])(t_coord3);
+	t_fcoord2	(*pre_project[2])(t_coord3);
 }				t_env;
 
 void			plot_line(t_coord2 c1, t_coord2 c2, t_env data, int color);
@@ -126,8 +126,8 @@ void			project_map(t_env data);
 void			set_z_ranges(t_env *data);
 t_coord2		iso_project(t_coord3 c, t_env data);
 t_coord2		para_project(t_coord3 c, t_env data);
-t_fcoord2		fiso_project(t_coord3 c);
-t_fcoord2		fpara_project(t_coord3 c);
+t_fcoord2		pre_iso_project(t_coord3 c);
+t_fcoord2		pre_para_project(t_coord3 c);
 void			recenter(t_env *data);
 void			trace(t_env data);
 void			trace_aa(t_env data);

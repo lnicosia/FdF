@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/21 10:05:53 by lnicosia         ###   ########.fr        #
+#    Updated: 2018/12/21 16:18:43 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,5 +69,4 @@ fclean: clean
 
 re: fclean all
 
-//.SILENT: $(OBJ)
 .PHONY: fclean all clean libft

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 15:05:55 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 16:14:39 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_coord2	para_project(t_coord3 c, t_env data)
 	return (res);
 }
 
-t_fcoord2	fiso_project(t_coord3 c)
+t_fcoord2	pre_iso_project(t_coord3 c)
 {
 	t_fcoord2	res;
 
@@ -72,7 +72,7 @@ t_fcoord2	fiso_project(t_coord3 c)
 	return (res);
 }
 
-t_fcoord2	fpara_project(t_coord3 c)
+t_fcoord2	pre_para_project(t_coord3 c)
 {
 	t_fcoord2	res;
 
@@ -113,11 +113,11 @@ void		recenter(t_env *data)
 	t_fcoord2	up;
 	t_fcoord2	down;
 
-	up = data->fproject[data->project_type](data->map[0]);
-	right = data->fproject[data->project_type](data->map[data->map_width - 1]);
-	left = data->fproject[data->project_type](data->map[data->map_width *
+	up = data->pre_project[data->project_type](data->map[0]);
+	right = data->pre_project[data->project_type](data->map[data->map_width - 1]);
+	left = data->pre_project[data->project_type](data->map[data->map_width *
 			(data->map_height - 1)]);
-	down = data->fproject[data->project_type](data->map[data->map_width *
+	down = data->pre_project[data->project_type](data->map[data->map_width *
 			data->map_height - 1]);
 	center.x = data->scale.x * (right.x - left.x) / 2 - ft_fabs(left.x)
 		* data->scale.x;
@@ -150,11 +150,11 @@ void		set_ranges(t_env *data)
 	t_fcoord2	up;
 	t_fcoord2	down;
 
-	up = data->fproject[data->project_type](data->map[0]);
-	right = data->fproject[data->project_type](data->map[data->map_width - 1]);
-	left = data->fproject[data->project_type](data->map[data->map_width *
+	up = data->pre_project[data->project_type](data->map[0]);
+	right = data->pre_project[data->project_type](data->map[data->map_width - 1]);
+	left = data->pre_project[data->project_type](data->map[data->map_width *
 			(data->map_height - 1)]);
-	down = data->fproject[data->project_type](data->map[data->map_width *
+	down = data->pre_project[data->project_type](data->map[data->map_width *
 			data->map_height - 1]);
 	data->scale.x = (float)data->s_width / (right.x - left.x);
 	data->scale.y = (float)data->s_height / (down.y - up.y);

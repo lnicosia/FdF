@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 14:54:21 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 16:30:30 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	init_data(t_env *data)
 	data->trace_type = NORMAL;
 	data->project[ISO] = &iso_project;
 	data->project[PARA] = &para_project;
-	data->fproject[ISO] = &fiso_project;
-	data->fproject[PARA] = &fpara_project;
+	data->pre_project[ISO] = &pre_iso_project;
+	data->pre_project[PARA] = &pre_para_project;
 }
 
 int		main(int argc, char **argv)
@@ -121,7 +121,6 @@ int		main(int argc, char **argv)
 	data.rotated_map = (t_fcoord3 *)malloc(sizeof(*data.rotated_map) * data.map_width * data.map_height);
 	data.projected_map = (t_fcoord3 *)malloc(sizeof(*data.projected_map) * data.map_width * data.map_height);
 	data.moved_map = (t_coord2 *)malloc(sizeof(*data.moved_map) * data.map_width * data.map_height);
-	//data.processed_map = init_map(data.map_height, data.map_width, map);
 	//print_map(data, data.map);
 	set_ranges(&data);
 	set_z_ranges(&data);
