@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 17:11:36 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 20:22:33 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "color.h"
 #include "utils.h"
 #include "math.h"
+#include "user_functions.h"
 #include <stdio.h>
 
 void	print_map(t_env data, t_coord3 *map)
@@ -55,8 +56,8 @@ void	init_hook(t_env *data)
 
 void	init_data(t_env *data)
 {
-	data->s_width = 1920;
-	data->s_height = 1080;
+	data->s_width = 1000;
+	data->s_height = 1000;
 	data->map_height = 0;
 	data->map_width = 0;
 	data->scale.x = 1;
@@ -71,9 +72,11 @@ void	init_data(t_env *data)
 	data->angle.z = 0;
 	data->move.x = 0;
 	data->move.y = 0;
-	data->delta.x = data->s_width / 25;
-	data->delta.y = data->s_height / 25;
-	data->delta.z = 0;
+	data->delta_move.x = 0;
+	data->delta_move.y = 0;
+	data->delta_scale.x = 1;
+	data->delta_scale.y = 1;
+	data->delta_scale.z = 0;
 	data->color_div = 25;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->s_width, data->s_height,
@@ -131,6 +134,8 @@ int		main(int argc, char **argv)
 	ft_putendl(RESET);
 	//exit(0);
 	trace(data);
+	printf("start[x] = %d	start[y] = %d\n", data.start.x, data.start.y);
+	zoom_in(&data, 0, 0);
 	//exit(0);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);

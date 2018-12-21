@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:52:40 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/18 15:31:19 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 18:12:59 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	increase_z(t_env *data);
 void	decrease_z(t_env *data);
 void	increase_color_div(t_env *data);
 void	decrease_color_div(t_env *data);
-void	zoom_in(t_env *data);
-void	zoom_out(t_env *data);
+void	zoom_in(t_env *data, int x, int y);
+void	zoom_out(t_env *data, int x, int y);
 void	move_up(t_env *data);
 void	move_down(t_env *data);
 void	move_right(t_env *data);

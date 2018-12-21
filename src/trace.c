@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 17:27:30 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 20:19:54 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void		set_z_ranges(t_env *data)
 	{
 		data->scale.z = (float)data->map_height / ((float)data->zmax * 10);
 		printf("scale.z = %f\n", data->scale.z);
-		data->delta.z = (float)data->s_height / (100 * data->zmax *
+		data->delta_scale.z = (float)data->s_height / (100 * data->zmax *
 				data->scale.x);
 	}
 	ft_putstr(GREEN);
@@ -112,7 +112,7 @@ void		set_ranges(t_env *data)
 	data->scale.x = (float)data->s_width / (right.x - left.x);
 	data->scale.y = (float)data->s_height / (down.y - up.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.8;
-	data->delta.x = data->scale.x * 10 / 100;
+	data->delta_scale.x = data->scale.x * 10 / 100;
 	printf("final scale = %f\n", data->scale.x);
 	recenter(data);
 	ft_putstr(GREEN);
@@ -155,8 +155,8 @@ void		center_map(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			data.moved_map[k].x = data.projected_map[k].x + data.start.x;
-			data.moved_map[k].y = data.projected_map[k].y + data.start.y;
+			data.moved_map[k].x = data.projected_map[k].x + data.start.x + data.delta_move.x;
+			data.moved_map[k].y = data.projected_map[k].y + data.start.y + data.delta_move.y;
 			x++;
 			k++;
 		}

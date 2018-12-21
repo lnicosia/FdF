@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 16:14:08 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 20:22:00 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ typedef struct	s_env
 	t_fcoord3	scale;
 	t_coord2	move;
 	t_coord2	start;
-	t_fcoord3	delta;
+	t_coord2	delta_move;
+	t_fcoord3	delta_scale;
 	t_fcoord3	angle;
 	t_coord2	(*project[2])(t_coord3, struct s_env);
 	t_fcoord2	(*pre_project[2])(t_coord3);

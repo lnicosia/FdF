@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 15:43:14 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 18:12:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,15 @@ int		mouse_press(int button, int x, int y, void *param)
 
 	data = (t_env*)param;
 	if (button == SCROLLUP_KEY)
-		zoom_in(data);
+	{
+		printf("[%d][%d]\n", x, y);
+		zoom_in(data, x, y);
+	}
 	else if (button == SCROLLDOWN_KEY)
-		zoom_out(data);
+	{
+		printf("[%d][%d]\n", x, y);
+		zoom_out(data, x, y);
+	}
 	(void)x;
 	(void)y;
 	return (0);

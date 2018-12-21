@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 17:29:21 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/12/21 18:08:42 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,6 @@ void	swap_project_type(t_env *data)
 {
 	data->project_type = data->project_type == PARA ? ISO : PARA;
 	set_ranges(data);
-	//set_z_ranges(data);
-	//float_map(*data);
-	rotate(*data);
 	project_map(*data);
 	scale_map(*data);
 	center_map(*data);
