@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:11:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/20 14:34:02 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 16:45:06 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int			parser(t_list **map, char *file, int *map_height, int *map_width)
 		ft_lstpushback(map, ft_lstnew(line, ft_strlen(line) + 1));
 		ft_strdel(&line);
 	}
-	ft_strdel(&line);
 	if (close(fd) == -1)
 		return (CLOSE_ERROR);
 	if (*map_width < 2 || *map_height < 2)

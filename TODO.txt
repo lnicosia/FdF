@@ -1,4 +1,3 @@
-/dev/
 Faces cachees/afficher les faces
 menu
 Rotations avec souris
