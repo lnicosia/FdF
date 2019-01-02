@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 18:08:42 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 15:51:35 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,19 @@ void	redraw(t_env *data)
 		trace(*data);
 	else
 		trace_aa(*data);
+	plot_line(new_coord2(0, data->s_height / 2), new_coord2(data->s_width, data->s_height / 2), *data, 0xFFFFFF);
+	plot_line(new_coord2(data->s_width / 2, 0), new_coord2(data->s_width / 2, data->s_height), *data, 0xFFFFFF);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+}
+
+
+void	process_all(t_env *data)
+{
+	rotate_map(*data);
+	project_map(*data);
+	scale_map(*data);
+	move_map(*data);
+	redraw(data);
 }
 
 void	swap_trace_type(t_env *data)
@@ -51,6 +63,6 @@ void	swap_project_type(t_env *data)
 	set_ranges(data);
 	project_map(*data);
 	scale_map(*data);
-	center_map(*data);
+	move_map(*data);
 	redraw(data);
 }

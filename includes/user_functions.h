@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:52:40 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 18:12:59 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 15:50:52 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define USER_FUNCTIONS_H
 
 void	quit(t_env *data);
+void	process_all(t_env *data);
 void	redraw(t_env *data);
 void	increase_z(t_env *data);
 void	decrease_z(t_env *data);

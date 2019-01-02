@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 20:22:33 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 16:33:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,14 +128,16 @@ int		main(int argc, char **argv)
 	float_map(data);
 	project_map(data);
 	scale_map(data);
-	center_map(data);
+	move_map(data);
 	ft_putstr(GREEN);
 	ft_putstr("[MAP CENTERED]");
 	ft_putendl(RESET);
 	//exit(0);
 	trace(data);
+	/*plot_line(new_coord2(0, data.s_height / 2), new_coord2(data.s_width, data.s_height / 2), data, 0xFFFFFF);
+	plot_line(new_coord2(data.s_width / 2, 0), new_coord2(data.s_width / 2, data.s_height), data, 0xFFFFFF);*/
 	printf("start[x] = %d	start[y] = %d\n", data.start.x, data.start.y);
-	zoom_in(&data, 0, 0);
+	//zoom_in(&data, 0, 0);
 	//exit(0);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_loop(data.mlx_ptr);

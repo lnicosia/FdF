@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:50:51 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 17:02:37 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 15:49:39 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	float_map(t_env data)
 	}
 }
 
-void	rotate(t_env data)
+void	rotate_map(t_env data)
 {
 	x_rotation(data);
 	y_rotation(data);

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 20:19:54 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 16:31:45 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			get_color(int x, int y, t_env data)
 	return (0xFFFFFF);
 }
 
-void		recenter(t_env *data)
+void		center(t_env *data)
 {
 	t_fcoord2	center;
 	t_fcoord2	right;
@@ -111,10 +111,10 @@ void		set_ranges(t_env *data)
 			data->map_height - 1]);
 	data->scale.x = (float)data->s_width / (right.x - left.x);
 	data->scale.y = (float)data->s_height / (down.y - up.y);
-	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.8;
+	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.6;
 	data->delta_scale.x = data->scale.x * 10 / 100;
 	printf("final scale = %f\n", data->scale.x);
-	recenter(data);
+	center(data);
 	ft_putstr(GREEN);
 	ft_putstr("[MAP SCALED]");
 	ft_putendl(RESET);
@@ -142,7 +142,7 @@ void		scale_map(t_env data)
 	}
 }
 
-void		center_map(t_env data)
+void		move_map(t_env data)
 {
 	int	y;
 	int	x;
@@ -211,10 +211,10 @@ void		trace(t_env data)
 		{
 			if (x < data.map_width - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-				new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
+						new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
 			if (y < data.map_height - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-				new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
+						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
 			x++;
 			k++;
 		}
@@ -237,10 +237,10 @@ void		trace_aa(t_env data)
 		{
 			if (x < data.map_width - 1)
 				plot_line_aa(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-				new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
+						new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
 			if (y < data.map_height - 1)
 				plot_line_aa(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-				new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
+						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
 			x++;
 			k++;
 		}

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 20:22:00 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 15:47:29 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void			del_map_link(void *content, size_t content_size);
 t_coord3		*init_map(int height, int width, t_list *r_map);
 void			set_ranges(t_env *data);
 void			scale_map(t_env data);
-void			center_map(t_env data);
+void			move_map(t_env data);
 void			move_map(t_env data);
 void			project_map(t_env data);
 void			set_z_ranges(t_env *data);
@@ -129,7 +129,7 @@ t_coord2		iso_project(t_coord3 c, t_env data);
 t_coord2		para_project(t_coord3 c, t_env data);
 t_fcoord2		pre_iso_project(t_coord3 c);
 t_fcoord2		pre_para_project(t_coord3 c);
-void			recenter(t_env *data);
+void			center(t_env *data);
 void			trace(t_env data);
 void			trace_aa(t_env data);
 t_coord2		new_coord2(int x, int y);
@@ -140,7 +140,7 @@ int				max3(t_coord3 *map, int size, char mode);
 void			x_rotation(t_env data);
 void			y_rotation(t_env data);
 void			z_rotation(t_env data);
-void			rotate(t_env data);
+void			rotate_map(t_env data);
 void			float_map(t_env data);
 void			init_cos_data(t_env *data);
 void			init_sin_data(t_env *data);

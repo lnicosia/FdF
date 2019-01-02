@@ -1,7 +1,7 @@
 /dev/
+project_map opti
 Faces cachees/afficher les faces
 menu
-Zoom centre / par rapport a la souris
 Rotations avec souris
 activer/desactiver couleurs (prendre couleurs du fichiers s'il y a)
 Gestion de la memoire (free)

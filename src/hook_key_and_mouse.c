@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 18:12:07 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 15:52:23 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,56 +47,32 @@ int		key_press(int key, void *param)
 	else if (key == NK1_KEY)
 	{
 		data->angle.x += 0.15707963267;
-		rotate(*data);
-		project_map(*data);
-		scale_map(*data);
-		center_map(*data);
-		redraw(data);
+		process_all(data);
 	}
 	else if (key == NK2_KEY)
 	{
 		data->angle.x -= 0.15707963267;
-		rotate(*data);
-		project_map(*data);
-		scale_map(*data);
-		center_map(*data);
-		redraw(data);
+		process_all(data);
 	}
 	else if (key == NK4_KEY)
 	{
 		data->angle.y += 0.15707963267;
-		rotate(*data);
-		project_map(*data);
-		scale_map(*data);
-		center_map(*data);
-		redraw(data);
+		process_all(data);
 	}
 	else if (key == NK5_KEY)
 	{
 		data->angle.y -= 0.15707963267;
-		rotate(*data);
-		project_map(*data);
-		scale_map(*data);
-		center_map(*data);
-		redraw(data);
+		process_all(data);
 	}
 	else if (key == NK7_KEY)
 	{
 		data->angle.z += 0.15707963267;
-		rotate(*data);
-		project_map(*data);
-		scale_map(*data);
-		center_map(*data);
-		redraw(data);
+		process_all(data);
 	}
 	else if (key == NK8_KEY)
 	{
 		data->angle.z -= 0.15707963267;
-		rotate(*data);
-		project_map(*data);
-		scale_map(*data);
-		center_map(*data);
-		redraw(data);
+		process_all(data);
 	}
 	else
 		ft_putendl("Coucou");
@@ -117,12 +93,12 @@ int		mouse_press(int button, int x, int y, void *param)
 	data = (t_env*)param;
 	if (button == SCROLLUP_KEY)
 	{
-		printf("[%d][%d]\n", x, y);
+		//printf("[%d][%d]\n", x, y);
 		zoom_in(data, x, y);
 	}
 	else if (button == SCROLLDOWN_KEY)
 	{
-		printf("[%d][%d]\n", x, y);
+		//printf("[%d][%d]\n", x, y);
 		zoom_out(data, x, y);
 	}
 	(void)x;

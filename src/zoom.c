@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:02:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/21 20:21:16 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 16:32:30 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,127 @@
 #include "user_functions.h"
 #include <stdio.h>
 
-void	zoom_in(t_env *data, int x, int y)
+void		center_mouse(t_env *data, int x, int y)
 {
-	t_coord2	center1;
-	t_coord2	center2;
+	t_fcoord2	center;
+	t_fcoord2	right;
+	t_fcoord2	left;
+	t_fcoord2	up;
+	t_fcoord2	down;
 
 	(void)x;
 	(void)y;
-	center1.x = (data->moved_map[data->map_width - 1].x - data->moved_map[data->map_width * (data->map_height -1)].x) / 2 + data->start.x;
-	center1.y = (data->moved_map[data->map_width * data->map_height - 1].y - data->moved_map[0].y) / 2 + data->start.y;
-	printf("center1[x] = %d	center1[y] = %d\n", center1.x, center1.y);
+	up = data->pre_project[data->project_type](data->map[0]);
+	right = data->pre_project[data->project_type](data->map[data->map_width - 1]);
+	left = data->pre_project[data->project_type](data->map[data->map_width *
+			(data->map_height - 1)]);
+	down = data->pre_project[data->project_type](data->map[data->map_width *
+			data->map_height - 1]);
+	center.x = data->scale.x * (right.x - left.x) / 2 - ft_fabs(left.x)
+		* data->scale.x;
+	center.y = data->scale.x * (down.y - up.y) / 2 - ft_fabs(up.y)
+		* data->scale.x;
+	data->start.x = (float)data->s_width / 2 - center.x;
+	  data->start.y = (float)data->s_height / 2 - center.y;
+	/*data->start.x = (float)data->s_width / 2 - (x * data->scale.x);
+	  data->start.y = (float)data->s_height / 2 - (y * data->scale.x);*/
+}
+
+void	translate_in(t_env *data, int m_x, int m_y)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+	while (y < data->map_height)
+	{
+		x = 0;
+		while (x < data->map_width)
+		{
+			data->moved_map[k].x -= m_x;
+			data->moved_map[k].y -= m_y;
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void	translate_out(t_env *data, int m_x, int m_y)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+while (y < data->map_height)
+	{
+		x = 0;
+		while (x < data->map_width)
+		{
+			data->moved_map[k].x += m_x;
+			data->moved_map[k].y += m_y;
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void	rescale_map(t_env *data)
+{
+	int	y;
+	int	x;
+	int	k;
+
+	y = 0;
+	k = 0;
+	while (y < data->map_height)
+	{
+		x = 0;
+		while (x < data->map_width)
+		{
+			data->moved_map[k].x += data->moved_map[k].x * data->delta_scale.x;
+			data->moved_map[k].y += data->moved_map[k].y * data->delta_scale.x;
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void	zoom_in(t_env *data, int x, int y)
+{
+	printf("mouse[x] = %d	mouse[y] = %d\n", x, y);
+	//data->delta_scale.x *= data->delta_scale.x < 0 ? -1 : 1;
 	data->scale.x += data->delta_scale.x;
-	//set_ranges(data);
+	center_mouse(data, x, y);
 	project_map(*data);
 	scale_map(*data);
-	center2.x = (float)data->s_width / 2 - data->start.x;
-	center2.y = (float)data->s_height / 2 - data->start.y;
-	printf("center2[x] = %d	center2[y] = %d\n", center2.x, center2.y);
-	/*printf("center x = %d	center y = %d\n", );
-	  data->start.x += data->start.x - x;
-	  data->start.y += data->start.y - y;*/
-	//recenter(data);
-	center_map(*data);
+	/*translate_in(data, x, y);
+	rescale_map(data);
+	translate_out(data, x, y);*/
+	move_map(*data);
 	redraw(data);
 }
 
 void	zoom_out(t_env *data, int x, int y)
 {
-	t_coord2	center1;
-	//t_coord2	center2;
-
-	(void)x;
-	(void)y;
+	printf("mouse[x] = %d	mouse[y] = %d\n", x, y);
 	if (data->scale.x - data->delta_scale.x >= 0)
 	{
-		center1.x = (data->moved_map[data->map_width - 1].x - data->moved_map[data->map_width * (data->map_height -1)].x) / 2;
-		center1.y = (data->moved_map[data->map_width * data->map_height - 1].y - data->moved_map[0].y) / 2;
-		printf("center1[x] = %d	center1[y] = %d\n", center1.x, center1.y);
+		//data->delta_scale.x *= data->delta_scale.x > 0 ? -1 : 1;
 		data->scale.x -= data->delta_scale.x;
-		/*data->start.x += data->s_width / 2;
-		  data->start.y += data->s_height / 2;*/
+		center_mouse(data, x, y);
 		project_map(*data);
 		scale_map(*data);
-		//recenter(data);
-		center_map(*data);
+		/*translate_in(data, x, y);
+		rescale_map(data);
+		translate_out(data, x, y);*/
+		move_map(*data);
 		redraw(data);
 	}
 }
