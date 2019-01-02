@@ -1,6 +1,5 @@
 Faces cachees/afficher les faces
 menu
-Rotations avec souris
 activer/desactiver couleurs (prendre couleurs du fichiers s'il y a)
 Gestion de la memoire (free)
 Protection

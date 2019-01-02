@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 15:52:23 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 18:44:12 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,24 +101,51 @@ int		mouse_press(int button, int x, int y, void *param)
 		//printf("[%d][%d]\n", x, y);
 		zoom_out(data, x, y);
 	}
-	(void)x;
-	(void)y;
+	else if (button == BUT1_KEY)
+	{
+		data->button1_state = 1;
+		data->drag_start.x = x;
+		data->drag_start.y = y;
+	}
+	else if (button == BUT2_KEY)
+	{
+		//printf("Start: [%d][%d]\n", x, y);
+	}
 	return (0);
 }
 
 int		mouse_release(int button, int x, int y, void *param)
 {
-	(void)button;
-	(void)param;
+	t_env	*data;
+
+	data = (t_env*)param;
 	(void)x;
 	(void)y;
+	if (button == BUT1_KEY)
+	{
+		data->button1_state = 0;
+	}
+	else if (button == BUT2_KEY)
+	{
+		//printf("Start: [%d][%d]\n", x, y);
+	}
 	return (0);
 }
 
 int		mouse_move(int x, int y, void *param)
 {
+	t_env	*data;
+
 	(void)x;
 	(void)y;
-	(void)param;
+	data = (t_env*)param;
+	if (data->button1_state == 1)
+	{
+		data->angle.x += 0.00314159265 * (y - data->drag_start.y);
+		data->angle.z -= 0.00314159265 * (x - data->drag_start.x);
+		process_all(data);
+		data->drag_start.x = x;
+		data->drag_start.y = y;
+	}
 	return (0);
 }

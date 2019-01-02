@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 15:47:29 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 17:12:48 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,11 @@ typedef struct	s_env
 	int			zmax;
 	int			color_div;
 	int			zbuffer;
+	int			button1_state;
 	float		cos_data[21];
 	float		sin_data[21];
+	t_coord2	drag_start;
+	t_coord2	drag_end;
 	t_fcoord3	scale;
 	t_coord2	move;
 	t_coord2	start;

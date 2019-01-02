@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 16:33:07 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 17:17:13 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	init_hook(t_env *data)
 	mlx_hook(data->win_ptr, DESTROYNOTIFY, STRUCTURENOTIFYMASK, close_window,
 			data);
 	mlx_hook(data->win_ptr, BUTTONPRESS, BUTTONPRESSMASK, mouse_press, data);
+	mlx_hook(data->win_ptr, BUTTONRELEASE, BUTTONRELEASEMASK, mouse_release, data);
+	mlx_hook(data->win_ptr, MOTIONNOTIFY, BUTTON1MOTIONMASK, mouse_move, data);
 }
 
 void	init_data(t_env *data)
@@ -77,6 +79,8 @@ void	init_data(t_env *data)
 	data->delta_scale.x = 1;
 	data->delta_scale.y = 1;
 	data->delta_scale.z = 0;
+	data->button1_state = 0;
+	data->drag_start = new_coord2(0,0);
 	data->color_div = 25;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->s_width, data->s_height,
@@ -136,7 +140,7 @@ int		main(int argc, char **argv)
 	trace(data);
 	/*plot_line(new_coord2(0, data.s_height / 2), new_coord2(data.s_width, data.s_height / 2), data, 0xFFFFFF);
 	plot_line(new_coord2(data.s_width / 2, 0), new_coord2(data.s_width / 2, data.s_height), data, 0xFFFFFF);*/
-	printf("start[x] = %d	start[y] = %d\n", data.start.x, data.start.y);
+	//printf("start[x] = %d	start[y] = %d\n", data.start.x, data.start.y);
 	//zoom_in(&data, 0, 0);
 	//exit(0);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
