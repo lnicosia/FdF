@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 16:31:45 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 16:40:51 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void		move_map(t_env data)
 	}	
 }
 
-void		project_map(t_env data)
+void		project_map_iso(t_env data)
 {
 	int		y;
 	int		x;
@@ -179,21 +179,45 @@ void		project_map(t_env data)
 		while (x < data.map_width)
 		{
 			tmp = data.rotated_map[k].x;
-			if (data.project_type == ISO)
-			{
-				data.projected_map[k].x = (data.rotated_map[k].x - data.rotated_map[k].y) * COS_30;
-				data.projected_map[k].y = (-data.rotated_map[k].z) + (tmp + data.rotated_map[k].y) * SIN_30;
-			}
-			else
-			{
-				data.projected_map[k].x = (data.rotated_map[k].x - data.rotated_map[k].y);
-				data.projected_map[k].y = (-data.rotated_map[k].z + data.rotated_map[k].y);
-			}
+			data.projected_map[k].x = (data.rotated_map[k].x - data.rotated_map[k].y) * COS_30;
+			data.projected_map[k].y = (-data.rotated_map[k].z) + (tmp + data.rotated_map[k].y) * SIN_30;
 			x++;
 			k++;
 		}
 		y++;
 	}
+}
+
+void		project_map_para(t_env data)
+{
+	int		y;
+	int		x;
+	int		k;
+	float	tmp;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			tmp = data.rotated_map[k].x;
+			data.projected_map[k].x = (data.rotated_map[k].x - data.rotated_map[k].y);
+			data.projected_map[k].y = (-data.rotated_map[k].z + data.rotated_map[k].y);
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+void		project_map(t_env data)
+{
+	if (data.project_type == ISO)
+		project_map_iso(data);
+	else
+		project_map_para(data);
 }
 
 void		trace(t_env data)

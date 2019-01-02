@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:02:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 16:32:30 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/02 16:42:04 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	rescale_map(t_env *data)
 
 void	zoom_in(t_env *data, int x, int y)
 {
-	printf("mouse[x] = %d	mouse[y] = %d\n", x, y);
+	//printf("mouse[x] = %d	mouse[y] = %d\n", x, y);
 	//data->delta_scale.x *= data->delta_scale.x < 0 ? -1 : 1;
 	data->scale.x += data->delta_scale.x;
 	center_mouse(data, x, y);
@@ -123,7 +123,7 @@ void	zoom_in(t_env *data, int x, int y)
 
 void	zoom_out(t_env *data, int x, int y)
 {
-	printf("mouse[x] = %d	mouse[y] = %d\n", x, y);
+	//printf("mouse[x] = %d	mouse[y] = %d\n", x, y);
 	if (data->scale.x - data->delta_scale.x >= 0)
 	{
 		//data->delta_scale.x *= data->delta_scale.x > 0 ? -1 : 1;

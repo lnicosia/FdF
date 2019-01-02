@@ -1,5 +1,4 @@
 /dev/
-project_map opti
 Faces cachees/afficher les faces
 menu
 Rotations avec souris
