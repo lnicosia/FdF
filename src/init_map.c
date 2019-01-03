@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:46:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 15:05:33 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 15:41:45 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static int	parse_str(char *str, t_env *data, t_coord2 c, int size)
 
 	j = 0;
 	i = 0;
+	while (str[j] && str[j] == ' ')
+		j++;
 	while (str[j])
 	{
 		if (c.x < size)

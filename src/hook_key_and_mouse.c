@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 18:44:12 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 15:14:27 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ int		key_press(int key, void *param)
 	{
 		data->angle.z -= 0.15707963267;
 		process_all(data);
+	}
+	else if (key == C_KEY)
+	{
+		data->color = data->color == 1 ? 0 : 1;
+		redraw(data);
 	}
 	else
 		ft_putendl("Coucou");
