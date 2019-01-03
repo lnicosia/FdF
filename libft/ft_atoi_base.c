@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 11:00:36 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 14:52:54 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 15:05:14 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,19 @@ int		ft_atoi_base(char *nbr, char *base_from)
 		j = -1;
 		while (base_from[++j])
 		{
-			if (*nbr == base_from[j])
-				res = ft_strlen(base_from) * res + j;
+			if (base_from[j] >= 'a' && base_from[j] < 'z')
+			{
+				if (*nbr == base_from[j] || *nbr == base_from[j] - 32)
+					res = ft_strlen(base_from) * res + j;
+			}
+			else if (base_from[j] >= 'A' && base_from[j] < 'Z')
+			{
+				if (*nbr == base_from[j] || *nbr == base_from[j] + 32)
+					res = ft_strlen(base_from) * res + j;
+			}
+			else
+				if (*nbr == base_from[j])
+					res = ft_strlen(base_from) * res + j;
 		}
 		nbr++;
 		k++;
