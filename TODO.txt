@@ -1,6 +1,6 @@
 Faces cachees/afficher les faces
 menu
-activer/desactiver couleurs (prendre couleurs du fichiers s'il y a)
+activer/desactiver couleurs (prendre couleurs du fichiers s'il y a sinon pickup)
 Gestion de la memoire (free)
 Protection
 Norme

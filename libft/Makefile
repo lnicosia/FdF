@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/04 11:57:59 by lnicosia          #+#    #+#              #
-#    Updated: 2018/12/14 14:41:08 by lnicosia         ###   ########.fr        #
+#    Updated: 2019/01/03 12:19:27 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS = ft_memccpy.c ft_memcpy.c ft_memset.c ft_bzero.c ft_memmove.c \
 	   ft_strsplit.c ft_itoa.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 	   ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstlen.c ft_lstpushback.c \
 	   ft_abs.c get_next_line.c ft_strjoin_free.c ft_min.c ft_max.c \
-	   ft_fmin.c ft_fmax.c ft_count.c ft_fabs.c
+	   ft_fmin.c ft_fmax.c ft_count.c ft_fabs.c ft_atoi_base.c
 
 INCLUDES = ../includes
 

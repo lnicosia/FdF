@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:01:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/12 17:10:20 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 12:21:38 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ double			ft_fmax(double nb1, double nb2);
 char			*ft_strjoin_free(char *s1, const char *s2);
 int				get_next_line(int fd, char **line);
 int				ft_count(int nb);
+int				ft_atoi_base(char *str, char *base);
 
 #endif

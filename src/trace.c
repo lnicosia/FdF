@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 16:40:51 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 13:29:18 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,30 @@ int			get_color(int x, int y, t_env data)
 {
 	int		z;
 
-	z = data.map[y * data.map_width + x].z;
-	if (z <= 0)
-		return (0xC3E1FF);
-	if (z <= (data.zmax) / data.color_div)
-		return (0x344623);
-	if (z <= (2 * data.zmax) / data.color_div)
-		return (0x7E9F5D);
-	if (z <= (3 * data.zmax) / data.color_div)
-		return (0xB7CAA4);
-	if (z <= (4 * data.zmax) / data.color_div)
-		return (0xCBAC83);
-	if (z <= (5 * data.zmax) / data.color_div)
-		return (0x75552D);
-	if (z <= (6 * data.zmax) / data.color_div)
-		return (0x583405);
-	if (z <= data.zmax)
-		return (0xFFFFFF);
+	if (data.color == 0)
+	{
+		z = data.map[y * data.map_width + x].z;
+		if (z <= 0)
+			return (0xC3E1FF);
+		if (z <= (data.zmax) / data.color_div)
+			return (0x344623);
+		if (z <= (2 * data.zmax) / data.color_div)
+			return (0x7E9F5D);
+		if (z <= (3 * data.zmax) / data.color_div)
+			return (0xB7CAA4);
+		if (z <= (4 * data.zmax) / data.color_div)
+			return (0xCBAC83);
+		if (z <= (5 * data.zmax) / data.color_div)
+			return (0x75552D);
+		if (z <= (6 * data.zmax) / data.color_div)
+			return (0x583405);
+		if (z <= data.zmax)
+			return (0xFFFFFF);
+	}
+	else
+	{
+		return (data.colors[y * data.map_width + x]);
+	}
 	return (0xFFFFFF);
 }
 

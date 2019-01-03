@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 17:12:48 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 11:53:56 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct	s_env
 	t_fcoord3	*rotated_map;
 	t_fcoord3	*projected_map;
 	t_coord2	*moved_map;
+	int			*colors;
 	int			map_height;
 	int			map_width;
 	int			s_height;
@@ -83,6 +84,7 @@ typedef struct	s_env
 	int			color_div;
 	int			zbuffer;
 	int			button1_state;
+	int			color;
 	float		cos_data[21];
 	float		sin_data[21];
 	t_coord2	drag_start;
@@ -121,7 +123,7 @@ int				parser(
 		t_list **map, char *file, int *map_height, int *map_width);
 int				clear_map(t_list **map);
 void			del_map_link(void *content, size_t content_size);
-t_coord3		*init_map(int height, int width, t_list *r_map);
+int				init_map(int height, int width, t_list *r_map, t_env *data);
 void			set_ranges(t_env *data);
 void			scale_map(t_env data);
 void			move_map(t_env data);

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 17:17:13 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 13:26:38 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	init_hook(t_env *data)
 
 void	init_data(t_env *data)
 {
-	data->s_width = 1000;
-	data->s_height = 1000;
+	data->s_width = 1920;
+	data->s_height = 1080;
 	data->map_height = 0;
 	data->map_width = 0;
 	data->scale.x = 1;
@@ -82,6 +82,7 @@ void	init_data(t_env *data)
 	data->button1_state = 0;
 	data->drag_start = new_coord2(0,0);
 	data->color_div = 25;
+	data->color = 0;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->s_width, data->s_height,
 			"Fdf");
@@ -122,7 +123,8 @@ int		main(int argc, char **argv)
 		ft_putchar('\n');
 		return (ret);
 	}
-	data.map = init_map(data.map_height, data.map_width, map);
+	data.colors = (int*)malloc(sizeof(int) * data.map_width * data.map_height);
+	init_map(data.map_height, data.map_width, map, &data);
 	data.rotated_map = (t_fcoord3 *)malloc(sizeof(*data.rotated_map) * data.map_width * data.map_height);
 	data.projected_map = (t_fcoord3 *)malloc(sizeof(*data.projected_map) * data.map_width * data.map_height);
 	data.moved_map = (t_coord2 *)malloc(sizeof(*data.moved_map) * data.map_width * data.map_height);

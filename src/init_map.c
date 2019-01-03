@@ -6,14 +6,15 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:46:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/20 16:51:14 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 13:36:03 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "color.h"
+#include <stdio.h>
 
-static int	parse_str(char *str, t_coord3 *map, t_coord2 c, int size)
+static int	parse_str(char *str, t_env *data, t_coord2 c, int size)
 {
 	int	j;
 	int	i;
@@ -24,12 +25,25 @@ static int	parse_str(char *str, t_coord3 *map, t_coord2 c, int size)
 	{
 		if (c.x < size)
 		{
-			map[c.x].x = i;
-			map[c.x].y = c.y;
-			map[c.x].z = ft_atoi(str + j);
+			data->map[c.x].x = i;
+			data->map[c.x].y = c.y;
+			data->map[c.x].z = ft_atoi(str + j);
+			data->colors[c.x] = 0xFFFFFF;
 		}
 		while (str[j] && str[j] != ' ')
+		{
+			if (str[j] == ',')
+			{
+				if (c.x < size)
+				{
+					j = j + 3;
+					data->color = 1;
+					data->colors[c.x] = ft_atoi_base(str + j, "0123456789ABCDEF");
+					//printf("hex: %d\n", ft_atoi_base(str + j, "0123456789ABCDEF"));
+				}
+			}
 			j++;
+		}
 		while (str[j] && str[j] == ' ')
 			j++;
 		c.x++;
@@ -38,22 +52,21 @@ static int	parse_str(char *str, t_coord3 *map, t_coord2 c, int size)
 	return (c.x);
 }
 
-t_coord3	*init_map(int height, int width, t_list *r_map)
+int			init_map(int height, int width, t_list *r_map, t_env *data)
 {
-	t_coord3	*map;
 	t_coord2	c;
 	int			size;
 	char		*str;
 
 	size = height * width;
-	if (!(map = (t_coord3*)malloc(sizeof(*map) * size)))
-		return (NULL);
+	if (!(data->map = (t_coord3*)malloc(sizeof(*(data->map)) * size)))
+		return (0);
 	c.y = 0;
 	c.x = 0;
 	while (c.y < height)
 	{
 		str = r_map->content;
-		c.x = parse_str(str, map, c, size);
+		c.x = parse_str(str, data, c, size);
 		r_map = r_map->next;
 		c.y++;
 	}
@@ -61,5 +74,5 @@ t_coord3	*init_map(int height, int width, t_list *r_map)
 	ft_putstr(GREEN);
 	ft_putstr("[MAP INITIALIZED]");
 	ft_putendl(RESET);
-	return (map);
+	return (1);
 }
