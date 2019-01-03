@@ -6,13 +6,12 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:46:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 13:36:03 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 14:53:25 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "color.h"
-#include <stdio.h>
 
 static int	parse_str(char *str, t_env *data, t_coord2 c, int size)
 {
@@ -38,8 +37,9 @@ static int	parse_str(char *str, t_env *data, t_coord2 c, int size)
 				{
 					j = j + 3;
 					data->color = 1;
-					data->colors[c.x] = ft_atoi_base(str + j, "0123456789ABCDEF");
-					//printf("hex: %d\n", ft_atoi_base(str + j, "0123456789ABCDEF"));
+					data->colors[c.x] = ft_atoi_base(str + j, "0123456789abcdef");
+					if (data->colors[c.x] == 0)
+						data->colors[c.x] = 0xFFFFFF;
 				}
 			}
 			j++;
