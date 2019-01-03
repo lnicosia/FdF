@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 15:14:27 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 16:23:26 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,17 @@ int		key_press(int key, void *param)
 		move_left(data);
 	else if (key == A_KEY)
 		swap_trace_type(data);
-	else if (key == P_KEY)
-		swap_project_type(data);
+	else if (key == D_KEY)
+	{
+		data->debug = data->debug == 1 ? 0 : 1;
+		redraw(data);
+	}
+	else if (key == K1_KEY)
+		swap_project_type(data, ISO);
+	else if (key == K2_KEY)
+		swap_project_type(data, PARA);
+	else if (key == K3_KEY)
+		swap_project_type(data, FLAT);
 	else if (key == PUP_KEY)
 		increase_color_div(data);
 	else if (key == PDOWN_KEY)

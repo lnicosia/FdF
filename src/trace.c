@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 15:42:33 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 18:26:52 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ t_fcoord2	pre_para_project(t_coord3 c)
 
 	res.x = ((float)c.x - (float)c.y);
 	res.y = ((float)c.y);
+	return (res);
+}
+
+t_fcoord2	pre_flat_project(t_coord3 c)
+{
+	t_fcoord2	res;
+
+	res.x = (float)c.x;
+	res.y = (float)c.y;
 	return (res);
 }
 
@@ -219,12 +228,38 @@ void		project_map_para(t_env data)
 	}
 }
 
+void		project_map_flat(t_env data)
+{
+	int		y;
+	int		x;
+	int		k;
+	float	tmp;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			tmp = data.rotated_map[k].x;
+			data.projected_map[k].x = data.rotated_map[k].x;
+			data.projected_map[k].y = data.rotated_map[k].y;
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
 void		project_map(t_env data)
 {
 	if (data.project_type == ISO)
 		project_map_iso(data);
-	else
+	else if (data.project_type == PARA)
 		project_map_para(data);
+	else if (data.project_type == FLAT)
+		project_map_flat(data);
 }
 
 void		trace(t_env data)

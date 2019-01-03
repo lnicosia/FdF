@@ -1,4 +1,5 @@
-2D mode (pas de projection)
+Julia + fract bug
+Para project rotation bug
 Faces cachees/afficher les faces
 menu
 coleurs > gradients?

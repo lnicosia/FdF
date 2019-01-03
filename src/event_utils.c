@@ -6,13 +6,14 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 16:45:40 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 18:30:57 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "utils.h"
 #include "color.h"
+#include "user_functions.h"
 
 void	quit(t_env *data)
 {
@@ -32,12 +33,13 @@ void	redraw(t_env *data)
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
 			&(data->img.bit_per_pixels), &(data->img.size_line),
 			&(data->img.endian));
+	set_background(*data, 0x404040);
 	if (data->trace_type == NORMAL)
 		trace(*data);
 	else
 		trace_aa(*data);
-	/*plot_line(new_coord2(0, data->s_height / 2), new_coord2(data->s_width, data->s_height / 2), *data, 0xFFFFFF);
-	plot_line(new_coord2(data->s_width / 2, 0), new_coord2(data->s_width / 2, data->s_height), *data, 0xFFFFFF);*/
+	if (data->debug == 1)
+		draw_axes(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
 
@@ -57,12 +59,15 @@ void	swap_trace_type(t_env *data)
 	redraw(data);
 }
 
-void	swap_project_type(t_env *data)
+void	swap_project_type(t_env *data, int type)
 {
-	data->project_type = data->project_type == PARA ? ISO : PARA;
+	data->project_type = type;
+	if (type == FLAT)
+	{
+		data->angle.x = 0;
+		data->angle.y = 0;
+		data->angle.z = 0;
+	}
 	set_ranges(data);
-	project_map(*data);
-	scale_map(*data);
-	move_map(*data);
-	redraw(data);
+	process_all(data);
 }

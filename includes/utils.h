@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 11:53:56 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 18:17:42 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # define ISO 0
 # define PARA 1
+# define FLAT 2
 # define NORMAL 0
 # define AA 1
 # define COS_30 0.86602540378
@@ -73,6 +74,7 @@ typedef struct	s_env
 	t_fcoord3	*rotated_map;
 	t_fcoord3	*projected_map;
 	t_coord2	*moved_map;
+	int			*zbuffer;
 	int			*colors;
 	int			map_height;
 	int			map_width;
@@ -82,9 +84,9 @@ typedef struct	s_env
 	int			trace_type;
 	int			zmax;
 	int			color_div;
-	int			zbuffer;
 	int			button1_state;
 	int			color;
+	int			debug;
 	float		cos_data[21];
 	float		sin_data[21];
 	t_coord2	drag_start;
@@ -96,7 +98,7 @@ typedef struct	s_env
 	t_fcoord3	delta_scale;
 	t_fcoord3	angle;
 	t_coord2	(*project[2])(t_coord3, struct s_env);
-	t_fcoord2	(*pre_project[2])(t_coord3);
+	t_fcoord2	(*pre_project[3])(t_coord3);
 }				t_env;
 
 void			plot_line(t_coord2 c1, t_coord2 c2, t_env data, int color);
@@ -134,6 +136,7 @@ t_coord2		iso_project(t_coord3 c, t_env data);
 t_coord2		para_project(t_coord3 c, t_env data);
 t_fcoord2		pre_iso_project(t_coord3 c);
 t_fcoord2		pre_para_project(t_coord3 c);
+t_fcoord2		pre_flat_project(t_coord3 c);
 void			center(t_env *data);
 void			trace(t_env data);
 void			trace_aa(t_env data);
@@ -149,5 +152,6 @@ void			rotate_map(t_env data);
 void			float_map(t_env data);
 void			init_cos_data(t_env *data);
 void			init_sin_data(t_env *data);
+void			set_background(t_env data, int color);
 
 #endif

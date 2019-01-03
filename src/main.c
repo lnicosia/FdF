@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 13:26:38 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/03 18:30:55 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,27 @@ void	print_map(t_env data, t_coord3 *map)
 	}
 }
 
+void	set_background(t_env data, int color)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (i < data.s_height)
+	{
+		j = 0;
+		while (j < data.s_width)
+		{
+			data.img.str[k] = color;
+			j++;
+			k++;
+		}
+		i++;
+	}
+}
+
 void	init_hook(t_env *data)
 {
 	mlx_hook(data->win_ptr, KEYPRESS, KEYPRESSMASK, key_press, data);
@@ -56,19 +77,43 @@ void	init_hook(t_env *data)
 	mlx_hook(data->win_ptr, MOTIONNOTIFY, BUTTON1MOTIONMASK, mouse_move, data);
 }
 
+int		init_zbuffer(t_env *data)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	if (!(data->zbuffer = (int*)malloc(sizeof(int) * data->s_width * data->s_height)))
+		return (0);
+	i = 0;
+	k = 0;
+	while (i < data->map_height)
+	{
+		j = 0;
+		while (j < data->map_width)
+		{
+			data->zbuffer[k] = 2147483647;
+			j++;
+			k++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 void	init_data(t_env *data)
 {
 	data->s_width = 1920;
 	data->s_height = 1080;
 	data->map_height = 0;
 	data->map_width = 0;
+	data->debug = 0;
 	data->scale.x = 1;
 	data->scale.y = 1;
 	data->scale.z = 1;
 	data->start.x = 0;
 	data->start.y = 0;
 	data->zmax = 0;
-	data->zbuffer = 0;
 	data->angle.x = 0;
 	data->angle.y = 0;
 	data->angle.z = 0;
@@ -93,6 +138,7 @@ void	init_data(t_env *data)
 	data->trace_type = NORMAL;
 	data->pre_project[ISO] = &pre_iso_project;
 	data->pre_project[PARA] = &pre_para_project;
+	data->pre_project[FLAT] = &pre_flat_project;
 }
 
 int		main(int argc, char **argv)
@@ -111,8 +157,6 @@ int		main(int argc, char **argv)
 	map = NULL;
 	init_data(&data);
 	init_hook(&data);
-	init_cos_data(&data);
-	init_sin_data(&data);
 	if ((ret = parser(&map, argv[1], &(data.map_height), &(data.map_width)))
 			!= 0)
 	{
@@ -123,12 +167,14 @@ int		main(int argc, char **argv)
 		ft_putchar('\n');
 		return (ret);
 	}
+	init_zbuffer(&data);
 	data.colors = (int*)malloc(sizeof(int) * data.map_width * data.map_height);
 	init_map(data.map_height, data.map_width, map, &data);
 	data.rotated_map = (t_fcoord3 *)malloc(sizeof(*data.rotated_map) * data.map_width * data.map_height);
 	data.projected_map = (t_fcoord3 *)malloc(sizeof(*data.projected_map) * data.map_width * data.map_height);
 	data.moved_map = (t_coord2 *)malloc(sizeof(*data.moved_map) * data.map_width * data.map_height);
 	//print_map(data, data.map);
+	set_background(data, 0x404040);
 	set_ranges(&data);
 	set_z_ranges(&data);
 	float_map(data);
@@ -140,8 +186,6 @@ int		main(int argc, char **argv)
 	ft_putendl(RESET);
 	//exit(0);
 	trace(data);
-	/*plot_line(new_coord2(0, data.s_height / 2), new_coord2(data.s_width, data.s_height / 2), data, 0xFFFFFF);
-	plot_line(new_coord2(data.s_width / 2, 0), new_coord2(data.s_width / 2, data.s_height), data, 0xFFFFFF);*/
 	//printf("start[x] = %d	start[y] = %d\n", data.start.x, data.start.y);
 	//zoom_in(&data, 0, 0);
 	//exit(0);
