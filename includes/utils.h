@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 18:17:42 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/07 15:55:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,39 +66,40 @@ typedef struct	s_img
 
 typedef struct	s_env
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	t_img		img;
-	t_coord3	*map;
-	t_fcoord3	*rotated_map;
-	t_fcoord3	*projected_map;
-	t_coord2	*moved_map;
-	int			*zbuffer;
-	int			*colors;
-	int			map_height;
-	int			map_width;
-	int			s_height;
-	int			s_width;
-	int			project_type;
-	int			trace_type;
-	int			zmax;
-	int			color_div;
-	int			button1_state;
-	int			color;
-	int			debug;
-	float		cos_data[21];
-	float		sin_data[21];
-	t_coord2	drag_start;
-	t_coord2	drag_end;
-	t_fcoord3	scale;
-	t_coord2	move;
-	t_coord2	start;
-	t_coord2	delta_move;
-	t_fcoord3	delta_scale;
-	t_fcoord3	angle;
-	t_coord2	(*project[2])(t_coord3, struct s_env);
-	t_fcoord2	(*pre_project[3])(t_coord3);
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	t_img			img;
+	t_coord3		*map;
+	t_fcoord3		*rotated_map;
+	t_fcoord3		*projected_map;
+	t_coord2		*moved_map;
+	unsigned int	background_color;
+	int				*zbuffer;
+	int				*colors;
+	int				map_height;
+	int				map_width;
+	int				s_height;
+	int				s_width;
+	int				project_type;
+	int				trace_type;
+	int				zmax;
+	int				color_div;
+	int				button1_state;
+	int				color;
+	int				debug;
+	float			cos_data[21];
+	float			sin_data[21];
+	t_coord2		drag_start;
+	t_coord2		drag_end;
+	t_fcoord3		scale;
+	t_coord2		move;
+	t_coord2		start;
+	t_coord2		delta_move;
+	t_fcoord3		delta_scale;
+	t_fcoord3		angle;
+	t_coord2		(*project[2])(t_coord3, struct s_env);
+	t_fcoord2		(*pre_project[3])(t_coord3);
 }				t_env;
 
 void			plot_line(t_coord2 c1, t_coord2 c2, t_env data, int color);
@@ -139,7 +140,9 @@ t_fcoord2		pre_para_project(t_coord3 c);
 t_fcoord2		pre_flat_project(t_coord3 c);
 void			center(t_env *data);
 void			trace(t_env data);
+void			fill_obj(t_env data);
 void			trace_aa(t_env data);
+unsigned int	get_color(int x, int y, t_env data);
 t_coord2		new_coord2(int x, int y);
 t_coord3		new_coord3(int x, int y, int z);
 t_fcoord3		new_fcoord3(float x, float y, float z);
@@ -153,5 +156,6 @@ void			float_map(t_env data);
 void			init_cos_data(t_env *data);
 void			init_sin_data(t_env *data);
 void			set_background(t_env data, int color);
+void			middle_of_face(t_coord2 c, unsigned int color, t_env data);
 
 #endif

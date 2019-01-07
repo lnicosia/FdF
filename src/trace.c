@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/07 12:26:42 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/07 17:48:55 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_fcoord2	pre_flat_project(t_coord3 c)
 	return (res);
 }
 
-int			get_color(int x, int y, t_env data)
+unsigned int	get_color(int x, int y, t_env data)
 {
 	int		z;
 
@@ -275,12 +275,18 @@ void		trace(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			if (x < data.map_width - 1)
+			/*if (x < data.map_width - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
 						new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
 			if (y < data.map_height - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
+						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));*/
+			if (x < data.map_width - 1)
+				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
+						new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, 0);
+			if (y < data.map_height - 1)
+				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
+						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, 0);
 			x++;
 			k++;
 		}

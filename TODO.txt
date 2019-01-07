@@ -1,3 +1,4 @@
+Point au milieu des faces
 fond blanc modele noir
 readme
 Julia + fract bug

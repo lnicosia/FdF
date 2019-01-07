@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 18:30:55 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/07 15:40:36 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	init_data(t_env *data)
 	data->map_height = 0;
 	data->map_width = 0;
 	data->debug = 0;
+	data->background_color = 0x404040;
 	data->scale.x = 1;
 	data->scale.y = 1;
 	data->scale.z = 1;
@@ -174,7 +175,7 @@ int		main(int argc, char **argv)
 	data.projected_map = (t_fcoord3 *)malloc(sizeof(*data.projected_map) * data.map_width * data.map_height);
 	data.moved_map = (t_coord2 *)malloc(sizeof(*data.moved_map) * data.map_width * data.map_height);
 	//print_map(data, data.map);
-	set_background(data, 0x404040);
+	set_background(data, data.background_color);
 	set_ranges(&data);
 	set_z_ranges(&data);
 	float_map(data);
@@ -186,6 +187,7 @@ int		main(int argc, char **argv)
 	ft_putendl(RESET);
 	//exit(0);
 	trace(data);
+	fill_obj(data);
 	//printf("start[x] = %d	start[y] = %d\n", data.start.x, data.start.y);
 	//zoom_in(&data, 0, 0);
 	//exit(0);
