@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 16:23:26 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/07 11:21:16 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,12 @@ int		mouse_press(int button, int x, int y, void *param)
 	}
 	else if (button == BUT1_KEY)
 	{
-		data->button1_state = 1;
-		data->drag_start.x = x;
-		data->drag_start.y = y;
+		if (y >= 0)
+		{
+			data->button1_state = 1;
+			data->drag_start.x = x;
+			data->drag_start.y = y;
+		}
 	}
 	else if (button == BUT2_KEY)
 	{
