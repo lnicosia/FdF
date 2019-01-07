@@ -1,9 +1,10 @@
+fond blanc modele noir
+readme
 Julia + fract bug
-Para project rotation bug
 Faces cachees/afficher les faces
 menu
-coleurs > gradients?
-activer/desactiver couleurs (prendre couleurs du fichiers s'il y a sinon pickup)
+couleurs > gradients?
+Si pas de couleurs pouvoir dans fichier choisir la couleur
 Gestion de la memoire (free)
 Protection
 Norme
