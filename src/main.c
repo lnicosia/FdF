@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/07 15:40:36 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/07 18:37:16 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	init_data(t_env *data)
 	data->map_width = 0;
 	data->debug = 0;
 	data->background_color = 0x404040;
+	data->edges_color = 0;
 	data->scale.x = 1;
 	data->scale.y = 1;
 	data->scale.z = 1;

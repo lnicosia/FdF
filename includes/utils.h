@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/07 15:55:07 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/07 18:37:00 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_env
 	t_fcoord3		*projected_map;
 	t_coord2		*moved_map;
 	unsigned int	background_color;
+	unsigned int	edges_color;
 	int				*zbuffer;
 	int				*colors;
 	int				map_height;
