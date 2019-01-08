@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/07 11:21:16 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/08 18:04:30 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,38 @@ int		mouse_press(int button, int x, int y, void *param)
 	}
 	else if (button == BUT1_KEY)
 	{
-		if (y >= 0)
+		if (y >= 0 && x > 200)
 		{
 			data->button1_state = 1;
 			data->drag_start.x = x;
 			data->drag_start.y = y;
+		}
+		else
+		{
+			if (x >= 25 && x <= 165)
+			{
+				if (y >= 30 && y <= 60)
+				{
+					data->s_width = 1920;
+					data->s_height = 1080;
+				}
+				else if (y >= 70 && y <= 100)
+				{
+					data->s_width = 1366;
+					data->s_height = 768;
+				}
+				else if (y >= 110 && y <= 140)
+				{
+					data->s_width = 1024;
+					data->s_height = 768;
+				}
+				else if (y >= 150 && y <= 180)
+				{
+					data->s_width = 800;
+					data->s_height = 600;
+				}
+			}
+			new_window(data);
 		}
 	}
 	else if (button == BUT2_KEY)
@@ -160,6 +187,7 @@ int		mouse_move(int x, int y, void *param)
 	{
 		data->angle.x += 0.00314159265 * (y - data->drag_start.y);
 		data->angle.z -= 0.00314159265 * (x - data->drag_start.x);
+		//printf("Ax [%f]	Az [%f]\n", data->angle.x, data->angle.z);
 		process_all(data);
 		data->drag_start.x = x;
 		data->drag_start.y = y;

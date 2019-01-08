@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/07 18:37:00 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/08 18:04:46 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ typedef struct	s_env
 	t_img			img;
 	t_coord3		*map;
 	t_fcoord3		*rotated_map;
-	t_fcoord3		*projected_map;
+	t_fcoord2		*projected_map;
 	t_coord2		*moved_map;
+	unsigned int	strings_color;
+	unsigned int	menu_color;
 	unsigned int	background_color;
 	unsigned int	edges_color;
 	int				*zbuffer;
@@ -158,5 +160,7 @@ void			init_cos_data(t_env *data);
 void			init_sin_data(t_env *data);
 void			set_background(t_env data, int color);
 void			middle_of_face(t_coord2 c, unsigned int color, t_env data);
+void			trace_menu(t_env data);
+void			put_strings(t_env data);
 
 #endif

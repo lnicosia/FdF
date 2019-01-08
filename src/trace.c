@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/07 18:37:39 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/08 16:29:38 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void		center(t_env *data)
 		* data->scale.x;
 	center.y = data->scale.x * (down.y - up.y) / 2 - ft_fabs(up.y)
 		* data->scale.x;
-	data->start.x = (float)data->s_width / 2 - center.x;
+	data->start.x = (float)data->s_width / 2 - center.x + 100;
 	data->start.y = (float)data->s_height / 2 - center.y;
 }
 
@@ -275,18 +275,18 @@ void		trace(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			/*if (x < data.map_width - 1)
+			if (x < data.map_width - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
 						new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
 			if (y < data.map_height - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));*/
-			if (x < data.map_width - 1)
+						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
+			/*if (x < data.map_width - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
 						new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, data.edges_color);
 			if (y < data.map_height - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, data.edges_color);
+						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, data.edges_color);*/
 			x++;
 			k++;
 		}

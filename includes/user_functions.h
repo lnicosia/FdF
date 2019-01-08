@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:52:40 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/03 16:20:26 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/08 18:05:00 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	move_left(t_env *data);
 void	swap_trace_type(t_env *data);
 void	swap_project_type(t_env *data, int type);
 void	draw_axes(t_env *data);
+void	new_window(t_env *data);
 
 #endif

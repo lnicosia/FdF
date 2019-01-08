@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:02:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/02 16:42:04 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/08 16:31:02 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		center_mouse(t_env *data, int x, int y)
 		* data->scale.x;
 	center.y = data->scale.x * (down.y - up.y) / 2 - ft_fabs(up.y)
 		* data->scale.x;
-	data->start.x = (float)data->s_width / 2 - center.x;
+	data->start.x = (float)data->s_width / 2 - center.x + 100;
 	  data->start.y = (float)data->s_height / 2 - center.y;
 	/*data->start.x = (float)data->s_width / 2 - (x * data->scale.x);
 	  data->start.y = (float)data->s_height / 2 - (y * data->scale.x);*/

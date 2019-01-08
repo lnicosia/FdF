@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/07 18:37:16 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/08 17:33:03 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ int		init_zbuffer(t_env *data)
 		return (0);
 	i = 0;
 	k = 0;
-	while (i < data->map_height)
+	while (i < data->s_height)
 	{
 		j = 0;
-		while (j < data->map_width)
+		while (j < data->s_width)
 		{
 			data->zbuffer[k] = 2147483647;
 			j++;
@@ -103,11 +103,13 @@ int		init_zbuffer(t_env *data)
 
 void	init_data(t_env *data)
 {
-	data->s_width = 1920;
-	data->s_height = 1080;
+	data->s_width = 800;
+	data->s_height = 600;
 	data->map_height = 0;
 	data->map_width = 0;
 	data->debug = 0;
+	data->strings_color = 0;
+	data->menu_color = 0xFFFFFF;
 	data->background_color = 0x404040;
 	data->edges_color = 0;
 	data->scale.x = 1;
@@ -172,11 +174,12 @@ int		main(int argc, char **argv)
 	init_zbuffer(&data);
 	data.colors = (int*)malloc(sizeof(int) * data.map_width * data.map_height);
 	init_map(data.map_height, data.map_width, map, &data);
-	data.rotated_map = (t_fcoord3 *)malloc(sizeof(*data.rotated_map) * data.map_width * data.map_height);
-	data.projected_map = (t_fcoord3 *)malloc(sizeof(*data.projected_map) * data.map_width * data.map_height);
-	data.moved_map = (t_coord2 *)malloc(sizeof(*data.moved_map) * data.map_width * data.map_height);
+	data.rotated_map = (t_fcoord3*)malloc(sizeof(*data.rotated_map) * data.map_width * data.map_height);
+	data.projected_map = (t_fcoord2*)malloc(sizeof(*data.projected_map) * data.map_width * data.map_height);
+	data.moved_map = (t_coord2*)malloc(sizeof(*data.moved_map) * data.map_width * data.map_height);
 	//print_map(data, data.map);
 	set_background(data, data.background_color);
+	trace_menu(data);
 	set_ranges(&data);
 	set_z_ranges(&data);
 	float_map(data);
@@ -193,6 +196,7 @@ int		main(int argc, char **argv)
 	//zoom_in(&data, 0, 0);
 	//exit(0);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
+	put_strings(data);
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }
