@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 15:59:38 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 17:52:34 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ int		init_zbuffer(t_env *data)
 
 void	init_data(t_env *data)
 {
-	data->config.s_width = 1920;
-	data->config.s_height = 1080;
+	data->config.s_width = 800;
+	data->config.s_height = 600;
 	data->map_height = 0;
 	data->map_width = 0;
 	data->config.debug = 0;
@@ -113,6 +113,7 @@ void	init_data(t_env *data)
 	data->menu_color = 0xFFFFFF;
 	data->background_color = 0x404040;
 	data->edges_color = 0xFFFFFF;
+	data->picked_color = 0;
 	data->config.black_white = 0;
 	data->centers_color = 0xFFFFFF;
 	data->config.centers = 0;
@@ -120,6 +121,8 @@ void	init_data(t_env *data)
 	data->input_buffers.decrease = 0;
 	data->input_buffers.button1 = 0;
 	data->input_buffers.color_button = 0;
+	data->input_buffers.increase_color = 0;
+	data->input_buffers.decrease_color = 0;
 	data->scale.x = 1;
 	data->scale.y = 1;
 	data->scale.z = 1;
@@ -180,7 +183,7 @@ int		main(int argc, char **argv)
 		return (ret);
 	}
 	init_zbuffer(&data);
-	data.colors = (int*)malloc(sizeof(int) * data.map_width * data.map_height);
+	data.file_colors = (int*)malloc(sizeof(int) * data.map_width * data.map_height);
 	init_map(data.map_height, data.map_width, map, &data);
 	data.rotated_map = (t_fcoord3*)malloc(sizeof(*data.rotated_map) * data.map_width * data.map_height);
 	data.projected_map = (t_fcoord2*)malloc(sizeof(*data.projected_map) * data.map_width * data.map_height);

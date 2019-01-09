@@ -6,12 +6,13 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 16:17:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 15:39:31 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 18:34:38 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include <mlx.h>
+#include "utils.h"
+#include "color_pickers.h"
 
 void	draw_button_up(t_coord2 c, t_coord2 size, t_env data)
 {
@@ -134,10 +135,23 @@ void	put_increase_buttons(t_env data)
 
 void	put_color_button(t_env data)
 {
-	if (data.input_buffers.color_button == 1)
+	if (data.input_buffers.color_button != 0)
 		draw_button_pressed(new_coord2(25, 330), new_coord2(140, 30), data);
 	else
 		draw_button_up(new_coord2(25, 330), new_coord2(140, 30), data);
+}
+
+void	put_increase_color_buttons(t_env data)
+{
+	if (data.input_buffers.increase_color == 1)
+		draw_button_pressed(new_coord2(data.config.s_width - 60, 40), new_coord2(20, 20), data);
+	else
+		draw_button_up(new_coord2(data.config.s_width - 60, 40), new_coord2(20, 20), data);
+	if (data.input_buffers.decrease_color == 1)
+		draw_button_pressed(new_coord2(data.config.s_width - 30, 40), new_coord2(20, 20), data);
+	else
+		draw_button_up(new_coord2(data.config.s_width - 30, 40), new_coord2(20, 20), data);
+
 }
 
 void	trace_menu(t_env data)
@@ -181,4 +195,7 @@ void	trace_menu(t_env data)
 	put_centers_button(data);
 	put_color_button(data);
 	put_increase_buttons(data);
+	put_color_pickers(data);
+	if (data.config.color == 2)
+		put_increase_color_buttons(data);
 }

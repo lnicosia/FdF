@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 15:57:19 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 17:52:12 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct	s_input_buffers
 	int	button1;
 	int	increase;
 	int	decrease;
+	int	increase_color;
+	int	decrease_color;
 	int	color_button;
 }				t_input_buffers;
 
@@ -100,16 +102,15 @@ typedef struct	s_env
 	unsigned int	background_color;
 	unsigned int	edges_color;
 	unsigned int	centers_color;
+	unsigned int	picked_color;
 	t_config		config;
 	t_input_buffers	input_buffers;
 	int				*zbuffer;
 	int				map_height;
 	int				map_width;
 	int				zmax;
-	int				*colors;
+	int				*file_colors;
 	int				color_div;
-	float			cos_data[21];
-	float			sin_data[21];
 	t_coord2		drag_start;
 	t_coord2		drag_end;
 	t_fcoord3		scale;

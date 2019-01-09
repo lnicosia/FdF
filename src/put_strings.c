@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:02:14 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 16:00:56 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 18:13:37 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	put_black_white_button_strings(t_env data)
 	if (data.config.black_white == 1)
 	{
 		mlx_string_put(data.mlx_ptr, data.win_ptr, 30, 254, color, "Black & White");
-		mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 253, 0x00FF00, "[B]");
+		mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 252, 0x00FF00, "[B]");
 	}
 	else
 	{
@@ -96,11 +96,11 @@ void	put_increase_buttons_strings(t_env data)
 	if (data.input_buffers.increase == 1)
 		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 56, 8, color, "+");
 	else
-		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 56, 8, color, "+");
+		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 56, 7, color, "+");
 	if (data.input_buffers.decrease == 1)
 		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 26, 8, color, "-");
 	else
-		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 26, 8, color, "-");
+		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 26, 7, color, "-");
 }
 
 void	put_debug_strings(t_env data)
@@ -148,6 +148,37 @@ void	put_color_strings(t_env data)
 	
 }
 
+void	put_color_key_strings(t_env data)
+{
+	if (data.input_buffers.color_button == 1)
+		mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 332, 0x00FF00, "[C]");
+	else
+	{
+		if (data.config.black_white == 1)
+			mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 332, 0, "[C]");
+		else
+			mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 332, 0xFFFFFF, "[C]");
+	}
+}
+
+void	put_increase_color_buttons_strings(t_env data)
+{
+	int	color;
+
+	if (data.config.black_white == 1)
+		color = 0;
+	else
+		color = 0xFFFFFF;
+	if (data.input_buffers.increase_color == 1)
+		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 56, 38, color, "<");
+	else
+		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 56, 37, color, "<");
+	if (data.input_buffers.decrease_color == 1)
+		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 25, 38, color, ">");
+	else
+		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 25, 37, color, ">");
+}
+
 void	put_strings(t_env data)
 {
 	if (data.config.black_white == 0)
@@ -160,4 +191,7 @@ void	put_strings(t_env data)
 	put_increase_buttons_strings(data);
 	put_debug_strings(data);
 	put_color_strings(data);
+	put_color_key_strings(data);
+	if (data.config.color == 2)
+		put_increase_color_buttons_strings(data);
 }

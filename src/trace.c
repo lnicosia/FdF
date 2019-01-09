@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 15:59:02 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 17:33:13 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,9 @@ unsigned int	get_color(int x, int y, t_env data)
 	else if (data.config.color == 1)
 	{
 		if (data.config.file_color == 1)
-			return (data.colors[y * data.map_width + x]);
-		else
-			return (data.edges_color);
+			return (data.file_colors[y * data.map_width + x]);
 	}
-	return (0xFFFFFF);
+	return (data.picked_color);
 }
 
 void		center(t_env *data)
