@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:02:14 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 18:13:37 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 18:38:56 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,7 @@ void	put_increase_color_buttons_strings(t_env data)
 	int	color;
 
 	if (data.config.black_white == 1)
-		color = 0;
-	else
+		return ;
 		color = 0xFFFFFF;
 	if (data.input_buffers.increase_color == 1)
 		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 56, 38, color, "<");

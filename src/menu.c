@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 16:17:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 18:34:38 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 18:38:06 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ void	put_color_button(t_env data)
 
 void	put_increase_color_buttons(t_env data)
 {
+	if (data.config.black_white == 0)
+	{
 	if (data.input_buffers.increase_color == 1)
 		draw_button_pressed(new_coord2(data.config.s_width - 60, 40), new_coord2(20, 20), data);
 	else
@@ -151,7 +153,7 @@ void	put_increase_color_buttons(t_env data)
 		draw_button_pressed(new_coord2(data.config.s_width - 30, 40), new_coord2(20, 20), data);
 	else
 		draw_button_up(new_coord2(data.config.s_width - 30, 40), new_coord2(20, 20), data);
-
+	}
 }
 
 void	trace_menu(t_env data)

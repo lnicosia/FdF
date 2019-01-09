@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 18:35:44 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 18:40:23 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,13 +181,19 @@ int		mouse_press(int button, int x, int y, void *param)
 		}
 		else if (x >= data->config.s_width - 60 && x <= data->config.s_width - 40 && y >= 40 && y <= 60)
 		{
-			data->input_buffers.increase_color = 1;
-			redraw(data);
+			if (data->config.black_white == 0)
+			{
+				data->input_buffers.increase_color = 1;
+				redraw(data);
+			}
 		}
 		else if (x >= data->config.s_width - 30 && x <= data->config.s_width - 10 && y >= 40 && y <= 60)
 		{
-			data->input_buffers.decrease_color = 1;
-			redraw(data);
+			if (data->config.black_white == 0)
+			{
+				data->input_buffers.decrease_color = 1;
+				redraw(data);
+			}
 		}
 		else if (y >= 0 && x > 200)
 		{
