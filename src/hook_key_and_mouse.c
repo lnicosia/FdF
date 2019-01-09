@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/08 18:04:30 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 13:29:23 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,15 @@ int		key_press(int key, void *param)
 	if (key == ESC_KEY)
 		quit(data);
 	else if (key == NKPL_KEY)
+	{
+		data->increase_pressed = 1;
 		increase_z(data);
+	}
 	else if (key == NKMN_KEY)
+	{
+		data->decrease_pressed = 1;
 		decrease_z(data);
+	}
 	else if (key == UP_KEY)
 		move_up(data);
 	else if (key == DOWN_KEY)
@@ -88,6 +94,17 @@ int		key_press(int key, void *param)
 		data->color = data->color == 1 ? 0 : 1;
 		redraw(data);
 	}
+	else if (key == M_KEY)
+	{
+		data->centers = data->centers == 1 ? 0 : 1;
+		redraw(data);
+	}
+	else if (key == B_KEY)
+	{
+		data->black_white = data->black_white == 1 ? 0 : 1;
+		data->centers_color = data->black_white == 1 ? 0 : 0xFFFFFF;
+		redraw(data);
+	}
 	else
 		ft_putendl("Coucou");
 	return (0);
@@ -95,8 +112,19 @@ int		key_press(int key, void *param)
 
 int		key_release(int key, void *param)
 {
-	(void)key;
-	(void)param;
+	t_env	*data;
+
+	data = (t_env*)param;
+	if (key == NKPL_KEY)
+	{
+		data->increase_pressed = 0;
+		increase_z(data);
+	}
+	else if (key == NKMN_KEY)
+	{
+		data->decrease_pressed = 0;
+		decrease_z(data);
+	}
 	return (0);
 }
 
@@ -107,48 +135,75 @@ int		mouse_press(int button, int x, int y, void *param)
 	data = (t_env*)param;
 	if (button == SCROLLUP_KEY)
 	{
-		//printf("[%d][%d]\n", x, y);
 		zoom_in(data, x, y);
 	}
 	else if (button == SCROLLDOWN_KEY)
 	{
-		//printf("[%d][%d]\n", x, y);
 		zoom_out(data, x, y);
 	}
 	else if (button == BUT1_KEY)
 	{
-		if (y >= 0 && x > 200)
+		printf("button\n");
+		if (x >= data->s_width - 60 && x <= data->s_width - 40 && y >= 10 && y <= 30)
+		{
+			data->increase_pressed = 1;
+			printf("+\n");
+			increase_z(data);
+		}
+		if (x >= data->s_width - 30 && x <= data->s_width - 10 && y >= 10 && y <= 30)
+		{
+			data->decrease_pressed = 1;
+			decrease_z(data);
+		}
+		else if (y >= 0 && x > 200)
 		{
 			data->button1_state = 1;
 			data->drag_start.x = x;
 			data->drag_start.y = y;
 		}
-		else
+		else if (x >= 25 && x <= 165)
 		{
-			if (x >= 25 && x <= 165)
-			{
 				if (y >= 30 && y <= 60)
 				{
-					data->s_width = 1920;
-					data->s_height = 1080;
+					data->s_width = 2560;
+					data->s_height = 1440;
+					new_window(data);
 				}
 				else if (y >= 70 && y <= 100)
 				{
-					data->s_width = 1366;
-					data->s_height = 768;
+					data->s_width = 1920;
+					data->s_height = 1080;
+					new_window(data);
 				}
 				else if (y >= 110 && y <= 140)
 				{
-					data->s_width = 1024;
+					data->s_width = 1366;
 					data->s_height = 768;
+					new_window(data);
 				}
 				else if (y >= 150 && y <= 180)
 				{
+					data->s_width = 1024;
+					data->s_height = 768;
+					new_window(data);
+				}
+				else if (y >= 190 && y <= 220)
+				{
 					data->s_width = 800;
 					data->s_height = 600;
+					new_window(data);
 				}
-			}
-			new_window(data);
+				else if (y >= 250 && y <= 280)
+				{
+					data->black_white = data->black_white == 1 ? 0 : 1;
+					data->centers_color = data->black_white == 1 ? 0 : 0xFFFFFF;
+					redraw(data);
+				}
+				else if (y >= 290 && y <= 320)
+				{
+					data->centers = data->centers == 1 ? 0 : 1;
+					redraw(data);
+				}
 		}
 	}
 	else if (button == BUT2_KEY)
@@ -163,11 +218,19 @@ int		mouse_release(int button, int x, int y, void *param)
 	t_env	*data;
 
 	data = (t_env*)param;
-	(void)x;
-	(void)y;
 	if (button == BUT1_KEY)
 	{
 		data->button1_state = 0;
+		if (x >= data->s_width - 60 && x <= data->s_width - 40 && y >= 10 && y <= 30)
+		{
+			data->increase_pressed = 0;
+			redraw(data);
+		}
+		if (x >= data->s_width - 30 && x <= data->s_width - 10 && y >= 10 && y <= 30)
+		{
+			data->decrease_pressed = 0;
+			redraw(data);
+		}
 	}
 	else if (button == BUT2_KEY)
 	{

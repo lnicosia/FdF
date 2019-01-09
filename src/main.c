@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/08 17:33:03 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 13:12:11 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	set_background(t_env data, int color)
 void	init_hook(t_env *data)
 {
 	mlx_hook(data->win_ptr, KEYPRESS, KEYPRESSMASK, key_press, data);
+	mlx_hook(data->win_ptr, KEYRELEASE, KEYRELEASE, key_release, data);
 	mlx_hook(data->win_ptr, DESTROYNOTIFY, STRUCTURENOTIFYMASK, close_window,
 			data);
 	mlx_hook(data->win_ptr, BUTTONPRESS, BUTTONPRESSMASK, mouse_press, data);
@@ -103,8 +104,8 @@ int		init_zbuffer(t_env *data)
 
 void	init_data(t_env *data)
 {
-	data->s_width = 800;
-	data->s_height = 600;
+	data->s_width = 1920;
+	data->s_height = 1080;
 	data->map_height = 0;
 	data->map_width = 0;
 	data->debug = 0;
@@ -112,6 +113,11 @@ void	init_data(t_env *data)
 	data->menu_color = 0xFFFFFF;
 	data->background_color = 0x404040;
 	data->edges_color = 0;
+	data->black_white = 0;
+	data->centers_color = 0xFFFFFF;
+	data->centers = 0;
+	data->increase_pressed = 0;
+	data->decrease_pressed = 0;
 	data->scale.x = 1;
 	data->scale.y = 1;
 	data->scale.z = 1;
@@ -189,12 +195,8 @@ int		main(int argc, char **argv)
 	ft_putstr(GREEN);
 	ft_putstr("[MAP CENTERED]");
 	ft_putendl(RESET);
-	//exit(0);
 	trace(data);
 	fill_obj(data);
-	//printf("start[x] = %d	start[y] = %d\n", data.start.x, data.start.y);
-	//zoom_in(&data, 0, 0);
-	//exit(0);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	put_strings(data);
 	mlx_loop(data.mlx_ptr);

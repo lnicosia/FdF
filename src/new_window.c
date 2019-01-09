@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:59:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/08 18:08:40 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 12:32:10 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ void	new_window(t_env *data)
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
 			&(data->img.bit_per_pixels), &(data->img.size_line),
 			&(data->img.endian));
-	set_background(*data, data->background_color);
+	init_hook(data);
+	if (data->black_white == 0)
+		set_background(*data, data->background_color);
+	else
+		set_background(*data, 0xFFFFFF);
 	trace_menu(*data);
 	set_ranges(data);
 	set_z_ranges(data);
@@ -36,9 +40,13 @@ void	new_window(t_env *data)
 	ft_putstr(GREEN);
 	ft_putstr("[MAP CENTERED]");
 	ft_putendl(RESET);
-	trace(*data);
+	if (data->debug == 1)
+		draw_axes(data);
+	if (data->trace_type == NORMAL)
+		trace(*data);
+	else
+		trace_aa(*data);
 	fill_obj(*data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	put_strings(*data);
-	//mlx_loop(data->mlx_ptr);
 }

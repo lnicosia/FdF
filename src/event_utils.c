@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/08 17:04:27 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 11:38:53 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ void	redraw(t_env *data)
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
 			&(data->img.bit_per_pixels), &(data->img.size_line),
 			&(data->img.endian));
+	if (data->black_white == 0)
 	set_background(*data, data->background_color);
+	else
+	set_background(*data, 0xFFFFFF);
 	if (data->trace_type == NORMAL)
 		trace(*data);
 	else

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/08 16:29:38 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 11:41:56 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ unsigned int	get_color(int x, int y, t_env data)
 {
 	int		z;
 
+	if (data.black_white == 1)
+		return (0);
 	if (data.color == 0)
 	{
 		z = data.map[y * data.map_width + x].z;

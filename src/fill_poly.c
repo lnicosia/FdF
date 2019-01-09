@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/08 15:05:59 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 11:55:39 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void		middle_of_face(t_coord2 c, unsigned int color, t_env data)
 {
-	if (c.x >= 0 && c.x < data.s_width && c.y >= 0 && c.y < data.s_height)
+	if (c.x >= 0 && c.x < data.s_width && c.y >= 0 && c.y < data.s_height && (data.img.str[c.x + c.y * data.s_width] == data.background_color || data.img.str[c.y + c.y * data.s_width] == 0xFFFFFF))
 		data.img.str[c.x + c.y * data.s_width] = color;
 }
 
@@ -100,7 +100,8 @@ void		fill_obj(t_env data)
 				//fill_poly(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), get_color(x, y, data), data);
 				//fill_poly(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), 0, data);
 				/*middle_of_face(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), get_color(x, y, data), data);*/
-				//middle_of_face(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), data.edges_color, data);
+				if (data.centers == 1)
+					middle_of_face(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), data.centers_color, data);
 			}
 			x++;
 			k++;

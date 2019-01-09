@@ -6,58 +6,73 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 16:17:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/08 17:44:44 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 13:10:37 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include <mlx.h>
 
-void	draw_button_up(t_coord2 c, t_env data)
+void	draw_button_up(t_coord2 c, t_coord2 size, t_env data)
 {
 	int	xend;
 	int	yend;
 	int	x;
 	int	y;
+	t_coord2 colors;
 
+	if (data.black_white == 1)
+	{
+		colors.x = 0xFFFFFF;
+		colors.y = 0x808080;
+	}
+	else
+	{
+		colors.x = 0x606060;
+		colors.y = 0;
+	}
 	y = c.y;
-	xend = c.x + 140;
-	yend = c.y + 30;
+	xend = c.x + size.x;
+	yend = c.y + size.y;
 	while (y < yend)
 	{
 		x = c.x;
 		while (x < xend)
 		{
-			if (y < yend - 5)
-				data.img.str[y * data.s_width + x] = 0x606060;	
+			if (y < yend - 3)
+				data.img.str[y * data.s_width + x] = colors.x;	
 			else
-				data.img.str[y * data.s_width + x] = 0x404040;	
+				data.img.str[y * data.s_width + x] = colors.y;
 			x++;
 		}
+		data.img.str[y * data.s_width + x] = colors.y;
+		data.img.str[y * data.s_width + x - 1] = colors.y;
 		y++;
 	}
 
 }
 
-void	draw_button_pressed(t_coord2 c, t_env data)
+void	draw_button_pressed(t_coord2 c, t_coord2 size, t_env data)
 {
 	int	xend;
 	int	yend;
 	int	x;
 	int	y;
+	int	color;
 
+	if (data.black_white == 1)
+		color = 0x808080;
+	else
+		color = 0x303030;
 	y = c.y;
-	xend = c.x + 140;
-	yend = c.y + 30;
+	xend = c.x + size.x;
+	yend = c.y + size.y;
 	while (y < yend)
 	{
 		x = c.x;
 		while (x < xend)
 		{
-			if (y >= c.y + 5)
-				data.img.str[y * data.s_width + x] = 0x606060;	
-			else
-				data.img.str[y * data.s_width + x] = 0x404040;	
+			data.img.str[y * data.s_width + x] = color;
 			x++;
 		}
 		y++;
@@ -67,39 +82,89 @@ void	draw_button_pressed(t_coord2 c, t_env data)
 
 void	put_res_buttons(t_env data)
 {
+	if (data.s_width == 2560)
+		draw_button_pressed(new_coord2(25, 30), new_coord2(140, 30), data);
+	else
+		draw_button_up(new_coord2(25, 30), new_coord2(140, 30), data);
 	if (data.s_width == 1920)
-		draw_button_pressed(new_coord2(25, 30), data);
+		draw_button_pressed(new_coord2(25, 70), new_coord2(140, 30), data);
 	else
-		draw_button_up(new_coord2(25, 30), data);
+		draw_button_up(new_coord2(25, 70), new_coord2(140, 30), data);
 	if (data.s_width == 1366)
-		draw_button_pressed(new_coord2(25, 70), data);
+		draw_button_pressed(new_coord2(25, 110), new_coord2(140, 30), data);
 	else
-		draw_button_up(new_coord2(25, 70), data);
+		draw_button_up(new_coord2(25, 110), new_coord2(140, 30), data);
 	if (data.s_width == 1024)
-		draw_button_pressed(new_coord2(25, 110), data);
+		draw_button_pressed(new_coord2(25, 150), new_coord2(140, 30), data);
 	else
-		draw_button_up(new_coord2(25, 110), data);
+		draw_button_up(new_coord2(25, 150), new_coord2(140, 30), data);
 	if (data.s_width == 800)
-		draw_button_pressed(new_coord2(25, 150), data);
+		draw_button_pressed(new_coord2(25, 190), new_coord2(140, 30), data);
 	else
-		draw_button_up(new_coord2(25, 150), data);
+		draw_button_up(new_coord2(25, 190), new_coord2(140, 30), data);
+}
+
+void	put_black_white_button(t_env data)
+{
+	if (data.black_white == 1)
+		draw_button_pressed(new_coord2(25, 250), new_coord2(140, 30), data);
+	else
+		draw_button_up(new_coord2(25, 250), new_coord2(140, 30), data);
+}
+
+void	put_centers_button(t_env data)
+{
+	if (data.centers == 1)
+		draw_button_pressed(new_coord2(25, 290), new_coord2(140, 30), data);
+	else
+		draw_button_up(new_coord2(25, 290), new_coord2(140, 30), data);
+}
+
+void	put_increase_buttons(t_env data)
+{
+	if (data.increase_pressed == 1)
+		draw_button_pressed(new_coord2(data.s_width - 60, 10), new_coord2(20, 20), data);
+	else
+		draw_button_up(new_coord2(data.s_width - 60, 10), new_coord2(20, 20), data);
+	if (data.decrease_pressed == 1)
+		draw_button_pressed(new_coord2(data.s_width - 30, 10), new_coord2(20, 20), data);
+	else
+		draw_button_up(new_coord2(data.s_width - 30, 10), new_coord2(20, 20), data);
 }
 
 void	trace_menu(t_env data)
 {
 	int	x;
 	int	y;
+	int	color;
 
 	y = 0;
+	if (data.black_white == 0)
+		color = data.menu_color;
+	else
+		color = data.background_color;
 	while (y < data.s_height)
 	{
 		x = 0;
+		while (x <= 190)
+		{
+			data.img.str[y * data.s_width + x] = color;
+			x++;
+		}
+		while (x <= 192)
+		{
+			data.img.str[y * data.s_width + x] = 0x606060;
+			x++;
+		}
 		while (x <= 200)
 		{
-			data.img.str[y * data.s_width + x] = data.menu_color;
+			data.img.str[y * data.s_width + x] = 0x808080;
 			x++;
 		}
 		y++;
 	}
 	put_res_buttons(data);
+	put_black_white_button(data);
+	put_centers_button(data);
+	put_increase_buttons(data);
 }
