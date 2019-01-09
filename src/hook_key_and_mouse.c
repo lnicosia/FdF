@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 13:29:23 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 15:53:52 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int		key_press(int key, void *param)
 		quit(data);
 	else if (key == NKPL_KEY)
 	{
-		data->increase_pressed = 1;
+		data->input_buffers.increase = 1;
 		increase_z(data);
 	}
 	else if (key == NKMN_KEY)
 	{
-		data->decrease_pressed = 1;
+		data->input_buffers.decrease = 1;
 		decrease_z(data);
 	}
 	else if (key == UP_KEY)
@@ -46,7 +46,7 @@ int		key_press(int key, void *param)
 		swap_trace_type(data);
 	else if (key == D_KEY)
 	{
-		data->debug = data->debug == 1 ? 0 : 1;
+		data->config.debug = data->config.debug == 1 ? 0 : 1;
 		redraw(data);
 	}
 	else if (key == K1_KEY)
@@ -91,18 +91,18 @@ int		key_press(int key, void *param)
 	}
 	else if (key == C_KEY)
 	{
-		data->color = data->color == 1 ? 0 : 1;
+		data->config.color = data->config.color == 1 ? 0 : 1;
 		redraw(data);
 	}
 	else if (key == M_KEY)
 	{
-		data->centers = data->centers == 1 ? 0 : 1;
+		data->config.centers = data->config.centers == 1 ? 0 : 1;
 		redraw(data);
 	}
 	else if (key == B_KEY)
 	{
-		data->black_white = data->black_white == 1 ? 0 : 1;
-		data->centers_color = data->black_white == 1 ? 0 : 0xFFFFFF;
+		data->config.black_white = data->config.black_white == 1 ? 0 : 1;
+		data->centers_color = data->config.black_white == 1 ? 0 : 0xFFFFFF;
 		redraw(data);
 	}
 	else
@@ -116,15 +116,9 @@ int		key_release(int key, void *param)
 
 	data = (t_env*)param;
 	if (key == NKPL_KEY)
-	{
-		data->increase_pressed = 0;
-		increase_z(data);
-	}
+		data->input_buffers.increase = 0;
 	else if (key == NKMN_KEY)
-	{
-		data->decrease_pressed = 0;
-		decrease_z(data);
-	}
+		data->input_buffers.decrease = 0;
 	return (0);
 }
 
@@ -143,67 +137,70 @@ int		mouse_press(int button, int x, int y, void *param)
 	}
 	else if (button == BUT1_KEY)
 	{
-		printf("button\n");
-		if (x >= data->s_width - 60 && x <= data->s_width - 40 && y >= 10 && y <= 30)
+		if (x >= data->config.s_width - 60 && x <= data->config.s_width - 40 && y >= 10 && y <= 30)
 		{
-			data->increase_pressed = 1;
-			printf("+\n");
+			data->input_buffers.increase = 1;
 			increase_z(data);
 		}
-		if (x >= data->s_width - 30 && x <= data->s_width - 10 && y >= 10 && y <= 30)
+		if (x >= data->config.s_width - 30 && x <= data->config.s_width - 10 && y >= 10 && y <= 30)
 		{
-			data->decrease_pressed = 1;
+			data->input_buffers.decrease = 1;
 			decrease_z(data);
 		}
 		else if (y >= 0 && x > 200)
 		{
-			data->button1_state = 1;
+			data->input_buffers.button1 = 1;
 			data->drag_start.x = x;
 			data->drag_start.y = y;
 		}
 		else if (x >= 25 && x <= 165)
 		{
-				if (y >= 30 && y <= 60)
-				{
-					data->s_width = 2560;
-					data->s_height = 1440;
-					new_window(data);
-				}
-				else if (y >= 70 && y <= 100)
-				{
-					data->s_width = 1920;
-					data->s_height = 1080;
-					new_window(data);
-				}
-				else if (y >= 110 && y <= 140)
-				{
-					data->s_width = 1366;
-					data->s_height = 768;
-					new_window(data);
-				}
-				else if (y >= 150 && y <= 180)
-				{
-					data->s_width = 1024;
-					data->s_height = 768;
-					new_window(data);
-				}
-				else if (y >= 190 && y <= 220)
-				{
-					data->s_width = 800;
-					data->s_height = 600;
-					new_window(data);
-				}
-				else if (y >= 250 && y <= 280)
-				{
-					data->black_white = data->black_white == 1 ? 0 : 1;
-					data->centers_color = data->black_white == 1 ? 0 : 0xFFFFFF;
-					redraw(data);
-				}
-				else if (y >= 290 && y <= 320)
-				{
-					data->centers = data->centers == 1 ? 0 : 1;
-					redraw(data);
-				}
+			if (y >= 30 && y <= 60)
+			{
+				data->config.s_width = 2560;
+				data->config.s_height = 1440;
+				new_window(data);
+			}
+			else if (y >= 70 && y <= 100)
+			{
+				data->config.s_width = 1920;
+				data->config.s_height = 1080;
+				new_window(data);
+			}
+			else if (y >= 110 && y <= 140)
+			{
+				data->config.s_width = 1366;
+				data->config.s_height = 768;
+				new_window(data);
+			}
+			else if (y >= 150 && y <= 180)
+			{
+				data->config.s_width = 1024;
+				data->config.s_height = 768;
+				new_window(data);
+			}
+			else if (y >= 190 && y <= 220)
+			{
+				data->config.s_width = 800;
+				data->config.s_height = 600;
+				new_window(data);
+			}
+			else if (y >= 250 && y <= 280)
+			{
+				data->config.black_white = data->config.black_white == 1 ? 0 : 1;
+				data->centers_color = data->config.black_white == 1 ? 0 : 0xFFFFFF;
+				redraw(data);
+			}
+			else if (y >= 290 && y <= 320)
+			{
+				data->config.centers = data->config.centers == 1 ? 0 : 1;
+				redraw(data);
+			}
+			else if (y >= 330 && y <= 360)
+			{
+				data->input_buffers.color_button = 1;
+				redraw(data);
+			}
 		}
 	}
 	else if (button == BUT2_KEY)
@@ -220,15 +217,23 @@ int		mouse_release(int button, int x, int y, void *param)
 	data = (t_env*)param;
 	if (button == BUT1_KEY)
 	{
-		data->button1_state = 0;
-		if (x >= data->s_width - 60 && x <= data->s_width - 40 && y >= 10 && y <= 30)
+		data->input_buffers.button1 = 0;
+		if (x >= data->config.s_width - 60 && x <= data->config.s_width - 40 && y >= 10 && y <= 30)
 		{
-			data->increase_pressed = 0;
+			data->input_buffers.increase = 0;
 			redraw(data);
 		}
-		if (x >= data->s_width - 30 && x <= data->s_width - 10 && y >= 10 && y <= 30)
+		if (x >= data->config.s_width - 30 && x <= data->config.s_width - 10 && y >= 10 && y <= 30)
 		{
-			data->decrease_pressed = 0;
+			data->input_buffers.decrease = 0;
+			redraw(data);
+		}
+		if (data->input_buffers.color_button == 1)
+		{
+			data->input_buffers.color_button = 0;
+			data->config.color++;
+			if (data->config.color > 2)
+				data->config.color = 0;
 			redraw(data);
 		}
 	}
@@ -246,7 +251,7 @@ int		mouse_move(int x, int y, void *param)
 	(void)x;
 	(void)y;
 	data = (t_env*)param;
-	if (data->button1_state == 1)
+	if (data->input_buffers.button1 == 1)
 	{
 		data->angle.x += 0.00314159265 * (y - data->drag_start.y);
 		data->angle.z -= 0.00314159265 * (x - data->drag_start.x);

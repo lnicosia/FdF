@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 11:55:39 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 15:05:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 void		middle_of_face(t_coord2 c, unsigned int color, t_env data)
 {
-	if (c.x >= 0 && c.x < data.s_width && c.y >= 0 && c.y < data.s_height && (data.img.str[c.x + c.y * data.s_width] == data.background_color || data.img.str[c.y + c.y * data.s_width] == 0xFFFFFF))
-		data.img.str[c.x + c.y * data.s_width] = color;
+	if (c.x >= 0 && c.x < data.config.s_width && c.y >= 0 && c.y < data.config.s_height && (data.img.str[c.x + c.y * data.config.s_width] == data.background_color || data.img.str[c.y + c.y * data.config.s_width] == 0xFFFFFF))
+		data.img.str[c.x + c.y * data.config.s_width] = color;
 }
 
 void		fill_poly(t_coord2 c, unsigned int color, t_env data)
@@ -31,32 +31,32 @@ void		fill_poly(t_coord2 c, unsigned int color, t_env data)
 
 	stack = NULL;
 	push_stack(&stack, c.x, c.y);
-	while(pop_stack(&stack, &c.x, &c.y) && c.x >= 0 && c.y >= 0 && c.x < data.s_width && c.y < data.s_height)
+	while(pop_stack(&stack, &c.x, &c.y) && c.x >= 0 && c.y >= 0 && c.x < data.config.s_width && c.y < data.config.s_height)
 	{
 		x1 = c.x;
-		while(x1 >= 0 && data.img.str[c.y * data.s_width + x1] != data.edges_color)
+		while(x1 >= 0 && data.img.str[c.y * data.config.s_width + x1] != data.edges_color)
 			x1--;
 		x1++;
 		spanAbove = 0;
 		spanBelow = 0;
-		while(x1 < data.s_width && data.img.str[c.y * data.s_width + x1] != data.edges_color)
+		while(x1 < data.config.s_width && data.img.str[c.y * data.config.s_width + x1] != data.edges_color)
 		{
-			data.img.str[c.y * data.s_width + x1] = color;
-			if(!spanAbove && c.y > 1 && data.img.str[(c.y - 1) * data.s_width + x1] == data.background_color)
+			data.img.str[c.y * data.config.s_width + x1] = color;
+			if(!spanAbove && c.y > 1 && data.img.str[(c.y - 1) * data.config.s_width + x1] == data.background_color)
 			{
 				push_stack(&stack, x1, c.y - 1);
 				spanAbove = 1;
 			}
-			else if(spanAbove && c.y > 1 && data.img.str[(c.y - 1) * data.s_width + x1] != data.background_color)
+			else if(spanAbove && c.y > 1 && data.img.str[(c.y - 1) * data.config.s_width + x1] != data.background_color)
 			{
 				spanAbove = 0;
 			}
-			if(!spanBelow && c.y < data.s_height - 1 && data.img.str[(c.y + 1) * data.s_width + x1] == data.background_color)
+			if(!spanBelow && c.y < data.config.s_height - 1 && data.img.str[(c.y + 1) * data.config.s_width + x1] == data.background_color)
 			{
 				push_stack(&stack, x1, c.y + 1);
 				spanBelow = 1;
 			}
-			else if(spanBelow && c.y < data.s_height - 1 && data.img.str[(c.y + 1) * data.s_width + x1] != data.background_color)
+			else if(spanBelow && c.y < data.config.s_height - 1 && data.img.str[(c.y + 1) * data.config.s_width + x1] != data.background_color)
 			{
 				spanBelow = 0;
 			}
@@ -100,7 +100,7 @@ void		fill_obj(t_env data)
 				//fill_poly(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), get_color(x, y, data), data);
 				//fill_poly(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), 0, data);
 				/*middle_of_face(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), get_color(x, y, data), data);*/
-				if (data.centers == 1)
+				if (data.config.centers == 1)
 					middle_of_face(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), data.centers_color, data);
 			}
 			x++;

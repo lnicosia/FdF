@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 12:38:28 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/09 15:57:19 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,27 @@ typedef struct	s_img
 	unsigned int	*str;
 }				t_img;
 
+typedef struct	s_config
+{
+	int				color;
+	int				file_color;
+	int				debug;
+	int				s_height;
+	int				s_width;
+	int				project_type;
+	int				trace_type;
+	int				centers;
+	int				black_white;
+}				t_config;
+
+typedef struct	s_input_buffers
+{
+	int	button1;
+	int	increase;
+	int	decrease;
+	int	color_button;
+}				t_input_buffers;
+
 typedef struct	s_env
 {
 	void			*mlx_ptr;
@@ -79,23 +100,14 @@ typedef struct	s_env
 	unsigned int	background_color;
 	unsigned int	edges_color;
 	unsigned int	centers_color;
-	int				increase_pressed;
-	int				decrease_pressed;
-	int				centers;
-	int				black_white;
+	t_config		config;
+	t_input_buffers	input_buffers;
 	int				*zbuffer;
-	int				*colors;
 	int				map_height;
 	int				map_width;
-	int				s_height;
-	int				s_width;
-	int				project_type;
-	int				trace_type;
 	int				zmax;
+	int				*colors;
 	int				color_div;
-	int				button1_state;
-	int				color;
-	int				debug;
 	float			cos_data[21];
 	float			sin_data[21];
 	t_coord2		drag_start;
