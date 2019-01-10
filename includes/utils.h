@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 17:52:12 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/10 17:12:03 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define ISO 0
 # define PARA 1
 # define FLAT 2
+# define PC 3
 # define NORMAL 0
 # define AA 1
 # define COS_30 0.86602540378
@@ -120,7 +121,7 @@ typedef struct	s_env
 	t_fcoord3		delta_scale;
 	t_fcoord3		angle;
 	t_coord2		(*project[2])(t_coord3, struct s_env);
-	t_fcoord2		(*pre_project[3])(t_coord3);
+	t_fcoord2		(*pre_project[4])(t_coord3);
 }				t_env;
 
 void			plot_line(t_coord2 c1, t_coord2 c2, t_env data, int color);
@@ -159,6 +160,7 @@ t_coord2		para_project(t_coord3 c, t_env data);
 t_fcoord2		pre_iso_project(t_coord3 c);
 t_fcoord2		pre_para_project(t_coord3 c);
 t_fcoord2		pre_flat_project(t_coord3 c);
+t_fcoord2		pre_pc_project(t_coord3 c);
 void			center(t_env *data);
 void			trace(t_env data);
 void			fill_obj(t_env data);

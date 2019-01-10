@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 17:52:34 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/10 17:12:12 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ int		init_zbuffer(t_env *data)
 
 void	init_data(t_env *data)
 {
-	data->config.s_width = 800;
-	data->config.s_height = 600;
+	data->config.s_width = 1920;
+	data->config.s_height = 1080;
 	data->map_height = 0;
 	data->map_width = 0;
 	data->config.debug = 0;
@@ -113,7 +113,7 @@ void	init_data(t_env *data)
 	data->menu_color = 0xFFFFFF;
 	data->background_color = 0x404040;
 	data->edges_color = 0xFFFFFF;
-	data->picked_color = 0;
+	data->picked_color = 0xFFFFFF;
 	data->config.black_white = 0;
 	data->centers_color = 0xFFFFFF;
 	data->config.centers = 0;
@@ -154,6 +154,7 @@ void	init_data(t_env *data)
 	data->pre_project[ISO] = &pre_iso_project;
 	data->pre_project[PARA] = &pre_para_project;
 	data->pre_project[FLAT] = &pre_flat_project;
+	data->pre_project[PC] = &pre_pc_project;
 }
 
 int		main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 18:40:23 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/10 17:08:39 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int		key_press(int key, void *param)
 		swap_project_type(data, PARA);
 	else if (key == K3_KEY)
 		swap_project_type(data, FLAT);
+	else if (key == K4_KEY)
+		swap_project_type(data, PC);
 	else if (key == PT_KEY)
 	{
 		data->input_buffers.decrease_color = 1;
@@ -171,12 +173,12 @@ int		mouse_press(int button, int x, int y, void *param)
 	{
 		if (x >= data->config.s_width - 60 && x <= data->config.s_width - 40 && y >= 10 && y <= 30)
 		{
-			data->input_buffers.decrease = 1;
+			data->input_buffers.increase = 1;
 			redraw(data);
 		}
 		else if (x >= data->config.s_width - 30 && x <= data->config.s_width - 10 && y >= 10 && y <= 30)
 		{
-			data->input_buffers.increase = 1;
+			data->input_buffers.decrease = 1;
 			redraw(data);
 		}
 		else if (x >= data->config.s_width - 60 && x <= data->config.s_width - 40 && y >= 40 && y <= 60)

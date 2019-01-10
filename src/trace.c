@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 17:33:13 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/10 17:37:51 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ t_fcoord2	pre_flat_project(t_coord3 c)
 
 	res.x = (float)c.x;
 	res.y = (float)c.y;
+	return (res);
+}
+
+t_fcoord2	pre_pc_project(t_coord3 c)
+{
+	t_fcoord2	res;
+
+	res.x = ((float)c.x / -(float)(c.z + 11));
+	res.y = ((float)c.y / -(float)(c.z + 11));
 	return (res);
 }
 
@@ -255,6 +264,30 @@ void		project_map_flat(t_env data)
 	}
 }
 
+void		project_map_pc(t_env data)
+{
+	int		y;
+	int		x;
+	int		k;
+	float	tmp;
+
+	y = 0;
+	k = 0;
+	while (y < data.map_height)
+	{
+		x = 0;
+		while (x < data.map_width)
+		{
+			tmp = data.rotated_map[k].x;
+			data.projected_map[k].x = data.rotated_map[k].x / (-data.rotated_map[k].z + data.zmax + 1);
+			data.projected_map[k].y = data.rotated_map[k].y / (-data.rotated_map[k].z + data.zmax + 1);
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
 void		project_map(t_env data)
 {
 	if (data.config.project_type == ISO)
@@ -263,6 +296,8 @@ void		project_map(t_env data)
 		project_map_para(data);
 	else if (data.config.project_type == FLAT)
 		project_map_flat(data);
+	else if (data.config.project_type == PC)
+		project_map_pc(data);
 }
 
 void		trace(t_env data)
@@ -284,12 +319,6 @@ void		trace(t_env data)
 			if (y < data.map_height - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
 						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
-			/*if (x < data.map_width - 1)
-				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-						new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, data.edges_color);
-			if (y < data.map_height - 1)
-				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, data.edges_color);*/
 			x++;
 			k++;
 		}

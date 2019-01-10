@@ -1,13 +1,12 @@
+limite zoom mini
+Passer toutes les actions en release au lieu de press
 colorier tour de la map
 Lors de pente a 2 faces: tracer les aretes
 Point au milieu des faces
-fond blanc modele noir
 readme
 Julia + fract bug
 Faces cachees/afficher les faces
-menu
 couleurs > gradients?
-Si pas de couleurs dans fichier pouvoir choisir la couleur
 Gestion de la memoire (free)
 Protection
 Norme
