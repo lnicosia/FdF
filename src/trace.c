@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/10 17:37:51 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/11 11:54:18 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,42 @@
 #include "color.h"
 #include <stdio.h>
 
-t_fcoord2	pre_iso_project(t_coord3 c)
+t_fcoord2	pre_iso_project(t_coord3 c, t_env data)
 {
 	t_fcoord2	res;
 
+	(void)data;
 	res.x = ((float)c.x - (float)c.y) * COS_30;
 	res.y = ((float)c.x + (float)c.y) * SIN_30;
 	return (res);
 }
 
-t_fcoord2	pre_para_project(t_coord3 c)
+t_fcoord2	pre_para_project(t_coord3 c, t_env data)
 {
 	t_fcoord2	res;
 
+	(void)data;
 	res.x = ((float)c.x - (float)c.y);
 	res.y = ((float)c.y);
 	return (res);
 }
 
-t_fcoord2	pre_flat_project(t_coord3 c)
+t_fcoord2	pre_flat_project(t_coord3 c, t_env data)
 {
 	t_fcoord2	res;
 
+	(void)data;
 	res.x = (float)c.x;
 	res.y = (float)c.y;
 	return (res);
 }
 
-t_fcoord2	pre_pc_project(t_coord3 c)
+t_fcoord2	pre_pc_project(t_coord3 c, t_env data)
 {
 	t_fcoord2	res;
 
-	res.x = ((float)c.x / -(float)(c.z + 11));
-	res.y = ((float)c.y / -(float)(c.z + 11));
+	res.x = ((float)(c.x - data.map_width / 2) / (float)(-c.z + data.zmax + 1));
+	res.y = ((float)(c.y - data.map_height / 2) / (float)(-c.z + data.zmax + 1));
 	return (res);
 }
 
@@ -94,12 +97,12 @@ void		center(t_env *data)
 	t_fcoord2	up;
 	t_fcoord2	down;
 
-	up = data->pre_project[data->config.project_type](data->map[0]);
-	right = data->pre_project[data->config.project_type](data->map[data->map_width - 1]);
+	up = data->pre_project[data->config.project_type](data->map[0], *data);
+	right = data->pre_project[data->config.project_type](data->map[data->map_width - 1], *data);
 	left = data->pre_project[data->config.project_type](data->map[data->map_width *
-			(data->map_height - 1)]);
+			(data->map_height - 1)], *data);
 	down = data->pre_project[data->config.project_type](data->map[data->map_width *
-			data->map_height - 1]);
+			data->map_height - 1], *data);
 	center.x = data->scale.x * (right.x - left.x) / 2 - ft_fabs(left.x)
 		* data->scale.x;
 	center.y = data->scale.x * (down.y - up.y) / 2 - ft_fabs(up.y)
@@ -110,7 +113,6 @@ void		center(t_env *data)
 
 void		set_z_ranges(t_env *data)
 {
-	data->zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
 	printf("zmax: %d\n", data->zmax);
 	if (data->zmax != 0)
 	{
@@ -131,16 +133,19 @@ void		set_ranges(t_env *data)
 	t_fcoord2	up;
 	t_fcoord2	down;
 
-	up = data->pre_project[data->config.project_type](data->map[0]);
-	right = data->pre_project[data->config.project_type](data->map[data->map_width - 1]);
+	data->zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
+	data->zlimit = data->zmax + 1;
+	up = data->pre_project[data->config.project_type](data->map[0], *data);
+	right = data->pre_project[data->config.project_type](data->map[data->map_width - 1], *data);
 	left = data->pre_project[data->config.project_type](data->map[data->map_width *
-			(data->map_height - 1)]);
+			(data->map_height - 1)], *data);
 	down = data->pre_project[data->config.project_type](data->map[data->map_width *
-			data->map_height - 1]);
+			data->map_height - 1], *data);
 	data->scale.x = (float)data->config.s_width / (right.x - left.x);
 	data->scale.y = (float)data->config.s_height / (down.y - up.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.6;
 	data->delta_scale.x = data->scale.x * 10 / 100;
+	data->delta_scale.x = 1;
 	printf("final scale = %f\n", data->scale.x);
 	center(data);
 	ft_putstr(GREEN);
@@ -279,8 +284,8 @@ void		project_map_pc(t_env data)
 		while (x < data.map_width)
 		{
 			tmp = data.rotated_map[k].x;
-			data.projected_map[k].x = data.rotated_map[k].x / (-data.rotated_map[k].z + data.zmax + 1);
-			data.projected_map[k].y = data.rotated_map[k].y / (-data.rotated_map[k].z + data.zmax + 1);
+			data.projected_map[k].x = (data.rotated_map[k].x - data.map_width / 2) / (-data.rotated_map[k].z + data.zmax + 1);
+			data.projected_map[k].y = (data.rotated_map[k].y - data.map_height / 2)/ (-data.rotated_map[k].z + data.zmax + 1);
 			x++;
 			k++;
 		}

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:02:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 14:56:02 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/11 11:26:19 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,18 @@ void		center_mouse(t_env *data, int x, int y)
 
 	(void)x;
 	(void)y;
-	up = data->pre_project[data->config.project_type](data->map[0]);
-	right = data->pre_project[data->config.project_type](data->map[data->map_width - 1]);
+	up = data->pre_project[data->config.project_type](data->map[0], *data);
+	right = data->pre_project[data->config.project_type](data->map[data->map_width - 1], *data);
 	left = data->pre_project[data->config.project_type](data->map[data->map_width *
-			(data->map_height - 1)]);
+			(data->map_height - 1)], *data);
 	down = data->pre_project[data->config.project_type](data->map[data->map_width *
-			data->map_height - 1]);
+			data->map_height - 1], *data);
 	center.x = data->scale.x * (right.x - left.x) / 2 - ft_fabs(left.x)
 		* data->scale.x;
 	center.y = data->scale.x * (down.y - up.y) / 2 - ft_fabs(up.y)
 		* data->scale.x;
 	data->start.x = (float)data->config.s_width / 2 - center.x + 100;
-	  data->start.y = (float)data->config.s_height / 2 - center.y;
-	/*data->start.x = (float)data->config.s_width / 2 - (x * data->scale.x);
-	  data->start.y = (float)data->s_height / 2 - (y * data->scale.x);*/
+	data->start.y = (float)data->config.s_height / 2 - center.y;
 }
 
 void	translate_in(t_env *data, int m_x, int m_y)
@@ -70,7 +68,7 @@ void	translate_out(t_env *data, int m_x, int m_y)
 
 	y = 0;
 	k = 0;
-while (y < data->map_height)
+	while (y < data->map_height)
 	{
 		x = 0;
 		while (x < data->map_width)
@@ -115,8 +113,8 @@ void	zoom_in(t_env *data, int x, int y)
 	project_map(*data);
 	scale_map(*data);
 	/*translate_in(data, x, y);
-	rescale_map(data);
-	translate_out(data, x, y);*/
+	  rescale_map(data);
+	  translate_out(data, x, y);*/
 	move_map(*data);
 	redraw(data);
 }
@@ -132,8 +130,8 @@ void	zoom_out(t_env *data, int x, int y)
 		project_map(*data);
 		scale_map(*data);
 		/*translate_in(data, x, y);
-		rescale_map(data);
-		translate_out(data, x, y);*/
+		  rescale_map(data);
+		  translate_out(data, x, y);*/
 		move_map(*data);
 		redraw(data);
 	}

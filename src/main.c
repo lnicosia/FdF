@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/10 17:12:12 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/11 11:52:59 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void	init_data(t_env *data)
 	data->start.x = 0;
 	data->start.y = 0;
 	data->zmax = 0;
+	data->zlimit = 0;
 	data->angle.x = 0;
 	data->angle.y = 0;
 	data->angle.z = 0;
@@ -189,7 +190,6 @@ int		main(int argc, char **argv)
 	data.rotated_map = (t_fcoord3*)malloc(sizeof(*data.rotated_map) * data.map_width * data.map_height);
 	data.projected_map = (t_fcoord2*)malloc(sizeof(*data.projected_map) * data.map_width * data.map_height);
 	data.moved_map = (t_coord2*)malloc(sizeof(*data.moved_map) * data.map_width * data.map_height);
-	//print_map(data, data.map);
 	set_background(data, data.background_color);
 	trace_menu(data);
 	set_ranges(&data);
