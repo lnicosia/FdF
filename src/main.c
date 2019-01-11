@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 11:52:59 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/11 18:20:01 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,6 @@ int		main(int argc, char **argv)
 	ft_putstr("[MAP CENTERED]");
 	ft_putendl(RESET);
 	trace(data);
-	fill_obj(data);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	put_strings(data);
 	mlx_loop(data.mlx_ptr);

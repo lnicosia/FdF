@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 13:14:47 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:07:56 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,8 +165,11 @@ void		scale_map(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			data.projected_map[k].x *= data.scale.x;
-			data.projected_map[k].y *= data.scale.x;
+			//if (data.projected_map[k].x != -1 && data.projected_map[k].y != -1)
+			//{
+				data.projected_map[k].x *= data.scale.x;
+				data.projected_map[k].y *= data.scale.x;
+			//}
 			x++;
 			k++;
 		}

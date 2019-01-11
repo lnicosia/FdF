@@ -1,3 +1,5 @@
+mode triangle
+flatten ocean
 relief > int max
 limite zoom mini
 Passer toutes les actions en release au lieu de press

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 10:43:46 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/11 17:59:45 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,21 @@ void	redraw(t_env *data)
 			&(data->img.bit_per_pixels), &(data->img.size_line),
 			&(data->img.endian));
 	if (data->config.black_white == 0)
-	set_background(*data, data->background_color);
+		set_background(*data, data->background_color);
 	else
-	set_background(*data, 0xFFFFFF);
-	if (data->config.trace_type == NORMAL)
-		trace(*data);
+		set_background(*data, 0xFFFFFF);
+	if (data->config.project_type == PC)
+		fill_obj(*data);
 	else
-		trace_aa(*data);
+		if (data->config.trace_type == NORMAL)
+			trace(*data);
+		else
+			trace_aa(*data);
 	if (data->config.debug == 1)
 		draw_axes(data);
 	trace_menu(*data);
-	fill_obj(*data);
+	if (data->config.centers == 1)
+		print_centers(*data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	put_strings(*data);
 }

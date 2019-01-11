@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 11:52:35 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/11 18:20:19 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ typedef struct	s_env
 	unsigned int	picked_color;
 	t_config		config;
 	t_input_buffers	input_buffers;
-	int				*zbuffer;
 	int				map_height;
+	int				*zbuffer;
 	int				map_width;
 	int				zmax;
 	int				zlimit;
@@ -181,6 +181,7 @@ void			init_cos_data(t_env *data);
 void			init_sin_data(t_env *data);
 void			set_background(t_env data, int color);
 void			middle_of_face(t_coord2 c, unsigned int color, t_env data);
+void			print_centers(t_env data);
 void			trace_menu(t_env data);
 void			put_strings(t_env data);
 void			init_hook(t_env *data);
