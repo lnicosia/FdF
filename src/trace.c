@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 11:54:18 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/11 13:14:47 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ void		set_ranges(t_env *data)
 	data->scale.y = (float)data->config.s_height / (down.y - up.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.6;
 	data->delta_scale.x = data->scale.x * 10 / 100;
-	data->delta_scale.x = 1;
 	printf("final scale = %f\n", data->scale.x);
 	center(data);
 	ft_putstr(GREEN);
@@ -284,8 +283,16 @@ void		project_map_pc(t_env data)
 		while (x < data.map_width)
 		{
 			tmp = data.rotated_map[k].x;
+			if (data.rotated_map[k].z >= data.zmax)
+			{
+				data.projected_map[k].x = -1;
+				data.projected_map[k].y = -1;
+			}
+			else
+			{
 			data.projected_map[k].x = (data.rotated_map[k].x - data.map_width / 2) / (-data.rotated_map[k].z + data.zmax + 1);
 			data.projected_map[k].y = (data.rotated_map[k].y - data.map_height / 2)/ (-data.rotated_map[k].z + data.zmax + 1);
+			}
 			x++;
 			k++;
 		}
