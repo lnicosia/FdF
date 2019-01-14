@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/14 16:56:17 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 17:59:06 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	redraw(t_env *data)
 		set_background(*data, 0xFFFFFF);
 	if (data->config.project_type == PC)
 	{
+		//trace(*data);
 		data->fzmax = fmax3(data->rotated_map, data->map_height * data->map_width, 'z');
 		data->fzmin = fmin3(data->rotated_map, data->map_height * data->map_width, 'z');
 		fill_obj(*data);
-		//trace(*data);
 	}
 	else
 		if (data->config.trace_type == NORMAL)

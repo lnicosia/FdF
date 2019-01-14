@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/14 17:08:03 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 18:46:11 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,19 +218,20 @@ void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env data)
 	float		z;
 
 	max.x = max_3(c0.x, c1.x, c2.x);
-	max.x = max.x >= data.config.s_width ? data.config.s_width : max.x;
+	max.x = max.x < data.config.s_width ? max.x : data.config.s_width;
 	max.y = max_3(c0.y, c1.y, c2.y);
-	max.y = max.y >= data.config.s_height ? data.config.s_height : max.y;
+	max.y = max.y < data.config.s_height? max.y : data.config.s_height;
 	min.x = min_3(c0.x, c1.x, c2.x);
 	min.y = min_3(c0.y, c1.y, c2.y);
 	p.y = min.y < 0 ? 0 : min.y;
 	z = -(c0.z + c1.z + c2.z) / 3;
+	//printf("%f\n", z);
 	while (p.y < max.y)
 	{
 		p.x = min.x < 0 ? 0 : min.x;
 		while (p.x < max.x)
 		{
-			if (edge(c0, c1, p) <= 0 && edge(c1, c2, p) <= 0 && edge(c2, c0, p) <= 0)
+			if (edge(c0, c1, p) < 1 && edge(c1, c2, p) < 1 && edge(c2, c0, p) < 1)
 			{
 				if (z < data.zbuffer[p.x + p.y * data.config.s_width])
 				{
@@ -239,6 +240,7 @@ void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env data)
 						data.img.str[p.x + p.y * data.config.s_width] = 65536 * (int)((ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin)) * 255) + 256 * (int)((ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin)) * 255) + (int)((ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin)) * 255);
 					else
 						data.img.str[p.x + p.y * data.config.s_width] = 0;
+						//data.img.str[p.x + p.y * data.config.s_width] = data.background_color;
 				}
 			}
 			p.x++;
@@ -265,10 +267,19 @@ void		fill_obj(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
+			//printf("[%d][%d]\n", y, x);
 			if (x < data.map_width - 1 && y < data.map_height - 1)
 			{
 				fill_ztriangle(new_fcoord3(data.moved_map[k].x, data.moved_map[k].y, data.rotated_map[k].z), new_fcoord3(data.moved_map[k + 1].x, data.moved_map[k + 1].y, data.rotated_map[k + 1].z), new_fcoord3(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y, data.rotated_map[k + data.map_width + 1].z), data);
 				fill_ztriangle(new_fcoord3(data.moved_map[k].x, data.moved_map[k].y, data.rotated_map[k].z), new_fcoord3(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y, data.rotated_map[k + data.map_width + 1].z), new_fcoord3(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y, data.rotated_map[k + data.map_width].z), data);
+				if (data.config.centers == 2)
+					plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y), data, get_color(x, y, data));
+			}
+			if (x < data.map_width - 1)
+				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
+			if (y < data.map_height - 1)
+			{
+				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
 			}
 			x++;
 			k++;
