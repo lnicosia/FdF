@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/14 12:09:02 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 16:31:59 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,15 @@ typedef struct	s_env
 	unsigned int	picked_color;
 	t_config		config;
 	t_input_buffers	input_buffers;
+	float			*zbuffer;
 	int				map_height;
-	int				*zbuffer;
 	int				map_width;
 	int				zmax;
 	int				zlimit;
 	int				*file_colors;
 	int				color_div;
+	float			fzmax;
+	float			fzmin;
 	t_coord2		drag_start;
 	t_coord2		drag_end;
 	t_fcoord3		scale;
@@ -173,6 +175,8 @@ t_coord3		new_coord3(int x, int y, int z);
 t_fcoord3		new_fcoord3(float x, float y, float z);
 int				min3(t_coord3 *map, int size, char mode);
 int				max3(t_coord3 *map, int size, char mode);
+float			fmin3(t_fcoord3 *map, int size, char mode);
+float			fmax3(t_fcoord3 *map, int size, char mode);
 void			x_rotation(t_env data);
 void			y_rotation(t_env data);
 void			z_rotation(t_env data);

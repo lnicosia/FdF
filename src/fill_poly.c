@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/14 12:47:23 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 17:08:03 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,42 @@ void		fill_poly(t_coord2 c, unsigned int color, t_env data)
 	}
 }
 
+int			min_3(int a, int b, int c)
+{
+	if (a < b)
+	{
+		if (a < c)
+			return (a);
+		else
+			return (c);
+	}
+	else
+	{
+		if (b < c)
+			return (b);
+		else
+			return (c);
+	}
+}
+
+int			max_3(int a, int b, int c)
+{
+	if (a > b)
+	{
+		if (a > c)
+			return (a);
+		else
+			return (c);
+	}
+	else
+	{
+		if (b > c)
+			return (b);
+		else
+			return (c);
+	}
+}
+
 void		fill_zbuffer(t_coord2 c, float z, t_env data)
 {
 	int				x1;
@@ -67,6 +103,8 @@ void		fill_zbuffer(t_coord2 c, float z, t_env data)
 	int				spanBelow;
 	t_coord_stack	*stack;
 
+	/*if (data.img.str[c.y * data.config.s_width + c.x] == data.picked_color)
+	  return ;*/
 	stack = NULL;
 	push_stack(&stack, c.x, c.y);
 	while(pop_stack(&stack, &c.x, &c.y) && c.x >= 0 && c.y >= 0 && c.x < data.config.s_width && c.y < data.config.s_height)
@@ -146,13 +184,75 @@ void		print_zbuffer(t_env data)
 	}
 }
 
+void		flush_zbuffer(t_env data)
+{
+	int	x;
+	int	y;
+	int	k;
+
+	y = 0;
+	k = 0;
+	while (y < data.config.s_height)
+	{
+		x = 0;
+		while (x < data.config.s_width)
+		{
+			data.zbuffer[k] = 2147483647;
+			x++;
+			k++;
+		}
+		y++;
+	}
+}
+
+int			edge(t_fcoord3 c0, t_fcoord3 c1, t_coord2 p)
+{
+	return ((p.x - c0.x) * (c1.y - c0.y) - (p.y - c0.y) * (c1.x - c0.x));
+}
+
+void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env data)
+{
+	t_coord2	max;
+	t_coord2	min;
+	t_coord2	p;
+	float		z;
+
+	max.x = max_3(c0.x, c1.x, c2.x);
+	max.x = max.x >= data.config.s_width ? data.config.s_width : max.x;
+	max.y = max_3(c0.y, c1.y, c2.y);
+	max.y = max.y >= data.config.s_height ? data.config.s_height : max.y;
+	min.x = min_3(c0.x, c1.x, c2.x);
+	min.y = min_3(c0.y, c1.y, c2.y);
+	p.y = min.y < 0 ? 0 : min.y;
+	z = -(c0.z + c1.z + c2.z) / 3;
+	while (p.y < max.y)
+	{
+		p.x = min.x < 0 ? 0 : min.x;
+		while (p.x < max.x)
+		{
+			if (edge(c0, c1, p) <= 0 && edge(c1, c2, p) <= 0 && edge(c2, c0, p) <= 0)
+			{
+				if (z < data.zbuffer[p.x + p.y * data.config.s_width])
+				{
+					data.zbuffer[p.x + p.y * data.config.s_width] = z;
+					if (data.config.debug == 1)
+						data.img.str[p.x + p.y * data.config.s_width] = 65536 * (int)((ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin)) * 255) + 256 * (int)((ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin)) * 255) + (int)((ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin)) * 255);
+					else
+						data.img.str[p.x + p.y * data.config.s_width] = 0;
+				}
+			}
+			p.x++;
+		}
+		p.y++;
+	}
+}
+
 void		fill_obj(t_env data)
 {
 	int		x;
 	int		y;
 	int		k;
 	int		color;
-	float	z;
 
 	if (data.config.black_white == 0)
 		color = data.background_color;
@@ -167,28 +267,13 @@ void		fill_obj(t_env data)
 		{
 			if (x < data.map_width - 1 && y < data.map_height - 1)
 			{
-				z = (data.rotated_map[k].z + data.rotated_map[k + 1].z + data.rotated_map[k + data.map_width].z + data.rotated_map[k + data.map_width + 1].z) / 4;
-				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
-				plot_line(new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), new_coord2(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y), data, get_color(x, y, data));
-				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y), data, get_color(x, y, data));
-				//fill_poly(start_pixel(k, data), get_color(x, y, data), data);
-				//fill_poly(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), get_color(x, y, data), data);
-				//fill_poly(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), 0, data);
-				fill_zbuffer(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), z, data);
-				/*if (k == 20)
-				{
-				mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
-				break;
-				}*/
-				set_background(data, color);
-				if (k == 50)
-					break;
-				//plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y), data, get_color(x, y, data));
+				fill_ztriangle(new_fcoord3(data.moved_map[k].x, data.moved_map[k].y, data.rotated_map[k].z), new_fcoord3(data.moved_map[k + 1].x, data.moved_map[k + 1].y, data.rotated_map[k + 1].z), new_fcoord3(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y, data.rotated_map[k + data.map_width + 1].z), data);
+				fill_ztriangle(new_fcoord3(data.moved_map[k].x, data.moved_map[k].y, data.rotated_map[k].z), new_fcoord3(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y, data.rotated_map[k + data.map_width + 1].z), new_fcoord3(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y, data.rotated_map[k + data.map_width].z), data);
 			}
 			x++;
 			k++;
 		}
 		y++;
 	}
-	print_zbuffer(data);
+	flush_zbuffer(data);
 }

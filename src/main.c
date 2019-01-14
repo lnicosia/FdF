@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/14 12:08:51 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 16:32:32 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		init_zbuffer(t_env *data)
 	int	j;
 	int	k;
 
-	if (!(data->zbuffer = (int*)malloc(sizeof(int) * data->config.s_width * data->config.s_height)))
+	if (!(data->zbuffer = (float*)malloc(sizeof(float) * data->config.s_width * data->config.s_height)))
 		return (0);
 	i = 0;
 	k = 0;
@@ -124,6 +124,8 @@ void	init_data(t_env *data)
 	data->input_buffers.increase_color = 0;
 	data->input_buffers.decrease_color = 0;
 	data->input_buffers.centers_button = 0;
+	data->fzmax = 0;
+	data->fzmin = 0;
 	data->scale.x = 1;
 	data->scale.y = 1;
 	data->scale.z = 1;
