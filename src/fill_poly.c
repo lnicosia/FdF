@@ -6,13 +6,14 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 18:46:21 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 12:47:23 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "coord_stack.h"
 #include <stdio.h>
+#include <mlx.h>
 
 void		fill_poly(t_coord2 c, unsigned int color, t_env data)
 {
@@ -136,6 +137,7 @@ void		print_zbuffer(t_env data)
 			if (data.zbuffer[k] != 2147483647)
 			{
 				data.img.str[k] = 65536 * (int)((data.zbuffer[k] / data.zmax) * 255);
+				//data.img.str[k] = 0xFFFFFF;
 			}
 			x++;
 			k++;
@@ -165,16 +167,22 @@ void		fill_obj(t_env data)
 		{
 			if (x < data.map_width - 1 && y < data.map_height - 1)
 			{
+				z = (data.rotated_map[k].z + data.rotated_map[k + 1].z + data.rotated_map[k + data.map_width].z + data.rotated_map[k + data.map_width + 1].z) / 4;
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
 				plot_line(new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), new_coord2(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y), data, get_color(x, y, data));
-				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
-				plot_line(new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), new_coord2(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y), data, get_color(x, y, data));
+				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y), data, get_color(x, y, data));
 				//fill_poly(start_pixel(k, data), get_color(x, y, data), data);
 				//fill_poly(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), get_color(x, y, data), data);
 				//fill_poly(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), 0, data);
-				z = (data.rotated_map[k].z + data.rotated_map[k + 1].z + data.rotated_map[k + data.map_width].z + data.rotated_map[k + data.map_width + 1].z) / 4;
 				fill_zbuffer(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), z, data);
+				/*if (k == 20)
+				{
+				mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
+				break;
+				}*/
 				set_background(data, color);
+				if (k == 50)
+					break;
 				//plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y), data, get_color(x, y, data));
 			}
 			x++;

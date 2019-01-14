@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 18:20:19 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 12:09:02 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct	s_input_buffers
 	int	increase_color;
 	int	decrease_color;
 	int	color_button;
+	int	centers_button;
 }				t_input_buffers;
 
 typedef struct	s_env

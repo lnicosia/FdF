@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 16:17:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 18:38:06 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 12:19:47 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	put_black_white_button(t_env data)
 
 void	put_centers_button(t_env data)
 {
-	if (data.config.centers == 1)
+	if (data.input_buffers.centers_button == 1)
 		draw_button_pressed(new_coord2(25, 290), new_coord2(140, 30), data);
 	else
 		draw_button_up(new_coord2(25, 290), new_coord2(140, 30), data);

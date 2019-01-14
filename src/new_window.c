@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:59:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 15:10:46 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 11:16:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	new_window(t_env *data)
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->config.s_width, data->config.s_height, "Fdf");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, data->config.s_width, data->config.s_height, "FdF");
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->config.s_width, data->config.s_height);
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
 			&(data->img.bit_per_pixels), &(data->img.size_line),

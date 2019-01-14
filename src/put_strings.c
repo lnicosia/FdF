@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:02:14 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/09 18:38:56 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 12:37:02 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,43 @@ void	put_centers_button_strings(t_env data)
 		color = 0;
 	else
 		color = 0xFFFFFF;
-	if (data.config.centers == 1){
-		mlx_string_put(data.mlx_ptr, data.win_ptr, 35, 294, color, "Show centers");
-		mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 292, 0x00FF00, "[M]");
+	if (data.config.centers == 0)
+	{
+		if (data.input_buffers.centers_button != 0)
+		{
+			mlx_string_put(data.mlx_ptr, data.win_ptr, 65, 294, color, "Normal");
+		}
+		else
+		{
+			mlx_string_put(data.mlx_ptr, data.win_ptr, 65, 293, color, "Normal");
+		}
 	}
+	else if (data.config.centers == 1)
+	{
+		if (data.input_buffers.centers_button != 0)
+			mlx_string_put(data.mlx_ptr, data.win_ptr, 60, 294, color, "Centers");
+		else
+			mlx_string_put(data.mlx_ptr, data.win_ptr, 60, 293, color, "Centers");
+	}
+	else if (data.config.centers == 2)
+	{
+		if (data.input_buffers.centers_button != 0)
+			mlx_string_put(data.mlx_ptr, data.win_ptr, 50, 294, color, "Triangles");
+		else
+			mlx_string_put(data.mlx_ptr, data.win_ptr, 50, 293, color, "Triangles");
+	}
+}
+
+void	put_centers_key_strings(t_env data)
+{
+	if (data.input_buffers.centers_button != 0)
+		mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 292, 0x00FF00, "[M]");
 	else
 	{
-		mlx_string_put(data.mlx_ptr, data.win_ptr, 35, 293, color, "Show centers");
-	if (data.config.black_white == 1)
-		mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 292, 0, "[M]");
-	else
-		mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 292, 0xFFFFFF, "[M]");
+		if (data.config.black_white == 1)
+			mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 292, 0, "[M]");
+		else
+			mlx_string_put(data.mlx_ptr, data.win_ptr, 210, 292, 0xFFFFFF, "[M]");
 	}
 }
 
@@ -110,9 +136,9 @@ void	put_debug_strings(t_env data)
 	else
 	{
 		if (data.config.black_white == 1)
-		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 100, data.config.s_height - 30, 0, "[D]Debug");
+			mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 100, data.config.s_height - 30, 0, "[D]Debug");
 		else
-		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 100, data.config.s_height - 30, 0xFFFFFF, "[D]Debug");
+			mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 100, data.config.s_height - 30, 0xFFFFFF, "[D]Debug");
 	}
 }
 
@@ -145,7 +171,7 @@ void	put_color_strings(t_env data)
 		else
 			mlx_string_put(data.mlx_ptr, data.win_ptr, 40, 335, color, "Color: earth");
 	}
-	
+
 }
 
 void	put_color_key_strings(t_env data)
@@ -167,7 +193,7 @@ void	put_increase_color_buttons_strings(t_env data)
 
 	if (data.config.black_white == 1)
 		return ;
-		color = 0xFFFFFF;
+	color = 0xFFFFFF;
 	if (data.input_buffers.increase_color == 1)
 		mlx_string_put(data.mlx_ptr, data.win_ptr, data.config.s_width - 56, 38, color, "<");
 	else
@@ -187,6 +213,7 @@ void	put_strings(t_env data)
 	put_res_button_strings(data);
 	put_black_white_button_strings(data);
 	put_centers_button_strings(data);
+	put_centers_key_strings(data);
 	put_increase_buttons_strings(data);
 	put_debug_strings(data);
 	put_color_strings(data);

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/10 17:08:39 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 12:35:13 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,10 @@ int		key_press(int key, void *param)
 	}
 	else if (key == M_KEY)
 	{
-		data->config.centers = data->config.centers == 1 ? 0 : 1;
+		data->config.centers++;
+		if (data->config.centers > 2)
+			data->config.centers = 0;
+		data->input_buffers.centers_button = 1;
 		redraw(data);
 	}
 	else if (key == B_KEY)
@@ -151,6 +154,11 @@ int		key_release(int key, void *param)
 	else if (key == CM_KEY)
 	{
 		data->input_buffers.increase_color = 0;
+		redraw(data);
+	}
+	else if (key == M_KEY)
+	{
+		data->input_buffers.centers_button = 0;
 		redraw(data);
 	}
 	return (0);
@@ -261,7 +269,10 @@ int		mouse_press(int button, int x, int y, void *param)
 			}
 			else if (y >= 290 && y <= 320)
 			{
-				data->config.centers = data->config.centers == 1 ? 0 : 1;
+				data->config.centers++;
+				if (data->config.centers > 2)
+					data->config.centers = 0;
+				data->input_buffers.centers_button = 1;
 				redraw(data);
 			}
 			else if (y >= 330 && y <= 360)
@@ -273,11 +284,16 @@ int		mouse_press(int button, int x, int y, void *param)
 	}
 	else if (button == BUT2_KEY)
 	{
-			if (x >= 25 && x <= 165 && y >= 330 && y <= 360)
-			{
-				data->input_buffers.color_button = 2;
-				redraw(data);
-			}
+		if (x >= 25 && x <= 165 && y >= 330 && y <= 360)
+		{
+			data->input_buffers.color_button = 2;
+			redraw(data);
+		}
+		else if (x >= 25 && x <= 165 && y >= 290 && y <= 320)
+		{
+			data->input_buffers.centers_button = 2;
+			redraw(data);
+		}
 	}
 	return (0);
 }
@@ -316,6 +332,11 @@ int		mouse_release(int button, int x, int y, void *param)
 			decrease_color_div(data);
 			redraw(data);
 		}
+		if (data->input_buffers.centers_button == 1)
+		{
+			data->input_buffers.centers_button = 0;
+			redraw(data);
+		}
 		if (data->input_buffers.color_button == 1)
 		{
 			data->input_buffers.color_button = 0;
@@ -333,6 +354,14 @@ int		mouse_release(int button, int x, int y, void *param)
 			data->config.color--;
 			if (data->config.color < 0)
 				data->config.color = 2;
+			redraw(data);
+		}
+		else if (data->input_buffers.centers_button == 2)
+		{
+			data->input_buffers.centers_button = 0;
+			data->config.centers--;
+			if (data->config.centers < 0)
+				data->config.centers = 2;
 			redraw(data);
 		}
 	}

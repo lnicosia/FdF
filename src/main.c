@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 18:20:01 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/14 12:08:51 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void	init_data(t_env *data)
 	data->input_buffers.color_button = 0;
 	data->input_buffers.increase_color = 0;
 	data->input_buffers.decrease_color = 0;
+	data->input_buffers.centers_button = 0;
 	data->scale.x = 1;
 	data->scale.y = 1;
 	data->scale.z = 1;
@@ -146,7 +147,7 @@ void	init_data(t_env *data)
 	data->config.file_color = 0;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->config.s_width, data->config.s_height,
-			"Fdf");
+			"FdF");
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->config.s_width, data->config.s_height);
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
 			&(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));

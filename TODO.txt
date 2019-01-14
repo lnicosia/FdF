@@ -1,3 +1,4 @@
+resoudre rotation
 mode triangle
 flatten ocean
 relief > int max
