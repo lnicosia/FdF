@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/15 12:57:28 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/15 15:54:18 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,11 @@ void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env data)
 	t_coord2	min;
 	t_coord2	p;
 	t_coord2	line[2];
+	int			color;
 	float		z;
+	float		zvalue;
 
+	color = get_color(data.current_coord.x, data.current_coord.y, data);
 	max.x = max_3(c0.x, c1.x, c2.x);
 	max.x = max.x < data.config.s_width ? max.x : data.config.s_width;
 	max.y = max_3(c0.y, c1.y, c2.y);
@@ -94,17 +97,21 @@ void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env data)
 	min.y = min_3(c0.y, c1.y, c2.y);
 	p.y = min.y < 0 ? 0 : min.y;
 	z = -(c0.z + c1.z + c2.z) / 3;
+	if (data.config.debug == 1)
+		zvalue = (ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin) * 127 + 128);
+	else
+		zvalue = (ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin));
 	if (data.config.trace == 1)
 	{
-	line[0] = new_coord2(c0.x, c0.y);
-	line[1] = new_coord2(c1.x, c1.y);
-	plot_line_z(line, data, 0xFFFFFF, z);
-	line[0] = new_coord2(c1.x, c1.y);
-	line[1] = new_coord2(c2.x, c2.y);
-	plot_line_z(line, data, 0xFFFFFF, z);
-	line[0] = new_coord2(c2.x, c2.y);
-	line[1] = new_coord2(c0.x, c0.y);
-	plot_line_z(line, data, 0xFFFFFF, z);
+		line[0] = new_coord2(c0.x, c0.y);
+		line[1] = new_coord2(c1.x, c1.y);
+		plot_line_z(line, data, 0, z);
+		line[0] = new_coord2(c1.x, c1.y);
+		line[1] = new_coord2(c2.x, c2.y);
+		plot_line_z(line, data, 0, z);
+		line[0] = new_coord2(c2.x, c2.y);
+		line[1] = new_coord2(c0.x, c0.y);
+		plot_line_z(line, data, 0, z);
 	}
 	//printf("%f\n", z);
 	while (p.y < max.y)
@@ -118,10 +125,11 @@ void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env data)
 				{
 					data.zbuffer[p.x + p.y * data.config.s_width] = z;
 					if (data.config.debug == 1)
-						data.img.str[p.x + p.y * data.config.s_width] = 65536 * (int)((ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin)) * 255) + 256 * (int)((ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin)) * 255) + (int)((ft_fabs(-z - data.fzmin) / ft_fabs(data.fzmax - data.fzmin)) * 255);
+						data.img.str[p.x + p.y * data.config.s_width] = 65536 * (int)zvalue + 256 * (int)zvalue + (int)zvalue;
 					else
-						//data.img.str[p.x + p.y * data.config.s_width] = 0;
-						data.img.str[p.x + p.y * data.config.s_width] = data.background_color;
+						//data.img.str[p.x + p.y * data.config.s_width] = 65536 * (int)(zvalue * (color >> 16 & 0xFF)) + 256 * (int)(zvalue * (color >> 8 & 0xFF)) + (int)(zvalue * (color & 0xFF));
+						data.img.str[p.x + p.y * data.config.s_width] = color;
+						//data.img.str[p.x + p.y * data.config.s_width] = data.background_color;
 				}
 			}
 			/*else if (edge(c0, c1, p) > -2 && edge(c0, c1, p) <= 0)
@@ -153,6 +161,7 @@ void		fill_obj(t_env data)
 			if (x < data.map_width - 1 && y < data.map_height - 1)
 			{
 				//printf("[%d][%d]\n", y, x);
+				data.current_coord = new_coord2(x, y);
 				fill_ztriangle(new_fcoord3(data.moved_map[k].x, data.moved_map[k].y, data.rotated_map[k].z), new_fcoord3(data.moved_map[k + 1].x, data.moved_map[k + 1].y, data.rotated_map[k + 1].z), new_fcoord3(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y, data.rotated_map[k + data.map_width + 1].z), data);
 			/*if (data.config.trace == 1)
 			{

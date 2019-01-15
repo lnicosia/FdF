@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/15 10:20:08 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/15 15:52:18 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct	s_env
 	unsigned int	edges_color;
 	unsigned int	centers_color;
 	unsigned int	picked_color;
+	unsigned int	current_color;
 	t_config		config;
 	t_input_buffers	input_buffers;
 	float			*zbuffer;
@@ -117,6 +118,7 @@ typedef struct	s_env
 	int				color_div;
 	float			fzmax;
 	float			fzmin;
+	t_coord2		current_coord;
 	t_coord2		drag_start;
 	t_coord2		drag_end;
 	t_fcoord3		scale;
