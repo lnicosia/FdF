@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/14 16:32:32 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/15 10:27:30 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	init_data(t_env *data)
 	data->config.black_white = 0;
 	data->centers_color = 0xFFFFFF;
 	data->config.centers = 0;
+	data->config.trace = 1;
 	data->input_buffers.increase = 0;
 	data->input_buffers.decrease = 0;
 	data->input_buffers.button1 = 0;

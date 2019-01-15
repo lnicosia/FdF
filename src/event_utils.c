@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/14 17:59:06 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/15 11:01:02 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	redraw(t_env *data)
 		set_background(*data, 0xFFFFFF);
 	if (data->config.project_type == PC)
 	{
-		//trace(*data);
 		data->fzmax = fmax3(data->rotated_map, data->map_height * data->map_width, 'z');
 		data->fzmin = fmin3(data->rotated_map, data->map_height * data->map_width, 'z');
 		fill_obj(*data);
@@ -48,12 +47,12 @@ void	redraw(t_env *data)
 		if (data->config.trace_type == NORMAL)
 		{
 			trace(*data);
+			print_centers(*data);
 		}
 		else
 			trace_aa(*data);
 	if (data->config.debug == 1)
 		draw_axes(data);
-	print_centers(*data);
 	trace_menu(*data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	put_strings(*data);

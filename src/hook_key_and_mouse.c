@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/14 12:35:13 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/15 10:23:41 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ int		key_press(int key, void *param)
 		move_left(data);
 	else if (key == A_KEY)
 		swap_trace_type(data);
+	else if (key == T_KEY)
+	{
+		data->config.trace = data->config.trace == 0 ? 1 : 0;
+		redraw(data);
+	}
 	else if (key == D_KEY)
 	{
 		data->config.debug = data->config.debug == 1 ? 0 : 1;

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 13:48:30 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/14 15:08:30 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/15 11:00:48 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		middle_of_face(t_coord2 c, unsigned int color, t_env data)
 {
-	if (c.x >= 0 && c.x < data.config.s_width && c.y >= 0 && c.y < data.config.s_height && (data.img.str[c.x + c.y * data.config.s_width] == data.background_color || data.img.str[c.y + c.y * data.config.s_width] == 0xFFFFFF))
+	if (c.x >= 0 && c.x < data.config.s_width && c.y >= 0 && c.y < data.config.s_height)// && (data.img.str[c.x + c.y * data.config.s_width] == data.background_color || data.img.str[c.y + c.y * data.config.s_width] == 0xFFFFFF))
 		data.img.str[c.x + c.y * data.config.s_width] = color;
 }
 

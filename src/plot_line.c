@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 13:21:16 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/15 11:43:04 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	plot_line_high(t_coord2 c1, t_coord2 c2, t_env data, int color)
 void	plot_line(t_coord2 c1, t_coord2 c2, t_env data, int color)
 {
 	if (data.config.project_type == PC)
-		if (c1.x < 0 || c1.y < 0 || c2.x < 0 || c2.y < 0)
+		if (c1.x < 0 || c1.y < 0 || c2.x < 0 || c2.y < 0 || c1.x > data.config.s_width - 1 || c1.y > data.config.s_height - 1 || c2.x > data.config.s_width - 1 || c2.y > data.config.s_height - 1)
 		return ;
 	if (ft_abs(c2.y - c1.y) < ft_abs(c2.x - c1.x))
 		if (c1.x > c2.x)
