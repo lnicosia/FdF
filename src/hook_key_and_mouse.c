@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/15 10:23:41 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:40:06 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -384,7 +384,6 @@ int		mouse_move(int x, int y, void *param)
 	{
 		data->angle.x += 0.00314159265 * (y - data->drag_start.y);
 		data->angle.z -= 0.00314159265 * (x - data->drag_start.x);
-		//printf("Ax [%f]	Az [%f]\n", data->angle.x, data->angle.z);
 		process_all(data);
 		data->drag_start.x = x;
 		data->drag_start.y = y;

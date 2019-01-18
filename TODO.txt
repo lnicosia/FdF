@@ -1,12 +1,14 @@
+Orientation mixte pour fil de fer
+Deux orientations des arretes
+Lors de pente a 2 faces: tracer les aretes
+shift + M. shift + c
 opti
 new_window
-mode triangle
 flatten ocean
 relief > int max
 limite zoom mini
 Passer toutes les actions en release au lieu de press
 colorier tour de la map
-Lors de pente a 2 faces: tracer les aretes
 Point au milieu des faces
 readme
 Julia + fract bug
