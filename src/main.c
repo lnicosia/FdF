@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/15 15:52:42 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/18 11:54:53 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	init_data(t_env *data)
 	data->input_buffers.decrease_color = 0;
 	data->input_buffers.centers_button = 0;
 	data->current_coord = new_coord2(0, 0);
+	data->area = 0;
 	data->fzmax = 0;
 	data->fzmin = 0;
 	data->scale.x = 1;

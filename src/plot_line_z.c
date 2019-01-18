@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/15 12:42:04 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/18 12:48:10 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 #include "libft.h"
 #include "utils.h"
 
-void	fill_img_z(t_coord2 c, t_env data, int color, float z)
+void	fill_img_z(t_coord2 c, t_env data, int color, t_fcoord3 vertices[3])
 {
+	float		z;
+	t_fcoord3	w;
+
 	if (c.x < 200 || c.x > data.config.s_width - 1 || c.y < 0 || c.y > data.config.s_height - 1)
 		return ;
-	//(void)color;
-	//(void)z;
+	w.x = edge(vertices[0], vertices[1], new_fcoord3(c.x, c.y, 0)) / data.area;
+	w.y = edge(vertices[1], vertices[2], new_fcoord3(c.x, c.y, 0)) / data.area;
+	w.z = edge(vertices[2], vertices[0], new_fcoord3(c.x, c.y, 0)) / data.area;
+	//z = -(w.x * vertices[2].z + w.y * vertices[0].z + w.z * vertices[1].z);
+	z = -(vertices[2].z + w.y * (vertices[0].z - vertices[2].z) + w.z * (vertices[1].z - vertices[2].z));
 	if (z < data.zbuffer[c.x + c.y * data.config.s_width])
 	{
 		data.zbuffer[c.x + c.y * data.config.s_width] = z;
 		data.img.str[c.x + c.y * data.config.s_width] = color;
 	}
-	//data.img.str[c.x + c.y * data.config.s_width] = color;
 }
 
-void	plot_line_low_z(t_coord2 c[2], t_env data, int color, float z)
+void	plot_line_low_z(t_coord2 c[2], t_env data, int color, t_fcoord3 vertices[3])
 {
 	int	dx;
 	int	dy;
@@ -42,7 +47,7 @@ void	plot_line_low_z(t_coord2 c[2], t_env data, int color, float z)
 	e = 2 * dy - dx;
 	while (c[0].x <= c[1].x)
 	{
-		fill_img_z(c[0], data, color, z);
+		fill_img_z(c[0], data, color, vertices);
 		c[0].y = e > 0 ? c[0].y + yi : c[0].y;
 		e = e > 0 ? e - 2 * dx : e;
 		e += 2 * dy;
@@ -50,7 +55,7 @@ void	plot_line_low_z(t_coord2 c[2], t_env data, int color, float z)
 	}
 }
 
-void	plot_line_high_z(t_coord2 c[2], t_env data, int color, float z)
+void	plot_line_high_z(t_coord2 c[2], t_env data, int color, t_fcoord3 vertices[3])
 {
 	int	dx;
 	int	dy;
@@ -64,7 +69,7 @@ void	plot_line_high_z(t_coord2 c[2], t_env data, int color, float z)
 	e = 2 * dx - dy;
 	while (c[0].y <= c[1].y)
 	{
-		fill_img_z(c[0], data, color, z);
+		fill_img_z(c[0], data, color, vertices);
 		c[0].x = e > 0 ? c[0].x + xi : c[0].x;
 		e = e > 0 ? e - 2 * dy : e;
 		e += 2 * dx;
@@ -81,26 +86,26 @@ void	swap_tcoord2(t_coord2 c[2])
 	c[1] = new_coord2(tmp.x, tmp.y);
 }
 
-void	plot_line_z(t_coord2 c[2], t_env data, int color, float z)
+void	plot_line_z(t_coord2 c[2], t_env data, int color, t_fcoord3 vertices[3])
 {
 	/*if (c[0].x < 0 || c[0].y < 0 || c[1].x < 0 || c[1].y < 0 || c[0].x > data.config.s_width - 1 || c[0].y > data.config.s_height - 1 || c[1].x > data.config.s_width - 1 || c[1].y > data.config.s_height - 1)
-		return ;*/
+	  return ;*/
 	if (ft_abs(c[1].y - c[0].y) < ft_abs(c[1].x - c[0].x))
 		if (c[0].x > c[1].x)
 		{
 			swap_tcoord2(c);
-			plot_line_low_z(c, data, color, z);
+			plot_line_low_z(c, data, color, vertices);
 		}
 		else
-			plot_line_low_z(c, data, color, z);
+			plot_line_low_z(c, data, color, vertices);
 	else
 	{
 		if (c[0].y > c[1].y)
 		{
 			swap_tcoord2(c);
-			plot_line_high_z(c, data, color, z);
+			plot_line_high_z(c, data, color, vertices);
 		}
 		else
-			plot_line_high_z(c, data, color, z);
+			plot_line_high_z(c, data, color, vertices);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/15 11:01:02 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/18 11:58:35 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	redraw(t_env *data)
 	{
 		data->fzmax = fmax3(data->rotated_map, data->map_height * data->map_width, 'z');
 		data->fzmin = fmin3(data->rotated_map, data->map_height * data->map_width, 'z');
-		fill_obj(*data);
+		fill_obj(data);
 	}
 	else
 		if (data->config.trace_type == NORMAL)

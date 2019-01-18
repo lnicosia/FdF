@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:59:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/14 11:16:07 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/18 12:00:38 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	new_window(t_env *data)
 		trace(*data);
 	else
 		trace_aa(*data);
-	fill_obj(*data);
+	fill_obj(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	put_strings(*data);
 }

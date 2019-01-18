@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/15 15:52:18 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/18 12:02:05 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ typedef struct	s_env
 	int				color_div;
 	float			fzmax;
 	float			fzmin;
+	float			area;
+	t_fcoord3		zvertices;
 	t_coord2		current_coord;
 	t_coord2		drag_start;
 	t_coord2		drag_end;
@@ -170,7 +172,7 @@ t_fcoord2		pre_flat_project(t_coord3 c, t_env data);
 t_fcoord2		pre_pc_project(t_coord3 c, t_env data);
 void			center(t_env *data);
 void			trace(t_env data);
-void			fill_obj(t_env data);
+void			fill_obj(t_env *data);
 void			trace_aa(t_env data);
 unsigned int	get_color(int x, int y, t_env data);
 t_coord2		new_coord2(int x, int y);
@@ -193,5 +195,6 @@ void			print_centers(t_env data);
 void			trace_menu(t_env data);
 void			put_strings(t_env data);
 void			init_hook(t_env *data);
+float			edge(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 p);
 
 #endif
