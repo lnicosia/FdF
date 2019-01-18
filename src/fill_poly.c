@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/18 18:36:05 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:43:58 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void		find_vertices(t_fcoord3 vertices[3], int k, t_env *data)
 	t_coord2	line[2];
 	int			color;
 
-	if (data->config.debug == 1)
+	if (data->config.debug == 1 || data->config.black_white == 1)
 		color = 0;
 	else
 		color = 0xFFFFFF;
@@ -191,7 +191,7 @@ void		find_vertices2(t_fcoord3 vertices2[3], int k, t_env *data)
 	t_coord2	line[2];
 	int			color;
 
-	if (data->config.debug == 1)
+	if (data->config.debug == 1 || data->config.black_white == 1)
 		color = 0;
 	else
 		color = 0xFFFFFF;
