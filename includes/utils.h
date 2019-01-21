@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/18 12:02:05 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/21 11:20:56 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct	s_config
 	int				centers;
 	int				black_white;
 	int				trace;
+	int				triangles;
 }				t_config;
 
 typedef struct	s_input_buffers

@@ -6,51 +6,15 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/18 18:43:58 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/21 13:07:41 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "coord_stack.h"
-#include "plot_line_z.h"
+#include "fill_poly_utils.h"
 #include <stdio.h>
 #include <mlx.h>
-
-int			min_3(int a, int b, int c)
-{
-	if (a < b)
-	{
-		if (a < c)
-			return (a);
-		else
-			return (c);
-	}
-	else
-	{
-		if (b < c)
-			return (b);
-		else
-			return (c);
-	}
-}
-
-int			max_3(int a, int b, int c)
-{
-	if (a > b)
-	{
-		if (a > c)
-			return (a);
-		else
-			return (c);
-	}
-	else
-	{
-		if (b > c)
-			return (b);
-		else
-			return (c);
-	}
-}
 
 void		flush_zbuffer(t_env *data)
 {
@@ -71,11 +35,6 @@ void		flush_zbuffer(t_env *data)
 		}
 		y++;
 	}
-}
-
-float		edge(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 p)
-{
-	return ((p.x - c0.x) * (c1.y - c0.y) - (p.y - c0.y) * (c1.x - c0.x));
 }
 
 void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env *data)
@@ -145,9 +104,9 @@ void		find_vertices(t_fcoord3 vertices[3], int k, t_env *data)
 		color = 0;
 	else
 		color = 0xFFFFFF;
-	vertices[0] = new_fcoord3(data->moved_map[k].x, data->moved_map[k].y, data->rotated_map[k].z);
-	if (data->map[k].z != data->map[k + data->map_width + 1].z && data->map[k + 1].z == data->map[k + data->map_width].z)
+	if ((data->map[k].z + data->map[k + data->map_width + 1].z) / 2 >= (data->map[k + 1].z + data->map[k + data->map_width].z) / 2)
 	{
+		vertices[0] = new_fcoord3(data->moved_map[k].x, data->moved_map[k].y, data->rotated_map[k].z);
 		vertices[1] = new_fcoord3(data->moved_map[k + data->map_width].x, data->moved_map[k + data->map_width].y, data->rotated_map[k + data->map_width].z);
 		vertices[2] = new_fcoord3(data->moved_map[k + 1].x, data->moved_map[k + 1].y, data->rotated_map[k + 1].z);
 		data->area = edge(vertices[0], vertices[1], vertices[2]);
@@ -167,6 +126,7 @@ void		find_vertices(t_fcoord3 vertices[3], int k, t_env *data)
 	}
 	else
 	{
+		vertices[0] = new_fcoord3(data->moved_map[k].x, data->moved_map[k].y, data->rotated_map[k].z);
 		vertices[1] = new_fcoord3(data->moved_map[k + data->map_width + 1].x, data->moved_map[k + data->map_width + 1].y, data->rotated_map[k + data->map_width + 1].z);
 		vertices[2] = new_fcoord3(data->moved_map[k + 1].x, data->moved_map[k + 1].y, data->rotated_map[k + 1].z);
 		data->area = edge(vertices[0], vertices[1], vertices[2]);
@@ -195,7 +155,7 @@ void		find_vertices2(t_fcoord3 vertices2[3], int k, t_env *data)
 		color = 0;
 	else
 		color = 0xFFFFFF;
-	if (data->map[k].z != data->map[k + data->map_width + 1].z && data->map[k + 1].z == data->map[k + data->map_width].z)
+	if ((data->map[k].z + data->map[k + data->map_width + 1].z) / 2 >= (data->map[k + 1].z + data->map[k + data->map_width].z) / 2)
 	{
 		vertices2[0] = new_fcoord3(data->moved_map[k + 1].x, data->moved_map[k + 1].y, data->rotated_map[k + 1].z);
 		vertices2[1] = new_fcoord3(data->moved_map[k + data->map_width].x, data->moved_map[k + data->map_width].y, data->rotated_map[k + data->map_width].z);
