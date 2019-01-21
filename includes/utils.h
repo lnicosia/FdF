@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/21 11:20:56 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/21 18:18:53 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ typedef struct	s_config
 	int				centers;
 	int				black_white;
 	int				trace;
-	int				triangles;
+	int				poly;
+	int				underside;
 }				t_config;
 
 typedef struct	s_input_buffers
@@ -117,6 +118,7 @@ typedef struct	s_env
 	int				zlimit;
 	int				*file_colors;
 	int				color_div;
+	int				norm;
 	float			fzmax;
 	float			fzmin;
 	float			area;

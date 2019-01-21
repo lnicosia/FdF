@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/18 18:46:20 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/21 14:09:58 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ int		key_press(int key, void *param)
 	else if (key == D_KEY)
 	{
 		data->config.debug = data->config.debug == 1 ? 0 : 1;
+		redraw(data);
+	}
+	else if (key == P_KEY)
+	{
+		data->config.poly++;
+		if (data->config.poly > 2)
+			data->config.poly = 0;
 		redraw(data);
 	}
 	else if (key == K1_KEY)

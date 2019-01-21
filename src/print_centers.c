@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 13:48:30 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/15 11:00:48 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/21 14:23:57 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		print_centers(t_env data)
 			if (x < data.map_width - 1 && y < data.map_height - 1)
 			{
 				if (data.config.centers == 1)
-					middle_of_face(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x) / 2, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y) / 2), data.centers_color, data);
+					middle_of_face(new_coord2((data.moved_map[k + data.map_width + 1].x + data.moved_map[k].x + data.moved_map[k + 1].x + data.moved_map[k + data.map_width].x) / 4, (data.moved_map[k + data.map_width + 1].y + data.moved_map[k].y + data.moved_map[k + 1].y + data.moved_map[k + data.map_width].y) / 4), data.centers_color, data);
 				if (data.config.centers == 2)
 					plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y), new_coord2(data.moved_map[k + data.map_width + 1].x, data.moved_map[k + data.map_width + 1].y), data, get_color(x, y, data));
 			}
