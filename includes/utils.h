@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/21 18:18:53 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/22 14:43:36 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct	s_config
 	int				trace;
 	int				poly;
 	int				underside;
+	int				fill;
+	int				light;
 }				t_config;
 
 typedef struct	s_input_buffers

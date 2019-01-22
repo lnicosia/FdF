@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/21 14:09:58 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/22 15:10:46 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,21 @@ int		key_press(int key, void *param)
 		data->config.poly++;
 		if (data->config.poly > 2)
 			data->config.poly = 0;
+		redraw(data);
+	}
+	else if (key == F_KEY)
+	{
+		data->config.fill = data->config.fill == 0 ? 1 : 0;
+		redraw(data);
+	}
+	else if (key == E_KEY)
+	{
+		data->edges_color = data->edges_color == 0xFFFFFF ? 0 : 0xFFFFFF;
+		redraw(data);
+	}
+	else if (key == L_KEY)
+	{
+		data->config.light = data->config.light == 0 ? 1 : 0;
 		redraw(data);
 	}
 	else if (key == K1_KEY)

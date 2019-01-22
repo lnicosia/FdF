@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/21 19:35:36 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/22 15:11:21 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env *data)
 			w.x = edge(c0, c1, new_fcoord3(p.x, p.y, 0));
 			w.y = edge(c1, c2, new_fcoord3(p.x, p.y, 0));
 			w.z = edge(c2, c0, new_fcoord3(p.x, p.y, 0));
-			if ((data->norm == -1 && w.x >= 0 && w.y >= 0 && w.z >= 0) || (data->norm == 1 && w.x < 0 && w.y < 0 && w.z < 0))
+			if ((data->norm == -1 && w.x >= 0 && w.y >= 0 && w.z >= 0) || (data->norm == 1 && w.x <= 0 && w.y <= 0 && w.z <= 0))
 			{
 				w.x /= data->area;
 				w.y /= data->area;
@@ -78,24 +78,28 @@ void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env *data)
 					if (data->config.debug == 1)
 						data->img.str[p.x + p.y * data->config.s_width] = 65536 * (int)light + 256 * (int)light + (int)light;
 					else
-						//data->img.str[p.x + p.y * data->config.s_width] = 65536 * (int)(light * (data->current_color >> 16 & 0xFF)) + 256 * (int)(light * (data->current_color >> 8 & 0xFF)) + (int)(light * (data->current_color & 0xFF));
+						if (data->config.light == 1)
+						data->img.str[p.x + p.y * data->config.s_width] = 65536 * (int)(light * (data->current_color >> 16 & 0xFF)) + 256 * (int)(light * (data->current_color >> 8 & 0xFF)) + (int)(light * (data->current_color & 0xFF));
+						else
 						data->img.str[p.x + p.y * data->config.s_width] = data->current_color;
-					//data->img.str[p.x + p.y * data->config.s_width] = data->background_color;
+						//data->img.str[p.x + p.y * data->config.s_width] = data->background_color;
 				}
 			}
-			/*else if ((data->norm == -1 || data->norm == 1) && w.x == 0 && w.y == 0 &&  w.z == 0)
-			  {
-			  w.x /= data->area;
-			  w.y /= data->area;
-			  w.z /= data->area;
-			//z = -(w.x * c2.z + w.y * c0.z + w.z * c1.z);
-			z = -(c2.z + w.y * (c0.z - c2.z) + w.z * (c1.z - c2.z));
-			if (z < data->zbuffer[p.x + p.y * data->config.s_width])
+			/*else if (w.x == 0 && w.y == 0 &&  w.z == 0)
 			{
-			data->zbuffer[p.x + p.y * data->config.s_width] = z;
-			if (data->config.debug == 1)
-			data->img.str[p.x + p.y * data->config.s_width] = 0;
-			}
+				w.x /= data->area;
+				w.y /= data->area;
+				w.z /= data->area;
+				//z = -(w.x * c2.z + w.y * c0.z + w.z * c1.z);
+				z = -(c2.z + w.y * (c0.z - c2.z) + w.z * (c1.z - c2.z));
+				if (z < data->zbuffer[p.x + p.y * data->config.s_width])
+				{
+					//data->zbuffer[p.x + p.y * data->config.s_width] = z;
+					if (data->config.debug == 1)
+						data->img.str[p.x + p.y * data->config.s_width] = 0;
+					else
+						data->img.str[p.x + p.y * data->config.s_width] = 0xFF0000;
+				}
 			}*/
 			p.x++;
 		}
@@ -114,9 +118,9 @@ void		find_vertices(t_fcoord3 vertices[3], int k, t_env *data)
 		color = 0xFFFFFF;
 	if ((data->config.poly == 0 && (data->map[k].z + data->map[k + data->map_width + 1].z) / 2 >= (data->map[k + 1].z + data->map[k + data->map_width].z) / 2) || (data->config.poly == 1 && data->map[k].z != data->map[k + data->map_width + 1].z && data->map[k + 1].z == data->map[k + data->map_width].z) || (data->config.poly == 2 && data->map[k].z == data->map[k + data->map_width + 1].z && data->map[k + 1].z != data->map[k + data->map_width].z))
 	{
-		vertices[0] = new_fcoord3(data->moved_map[k].x, data->moved_map[k].y, data->rotated_map[k].z);
-		vertices[1] = new_fcoord3(data->moved_map[k + data->map_width].x, data->moved_map[k + data->map_width].y, data->rotated_map[k + data->map_width].z);
-		vertices[2] = new_fcoord3(data->moved_map[k + 1].x, data->moved_map[k + 1].y, data->rotated_map[k + 1].z);
+		vertices[0] = new_fcoord3(data->moved_map[k + 1].x, data->moved_map[k + 1].y, data->rotated_map[k + 1].z);
+		vertices[1] = new_fcoord3(data->moved_map[k].x, data->moved_map[k].y, data->rotated_map[k].z);
+		vertices[2] = new_fcoord3(data->moved_map[k + data->map_width].x, data->moved_map[k + data->map_width].y, data->rotated_map[k + data->map_width].z);
 		data->area = edge(vertices[0], vertices[1], vertices[2]);
 		/*if (data->config.trace == 1)
 		  {
@@ -134,9 +138,9 @@ void		find_vertices(t_fcoord3 vertices[3], int k, t_env *data)
 	}
 	else
 	{
-		vertices[0] = new_fcoord3(data->moved_map[k].x, data->moved_map[k].y, data->rotated_map[k].z);
-		vertices[1] = new_fcoord3(data->moved_map[k + data->map_width + 1].x, data->moved_map[k + data->map_width + 1].y, data->rotated_map[k + data->map_width + 1].z);
-		vertices[2] = new_fcoord3(data->moved_map[k + 1].x, data->moved_map[k + 1].y, data->rotated_map[k + 1].z);
+		vertices[0] = new_fcoord3(data->moved_map[k + data->map_width + 1].x, data->moved_map[k + data->map_width + 1].y, data->rotated_map[k + data->map_width + 1].z);
+		vertices[1] = new_fcoord3(data->moved_map[k + 1].x, data->moved_map[k + 1].y, data->rotated_map[k + 1].z);
+		vertices[2] = new_fcoord3(data->moved_map[k].x, data->moved_map[k].y, data->rotated_map[k].z);
 		data->area = edge(vertices[0], vertices[1], vertices[2]);
 		/*if (data->config.trace == 1)
 		  {
@@ -165,9 +169,9 @@ void		find_vertices2(t_fcoord3 vertices2[3], int k, t_env *data)
 		color = 0xFFFFFF;
 	if ((data->config.poly == 0 && (data->map[k].z + data->map[k + data->map_width + 1].z) / 2 >= (data->map[k + 1].z + data->map[k + data->map_width].z) / 2) || (data->config.poly == 1 && data->map[k].z != data->map[k + data->map_width + 1].z && data->map[k + 1].z == data->map[k + data->map_width].z) || (data->config.poly == 2 && data->map[k].z == data->map[k + data->map_width + 1].z && data->map[k + 1].z != data->map[k + data->map_width].z))
 	{
-		vertices2[0] = new_fcoord3(data->moved_map[k + 1].x, data->moved_map[k + 1].y, data->rotated_map[k + 1].z);
-		vertices2[1] = new_fcoord3(data->moved_map[k + data->map_width].x, data->moved_map[k + data->map_width].y, data->rotated_map[k + data->map_width].z);
-		vertices2[2] = new_fcoord3(data->moved_map[k + data->map_width + 1].x, data->moved_map[k + data->map_width + 1].y, data->rotated_map[k + data->map_width + 1].z);
+		vertices2[0] = new_fcoord3(data->moved_map[k + data->map_width].x, data->moved_map[k + data->map_width].y, data->rotated_map[k + data->map_width].z);
+		vertices2[1] = new_fcoord3(data->moved_map[k + data->map_width + 1].x, data->moved_map[k + data->map_width + 1].y, data->rotated_map[k + data->map_width + 1].z);
+		vertices2[2] = new_fcoord3(data->moved_map[k + 1].x, data->moved_map[k + 1].y, data->rotated_map[k + 1].z);
 		data->area = edge(vertices2[0], vertices2[1], vertices2[2]);
 		/*if (data->config.trace == 1)
 		  {
@@ -224,41 +228,70 @@ void		fill_obj(t_env *data)
 			if (x < data->map_width - 1 && y < data->map_height - 1)
 			{
 				data->current_coord = new_coord2(x, y);
-				data->current_color = get_color(data->current_coord.x, data->current_coord.y, *data);
+				if (data->config.fill == 1)
+				data->current_color = get_color(x, y, *data);
+				else
+					data->current_color = data->background_color;
 				find_vertices(vertices, k, data);
 				data->norm = ((vertices[1].x - vertices[0].x) * (vertices[2].y - vertices[0].y) - (vertices[1].y - vertices[0].y) * (vertices[2].x - vertices[0].x)) > 0 ? 1 : -1;
-				if (data->config.trace == 1)
-				{
-					line[0] = new_coord2(vertices[0].x, vertices[0].y);
-					line[1] = new_coord2(vertices[1].x, vertices[1].y);
-					plot_line_z(line, *data, 0, vertices);
-					line[0] = new_coord2(vertices[1].x, vertices[1].y);
-					line[1] = new_coord2(vertices[2].x, vertices[2].y);
-					plot_line_z(line, *data, 0, vertices);
-					line[0] = new_coord2(vertices[2].x, vertices[2].y);
-					line[1] = new_coord2(vertices[0].x, vertices[0].y);
-					//if (data->config.centers == 2)
-					plot_line_z(line, *data, 0, vertices);
-				}
+				/*if (data->config.trace == 1)
+				  {
+				  line[0] = new_coord2(vertices[0].x, vertices[0].y);
+				  line[1] = new_coord2(vertices[1].x, vertices[1].y);
+				  plot_line_z(line, *data, 0, vertices);
+				  line[0] = new_coord2(vertices[1].x, vertices[1].y);
+				  line[1] = new_coord2(vertices[2].x, vertices[2].y);
+				  plot_line_z(line, *data, 0, vertices);
+				  line[0] = new_coord2(vertices[2].x, vertices[2].y);
+				  line[1] = new_coord2(vertices[0].x, vertices[0].y);
+				//if (data->config.centers == 2)
+				plot_line_z(line, *data, 0, vertices);
+				}*/
 				fill_ztriangle(vertices[0], vertices[1], vertices[2], data);
+				if (data->config.trace == 1 || (data->config.fill == 0 && data->config.debug == 0))
+				  {
+				  line[0] = new_coord2(vertices[0].x, vertices[0].y);
+				  line[1] = new_coord2(vertices[1].x, vertices[1].y);
+				  plot_line_z(line, *data, data->edges_color, vertices);
+				  line[0] = new_coord2(vertices[1].x, vertices[1].y);
+				  line[1] = new_coord2(vertices[2].x, vertices[2].y);
+				  plot_line_z(line, *data, data->edges_color, vertices);
+				  line[0] = new_coord2(vertices[2].x, vertices[2].y);
+				  line[1] = new_coord2(vertices[0].x, vertices[0].y);
+				if (data->config.centers == 2)
+				plot_line_z(line, *data, data->edges_color, vertices);
+				}
 				/*if (data->config.centers == 1)
 				  middle_of_face(new_coord2((data->moved_map[k + data->map_width + 1].x + data->moved_map[k].x + data->moved_map[k + 1].x + data->moved_map[k + data->map_width].x) / 4, (data->moved_map[k + data->map_width + 1].y + data->moved_map[k].y + data->moved_map[k + 1].y + data->moved_map[k + data->map_width].y) / 4), data->centers_color, *data);*/
 				find_vertices2(vertices2, k, data);
 				data->norm = ((vertices2[1].x - vertices2[0].x) * (vertices2[2].y - vertices2[0].y) - (vertices2[1].y - vertices2[0].y) * (vertices2[2].x - vertices2[0].x)) > 0 ? 1 : -1;
-				if (data->config.trace == 1)
-				{
-					line[0] = new_coord2(vertices2[0].x, vertices2[0].y);
-					line[1] = new_coord2(vertices2[1].x, vertices2[1].y);
-					plot_line_z(line, *data, 0, vertices2);
-					line[0] = new_coord2(vertices2[1].x, vertices2[1].y);
-					line[1] = new_coord2(vertices2[2].x, vertices2[2].y);
-					plot_line_z(line, *data, 0, vertices2);
-					line[0] = new_coord2(vertices2[2].x, vertices2[2].y);
-					line[1] = new_coord2(vertices2[0].x, vertices2[0].y);
-					//if (data->config.centers == 2)
-					plot_line_z(line, *data, 0, vertices2);
-				}
+				/*if (data->config.trace == 1)
+				  {
+				  line[0] = new_coord2(vertices2[0].x, vertices2[0].y);
+				  line[1] = new_coord2(vertices2[1].x, vertices2[1].y);
+				  plot_line_z(line, *data, 0, vertices2);
+				  line[0] = new_coord2(vertices2[1].x, vertices2[1].y);
+				  line[1] = new_coord2(vertices2[2].x, vertices2[2].y);
+				  plot_line_z(line, *data, 0, vertices2);
+				  line[0] = new_coord2(vertices2[2].x, vertices2[2].y);
+				  line[1] = new_coord2(vertices2[0].x, vertices2[0].y);
+				//if (data->config.centers == 2)
+				plot_line_z(line, *data, 0, vertices2);
+				}*/
 				fill_ztriangle(vertices2[0], vertices2[1], vertices2[2], data);
+				if (data->config.trace == 1 || (data->config.fill == 0 && data->config.debug == 0))
+				  {
+				  line[0] = new_coord2(vertices2[0].x, vertices2[0].y);
+				  line[1] = new_coord2(vertices2[1].x, vertices2[1].y);
+				  plot_line_z(line, *data, data->edges_color, vertices2);
+				  line[0] = new_coord2(vertices2[1].x, vertices2[1].y);
+				  line[1] = new_coord2(vertices2[2].x, vertices2[2].y);
+				  plot_line_z(line, *data, data->edges_color, vertices2);
+				  line[0] = new_coord2(vertices2[2].x, vertices2[2].y);
+				  line[1] = new_coord2(vertices2[0].x, vertices2[0].y);
+				if (data->config.centers == 2)
+				plot_line_z(line, *data, data->edges_color, vertices2);
+				}
 				/*if (data->config.centers == 1)
 				  middle_of_face(new_coord2((data->moved_map[k + data->map_width + 1].x + data->moved_map[k].x + data->moved_map[k + 1].x + data->moved_map[k + data->map_width].x) / 4, (data->moved_map[k + data->map_width + 1].y + data->moved_map[k].y + data->moved_map[k + 1].y + data->moved_map[k + data->map_width].y) / 4), data->centers_color, *data);*/
 			}

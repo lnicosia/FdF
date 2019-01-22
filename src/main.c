@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/21 18:19:10 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/22 15:01:25 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	init_data(t_env *data)
 	data->strings_color = 0;
 	data->menu_color = 0xFFFFFF;
 	data->background_color = 0x404040;
-	data->edges_color = 0xFFFFFF;
+	data->edges_color = 0;
 	data->picked_color = 0xFFFFFF;
 	data->config.black_white = 0;
 	data->centers_color = 0xFFFFFF;
@@ -121,6 +121,8 @@ void	init_data(t_env *data)
 	data->config.trace = 1;
 	data->config.poly = 0;
 	data->config.underside = 0;
+	data->config.fill = 1;
+	data->config.light = 0;
 	data->input_buffers.increase = 0;
 	data->input_buffers.decrease = 0;
 	data->input_buffers.button1 = 0;

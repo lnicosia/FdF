@@ -1,4 +1,7 @@
-mode triangle mais pas quand c'est des carres
+z increase quand changement reso
+Couleur tout <= 0 = background
+depassement de camera
+afficher triangles sauf sur les carres
 corriger middle_of_faces pour PC
 shift + M. shift + c. shift + p.
 opti
