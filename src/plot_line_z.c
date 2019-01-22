@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/22 15:01:01 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/22 16:26:05 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	fill_img_z(t_coord2 c, t_env data, int color, t_fcoord3 vertices[3])
 		//z = -((vertices[2].z + vertices[0].z + vertices[1].z) / 3);
 		if (z <= data.zbuffer[c.x + c.y * data.config.s_width])
 		{
-			//data.zbuffer[c.x + c.y * data.config.s_width] = z;
+			data.zbuffer[c.x + c.y * data.config.s_width] = z;
 			data.img.str[c.x + c.y * data.config.s_width] = color;
 		}
 	}
@@ -55,7 +55,7 @@ void	fill_img_z(t_coord2 c, t_env data, int color, t_fcoord3 vertices[3])
 		//z = -((vertices[2].z + vertices[0].z + vertices[1].z) / 3);
 		if (z <= data.zbuffer[c.x + c.y * data.config.s_width])
 		{
-			//data.zbuffer[c.x + c.y * data.config.s_width] = z;
+			data.zbuffer[c.x + c.y * data.config.s_width] = z;
 			data.img.str[c.x + c.y * data.config.s_width] = color;
 		}
 	}

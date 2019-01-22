@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:59:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/22 14:38:29 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/22 18:34:44 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	new_window(t_env *data)
 		set_background(*data, 0xFFFFFF);
 	trace_menu(*data);
 	set_ranges(data);
-	set_z_ranges(data);
+	//set_z_ranges(data);
 	//float_map(*data);
 	rotate_map(*data);
 	project_map(*data);

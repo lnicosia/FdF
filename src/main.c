@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/22 15:01:25 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/22 18:46:16 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,11 @@ void	init_data(t_env *data)
 	data->centers_color = 0xFFFFFF;
 	data->current_color = 0xFFFFFF;
 	data->config.centers = 0;
-	data->config.trace = 1;
+	data->config.trace = 0;
 	data->config.poly = 0;
 	data->config.underside = 0;
 	data->config.fill = 1;
-	data->config.light = 0;
+	data->config.light = 1;
 	data->input_buffers.increase = 0;
 	data->input_buffers.decrease = 0;
 	data->input_buffers.button1 = 0;
@@ -130,7 +130,6 @@ void	init_data(t_env *data)
 	data->input_buffers.increase_color = 0;
 	data->input_buffers.decrease_color = 0;
 	data->input_buffers.centers_button = 0;
-	data->current_coord = new_coord2(0, 0);
 	data->norm = -1;
 	data->area = 0;
 	data->fzmax = 0;
