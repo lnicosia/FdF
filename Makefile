@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2019/01/23 12:24:56 by lnicosia         ###   ########.fr        #
+#    Updated: 2019/01/23 14:06:48 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC_RAW = main.c plot_line.c hook_more.c parser.c zoom.c event_utils.c \
 	  fill_poly.c coord_stack.c menu.c put_strings.c background.c \
 	  color_pickers.c print_centers.c plot_line_z.c \
 	  fill_poly_maths.c pre_project.c adapt.c project.c coord_max.c \
-	  screen_utils.c
+	  screen_utils.c init_data.c init_arrays.c logs.c
 
 HEADERS = utils.h color.h mlx_keycode.h user_functions.h coord_stack.h \
 		  color_pickers.h error.h fill_poly_utils.h

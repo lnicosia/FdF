@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 12:22:49 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 14:07:30 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,5 +201,9 @@ void			put_strings(t_env data);
 void			init_hook(t_env *data);
 float			edge(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 p);
 void			set_screen(t_env *data);
+void			init_data(t_env *data);
+int				init_zbuffer(t_env *data);
+int				init_arrays(t_env *data);
+void			put_log(const char *str, int mode);
 
 #endif
