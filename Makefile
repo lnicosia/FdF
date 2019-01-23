@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2019/01/22 18:35:19 by lnicosia         ###   ########.fr        #
+#    Updated: 2019/01/23 12:24:56 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,11 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_RAW = main.c plot_line.c hook_more.c parser.c zoom.c event_utils.c \
 	  coord_utils.c init_map.c trace.c increase_z_and_color.c map_movement.c \
-	  plot_line_aa.c hook_key_and_mouse.c math.c draw_quad.c rotate.c \
-	  debug_utils.c fill_poly.c coord_stack.c menu.c put_strings.c \
-	  new_window.c color_pickers.c print_centers.c plot_line_z.c \
-	  fill_poly_maths.c
+	  plot_line_aa.c hook_key_and_mouse.c math.c rotate.c debug_utils.c \
+	  fill_poly.c coord_stack.c menu.c put_strings.c background.c \
+	  color_pickers.c print_centers.c plot_line_z.c \
+	  fill_poly_maths.c pre_project.c adapt.c project.c coord_max.c \
+	  screen_utils.c
 
 HEADERS = utils.h color.h mlx_keycode.h user_functions.h coord_stack.h \
 		  color_pickers.h error.h fill_poly_utils.h

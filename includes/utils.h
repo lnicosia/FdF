@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/22 18:33:12 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 12:22:49 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,12 +193,13 @@ void			rotate_map(t_env data);
 void			float_map(t_env data);
 void			init_cos_data(t_env *data);
 void			init_sin_data(t_env *data);
-void			set_background(t_env data, int color);
+void			set_background(t_env data);
 void			middle_of_face(t_coord2 c, unsigned int color, t_env data);
 void			print_centers(t_env data);
 void			trace_menu(t_env data);
 void			put_strings(t_env data);
 void			init_hook(t_env *data);
 float			edge(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 p);
+void			set_screen(t_env *data);
 
 #endif

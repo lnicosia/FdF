@@ -6,13 +6,13 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 11:38:32 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/21 12:47:43 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 12:26:24 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int			min_3(int a, int b, int c)
+int		min_3(int a, int b, int c)
 {
 	if (a < b)
 	{
@@ -30,7 +30,7 @@ int			min_3(int a, int b, int c)
 	}
 }
 
-int			max_3(int a, int b, int c)
+int		max_3(int a, int b, int c)
 {
 	if (a > b)
 	{
@@ -98,7 +98,7 @@ int		top_vertex(float a, float b, float c, float d)
 	return (index);
 }
 
-float		edge(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 p)
+float	edge(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 p)
 {
 	return ((p.x - c0.x) * (c1.y - c0.y) - (p.y - c0.y) * (c1.x - c0.x));
 }

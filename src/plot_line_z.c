@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/22 16:26:05 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 11:47:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ void	swap_tcoord2(t_coord2 c[2])
 
 void	plot_line_z(t_coord2 c[2], t_env data, int color, t_fcoord3 vertices[3])
 {
-	/*if (c[0].x < 0 || c[0].y < 0 || c[1].x < 0 || c[1].y < 0 || c[0].x > data.config.s_width - 1 || c[0].y > data.config.s_height - 1 || c[1].x > data.config.s_width - 1 || c[1].y > data.config.s_height - 1)
-	  return ;*/
 	if (ft_abs(c[1].y - c[0].y) < ft_abs(c[1].x - c[0].x))
 		if (c[0].x > c[1].x)
 		{

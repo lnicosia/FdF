@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:42:59 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/12/20 16:33:57 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 11:44:54 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,12 @@ void	plot_extremes_low(t_coord2 c1, t_coord2 c2, t_env data, int color)
 
 	d.y = c2.y - c1.y;
 	d.x = c2.x - c1.x;
-	//printf("[%d][%d]\n",c1.x, c1.y);
 	gradient = d.x == 0 ? 1 : d.y / d.x;
 	end.x = (float)round_((float)c1.x);
 	end.y = (float)c1.y + gradient * (end.x - (float)c1.x);
 	xgap = rfpart((float)c1.x + 0.5);
 	pxl.x = end.x;
 	pxl.y = ipart(end.y);
-	//printf("[brightness]: %f (rfpart(end.y) = %f xgap = %f)\n", rfpart(end.y) * xgap, rfpart(end.y), xgap);
-	/*fill_img(new_coord2(pxl.x, pxl.y), data, color, rfpart(end.y) * xgap);
-	  fill_img(new_coord2(pxl.x, pxl.y + 1), data, color, fpart(end.y) * xgap);*/
 	fill_img(new_coord2(pxl.x, pxl.y), data, color, 1);
 	fill_img(new_coord2(pxl.x, pxl.y + 1), data, color, fpart(end.y) * xgap);
 	end.x = (float)round_((float)c2.x);
@@ -62,8 +58,6 @@ void	plot_extremes_high(t_coord2 c1, t_coord2 c2, t_env data, int color)
 	ygap = rfpart((float)c1.y + 0.5);
 	pxl.y = end.y;
 	pxl.x = ipart(end.x);
-	/*fill_img(new_coord2(pxl.x, pxl.y), data, color, rfpart(end.x) * ygap);
-	  fill_img(new_coord2(pxl.x + 1, pxl.y), data, color, fpart(end.x) * ygap);*/
 	fill_img(new_coord2(pxl.x, pxl.y), data, color, 1);
 	fill_img(new_coord2(pxl.x + 1, pxl.y), data, color, fpart(end.x) * ygap);
 	end.y = (float)round_(c2.y);
@@ -75,7 +69,7 @@ void	plot_extremes_high(t_coord2 c1, t_coord2 c2, t_env data, int color)
 	fill_img(new_coord2(pxl.x + 1, pxl.y), data, color, fpart(end.x) * ygap);
 }
 
-void		plot_line_low_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
+void	plot_line_low_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 {
 	t_fcoord2	d;
 	int			xpxl1;
@@ -89,10 +83,8 @@ void		plot_line_low_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 		gradient = 1.0;
 	else
 		gradient = d.y / d.x;
-	//plot_extremes_low(c1, c2, data, color);
 	xpxl1 = round_(c1.x);
 	xpxl2 = round_(c2.x);
-	//intery = ipart(c1.y + gradient * (xpxl1 - c1.x)) + gradient;
 	intery = c1.y + gradient;
 	while (xpxl1 < xpxl2)
 	{
@@ -105,7 +97,7 @@ void		plot_line_low_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 	}
 }
 
-void		plot_line_high_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
+void	plot_line_high_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 {
 	t_fcoord2	d;
 	int			ypxl1;
@@ -119,10 +111,8 @@ void		plot_line_high_aa(t_coord2 c1, t_coord2 c2, t_env data, int color)
 		gradient = 1.0;
 	else
 		gradient = d.x / d.y;
-	//plot_extremes_high(c1, c2, data, color);
 	ypxl1 = round_(c1.y);
 	ypxl2 = round_(c2.y);
-	//intery = ipart(c1.x + gradient * (ypxl1 - c1.y)) + gradient;
 	intery = c1.x + gradient;
 	while (ypxl1 < ypxl2)
 	{

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/22 18:46:16 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 12:10:58 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,6 @@ void	print_map(t_env data, t_coord3 *map)
 			k++;
 		}
 		ft_putchar('\n');
-		i++;
-	}
-}
-
-void	set_background(t_env data, int color)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	k = 0;
-	while (i < data.config.s_height)
-	{
-		j = 0;
-		while (j < data.config.s_width)
-		{
-			data.img.str[k] = color;
-			j++;
-			k++;
-		}
 		i++;
 	}
 }
@@ -201,7 +180,7 @@ int		main(int argc, char **argv)
 	data.rotated_map = (t_fcoord3*)malloc(sizeof(*data.rotated_map) * data.map_width * data.map_height);
 	data.projected_map = (t_fcoord2*)malloc(sizeof(*data.projected_map) * data.map_width * data.map_height);
 	data.moved_map = (t_coord2*)malloc(sizeof(*data.moved_map) * data.map_width * data.map_height);
-	set_background(data, data.background_color);
+	set_background(data);
 	trace_menu(data);
 	set_ranges(&data);
 	set_z_ranges(&data);

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 15:07:56 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 11:40:22 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,6 @@
 #include "utils.h"
 #include "color.h"
 #include <stdio.h>
-
-t_fcoord2	pre_iso_project(t_coord3 c, t_env data)
-{
-	t_fcoord2	res;
-
-	(void)data;
-	res.x = ((float)c.x - (float)c.y) * COS_30;
-	res.y = ((float)c.x + (float)c.y) * SIN_30;
-	return (res);
-}
-
-t_fcoord2	pre_para_project(t_coord3 c, t_env data)
-{
-	t_fcoord2	res;
-
-	(void)data;
-	res.x = ((float)c.x - (float)c.y);
-	res.y = ((float)c.y);
-	return (res);
-}
-
-t_fcoord2	pre_flat_project(t_coord3 c, t_env data)
-{
-	t_fcoord2	res;
-
-	(void)data;
-	res.x = (float)c.x;
-	res.y = (float)c.y;
-	return (res);
-}
-
-t_fcoord2	pre_pc_project(t_coord3 c, t_env data)
-{
-	t_fcoord2	res;
-
-	res.x = ((float)(c.x - data.map_width / 2) / (float)(-c.z + data.zmax + 1));
-	res.y = ((float)(c.y - data.map_height / 2) / (float)(-c.z + data.zmax + 1));
-	return (res);
-}
 
 unsigned int	get_color(int x, int y, t_env data)
 {
@@ -76,83 +37,15 @@ unsigned int	get_color(int x, int y, t_env data)
 			return (0xCBAC83);
 		if (z <= (5 * data.zmax) / data.color_div)
 			return (0x75552D);
-		if (z <= (6 * data.zmax) / data.color_div)
-			return (0x583405);
-		if (z <= data.zmax)
-			return (0xFFFFFF);
+		return (z <= (6 * data.zmax) / data.color_div ? 0x583405 : (0xFFFFFF));
 	}
 	else if (data.config.color == 1)
-	{
 		if (data.config.file_color == 1)
 			return (data.file_colors[y * data.map_width + x]);
-	}
 	return (data.picked_color);
 }
 
-void		center(t_env *data)
-{
-	t_fcoord2	center;
-	t_fcoord2	right;
-	t_fcoord2	left;
-	t_fcoord2	up;
-	t_fcoord2	down;
-
-	up = data->pre_project[data->config.project_type](data->map[0], *data);
-	right = data->pre_project[data->config.project_type](data->map[data->map_width - 1], *data);
-	left = data->pre_project[data->config.project_type](data->map[data->map_width *
-			(data->map_height - 1)], *data);
-	down = data->pre_project[data->config.project_type](data->map[data->map_width *
-			data->map_height - 1], *data);
-	center.x = data->scale.x * (right.x - left.x) / 2 - ft_fabs(left.x)
-		* data->scale.x;
-	center.y = data->scale.x * (down.y - up.y) / 2 - ft_fabs(up.y)
-		* data->scale.x;
-	data->start.x = (float)data->config.s_width / 2 - center.x + 100;
-	data->start.y = (float)data->config.s_height / 2 - center.y;
-}
-
-void		set_z_ranges(t_env *data)
-{
-	printf("zmax: %d\n", data->zmax);
-	if (data->zmax != 0)
-	{
-		data->scale.z = (float)data->map_height / ((float)data->zmax * 10);
-		printf("scale.z = %f\n", data->scale.z);
-		data->delta_scale.z = (float)data->config.s_height / (100 * data->zmax *
-				data->scale.x);
-	}
-	ft_putstr(GREEN);
-	ft_putstr("[Z SCALED]");
-	ft_putendl(RESET);
-}
-
-void		set_ranges(t_env *data)
-{
-	t_fcoord2	right;
-	t_fcoord2	left;
-	t_fcoord2	up;
-	t_fcoord2	down;
-
-	data->zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
-	data->zlimit = data->zmax + 1;
-	up = data->pre_project[data->config.project_type](data->map[0], *data);
-	right = data->pre_project[data->config.project_type](data->map[data->map_width - 1], *data);
-	left = data->pre_project[data->config.project_type](data->map[data->map_width *
-			(data->map_height - 1)], *data);
-	down = data->pre_project[data->config.project_type](data->map[data->map_width *
-			data->map_height - 1], *data);
-	data->scale.x = (float)data->config.s_width / (right.x - left.x);
-	data->scale.y = (float)data->config.s_height / (down.y - up.y);
-	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.6;
-	data->delta_scale.x = data->scale.x * 10 / 100;
-	printf("final scale = %f\n", data->scale.x);
-	center(data);
-	ft_putstr(GREEN);
-	ft_putstr("[MAP SCALED]");
-	ft_putendl(RESET);
-}
-
-void		scale_map(t_env data)
+void			scale_map(t_env data)
 {
 	int	y;
 	int	x;
@@ -165,11 +58,8 @@ void		scale_map(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			//if (data.projected_map[k].x != -1 && data.projected_map[k].y != -1)
-			//{
-				data.projected_map[k].x *= data.scale.x;
-				data.projected_map[k].y *= data.scale.x;
-			//}
+			data.projected_map[k].x *= data.scale.x;
+			data.projected_map[k].y *= data.scale.x;
 			x++;
 			k++;
 		}
@@ -177,7 +67,7 @@ void		scale_map(t_env data)
 	}
 }
 
-void		move_map(t_env data)
+void			move_map(t_env data)
 {
 	int	y;
 	int	x;
@@ -190,32 +80,10 @@ void		move_map(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			data.moved_map[k].x = data.projected_map[k].x + data.start.x + data.delta_move.x;
-			data.moved_map[k].y = data.projected_map[k].y + data.start.y + data.delta_move.y;
-			x++;
-			k++;
-		}
-		y++;
-	}	
-}
-
-void		project_map_iso(t_env data)
-{
-	int		y;
-	int		x;
-	int		k;
-	float	tmp;
-
-	y = 0;
-	k = 0;
-	while (y < data.map_height)
-	{
-		x = 0;
-		while (x < data.map_width)
-		{
-			tmp = data.rotated_map[k].x;
-			data.projected_map[k].x = (data.rotated_map[k].x - data.rotated_map[k].y) * COS_30;
-			data.projected_map[k].y = (-data.rotated_map[k].z) + (tmp + data.rotated_map[k].y) * SIN_30;
+			data.moved_map[k].x = data.projected_map[k].x + data.start.x +
+				data.delta_move.x;
+			data.moved_map[k].y = data.projected_map[k].y + data.start.y +
+				data.delta_move.y;
 			x++;
 			k++;
 		}
@@ -223,99 +91,7 @@ void		project_map_iso(t_env data)
 	}
 }
 
-void		project_map_para(t_env data)
-{
-	int		y;
-	int		x;
-	int		k;
-	float	tmp;
-
-	y = 0;
-	k = 0;
-	while (y < data.map_height)
-	{
-		x = 0;
-		while (x < data.map_width)
-		{
-			tmp = data.rotated_map[k].x;
-			data.projected_map[k].x = (data.rotated_map[k].x - data.rotated_map[k].y);
-			data.projected_map[k].y = (-data.rotated_map[k].z + data.rotated_map[k].y);
-			x++;
-			k++;
-		}
-		y++;
-	}
-}
-
-void		project_map_flat(t_env data)
-{
-	int		y;
-	int		x;
-	int		k;
-	float	tmp;
-
-	y = 0;
-	k = 0;
-	while (y < data.map_height)
-	{
-		x = 0;
-		while (x < data.map_width)
-		{
-			tmp = data.rotated_map[k].x;
-			data.projected_map[k].x = data.rotated_map[k].x;
-			data.projected_map[k].y = data.rotated_map[k].y;
-			x++;
-			k++;
-		}
-		y++;
-	}
-}
-
-void		project_map_pc(t_env data)
-{
-	int		y;
-	int		x;
-	int		k;
-	float	tmp;
-
-	y = 0;
-	k = 0;
-	while (y < data.map_height)
-	{
-		x = 0;
-		while (x < data.map_width)
-		{
-			tmp = data.rotated_map[k].x;
-			if (data.rotated_map[k].z >= data.zmax)
-			{
-				data.projected_map[k].x = -1;
-				data.projected_map[k].y = -1;
-			}
-			else
-			{
-			data.projected_map[k].x = (data.rotated_map[k].x - data.map_width / 2) / (-data.rotated_map[k].z + data.zmax + 1);
-			data.projected_map[k].y = (data.rotated_map[k].y - data.map_height / 2)/ (-data.rotated_map[k].z + data.zmax + 1);
-			}
-			x++;
-			k++;
-		}
-		y++;
-	}
-}
-
-void		project_map(t_env data)
-{
-	if (data.config.project_type == ISO)
-		project_map_iso(data);
-	else if (data.config.project_type == PARA)
-		project_map_para(data);
-	else if (data.config.project_type == FLAT)
-		project_map_flat(data);
-	else if (data.config.project_type == PC)
-		project_map_pc(data);
-}
-
-void		trace(t_env data)
+void			trace(t_env data)
 {
 	int	y;
 	int	x;
@@ -330,10 +106,13 @@ void		trace(t_env data)
 		{
 			if (x < data.map_width - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-						new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
+						new_coord2(data.moved_map[k + 1].x, data.moved_map[k +
+							1].y), data, get_color(x, y, data));
 			if (y < data.map_height - 1)
 				plot_line(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
+						new_coord2(data.moved_map[k + data.map_width].x,
+							data.moved_map[k + data.map_width].y), data,
+						get_color(x, y, data));
 			x++;
 			k++;
 		}
@@ -341,7 +120,7 @@ void		trace(t_env data)
 	}
 }
 
-void		trace_aa(t_env data)
+void			trace_aa(t_env data)
 {
 	int	y;
 	int	x;
@@ -355,11 +134,13 @@ void		trace_aa(t_env data)
 		while (x < data.map_width)
 		{
 			if (x < data.map_width - 1)
-				plot_line_aa(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-						new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y), data, get_color(x, y, data));
+				plot_line_aa(new_coord2(data.moved_map[k].x, data.moved_map[k]
+			.y), new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y),
+						data, get_color(x, y, data));
 			if (y < data.map_height - 1)
-				plot_line_aa(new_coord2(data.moved_map[k].x, data.moved_map[k].y),
-						new_coord2(data.moved_map[k + data.map_width].x, data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
+				plot_line_aa(new_coord2(data.moved_map[k].x,
+data.moved_map[k].y), new_coord2(data.moved_map[k + data.map_width].x,
+data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
 			x++;
 			k++;
 		}

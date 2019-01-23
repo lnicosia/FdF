@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/11 13:34:45 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 11:46:41 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 
 void	increase_z(t_env *data)
 {
-	//if (data->zmax * (data->scale.z + data->delta_scale.z) <= data->zlimit)
 	data->scale.z += data->delta_scale.z;
-	//printf("zmax = %d scale = %f (zmax * scale) = %f\n", data->zmax, data->scale.z, data->zmax * data->scale.z);
 	process_all(data);
 }
 
