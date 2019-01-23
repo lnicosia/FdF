@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 11:46:41 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 16:43:14 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,10 @@ void	decrease_z(t_env *data)
 void	increase_color_div(t_env *data)
 {
 	data->color_div++;
-	redraw(data);
 }
 
 void	decrease_color_div(t_env *data)
 {
 	if (data->color_div > 1)
-	{
 		data->color_div--;
-		redraw(data);
-	}
 }

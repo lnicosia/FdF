@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 12:24:14 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 16:53:27 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ void	process_all(t_env *data)
 	project_map(*data);
 	scale_map(*data);
 	move_map(*data);
-	redraw(data);
 }
 
 void	swap_trace_type(t_env *data)
 {
+	data->input_buffers.a = 0;
 	data->config.trace_type = data->config.trace_type == AA ? NORMAL : AA;
-	redraw(data);
 }
 
 void	swap_project_type(t_env *data, int type)
