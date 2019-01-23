@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   logs.c                                             :+:      :+:    :+:   */
+/*   buttons.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/23 14:04:50 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 14:57:10 by lnicosia         ###   ########.fr       */
+/*   Created: 2019/01/23 14:52:25 by lnicosia          #+#    #+#             */
+/*   Updated: 2019/01/23 14:54:23 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "color.h"
-#include "utils.h"
+#ifndef BUTTONS_H
+# define BUTTONS_H
 
-void	put_log(const char *str, int mode)
-{
-	if (mode == 0)
-		ft_putstr(GREEN);
-	else
-		ft_putstr(RED);
-	ft_putstr(str);
-	ft_putendl(RESET);
-}
+void	draw_button_up(t_coord2 c, t_coord2 size, t_env data);
+void	draw_button_pressed(t_coord2 c, t_coord2 size, t_env data);
+void	put_black_white_button(t_env data);
+void	put_centers_button(t_env data);
+void	put_increase_buttons(t_env data);
+void	put_color_button(t_env data);
+void	put_increase_color_buttons(t_env data);
 
-void	put_map_size(int height, int width)
-{
-	ft_putnbr(width);
-	ft_putstr(" x ");
-	ft_putnbr(height);
-	ft_putchar('\n');
-}
+#endif

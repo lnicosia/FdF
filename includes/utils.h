@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 14:07:30 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 15:08:45 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ void			float_map(t_env data);
 void			init_cos_data(t_env *data);
 void			init_sin_data(t_env *data);
 void			set_background(t_env data);
-void			middle_of_face(t_coord2 c, unsigned int color, t_env data);
+void			middle_of_face(int k, unsigned int color, t_env data);
 void			print_centers(t_env data);
 void			trace_menu(t_env data);
 void			put_strings(t_env data);
@@ -205,5 +205,6 @@ void			init_data(t_env *data);
 int				init_zbuffer(t_env *data);
 int				init_arrays(t_env *data);
 void			put_log(const char *str, int mode);
+void			put_map_size(int height, int width);
 
 #endif

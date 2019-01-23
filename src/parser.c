@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:11:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 14:09:37 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 14:58:20 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "fcntl.h"
 #include "color.h"
 
-int	check_line(char *line, int *line_size)
+int		check_line(char *line, int *line_size)
 {
 	int	i;
 
@@ -35,26 +35,24 @@ int	check_line(char *line, int *line_size)
 	return (0);
 }
 
-void		del_map_link(void *content, size_t content_size)
+void	del_map_link(void *content, size_t content_size)
 {
 	(void)content_size;
 	free(content);
 }
 
-int			clear_map(t_list **map)
+int		clear_map(t_list **map)
 {
 	ft_lstdel(map, del_map_link);
 	return (LINE_FORMAT_ERROR);
 }
 
-int			parser(t_list **map, char *file, int *map_height, int *map_width)
+int		parser(t_list **map, char *file, int *map_height, int *map_width)
 {
 	int		fd;
 	int		tmp;
 	char	*line;
 
-	*map_height = 0;
-	*map_width = 0;
 	if ((fd = open(file, O_RDONLY)) < 0)
 		return (OPEN_ERROR);
 	while (get_next_line(fd, &line) > 0)
@@ -71,11 +69,8 @@ int			parser(t_list **map, char *file, int *map_height, int *map_width)
 	if (close(fd) == -1)
 		return (CLOSE_ERROR);
 	if (*map_width < 2 || *map_height < 2)
-		return(FILE_FORMAT_ERROR);
+		return (FILE_FORMAT_ERROR);
 	put_log("[PARSE OK]", 0);
-	ft_putnbr(*map_width);
-	ft_putstr(" x ");
-	ft_putnbr(*map_height);
-	ft_putchar('\n');
+	put_map_size(*map_height, *map_width);
 	return (0);
 }

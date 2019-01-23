@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 11:46:10 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 15:10:07 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,14 +181,14 @@ void		fill_obj(t_env *data)
 				if (data->config.trace == 1 || (data->config.fill == 0 && data->config.debug == 0))
 					trace_z(vertices, data);
 				if (data->config.trace == 1 && data->config.centers == 1)
-					middle_of_face(new_coord2((data->moved_map[k + data->map_width + 1].x + data->moved_map[k].x + data->moved_map[k + 1].x + data->moved_map[k + data->map_width].x) / 4, (data->moved_map[k + data->map_width + 1].y + data->moved_map[k].y + data->moved_map[k + 1].y + data->moved_map[k + data->map_width].y) / 4), data->edges_color, *data);
+					middle_of_face(k, data->edges_color, *data);
 				find_vertices2(vertices2, k, data);
 				data->norm = ((vertices2[1].x - vertices2[0].x) * (vertices2[2].y - vertices2[0].y) - (vertices2[1].y - vertices2[0].y) * (vertices2[2].x - vertices2[0].x)) > 0 ? 1 : -1;
 				fill_ztriangle(vertices2[0], vertices2[1], vertices2[2], data);
 				if (data->config.trace == 1 || (data->config.fill == 0 && data->config.debug == 0))
 					trace_z(vertices2, data);
 				if (data->config.trace == 1 && data->config.centers == 1)
-					middle_of_face(new_coord2((data->moved_map[k + data->map_width + 1].x + data->moved_map[k].x + data->moved_map[k + 1].x + data->moved_map[k + data->map_width].x) / 4, (data->moved_map[k + data->map_width + 1].y + data->moved_map[k].y + data->moved_map[k + 1].y + data->moved_map[k + data->map_width].y) / 4), data->edges_color, *data);
+					middle_of_face(k, data->edges_color, *data);
 			}
 			x++;
 			k++;
