@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 19:02:35 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/23 19:04:51 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ int		key_release(int key, void *param)
 	return (0);
 }
 
-void	mouse_release1(int button, int x, int y, t_env *data)
+void	mouse_release1(int button, t_env *data)
 {
-	(void)x;
-	(void)y;
 	if (button == BUT2_KEY)
 	{
 		if (data->input_buffers.color_button == 2)
@@ -66,10 +64,8 @@ void	mouse_release1(int button, int x, int y, t_env *data)
 	redraw(data);
 }
 
-void	mouse_release0(int button, int x, int y, t_env *data)
+void	mouse_release0(int button, t_env *data)
 {
-	(void)x;
-	(void)y;
 	if (button == BUT1_KEY)
 	{
 		if (data->input_buffers.increase_color == 1)
@@ -92,7 +88,7 @@ void	mouse_release0(int button, int x, int y, t_env *data)
 				data->config.color = 0;
 		}
 	}
-	mouse_release1(button, x, y, data);
+	mouse_release1(button, data);
 }
 
 int		mouse_release(int button, int x, int y, void *param)
@@ -116,7 +112,7 @@ int		mouse_release(int button, int x, int y, void *param)
 			decrease_z(data);
 		}
 	}
-	mouse_release0(button, x, y, data);
+	mouse_release0(button, data);
 	return (0);
 }
 

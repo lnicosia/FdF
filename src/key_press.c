@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:30:01 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 18:40:52 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/24 14:55:46 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int		key_press3(int key, t_env *data)
 		data->background_color = data->config.black_white == 1 ? 0xFFFFFF :
 			0x404040;
 	}
-	else
-		ft_putendl("Coucou");
 	redraw(data);
 	return (0);
 }

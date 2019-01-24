@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 14:18:36 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/24 16:59:02 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	first_process(t_env *data)
 	trace_menu(*data);
 	set_ranges(data);
 	set_z_ranges(data);
+	center(data);
 	float_map(*data);
 	project_map(*data);
 	scale_map(*data);

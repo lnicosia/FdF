@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:24:50 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 15:00:56 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/24 17:06:46 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_fcoord2	pre_iso_project(t_coord3 c, t_env data)
 
 	(void)data;
 	res.x = ((float)c.x - (float)c.y) * COS_30;
-	res.y = ((float)c.x + (float)c.y) * SIN_30;
+	res.y = -((float)c.z * data.scale.z) + ((float)c.x + (float)c.y) * SIN_30;
 	return (res);
 }
 
@@ -28,7 +28,7 @@ t_fcoord2	pre_para_project(t_coord3 c, t_env data)
 
 	(void)data;
 	res.x = ((float)c.x - (float)c.y);
-	res.y = ((float)c.y);
+	res.y = (-(float)c.z * data.scale.z + (float)c.y);
 	return (res);
 }
 

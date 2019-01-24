@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 15:10:07 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/24 14:57:39 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,14 +178,14 @@ void		fill_obj(t_env *data)
 				find_vertices(vertices, k, data);
 				data->norm = ((vertices[1].x - vertices[0].x) * (vertices[2].y - vertices[0].y) - (vertices[1].y - vertices[0].y) * (vertices[2].x - vertices[0].x)) > 0 ? 1 : -1;
 				fill_ztriangle(vertices[0], vertices[1], vertices[2], data);
-				if (data->config.trace == 1 || (data->config.fill == 0 && data->config.debug == 0))
+				if (data->config.trace == 1 || (data->config.fill == 0 && data->config.debug == 0) || data->config.debug == 1)
 					trace_z(vertices, data);
 				if (data->config.trace == 1 && data->config.centers == 1)
 					middle_of_face(k, data->edges_color, *data);
 				find_vertices2(vertices2, k, data);
 				data->norm = ((vertices2[1].x - vertices2[0].x) * (vertices2[2].y - vertices2[0].y) - (vertices2[1].y - vertices2[0].y) * (vertices2[2].x - vertices2[0].x)) > 0 ? 1 : -1;
 				fill_ztriangle(vertices2[0], vertices2[1], vertices2[2], data);
-				if (data->config.trace == 1 || (data->config.fill == 0 && data->config.debug == 0))
+				if (data->config.trace == 1 || (data->config.fill == 0 && data->config.debug == 0) || data->config.debug == 1)
 					trace_z(vertices2, data);
 				if (data->config.trace == 1 && data->config.centers == 1)
 					middle_of_face(k, data->edges_color, *data);

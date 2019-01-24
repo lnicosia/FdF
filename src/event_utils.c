@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:05:06 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 16:53:27 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/24 16:59:27 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	swap_project_type(t_env *data, int type)
 		data->angle.z = 0;
 	}
 	set_ranges(data);
+	center(data);
 	process_all(data);
 }

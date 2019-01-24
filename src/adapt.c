@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:27:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 11:43:51 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/24 16:58:35 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ void	set_z_ranges(t_env *data)
 	printf("zmax: %d\n", data->zmax);
 	if (data->zmax != 0)
 	{
-		data->scale.z = (float)data->map_height / ((float)data->zmax * 10);
+		data->scale.z = (float)data->map_height / ((float)ft_abs(data->zmax) * 10);
 		printf("scale.z = %f\n", data->scale.z);
-		data->delta_scale.z = (float)data->config.s_height / (100 * data->zmax
+		data->delta_scale.z = (float)data->config.s_height / (100 * ft_abs(data->zmax)
 				* data->scale.x);
+		printf("delta.scale.z = %f\n", data->delta_scale.z);
 	}
-	ft_putstr(GREEN);
-	ft_putstr("[Z SCALED]");
-	ft_putendl(RESET);
+	put_log("[Z SCALED]", 0);
 }
 
 void	set_ranges(t_env *data)
@@ -61,7 +60,8 @@ void	set_ranges(t_env *data)
 	t_fcoord2	up;
 	t_fcoord2	down;
 
-	data->zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
+	//data->zmax = (max3(data->map, data->map_height * data->map_width, 'z'));
+	data->zmax = (max3(data->map, data->map_height * data->map_width, 'z') - min3(data->map, data->map_height * data->map_width, 'z'));
 	data->zlimit = data->zmax + 1;
 	up = data->pre_project[data->config.project_type](data->map[0], *data);
 	right = data->pre_project[data->config.project_type](data->map[data->
@@ -77,8 +77,5 @@ void	set_ranges(t_env *data)
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.6;
 	data->delta_scale.x = data->scale.x * 10 / 100;
 	printf("final scale = %f\n", data->scale.x);
-	center(data);
-	ft_putstr(GREEN);
-	ft_putstr("[MAP SCALED]");
-	ft_putendl(RESET);
+	put_log("[MAP SCALED]", 0);
 }

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 16:43:14 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/24 16:07:34 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 
 void	increase_z(t_env *data)
 {
-	data->scale.z += data->delta_scale.z;
-	process_all(data);
+	//if (data->fzmax * (data->scale.z + data->delta_scale.z) < data->zmax)
+	//{
+		data->scale.z += data->delta_scale.z;
+		process_all(data);
+	//}
 }
 
 void	decrease_z(t_env *data)

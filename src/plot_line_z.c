@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 11:47:07 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/24 14:59:08 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	fill_img_z(t_coord2 c, t_env data, int color, t_fcoord3 vertices[3])
 		color = 0xFF0000;
 	else
 		color = 0x00FF00;*/
+	if (data.config.debug == 1)
+		color = 0xFFFFFF;
 	if (c.x < 200 || c.x > data.config.s_width - 1 || c.y < 0 || c.y > data.config.s_height - 1)
 		return ;
 	//data.img.str[c.x + c.y * data.config.s_width] = color;
