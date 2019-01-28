@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:24:50 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/24 17:06:46 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 12:58:05 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_fcoord2	pre_pc_project(t_coord3 c, t_env data)
 {
 	t_fcoord2	res;
 
-	res.x = ((float)(c.x - data.map_width / 2) / (float)(-c.z + data.zmax + 1));
-	res.y = ((float)(c.y - data.map_height / 2) / (float)(-c.z + data.zmax +
+	res.x = ((float)(c.x - data.map_width / 2) / (float)(-c.z + data.zlimit + 1));
+	res.y = ((float)(c.y - data.map_height / 2) / (float)(-c.z + data.zlimit +
 				1));
 	return (res);
 }

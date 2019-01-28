@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:49:59 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 11:50:14 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 12:06:44 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,19 @@ int			max3(t_coord3 *map, int size, char mode)
 	}
 	return (res);
 }
-
-float		fmin3(t_fcoord3 *map, int size, char mode)
+int			cmin3(t_coord3 *map, int size, char mode)
 {
-	float	res;
-	float	tmp;
-	int		i;
+	int	res;
+	int	tmp;
+	int	i;
+	int	k;
 
 	if (mode != 'x' && mode != 'y' && mode != 'z')
 	{
 		ft_putendl("min3: invalid mode.");
 		return (0);
 	}
+	k = 0;
 	i = -1;
 	res = mode == 'x' ? map[0].x : 0;
 	res = mode == 'y' ? map[0].y : 0;
@@ -91,22 +92,25 @@ float		fmin3(t_fcoord3 *map, int size, char mode)
 			tmp = map[i].y;
 		else if (mode == 'z')
 			tmp = map[i].z;
+		k = res > tmp ? i : k;
 		res = res > tmp ? tmp : res;
 	}
-	return (res);
+	return (k);
 }
 
-float		fmax3(t_fcoord3 *map, int size, char mode)
+int			cmax3(t_coord3 *map, int size, char mode)
 {
-	float	res;
-	float	tmp;
-	int		i;
+	int	res;
+	int	tmp;
+	int	i;
+	int	k;
 
 	if (mode != 'x' && mode != 'y' && mode != 'z')
 	{
 		ft_putendl("max3: invalid mode.");
 		return (0);
 	}
+	k = 0;
 	i = -1;
 	res = mode == 'x' ? map[0].x : 0;
 	res = mode == 'y' ? map[0].y : 0;
@@ -119,7 +123,8 @@ float		fmax3(t_fcoord3 *map, int size, char mode)
 			tmp = map[i].y;
 		else if (mode == 'z')
 			tmp = map[i].z;
+		k = res < tmp ? i : k;
 		res = res < tmp ? tmp : res;
 	}
-	return (res);
+	return (k);
 }

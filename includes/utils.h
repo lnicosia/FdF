@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 16:59:09 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 12:23:51 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,14 +118,16 @@ typedef struct	s_env
 	float			*zbuffer;
 	int				map_height;
 	int				map_width;
-	int				zmax;
+	int				zrange;
 	int				zlimit;
 	int				*file_colors;
 	int				color_div;
 	int				norm;
+	int				zmax;
+	int				zmin;
+	float			area;
 	float			fzmax;
 	float			fzmin;
-	float			area;
 	t_fcoord3		zvertices;
 	t_coord2		drag_start;
 	t_coord2		drag_end;
@@ -186,6 +188,8 @@ t_coord3		new_coord3(int x, int y, int z);
 t_fcoord3		new_fcoord3(float x, float y, float z);
 int				min3(t_coord3 *map, int size, char mode);
 int				max3(t_coord3 *map, int size, char mode);
+int				cmin3(t_coord3 *map, int size, char mode);
+int				cmax3(t_coord3 *map, int size, char mode);
 float			fmin3(t_fcoord3 *map, int size, char mode);
 float			fmax3(t_fcoord3 *map, int size, char mode);
 void			x_rotation(t_env data);

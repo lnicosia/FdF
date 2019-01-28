@@ -1,20 +1,11 @@
-z increase quand changement reso
 Couleur tout <= 0 = background
-depassement de camera
 afficher triangles sauf sur les carres
 corriger middle_of_faces pour PC
 shift + M. shift + c. shift + p.
 opti
-new_window
 flatten ocean
-relief > int max
-limite zoom mini
 Passer toutes les actions en release au lieu de press
-colorier tour de la map
 readme
-Julia + fract bug
-Faces cachees/afficher les faces
-couleurs > gradients?
 Gestion de la memoire (free)
 Protection
 Norme

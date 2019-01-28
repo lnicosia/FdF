@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 11:40:22 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 11:43:02 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ unsigned int	get_color(int x, int y, t_env data)
 		z = data.map[y * data.map_width + x].z;
 		if (z <= 0)
 			return (0xC3E1FF);
-		if (z <= (data.zmax) / data.color_div)
+		if (z <= (data.zrange) / data.color_div)
 			return (0x344623);
-		if (z <= (2 * data.zmax) / data.color_div)
+		if (z <= (2 * data.zrange) / data.color_div)
 			return (0x7E9F5D);
-		if (z <= (3 * data.zmax) / data.color_div)
+		if (z <= (3 * data.zrange) / data.color_div)
 			return (0xB7CAA4);
-		if (z <= (4 * data.zmax) / data.color_div)
+		if (z <= (4 * data.zrange) / data.color_div)
 			return (0xCBAC83);
-		if (z <= (5 * data.zmax) / data.color_div)
+		if (z <= (5 * data.zrange) / data.color_div)
 			return (0x75552D);
-		return (z <= (6 * data.zmax) / data.color_div ? 0x583405 : (0xFFFFFF));
+		return (z <= (6 * data.zrange) / data.color_div ? 0x583405 : (0xFFFFFF));
 	}
 	else if (data.config.color == 1)
 		if (data.config.file_color == 1)

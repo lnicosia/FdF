@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 13:17:09 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 13:55:09 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 12:06:28 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void	init_values(t_env *data)
 	data->current_color = 0xFFFFFF;
 	data->norm = -1;
 	data->area = 0;
-	data->fzmax = 0;
-	data->fzmin = 0;
+	data->zmax = 0;
+	data->zmin = 0;
 	data->scale.x = 1;
 	data->scale.y = 1;
 	data->scale.z = 1;
 	data->start.x = 0;
 	data->start.y = 0;
-	data->zmax = 0;
+	data->zrange = 0;
 	data->zlimit = 0;
 	data->angle.x = 0;
 	data->angle.y = 0;

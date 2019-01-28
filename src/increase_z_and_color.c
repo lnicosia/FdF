@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/24 16:07:34 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 12:47:42 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,24 @@
 
 void	increase_z(t_env *data)
 {
-	//if (data->fzmax * (data->scale.z + data->delta_scale.z) < data->zmax)
-	//{
+	if (ft_abs(data->map[data->zmax].z * (data->scale.z + data->delta_scale.z))
+			< data->map_height && ft_abs(data->map[data->zmax].z *
+				(data->scale.z + data->delta_scale.z)) < data->map_width)
+	{
 		data->scale.z += data->delta_scale.z;
 		process_all(data);
-	//}
+	}
 }
 
 void	decrease_z(t_env *data)
 {
-	data->scale.z -= data->delta_scale.z;
-	process_all(data);
+	if (ft_abs(data->map[data->zmax].z * (data->scale.z - data->delta_scale.z))
+			< data->map_height && ft_abs(data->map[data->zmax].z *
+				(data->scale.z - data->delta_scale.z)) < data->map_width)
+	{
+		data->scale.z -= data->delta_scale.z;
+		process_all(data);
+	}
 }
 
 void	increase_color_div(t_env *data)
