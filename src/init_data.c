@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 13:17:09 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 18:15:50 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 18:17:40 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,6 @@ void	init_data(t_env *data)
 	init_values(data);
 	init_config(data);
 	init_buffers(data);
-	/*data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->config.s_width,
-			data->config.s_height, "FdF");
-	data->img_ptr = mlx_new_image(data->mlx_ptr, data->config.s_width,
-			data->config.s_height);
-	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
-&(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));
-	init_hook(data);*/
 	data->pre_project[ISO] = &pre_iso_project;
 	data->pre_project[PARA] = &pre_para_project;
 	data->pre_project[FLAT] = &pre_flat_project;
