@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:50:51 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 15:42:11 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 16:52:34 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ void	x_rotation(t_env data)
 			data.map_height / 2) * sin(data.angle.x) + (float)data.map[k].z *
 			data.scale.z * cos(data.angle.x);
 			data.rotated_map[k].x = (float)data.map[k].x - data.map_width / 2;
+			/*data.rotated_map[k].y = ((float)data.map[k].y -
+			data.map_height / 2) * cos(data.angle.x) + ((float)data.map[k].z *
+			data.scale.z + ((float)data.zrange / 2) * data.scale.z) * sin(data.angle.x);
+			data.rotated_map[k].z = (-(float)data.map[k].y +
+			data.map_height / 2) * sin(data.angle.x) + ((float)data.map[k].z *
+			data.scale.z + ((float)data.zrange / 2) * data.scale.z) * cos(data.angle.x);
+			data.rotated_map[k].x = (float)data.map[k].x - data.map_width / 2;*/
 			x++;
 			k++;
 		}
@@ -86,6 +93,7 @@ void	z_rotation(t_env data)
 				data.rotated_map[k].y * sin(data.angle.z) + data.map_width / 2;
 			data.rotated_map[k].y = tmp * sin(data.angle.z) +
 				data.rotated_map[k].y * cos(data.angle.z) + data.map_height / 2;
+			//data.rotated_map[k].z -= ((float)data.zrange / 2) * data.scale.z;
 			x++;
 			k++;
 		}

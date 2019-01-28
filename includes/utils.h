@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 12:23:51 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 16:53:53 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct	s_env
 	float			area;
 	float			fzmax;
 	float			fzmin;
+	t_fcoord2		center;
 	t_fcoord3		zvertices;
 	t_coord2		drag_start;
 	t_coord2		drag_end;

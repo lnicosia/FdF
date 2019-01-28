@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:31:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 14:14:51 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 15:29:20 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ void		project_map_pc(t_env data)
 			else
 			{
 				data.projected_map[k].x = (data.rotated_map[k].x -
-data.map_width / 2) / (-data.rotated_map[k].z + data.map[data.zmax].z + 1);
+data.map_width / 2) / (-data.rotated_map[k].z + data.map[data.zmax].z + data.zlimit + 1);
 				data.projected_map[k].y = (data.rotated_map[k].y -
-data.map_height / 2) / (-data.rotated_map[k].z + data.map[data.zmax].z + 1);
+data.map_height / 2) / (-data.rotated_map[k].z + data.map[data.zmax].z + data.zlimit + 1);
 			}
 			x++;
 			k++;

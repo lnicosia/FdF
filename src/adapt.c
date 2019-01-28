@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:27:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 15:16:10 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 16:53:59 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	center(t_env *data)
 			data->map_height - 1], *data);
 	center.x = data->scale.x * (right.x + left.x) / 2;
 	center.y = data->scale.x * (down.y + up.y) / 2;
+	data->center = center;
 	data->start.x = (float)data->config.s_width / 2 - center.x + 100;
 	data->start.y = (float)data->config.s_height / 2 - center.y;
 }
