@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 11:03:00 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 18:07:14 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int		main(int argc, char **argv)
 	}
 	init_arrays(&data);
 	init_map(data.map_height, data.map_width, map, &data);
-	init_zbuffer(&data);
 	first_process(&data);
 	return (0);
 }
