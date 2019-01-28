@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 18:07:14 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 18:16:34 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ void	first_process(t_env *data)
 	mlx_loop(data->mlx_ptr);
 }
 
+void	init_window(t_env *data)
+{
+	data->mlx_ptr = mlx_init();
+	data->win_ptr = mlx_new_window(data->mlx_ptr, data->config.s_width,
+			data->config.s_height, "FdF");
+	data->img_ptr = mlx_new_image(data->mlx_ptr, data->config.s_width,
+			data->config.s_height);
+	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
+			&(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));
+	init_hook(data);
+}
+
 int		main(int argc, char **argv)
 {
 	t_env		data;
@@ -60,6 +72,7 @@ int		main(int argc, char **argv)
 	}
 	init_arrays(&data);
 	init_map(data.map_height, data.map_width, map, &data);
+	init_window(&data);
 	first_process(&data);
 	return (0);
 }

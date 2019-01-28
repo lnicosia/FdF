@@ -1,4 +1,3 @@
-/dev/zero
 Couleur tout <= 0 = background
 afficher triangles sauf sur les carres
 corriger middle_of_faces pour PC
