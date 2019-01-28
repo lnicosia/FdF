@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:27:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 12:56:40 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/28 15:16:10 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	center(t_env *data)
 
 void	set_z_ranges(t_env *data)
 {
-	printf("zmax: %d\n", data->zrange);
+	printf("zrange: %d\n", data->zrange);
 	if (data->zrange != 0)
 	{
 		data->scale.z = (float)data->map_height / ((float)ft_abs(data->zrange) * 10);
@@ -65,6 +65,7 @@ void	set_ranges(t_env *data)
 	data->zlimit = ft_max(data->map[data->zmax].z, -data->map[data->zmin].z);
 	data->zlimit = ft_max(data->zlimit, data->map_height);
 	data->zlimit = ft_max(data->zlimit, data->map_width);
+	printf("zmax = %d\n", data->map[data->zmax].z);
 	up = data->pre_project[data->config.project_type](data->map[0], *data);
 	right = data->pre_project[data->config.project_type](data->map[data->
 			map_width - 1], *data);
@@ -74,9 +75,16 @@ void	set_ranges(t_env *data)
 	down = data->pre_project[data->config.project_type](data->map[data->
 			map_width *
 			data->map_height - 1], *data);
-	data->scale.x = (float)data->config.s_width / (right.x - left.x);
+	printf("right.x = %f\n", right.x);
+	printf("left.x = %f\n", left.x);
+	printf("down.y = %f\n", down.y);
+	printf("up.y = %f\n", up.y);
+	printf("right - left = %f\n", right.x - left.x);
+	printf("down - up = %f\n", down.y - up.y);
+	data->scale.x = (float)(data->config.s_width) / (right.x - left.x);
 	data->scale.y = (float)data->config.s_height / (down.y - up.y);
 	data->scale.x = ft_fmin(data->scale.x, data->scale.y) * 0.6;
+	//data->scale.x = 1;
 	data->delta_scale.x = data->scale.x * 10 / 150;
 	printf("final scale = %f\n", data->scale.x);
 	printf("zlimit = %d\n", data->zlimit);
