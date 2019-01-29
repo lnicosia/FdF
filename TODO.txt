@@ -2,7 +2,6 @@ Couleur tout <= 0 = background
 afficher triangles sauf sur les carres
 shift + M. shift + c. shift + p.
 opti
-flatten ocean
 Passer toutes les actions en release au lieu de press
 readme
 Gestion de la memoire (free)
