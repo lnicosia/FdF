@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:50:51 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 17:58:16 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/29 12:51:26 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ void	x_rotation(t_env data)
 		while (x < data.map_width)
 		{
 			data.rotated_map[k].y = ((float)data.map[k].y -
-			data.map_height / 2) * cos(data.angle.x) + (float)data.map[k].z *
-			data.scale.z * sin(data.angle.x);
+			((float)data.map_height - 1) / 2) * cos(data.angle.x) + ((float)data.map[k].z * data.scale.z - data.ztrans * data.scale.z) * sin(data.angle.x);
 			data.rotated_map[k].z = (-(float)data.map[k].y +
-			data.map_height / 2) * sin(data.angle.x) + (float)data.map[k].z *
-			data.scale.z * cos(data.angle.x);
-			data.rotated_map[k].x = (float)data.map[k].x - data.map_width / 2;
+			((float)data.map_height - 1) / 2) * sin(data.angle.x) + ((float)data.map[k].z * data.scale.z - data.ztrans * data.scale.z) * cos(data.angle.x);
+			data.rotated_map[k].x = (float)data.map[k].x - ((float)data.map_width - 1) / 2;
 			x++;
 			k++;
 		}
@@ -83,9 +81,10 @@ void	z_rotation(t_env data)
 		{
 			tmp = data.rotated_map[k].x;
 			data.rotated_map[k].x = data.rotated_map[k].x * cos(data.angle.z) -
-				data.rotated_map[k].y * sin(data.angle.z) + data.map_width / 2;
+				data.rotated_map[k].y * sin(data.angle.z) + ((float)data.map_width - 1) / 2;
 			data.rotated_map[k].y = tmp * sin(data.angle.z) +
-				data.rotated_map[k].y * cos(data.angle.z) + data.map_height / 2;
+				data.rotated_map[k].y * cos(data.angle.z) + ((float)data.map_height - 1) / 2;
+			data.rotated_map[k].z += data.ztrans * data.scale.z;
 			x++;
 			k++;
 		}

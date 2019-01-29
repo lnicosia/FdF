@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:27:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 18:04:13 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/29 12:48:56 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,25 @@ void	set_z_ranges(t_env *data)
 		printf("delta.scale.z = %f\n", data->delta_scale.z);
 	}
 	put_log("[Z SCALED]", 0);
+}
+
+void	set_ztrans(t_env *data)
+{
+	if (data->map_width % 2 == 1)
+	{
+		if (data->map_height % 2 == 1)
+			data->ztrans = data->map[data->map_width / 2 + (data->map_height / 2) * data->map_width].z;
+		else
+			data->ztrans = (data->map[data->map_width / 2 + ((data->map_height - 1) / 2) * data->map_width].z + data->map[data->map_width / 2 + ((data->map_height) / 2) * data->map_width].z) / 2;
+	}
+	else
+	{
+		if (data->map_height % 2 == 1)
+			data->ztrans = (data->map[(data->map_width - 1) / 2 + (data->map_height / 2) * data->map_width].z + data->map[data->map_width / 2 + (data->map_height / 2) * data->map_width].z) / 2;
+		else
+			data->ztrans = (data->map[(data->map_width - 1) / 2 + (data->map_height / 2) * data->map_width].z + data->map[data->map_width / 2 + (data->map_height / 2) * data->map_width].z + data->map[data->map_width / 2 + ((data->map_height - 1) / 2) * data->map_width].z + data->map[(data->map_width - 1) / 2 + ((data->map_height - 1) / 2) * data->map_width].z) / 4;
+	}
+	printf("z trans = %f\n", data->ztrans);
 }
 
 void	set_ranges(t_env *data)

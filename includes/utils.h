@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 16:53:53 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/29 12:44:46 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct	s_env
 	int				norm;
 	int				zmax;
 	int				zmin;
+	float			ztrans;
 	float			area;
 	float			fzmax;
 	float			fzmin;
@@ -168,6 +169,7 @@ int				clear_map(t_list **map);
 void			del_map_link(void *content, size_t content_size);
 int				init_map(int height, int width, t_list *r_map, t_env *data);
 void			set_ranges(t_env *data);
+void			set_ztrans(t_env *data);
 void			scale_map(t_env data);
 void			move_map(t_env data);
 void			move_map(t_env data);

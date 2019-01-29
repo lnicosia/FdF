@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 13:17:09 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 18:17:40 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/29 12:46:09 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	init_data(t_env *data)
 	data->delta_scale.z = 0;
 	data->drag_start = new_coord2(0, 0);
 	data->color_div = 25;
+	data->ztrans = 0;
 	init_values(data);
 	init_config(data);
 	init_buffers(data);
