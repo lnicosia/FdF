@@ -1,3 +1,4 @@
+deplacement lent
 Couleur tout <= 0 = background
 afficher triangles sauf sur les carres
 shift + M. shift + c. shift + p.

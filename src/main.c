@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/29 13:05:07 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/29 15:37:49 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	first_process(t_env *data)
 	project_map(*data);
 	scale_map(*data);
 	move_map(*data);
-	put_log("[MAP CENTERED]", 0);
 	trace(*data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	put_strings(*data);
