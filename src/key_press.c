@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:30:01 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/24 14:55:46 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/29 21:57:30 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		key_press3(int key, t_env *data)
 		if (data->config.color > 2)
 			data->config.color = 0;
 		data->input_buffers.color_button = 1;
+		redraw(data);
 	}
 	else if (key == M_KEY)
 	{
@@ -29,6 +30,7 @@ int		key_press3(int key, t_env *data)
 		if (data->config.centers > 2)
 			data->config.centers = 0;
 		data->input_buffers.centers_button = 1;
+		redraw(data);
 	}
 	else if (key == B_KEY)
 	{
@@ -37,7 +39,6 @@ int		key_press3(int key, t_env *data)
 		data->background_color = data->config.black_white == 1 ? 0xFFFFFF :
 			0x404040;
 	}
-	redraw(data);
 	return (0);
 }
 
@@ -47,21 +48,25 @@ int		key_press2(int key, t_env *data)
 	{
 		data->angle.y += 0.15707963267;
 		process_all(data);
+		redraw(data);
 	}
 	else if (key == NK5_KEY)
 	{
 		data->angle.y -= 0.15707963267;
 		process_all(data);
+		redraw(data);
 	}
 	else if (key == NK7_KEY)
 	{
 		data->angle.z += 0.15707963267;
 		process_all(data);
+		redraw(data);
 	}
 	else if (key == NK8_KEY)
 	{
 		data->angle.z -= 0.15707963267;
 		process_all(data);
+		redraw(data);
 	}
 	return (key_press3(key, data));
 }
@@ -76,21 +81,25 @@ int		key_press1(int key, t_env *data)
 	{
 		data->input_buffers.decrease_color = 1;
 		decrease_color_div(data);
+		redraw(data);
 	}
 	else if (key == CM_KEY)
 	{
 		data->input_buffers.increase_color = 1;
 		increase_color_div(data);
+		redraw(data);
 	}
 	else if (key == NK1_KEY)
 	{
 		data->angle.x += 0.15707963267;
 		process_all(data);
+		redraw(data);
 	}
 	else if (key == NK2_KEY)
 	{
 		data->angle.x -= 0.15707963267;
 		process_all(data);
+		redraw(data);
 	}
 	return (key_press2(key, data));
 }
@@ -133,11 +142,13 @@ int		key_press(int key, void *param)
 	{
 		data->input_buffers.increase = 1;
 		increase_z(data);
+		redraw(data);
 	}
 	else if (key == NKMN_KEY)
 	{
 		data->input_buffers.decrease = 1;
 		decrease_z(data);
+		redraw(data);
 	}
 	else if (key == UP_KEY)
 		move_up(data);

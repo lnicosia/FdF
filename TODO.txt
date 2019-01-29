@@ -1,11 +1,4 @@
-deplacement lent
-Couleur tout <= 0 = background
-afficher triangles sauf sur les carres
-shift + M. shift + c. shift + p.
+delta.z
 opti
-Passer toutes les actions en release au lieu de press
 readme
-Gestion de la memoire (free)
 Protection
-Norme
-Basic Errors (centrage map negative)
