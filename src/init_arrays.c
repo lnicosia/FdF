@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 13:54:14 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 14:02:26 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/29 20:40:58 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int		init_zbuffer(t_env *data)
 	int	j;
 	int	k;
 
-	if (!(data->zbuffer = (float*)malloc(sizeof(float) * data->config.s_width
-					* data->config.s_height)))
+	if (!(data->zbuffer = (float*)malloc(sizeof(float) * 2560 * 1440)))
 		return (0);
 	i = 0;
 	k = 0;
