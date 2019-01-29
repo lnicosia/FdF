@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:27:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/29 13:17:20 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/29 14:16:41 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ void	set_ztrans(t_env *data)
 		if (data->map_height % 2 == 1)
 		{
 			printf("impaire x impaire\n");
-			data->ztrans = data->map[data->map_width / 2 + (data->map_height / 2) * data->map_width].z;
+			data->ztrans = (float)data->map[data->map_width / 2 + (data->map_height / 2) * data->map_width].z;
 		}
 		else
 		{
 			printf("impaire x paire\n");
-			data->ztrans = (data->map[data->map_width / 2 + ((data->map_height - 1) / 2) * data->map_width].z + data->map[data->map_width / 2 + ((data->map_height) / 2) * data->map_width].z) / 2;
+			data->ztrans = ((float)data->map[data->map_width / 2 + ((data->map_height - 1) / 2) * data->map_width].z + (float)data->map[data->map_width / 2 + ((data->map_height) / 2) * data->map_width].z) / 2;
 		}
 	}
 	else
@@ -78,15 +78,16 @@ void	set_ztrans(t_env *data)
 		if (data->map_height % 2 == 1)
 		{
 			printf("paire x impaire\n");
-			data->ztrans = (data->map[(data->map_width - 1) / 2 + (data->map_height / 2) * data->map_width].z + data->map[data->map_width / 2 + (data->map_height / 2) * data->map_width].z) / 2;
+			data->ztrans = ((float)data->map[(data->map_width - 1) / 2 + (data->map_height / 2) * data->map_width].z + (float)data->map[data->map_width / 2 + (data->map_height / 2) * data->map_width].z) / 2;
 		}
 		else
 		{
 			printf("paire x paire\n");
-			data->ztrans = (data->map[(data->map_width - 1) / 2 + (data->map_height / 2) * data->map_width].z + data->map[data->map_width / 2 + (data->map_height / 2) * data->map_width].z + data->map[data->map_width / 2 + ((data->map_height - 1) / 2) * data->map_width].z + data->map[(data->map_width - 1) / 2 + ((data->map_height - 1) / 2) * data->map_width].z) / 4;
+			data->ztrans = ((float)data->map[(data->map_width - 1) / 2 + (data->map_height - 1) / 2 * data->map_width].z + (float)data->map[data->map_width / 2 + (data->map_height - 1) / 2 * data->map_width].z + (float)data->map[(data->map_width - 1) / 2 + data->map_height / 2 * data->map_width].z + (float)data->map[data->map_width / 2 + data->map_height / 2 * data->map_width].z) / 4;
 		}
 	}
-	printf("[%d][%d]\n[%d][%d]\n", (data->map_width - 1) / 2 + ((data->map_height - 1) / 2) * data->map_width, data->map_width / 2 + ((data->map_height - 1) / 2) * data->map_width, (data->map_width - 1) / 2 + (data->map_height / 2) * data->map_width, data->map_width / 2 + (data->map_height / 2) * data->map_width);
+	printf("[x][y]:\n[%d][%d] [%d][%d]\n[%d][%d] [%d][%d]\n", (data->map_height - 1) / 2, (data->map_width - 1) / 2, (data->map_height - 1) / 2, data->map_width / 2, data->map_height / 2, (data->map_width - 1) / 2, data->map_height / 2, data->map_width / 2);
+	printf("[k]:\n[%d][%d]\n[%d][%d]\n", (data->map_width - 1) / 2 + ((data->map_height - 1) / 2) * data->map_width, data->map_width / 2 + ((data->map_height - 1) / 2) * data->map_width, (data->map_width - 1) / 2 + (data->map_height / 2) * data->map_width, data->map_width / 2 + (data->map_height / 2) * data->map_width);
 	printf("z trans = %f\n", data->ztrans);
 }
 
