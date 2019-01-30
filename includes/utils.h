@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/29 12:44:46 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 18:39:36 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,9 @@ typedef struct	s_env
 	unsigned int	centers_color;
 	unsigned int	picked_color;
 	unsigned int	current_color;
+	unsigned int	red;
+	unsigned int	green;
+	unsigned int	blue;
 	t_config		config;
 	t_input_buffers	input_buffers;
 	float			*zbuffer;
@@ -129,6 +132,9 @@ typedef struct	s_env
 	float			area;
 	float			fzmax;
 	float			fzmin;
+	float			light_range;
+	float			c0_c2;
+	float			c1_c2;
 	t_fcoord2		center;
 	t_fcoord3		zvertices;
 	t_coord2		drag_start;
@@ -215,5 +221,6 @@ int				init_zbuffer(t_env *data);
 int				init_arrays(t_env *data);
 void			put_log(const char *str, int mode);
 void			put_map_size(int height, int width);
+void			black_white_mode(t_env *data);
 
 #endif

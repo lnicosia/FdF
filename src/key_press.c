@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:30:01 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/29 21:57:30 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 16:22:58 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@
 
 int		key_press3(int key, t_env *data)
 {
-	if (key == C_KEY)
+	if (key == NK8_KEY)
+	{
+		data->angle.z -= 0.15707963267;
+		process_all(data);
+		redraw(data);
+	}
+	else if (key == C_KEY)
 	{
 		data->config.color++;
 		if (data->config.color > 2)
@@ -33,18 +39,19 @@ int		key_press3(int key, t_env *data)
 		redraw(data);
 	}
 	else if (key == B_KEY)
-	{
-		data->config.black_white = data->config.black_white == 1 ? 0 : 1;
-		data->centers_color = data->config.black_white == 1 ? 0 : 0xFFFFFF;
-		data->background_color = data->config.black_white == 1 ? 0xFFFFFF :
-			0x404040;
-	}
+		black_white_mode(data);
 	return (0);
 }
 
 int		key_press2(int key, t_env *data)
 {
-	if (key == NK4_KEY)
+	if (key == NK2_KEY)
+	{
+		data->angle.x -= 0.15707963267;
+		process_all(data);
+		redraw(data);
+	}
+	else if (key == NK4_KEY)
 	{
 		data->angle.y += 0.15707963267;
 		process_all(data);
@@ -59,12 +66,6 @@ int		key_press2(int key, t_env *data)
 	else if (key == NK7_KEY)
 	{
 		data->angle.z += 0.15707963267;
-		process_all(data);
-		redraw(data);
-	}
-	else if (key == NK8_KEY)
-	{
-		data->angle.z -= 0.15707963267;
 		process_all(data);
 		redraw(data);
 	}
@@ -92,12 +93,6 @@ int		key_press1(int key, t_env *data)
 	else if (key == NK1_KEY)
 	{
 		data->angle.x += 0.15707963267;
-		process_all(data);
-		redraw(data);
-	}
-	else if (key == NK2_KEY)
-	{
-		data->angle.x -= 0.15707963267;
 		process_all(data);
 		redraw(data);
 	}
@@ -136,9 +131,8 @@ int		key_press(int key, void *param)
 	t_env	*data;
 
 	data = (t_env*)param;
-	if (key == ESC_KEY)
-		data->input_buffers.esc = 0;
-	else if (key == NKPL_KEY)
+	data->input_buffers.esc = key == ESC_KEY ? 0 : data->input_buffers.esc;
+	if (key == NKPL_KEY)
 	{
 		data->input_buffers.increase = 1;
 		increase_z(data);

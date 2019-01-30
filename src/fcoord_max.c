@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 12:15:48 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 12:23:40 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 15:54:05 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ float	fmin3(t_fcoord3 *map, int size, char mode)
 {
 	float	res;
 	float	tmp;
-	int	i;
+	int		i;
 
 	if (mode != 'x' && mode != 'y' && mode != 'z')
 	{

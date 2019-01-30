@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/29 15:37:49 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 17:51:59 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,21 @@ void	first_process(t_env *data)
 	mlx_loop(data->mlx_ptr);
 }
 
-void	init_window(t_env *data)
+int		init_window(t_env *data)
 {
-	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->config.s_width,
-			data->config.s_height, "FdF");
-	data->img_ptr = mlx_new_image(data->mlx_ptr, data->config.s_width,
-			data->config.s_height);
+	if (!(data->mlx_ptr = mlx_init()))
+		return (0);
+	if (!(data->win_ptr = mlx_new_window(data->mlx_ptr, data->config.s_width,
+			data->config.s_height, "FdF")))
+		return (0);
+	if (!(data->img_ptr = mlx_new_image(data->mlx_ptr, data->config.s_width,
+			data->config.s_height)))
+		return (0);
 	data->img.str = (unsigned int*)mlx_get_data_addr(data->img_ptr,
-			&(data->img.bit_per_pixels), &(data->img.size_line), &(data->img.endian));
+			&(data->img.bit_per_pixels), &(data->img.size_line),
+			&(data->img.endian));
 	init_hook(data);
+	return (1);
 }
 
 int		main(int argc, char **argv)
@@ -70,9 +75,12 @@ int		main(int argc, char **argv)
 		ft_putchar('\n');
 		return (ret);
 	}
-	init_arrays(&data);
-	init_map(data.map_height, data.map_width, map, &data);
-	init_window(&data);
+	if (init_arrays(&data) == 0)
+		return (1);
+	if (init_map(data.map_height, data.map_width, map, &data) == 0)
+		return (1);
+	if (init_window(&data) == 0)
+		return (1);
 	first_process(&data);
 	return (0);
 }

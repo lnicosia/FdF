@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 11:43:02 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 16:21:37 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,11 @@ unsigned int	get_color(int x, int y, t_env data)
 			return (0xCBAC83);
 		if (z <= (5 * data.zrange) / data.color_div)
 			return (0x75552D);
-		return (z <= (6 * data.zrange) / data.color_div ? 0x583405 : (0xFFFFFF));
+		return (z <= (6 * data.zrange) / data.color_div ? 0x583405 :
+				(0xFFFFFF));
 	}
-	else if (data.config.color == 1)
-		if (data.config.file_color == 1)
-			return (data.file_colors[y * data.map_width + x]);
-	return (data.picked_color);
+	return ((data.config.color == 1 && data.config.file_color == 1) ?
+			data.file_colors[y * data.map_width + x] : data.picked_color);
 }
 
 void			scale_map(t_env data)
@@ -135,12 +134,13 @@ void			trace_aa(t_env data)
 		{
 			if (x < data.map_width - 1)
 				plot_line_aa(new_coord2(data.moved_map[k].x, data.moved_map[k]
-			.y), new_coord2(data.moved_map[k + 1].x, data.moved_map[k + 1].y),
-						data, get_color(x, y, data));
+					.y), new_coord2(data.moved_map[k + 1].x,
+					data.moved_map[k + 1].y), data, get_color(x, y, data));
 			if (y < data.map_height - 1)
 				plot_line_aa(new_coord2(data.moved_map[k].x,
-data.moved_map[k].y), new_coord2(data.moved_map[k + data.map_width].x,
-data.moved_map[k + data.map_width].y), data, get_color(x, y, data));
+					data.moved_map[k].y), new_coord2(data.moved_map[k +
+					data.map_width].x, data.moved_map[k + data.map_width].y),
+						data, get_color(x, y, data));
 			x++;
 			k++;
 		}

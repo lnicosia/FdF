@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:49:59 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 12:06:44 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 16:11:56 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int			max3(t_coord3 *map, int size, char mode)
 	}
 	return (res);
 }
+
 int			cmin3(t_coord3 *map, int size, char mode)
 {
 	int	res;
@@ -86,12 +87,9 @@ int			cmin3(t_coord3 *map, int size, char mode)
 	res = mode == 'z' ? map[0].z : 0;
 	while (++i < size)
 	{
-		if (mode == 'x')
-			tmp = map[i].x;
-		else if (mode == 'y')
-			tmp = map[i].y;
-		else if (mode == 'z')
-			tmp = map[i].z;
+		tmp = mode == 'x' ? map[i].x : tmp;
+		tmp = mode == 'y' ? map[i].y : tmp;
+		tmp = mode == 'z' ? map[i].z : tmp;
 		k = res > tmp ? i : k;
 		res = res > tmp ? tmp : res;
 	}
@@ -117,12 +115,9 @@ int			cmax3(t_coord3 *map, int size, char mode)
 	res = mode == 'z' ? map[0].z : 0;
 	while (++i < size)
 	{
-		if (mode == 'x')
-			tmp = map[i].x;
-		else if (mode == 'y')
-			tmp = map[i].y;
-		else if (mode == 'z')
-			tmp = map[i].z;
+		tmp = mode == 'x' ? map[i].x : tmp;
+		tmp = mode == 'y' ? map[i].y : tmp;
+		tmp = mode == 'z' ? map[i].z : tmp;
 		k = res < tmp ? i : k;
 		res = res < tmp ? tmp : res;
 	}

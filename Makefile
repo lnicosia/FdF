@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2019/01/29 21:07:04 by lnicosia         ###   ########.fr        #
+#    Updated: 2019/01/30 16:23:43 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC_RAW = main.c plot_line.c hook_more.c parser.c zoom.c event_utils.c \
 	  coord_utils.c init_map.c trace.c increase_z_and_color.c map_movement.c \
 	  plot_line_aa.c hook_key_and_mouse.c math.c rotate.c debug_utils.c \
 	  fill_poly.c coord_stack.c menu.c put_strings.c background.c \
-	  color_pickers.c print_centers.c plot_line_z.c \
+	  color_pickers.c print_centers.c plot_line_z.c black_white_mode.c \
 	  fill_poly_maths.c pre_project.c adapt.c project.c coord_max.c \
 	  screen_utils.c init_data.c init_arrays.c logs.c put_buttons.c \
 	  put_button_strings.c key_press.c mouse_press.c fcoord_max.c
@@ -58,7 +58,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE)
 
 $(BIN_DIR)/$(NAME): $(OBJ) $(LIBFT)
 	@gcc $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
-	@echo ${GREEN}"[INFO] Compiled [$(NAME)] executable with success!"${RESET}
+	@echo ${GREEN}"[INFO] Compiled '$(NAME)' executable with success!"${RESET}
 
 clean: 
 	@rm -f $(OBJ)

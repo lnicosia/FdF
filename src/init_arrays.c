@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 13:54:14 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/29 20:40:58 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 17:19:12 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,19 @@ int		init_zbuffer(t_env *data)
 
 int		init_arrays(t_env *data)
 {
-	init_zbuffer(data);
-	data->file_colors = (int*)malloc(sizeof(int) * data->map_width * data->
-			map_height);
-	data->rotated_map = (t_fcoord3*)malloc(sizeof(*data->rotated_map) *
-			data->map_width * data->map_height);
-	data->projected_map = (t_fcoord2*)malloc(sizeof(*data->projected_map) *
-			data->map_width * data->map_height);
-	data->moved_map = (t_coord2*)malloc(sizeof(*data->moved_map) * data->
-			map_width * data->map_height);
+	if (init_zbuffer(data) == 0)
+		return (0);
+	if (!(data->file_colors = (int*)malloc(sizeof(int) * data->map_width *
+		data->map_height)))
+		return (0);
+	if (!(data->rotated_map = (t_fcoord3*)malloc(sizeof(*data->rotated_map) *
+		data->map_width * data->map_height)))
+			return (0);
+	if (!(data->projected_map = (t_fcoord2*)malloc(sizeof(*data->
+		projected_map) * data->map_width * data->map_height)))
+		return (0);
+	if (!(data->moved_map = (t_coord2*)malloc(sizeof(*data->moved_map) * data->
+		map_width * data->map_height)))
+		return (0);
 	return (1);
 }

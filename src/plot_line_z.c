@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/24 14:59:08 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 18:45:29 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	fill_img_z(t_coord2 c, t_env data, int color, t_fcoord3 vertices[3])
 	t_fcoord3	w;
 
 	/*if (data.norm == -1)
-		color = 0xFF0000;
-	else
-		color = 0x00FF00;*/
+	  color = 0xFF0000;
+	  else
+	  color = 0x00FF00;*/
 	if (data.config.debug == 1)
 		color = 0xFFFFFF;
 	if (c.x < 200 || c.x > data.config.s_width - 1 || c.y < 0 || c.y > data.config.s_height - 1)
@@ -31,35 +31,15 @@ void	fill_img_z(t_coord2 c, t_env data, int color, t_fcoord3 vertices[3])
 	w.x = edge(vertices[0], vertices[1], new_fcoord3(c.x, c.y, 0));
 	w.y = edge(vertices[1], vertices[2], new_fcoord3(c.x, c.y, 0));
 	w.z = edge(vertices[2], vertices[0], new_fcoord3(c.x, c.y, 0));
-	if ((data.norm == -1 && w.x >= 0 && w.y >= 0 && w.z >= 0) || (data.norm == 1 && w.x <= 0 && w.y <= 0 && w.z <= 0))
-	//if (data.norm == -1)
+	w.x /= data.area;
+	w.y /= data.area;
+	w.z /= data.area;
+	//z = -(w.x * vertices[2].z + w.y * vertices[0].z + w.z * vertices[1].z);
+	z = -(vertices[2].z + w.y * data.c0_c2 + w.z * data.c1_c2);
+	if (z <= data.zbuffer[c.x + c.y * data.config.s_width])
 	{
-		w.x /= data.area;
-		w.y /= data.area;
-		w.z /= data.area;
-		//z = -(w.x * vertices[2].z + w.y * vertices[0].z + w.z * vertices[1].z);
-		z = -(vertices[2].z + w.y * (vertices[0].z - vertices[2].z) + w.z * (vertices[1].z - vertices[2].z));
-		//z = -((vertices[2].z + vertices[0].z + vertices[1].z) / 3);
-		if (z <= data.zbuffer[c.x + c.y * data.config.s_width])
-		{
-			data.zbuffer[c.x + c.y * data.config.s_width] = z;
-			data.img.str[c.x + c.y * data.config.s_width] = color;
-		}
-	}
-	else if ((data.norm == -1 && (w.x <= 0 || w.y <= 0 || w.z <= 0)) || (data.norm == 1 && (w.x >= 0 || w.y >= 0 || w.z >= 0)))
-	{
-		//data.img.str[c.x + c.y * data.config.s_width] = color;
-		w.x /= data.area;
-		w.y /= data.area;
-		w.z /= data.area;
-		//z = -(w.x * vertices[2].z + w.y * vertices[0].z + w.z * vertices[1].z);
-		z = -(vertices[2].z + w.y * (vertices[0].z - vertices[2].z) + w.z * (vertices[1].z - vertices[2].z));
-		//z = -((vertices[2].z + vertices[0].z + vertices[1].z) / 3);
-		if (z <= data.zbuffer[c.x + c.y * data.config.s_width])
-		{
-			data.zbuffer[c.x + c.y * data.config.s_width] = z;
-			data.img.str[c.x + c.y * data.config.s_width] = color;
-		}
+		data.zbuffer[c.x + c.y * data.config.s_width] = z;
+		data.img.str[c.x + c.y * data.config.s_width] = color;
 	}
 }
 

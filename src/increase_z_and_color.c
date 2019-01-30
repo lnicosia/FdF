@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 12:47:42 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 17:09:15 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 void	increase_z(t_env *data)
 {
 	if (ft_abs(data->map[data->zmax].z * (data->scale.z + data->delta_scale.z))
-			< data->map_height && ft_abs(data->map[data->zmax].z *
-				(data->scale.z + data->delta_scale.z)) < data->map_width)
+			< data->zlimit)
 	{
 		data->scale.z += data->delta_scale.z;
 		process_all(data);
@@ -28,8 +27,7 @@ void	increase_z(t_env *data)
 void	decrease_z(t_env *data)
 {
 	if (ft_abs(data->map[data->zmax].z * (data->scale.z - data->delta_scale.z))
-			< data->map_height && ft_abs(data->map[data->zmax].z *
-				(data->scale.z - data->delta_scale.z)) < data->map_width)
+			< data->zlimit)
 	{
 		data->scale.z -= data->delta_scale.z;
 		process_all(data);

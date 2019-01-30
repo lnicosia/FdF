@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 12:21:09 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 18:46:03 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,8 @@ void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env *data)
 				w.x /= data->area;
 				w.y /= data->area;
 				w.z /= data->area;
-				//z = -(w.x * c2.z + w.y * c0.z + w.z * c1.z);
-				z = -(c2.z + w.y * (c0.z - c2.z) + w.z * (c1.z - c2.z));
-				light = (ft_fabs(-z - data->fzmin) / ft_fabs(data->fzmax - data->fzmin));
+				z = -(c2.z + w.y * data->c0_c2 + w.z * data->c1_c2);
+				light = ft_fabs(-z - data->fzmin) / data->light_range;
 				if (data->config.debug == 1)
 					//light = light * 191 + 64;
 					light = light * 255;
@@ -79,7 +78,7 @@ void		fill_ztriangle(t_fcoord3 c0, t_fcoord3 c1, t_fcoord3 c2, t_env *data)
 						data->img.str[p.x + p.y * data->config.s_width] = 65536 * (int)light + 256 * (int)light + (int)light;
 					else
 						if (data->config.light == 1)
-							data->img.str[p.x + p.y * data->config.s_width] = 65536 * (int)(light * (data->current_color >> 16 & 0xFF)) + 256 * (int)(light * (data->current_color >> 8 & 0xFF)) + (int)(light * (data->current_color & 0xFF));
+							data->img.str[p.x + p.y * data->config.s_width] = 65536 * (int)(light * data->red) + 256 * (int)(light * data->green) + (int)(light * data->blue);
 						else
 							data->img.str[p.x + p.y * data->config.s_width] = data->current_color;
 				}
@@ -154,6 +153,13 @@ void		trace_z(t_fcoord3 vertices[3], t_env *data)
 		plot_line_z(line, *data, data->edges_color, vertices);
 }
 
+void		get_current_color(t_env *data)
+{
+	data->red = data->current_color >> 16 & 0xFF;
+	data->green = data->current_color >> 8 & 0xFF;
+	data->blue = data->current_color & 0xFF;
+}
+
 void		fill_obj(t_env *data)
 {
 	int			x;
@@ -175,7 +181,10 @@ void		fill_obj(t_env *data)
 					data->current_color = get_color(x, y, *data);
 				else
 					data->current_color = data->background_color;
+				get_current_color(data);
 				find_vertices(vertices, k, data);
+				data->c0_c2 = vertices[0].z - vertices[2].z;
+				data->c1_c2 = vertices[1].z - vertices[2].z;
 				data->norm = ((vertices[1].x - vertices[0].x) * (vertices[2].y - vertices[0].y) - (vertices[1].y - vertices[0].y) * (vertices[2].x - vertices[0].x)) > 0 ? 1 : -1;
 				fill_ztriangle(vertices[0], vertices[1], vertices[2], data);
 				if (data->config.trace == 1 || (data->config.fill == 0 && data->config.debug == 0) || data->config.debug == 1)
@@ -183,6 +192,8 @@ void		fill_obj(t_env *data)
 				if (data->config.trace == 1 && data->config.centers == 1)
 					middle_of_face(k, data->edges_color, *data);
 				find_vertices2(vertices2, k, data);
+				data->c0_c2 = vertices2[0].z - vertices2[2].z;
+				data->c1_c2 = vertices2[1].z - vertices2[2].z;
 				data->norm = ((vertices2[1].x - vertices2[0].x) * (vertices2[2].y - vertices2[0].y) - (vertices2[1].y - vertices2[0].y) * (vertices2[2].x - vertices2[0].x)) > 0 ? 1 : -1;
 				fill_ztriangle(vertices2[0], vertices2[1], vertices2[2], data);
 				if (data->config.trace == 1 || (data->config.fill == 0 && data->config.debug == 0) || data->config.debug == 1)

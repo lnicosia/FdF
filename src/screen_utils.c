@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:59:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/29 15:39:49 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 18:14:09 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ void	set_screen(t_env *data)
 	set_background(*data);
 	if (data->config.project_type == PC)
 	{
-		data->fzmax = fmax3(data->rotated_map, data->map_height * data->map_width, 'z');
-		data->fzmin = fmin3(data->rotated_map, data->map_height * data->map_width, 'z');
+		data->fzmax = fmax3(data->rotated_map, data->map_height * data->
+				map_width, 'z');
+		data->fzmin = fmin3(data->rotated_map, data->map_height * data->
+				map_width, 'z');
+		data->light_range = ft_fabs(data->fzmax - data->fzmin);
 		fill_obj(data);
 	}
 	else

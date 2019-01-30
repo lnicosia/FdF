@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:11:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 14:58:20 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 17:53:00 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		parser(t_list **map, char *file, int *map_height, int *map_width)
 	int		fd;
 	int		tmp;
 	char	*line;
+	t_list	*lst_tmp;
 
 	if ((fd = open(file, O_RDONLY)) < 0)
 		return (OPEN_ERROR);
@@ -63,7 +64,9 @@ int		parser(t_list **map, char *file, int *map_height, int *map_width)
 			return (LINE_ERROR);
 		*map_width = tmp;
 		(*map_height)++;
-		ft_lstpushback(map, ft_lstnew(line, ft_strlen(line) + 1));
+		if (!(lst_tmp = ft_lstnew(line, ft_strlen(line) + 1)))
+			return (MALLOC_ERROR);
+		ft_lstpushback(map, lst_tmp);
 		ft_strdel(&line);
 	}
 	if (close(fd) == -1)
