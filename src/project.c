@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:31:26 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/29 20:48:25 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/30 12:10:58 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,10 @@ void		project_map_pc(t_env data)
 		while (x < data.map_width)
 		{
 			tmp = data.rotated_map[k].x;
-			/*if (data.rotated_map[k].z >= data.zlimit)
-			{
-				data.projected_map[k].x = -1;
-				data.projected_map[k].y = -1;
-			}
-			else
-			{*/
-				data.projected_map[k].x = (data.rotated_map[k].x -
-data.map_width / 2) / (-data.rotated_map[k].z + data.map[data.zmax].z + data.zlimit + 1);
-				data.projected_map[k].y = (data.rotated_map[k].y -
-data.map_height / 2) / (-data.rotated_map[k].z + data.map[data.zmax].z + data.zlimit + 1);
-			//}
+			data.projected_map[k].x = (data.rotated_map[k].x -
+					data.map_width / 2) / (-(data.rotated_map[k].z + data.ztrans * data.scale.z) + data.map[data.zmax].z + data.zlimit + 1);
+			data.projected_map[k].y = (data.rotated_map[k].y -
+					data.map_height / 2) / (-(data.rotated_map[k].z + data.ztrans * data.scale.z) + data.map[data.zmax].z + data.zlimit + 1);
 			x++;
 			k++;
 		}
