@@ -6,14 +6,15 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 12:09:56 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/21 12:49:04 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/31 17:46:55 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILL_POLY_UTILS_H
 # define FILL_POLY_UTILS_H
 
-void	plot_line_z(t_coord2 c[2], t_env data, int color, t_fcoord3 vertices[3]);
+void	plot_line_z(t_coord2 c[2], t_env data, int color,
+		t_fcoord3 vertices[3]);
 int		min_3(int a, int b, int c);
 int		max_3(int a, int b, int c);
 int		bottom_vertex(float a, float b, float c, float d);

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 16:20:15 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/07 17:04:38 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/31 17:46:43 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct	s_coord_stack
 	struct s_coord_stack	*next;
 }				t_coord_stack;
 
-void		push_stack(t_coord_stack **stack, int x, int y);
-int			pop_stack(t_coord_stack **stack, int *x, int *y);
+void			push_stack(t_coord_stack **stack, int x, int y);
+int				pop_stack(t_coord_stack **stack, int *x, int *y);
 
 #endif

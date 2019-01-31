@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:33:53 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/30 18:45:29 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/31 15:33:54 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,17 @@ void	fill_img_z(t_coord2 c, t_env data, int color, t_fcoord3 vertices[3])
 	float		z;
 	t_fcoord3	w;
 
-	/*if (data.norm == -1)
-	  color = 0xFF0000;
-	  else
-	  color = 0x00FF00;*/
 	if (data.config.debug == 1)
 		color = 0xFFFFFF;
-	if (c.x < 200 || c.x > data.config.s_width - 1 || c.y < 0 || c.y > data.config.s_height - 1)
+	if (c.x < 200 || c.x > data.config.s_width - 1 || c.y < 0 || c.y >
+			data.config.s_height - 1)
 		return ;
-	//data.img.str[c.x + c.y * data.config.s_width] = color;
 	w.x = edge(vertices[0], vertices[1], new_fcoord3(c.x, c.y, 0));
 	w.y = edge(vertices[1], vertices[2], new_fcoord3(c.x, c.y, 0));
 	w.z = edge(vertices[2], vertices[0], new_fcoord3(c.x, c.y, 0));
 	w.x /= data.area;
 	w.y /= data.area;
 	w.z /= data.area;
-	//z = -(w.x * vertices[2].z + w.y * vertices[0].z + w.z * vertices[1].z);
 	z = -(vertices[2].z + w.y * data.c0_c2 + w.z * data.c1_c2);
 	if (z <= data.zbuffer[c.x + c.y * data.config.s_width])
 	{
@@ -43,7 +38,8 @@ void	fill_img_z(t_coord2 c, t_env data, int color, t_fcoord3 vertices[3])
 	}
 }
 
-void	plot_line_low_z(t_coord2 c[2], t_env data, int color, t_fcoord3 vertices[3])
+void	plot_line_low_z(t_coord2 c[2], t_env data, int color,
+		t_fcoord3 vertices[3])
 {
 	int	dx;
 	int	dy;
@@ -65,7 +61,8 @@ void	plot_line_low_z(t_coord2 c[2], t_env data, int color, t_fcoord3 vertices[3]
 	}
 }
 
-void	plot_line_high_z(t_coord2 c[2], t_env data, int color, t_fcoord3 vertices[3])
+void	plot_line_high_z(t_coord2 c[2], t_env data, int color,
+		t_fcoord3 vertices[3])
 {
 	int	dx;
 	int	dy;

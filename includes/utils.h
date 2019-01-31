@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/30 18:39:36 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/31 17:44:58 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,5 +222,8 @@ int				init_arrays(t_env *data);
 void			put_log(const char *str, int mode);
 void			put_map_size(int height, int width);
 void			black_white_mode(t_env *data);
+void			clear_zbuffer(t_env *data);
+void			fill_triangle(t_fcoord3 v[3], t_env *data);
+void			trace_z(t_fcoord3 v[3], t_env *data);
 
 #endif

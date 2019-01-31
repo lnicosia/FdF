@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 13:54:14 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/30 17:19:12 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/31 15:27:58 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		init_arrays(t_env *data)
 		return (0);
 	if (!(data->rotated_map = (t_fcoord3*)malloc(sizeof(*data->rotated_map) *
 		data->map_width * data->map_height)))
-			return (0);
+		return (0);
 	if (!(data->projected_map = (t_fcoord2*)malloc(sizeof(*data->
 		projected_map) * data->map_width * data->map_height)))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 17:11:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/30 17:53:00 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/31 15:26:46 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,17 @@ int		clear_map(t_list **map)
 	return (LINE_FORMAT_ERROR);
 }
 
+int		close_parser(int fd, int height, int width)
+{
+	if (close(fd) == -1)
+		return (CLOSE_ERROR);
+	if (width < 2 || height < 2)
+		return (FILE_FORMAT_ERROR);
+	put_log("[PARSE OK]", 0);
+	put_map_size(height, width);
+	return (0);
+}
+
 int		parser(t_list **map, char *file, int *map_height, int *map_width)
 {
 	int		fd;
@@ -69,11 +80,5 @@ int		parser(t_list **map, char *file, int *map_height, int *map_width)
 		ft_lstpushback(map, lst_tmp);
 		ft_strdel(&line);
 	}
-	if (close(fd) == -1)
-		return (CLOSE_ERROR);
-	if (*map_width < 2 || *map_height < 2)
-		return (FILE_FORMAT_ERROR);
-	put_log("[PARSE OK]", 0);
-	put_map_size(*map_height, *map_width);
-	return (0);
+	return (close_parser(fd, *map_height, *map_width));
 }

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/30 17:51:59 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/01/31 15:23:41 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ int		main(int argc, char **argv)
 			!= 0)
 	{
 		put_log("[PARSE ERROR]", 1);
-		ft_putnbr(ret);
-		ft_putchar('\n');
 		return (ret);
 	}
 	if (init_arrays(&data) == 0)
