@@ -28,9 +28,11 @@ make
 run ./fdf with one of any file given in test_maps/
 ```
 
-## Functionnalities
+## Features
 		
 * Map scaling and centering
+
+* Window resolution
 
 * 4 Displays: Iso, para, flat and perspective correct
 ```
@@ -67,9 +69,59 @@ OR
 Mouse drag (X and Z rotations)
 ```
 
+* Black & White mode
+```
+🄱
+```
+
+* Show middle of faces / triangles
+```
+🄼
+```
+
+* Color modes (pick up, file colors or earth-like)
+```
+🄲
+```
+
+* Debug utils
+```
+🄳
+```
+
 * Anti-Aliasing
 ```
 🄰
+```
+
+* Object carving (only in perspective correct mode)
+```
+🄿
+```
+
+* 3 Polygons carving (only in perspective correct mode)
+```
+🄿
+```
+
+* Fill object or not (only in perspective correct mode)
+```
+🄵
+```
+
+* Light (only in perspective correct mode)
+```
+🄻
+```
+
+* Trace edges (only in perspective correct mode)
+```
+🅃
+```
+
+* Edges color, black or white (only in perspective correct mode)
+```
+🄴
 ```
 
 ## Authors
