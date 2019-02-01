@@ -1,6 +1,6 @@
 # Fdf
 
-This is my version of Fdf project from 42 (done in solo)
+This is my version of Fdf project from 42
 
 ## User Guide
 	
@@ -8,13 +8,12 @@ How to use Fdf
 
 ### Prerequisites
 	
-Only working on MacOSX atm. The following frameworks are needed
+Only working on MacOSX atm. The following frameworks/libs are needed
 ```
--OpenGL
--Appkit
+OpenGL
+Appkit
+X11
 ```
-
-You also need X11 installed on the computer
 
 ### Installing
 		
@@ -49,11 +48,6 @@ run ./fdf with one of any file given in test_maps/
 ⊞ ⊟
 ```
 
-* Map colouring as earth cartography. Can scale it
-```
-< >
-```
-
 * Zoom
 ```
 Mouse scroll
@@ -74,7 +68,7 @@ Mouse drag (X and Z rotations)
 🄱
 ```
 
-* Show middle of faces / triangles
+* Show middle of faces / triangles / nothing
 ```
 🄼
 ```
@@ -82,6 +76,11 @@ Mouse drag (X and Z rotations)
 * Color modes (pick up, file colors or earth-like)
 ```
 🄲
+```
+
+* Scaling of earth-like colors
+```
+< >
 ```
 
 * Debug utils
@@ -92,11 +91,6 @@ Mouse drag (X and Z rotations)
 * Anti-Aliasing
 ```
 🄰
-```
-
-* Object carving (only in perspective correct mode)
-```
-🄿
 ```
 
 * 3 Polygons carving (only in perspective correct mode)
