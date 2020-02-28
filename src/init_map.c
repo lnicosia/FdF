@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:46:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 15:58:16 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/03/08 14:16:57 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		set_colors(t_coord2 c, int *j, char *str, t_env *data)
 	data->file_colors[c.x] = ft_atoi_base(str + *j,
 			"0123456789abcdef");
 	if (data->file_colors[c.x] == 0)
-		data->file_colors[c.x] = 0xFFFFFF;
+		data->file_colors[c.x] = 0;
 }
 
 static int	parse_str(char *str, t_env *data, t_coord2 c, int size)

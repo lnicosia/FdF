@@ -6,14 +6,13 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:59:46 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/31 17:44:28 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/01 12:19:57 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "coord_stack.h"
 #include "fill_poly_utils.h"
-#include <stdio.h>
 #include <mlx.h>
 
 void	find_v(t_fcoord3 v[3], int k, t_env *data)

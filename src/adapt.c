@@ -6,13 +6,12 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:27:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/31 15:17:45 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/01 12:19:40 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "color.h"
-#include <stdio.h>
 
 void	center(t_env *data)
 {

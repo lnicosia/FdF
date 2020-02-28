@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:42:13 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/30 16:21:37 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/01 12:20:58 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <math.h>
 #include "utils.h"
 #include "color.h"
-#include <stdio.h>
 
 unsigned int	get_color(int x, int y, t_env data)
 {

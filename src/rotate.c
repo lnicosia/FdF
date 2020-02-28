@@ -6,13 +6,12 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:50:51 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/30 17:03:54 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/01 12:20:49 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "utils.h"
-#include <stdio.h>
 
 void	x_rotation(t_env data)
 {

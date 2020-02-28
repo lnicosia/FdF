@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:34:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/29 21:30:47 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/01 12:20:10 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "utils.h"
 #include "user_functions.h"
 #include "mlx_keycode.h"
-#include <stdio.h>
 
 int		key_release(int key, void *param)
 {

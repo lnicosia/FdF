@@ -6,13 +6,12 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:02:58 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/28 12:29:24 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/01 12:21:25 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "user_functions.h"
-#include <stdio.h>
 
 void	center_mouse(t_env *data, int x, int y)
 {

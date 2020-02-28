@@ -6,14 +6,13 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:42:59 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/23 11:44:54 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/01 12:20:44 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "libft.h"
 #include "utils.h"
-#include <stdio.h>
 
 void	plot_extremes_low(t_coord2 c1, t_coord2 c2, t_env data, int color)
 {

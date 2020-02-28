@@ -6,13 +6,12 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:58:37 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/30 17:09:15 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/01 12:20:17 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "user_functions.h"
-#include <stdio.h>
 
 void	increase_z(t_env *data)
 {

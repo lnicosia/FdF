@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:40:22 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/31 15:23:41 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/01 12:20:27 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "utils.h"
 #include "math.h"
 #include "user_functions.h"
-#include <stdio.h>
 
 void	first_process(t_env *data)
 {
