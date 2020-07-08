@@ -22,6 +22,7 @@ BIN_DIR = .
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = minilibx
+ROOT = sudo
 
 SRC_RAW = main.c plot_line.c hook_more.c parser.c zoom.c event_utils.c \
 	  coord_utils.c init_map.c trace.c increase_z_and_color.c map_movement.c \
@@ -40,11 +41,25 @@ SRC = $(addprefix $(SRC_DIR)/, $(SRC_RAW))
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_RAW:.c=.o))
 INCLUDES = $(addprefix $(INCLUDES_DIR)/, $(HEADERS))
 
-CFLAGS =  -g3 -O3 -Wall -Wextra -Werror -I $(INCLUDES_DIR) \
+OPTI_FLAGS = -O3
+
+CFLAGS =  -g3 $(OPTI_FLAGS) -Wall -Wextra -Werror -I $(INCLUDES_DIR) \
 		 -I $(LIBFT_DIR)
 
 #MLX = -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
-MLX = -lmlx -I minilibx/ -lX11 -lXext -lm
+MLX_FLAGS = -lmlx -I minilibx/ -lX11 -lXext -lm
+MLX = /usr/lib/
+
+ifeq ($(OS), Windows_NT)
+	ROOT =
+else
+	UNAME_S = $(shell uname -s)
+    ifeq ($(UNAME_S), Darwin)
+		OPTI_FLAGS += -flto
+    else
+		OPTI_FLAGS += -flto
+    endif
+endif
 
 RED := "\033[0;31m"
 GREEN := "\033[0;32m"
@@ -61,8 +76,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE)
 	@gcc -c $< -o $@ $(CFLAGS) 
 
 $(BIN_DIR)/$(NAME): $(OBJ) $(LIBFT)
-	@gcc $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
+	@gcc $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 	@echo ${GREEN}"[INFO] Compiled '$(NAME)' executable with success!"${RESET}
+
+$(MLX):
+	$(ROOT) cp $(MLX_DIR)/libmlx.a /usr/lib
 
 clean: 
 	@rm -f $(OBJ)
@@ -74,7 +92,7 @@ clean:
 fclean: clean
 	@rm -Rf fdf
 	@rm -Rf fdf_leaks
-	@echo ${CYAN}"[INFO] Removed everything because SKIBIDI PA PA"${RESET}
+	@echo ${CYAN}"[INFO] Removed everything"${RESET}
 
 re: fclean all
 
