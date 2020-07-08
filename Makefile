@@ -21,6 +21,7 @@ BIN_DIR = .
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
+MLX_DIR = minilibx
 
 SRC_RAW = main.c plot_line.c hook_more.c parser.c zoom.c event_utils.c \
 	  coord_utils.c init_map.c trace.c increase_z_and_color.c map_movement.c \
@@ -52,6 +53,7 @@ RESET :="\033[0m"
 
 all:
 	@make -C $(LIBFT_DIR)
+	@make -C $(MLX_DIR)
 	@make $(BIN_DIR)/$(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE)
