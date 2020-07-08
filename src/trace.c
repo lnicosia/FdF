@@ -40,7 +40,8 @@ unsigned int	get_color(int x, int y, t_env data)
 				(0xFFFFFF));
 	}
 	return ((data.config.color == 1 && data.config.file_color == 1) ?
-			data.file_colors[y * data.map_width + x] : data.picked_color);
+			(unsigned int)data.file_colors[y * data.map_width + x]
+			: data.picked_color);
 }
 
 void			scale_map(t_env data)

@@ -42,7 +42,8 @@ INCLUDES = $(addprefix $(INCLUDES_DIR)/, $(HEADERS))
 CFLAGS =  -g3 -O3 -Wall -Wextra -Werror -I $(INCLUDES_DIR) \
 		 -I $(LIBFT_DIR)
 
-MLX = -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
+#MLX = -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
+MLX = -lmlx -I minilibx/
 
 RED := "\033[0;31m"
 GREEN := "\033[0;32m"

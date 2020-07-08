@@ -43,7 +43,6 @@ void		project_map_para(t_env data)
 	int		y;
 	int		x;
 	int		k;
-	float	tmp;
 
 	y = 0;
 	k = 0;
@@ -52,7 +51,6 @@ void		project_map_para(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			tmp = data.rotated_map[k].x;
 			data.projected_map[k].x = (data.rotated_map[k].x -
 					data.rotated_map[k].y);
 			data.projected_map[k].y = (-data.rotated_map[k].z +
@@ -69,7 +67,6 @@ void		project_map_flat(t_env data)
 	int		y;
 	int		x;
 	int		k;
-	float	tmp;
 
 	y = 0;
 	k = 0;
@@ -78,7 +75,6 @@ void		project_map_flat(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			tmp = data.rotated_map[k].x;
 			data.projected_map[k].x = data.rotated_map[k].x;
 			data.projected_map[k].y = data.rotated_map[k].y;
 			x++;
@@ -93,7 +89,6 @@ void		project_map_pc(t_env data)
 	int		y;
 	int		x;
 	int		k;
-	float	tmp;
 
 	y = 0;
 	k = 0;
@@ -102,7 +97,6 @@ void		project_map_pc(t_env data)
 		x = 0;
 		while (x < data.map_width)
 		{
-			tmp = data.rotated_map[k].x;
 			data.projected_map[k].x = (data.rotated_map[k].x - data.map_width /
 			2) / (-(data.rotated_map[k].z) +
 			data.map[data.zmax].z + data.zlimit + 1);
