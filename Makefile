@@ -22,6 +22,7 @@ BIN_DIR = .
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = minilibx
+MLX = $(MLX_DIR)/libmlx.a
 ROOT = sudo
 
 SRC_RAW = main.c plot_line.c hook_more.c parser.c zoom.c event_utils.c \
@@ -47,8 +48,7 @@ CFLAGS =  -g3 $(OPTI_FLAGS) -Wall -Wextra -Werror -I $(INCLUDES_DIR) \
 		 -I $(LIBFT_DIR)
 
 #MLX = -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
-MLX_FLAGS = -lmlx -I minilibx/ -lX11 -lXext -lm
-MLX = /usr/lib/libmlx.a
+MLX_FLAGS = -lmlx -I $(MLX_DIR) -lX11 -lXext -lm
 
 ifeq ($(OS), Windows_NT)
 	ROOT =
@@ -68,7 +68,6 @@ RESET :="\033[0m"
 
 all:
 	@make -C $(LIBFT_DIR)
-	@make -C $(MLX_DIR)
 	@make $(BIN_DIR)/$(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE)
