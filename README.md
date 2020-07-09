@@ -1,6 +1,6 @@
 # Fdf
 
-This is my version of Fdf project from 42
+This is my version of Fdf project from 42. This software provides a wireframe representation of 3D terrains.
 
 ## User Guide
 	
