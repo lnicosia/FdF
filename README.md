@@ -2,6 +2,12 @@
 
 ![](docs/fdf1.png)
 
+![](docs/fdf4.png)
+
+![](docs/fdf2.png)
+
+![](docs/fdf3.png)
+
 This is my version of Fdf project from 42. This software provides a wireframe representation of 3D terrains.
 
 ## User Guide
