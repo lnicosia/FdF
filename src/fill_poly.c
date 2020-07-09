@@ -13,7 +13,7 @@
 #include "utils.h"
 #include "coord_stack.h"
 #include "fill_poly_utils.h"
-#include <mlx.h>
+#include "mlx.h"
 
 void	find_v(t_fcoord3 v[3], int k, t_env *data)
 {

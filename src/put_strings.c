@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
+#include "mlx.h"
 #include "utils.h"
 #include "put_button_strings.h"
 

@@ -45,10 +45,10 @@ INCLUDES = $(addprefix $(INCLUDES_DIR)/, $(HEADERS))
 OPTI_FLAGS = -O3
 
 CFLAGS =  -g3 $(OPTI_FLAGS) -Wall -Wextra -Werror -I $(INCLUDES_DIR) \
-		 -I $(LIBFT_DIR)
+		 -I $(LIBFT_DIR) -I $(MLX_DIR)
 
 #MLX = -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
-MLX_FLAGS = -lmlx -I $(MLX_DIR) -lX11 -lXext -lm
+MLX_FLAGS = -lX11 -lXext -lm
 
 ifeq ($(OS), Windows_NT)
 	ROOT =
@@ -75,7 +75,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE)
 	@gcc -c $< -o $@ $(CFLAGS) 
 
 $(BIN_DIR)/$(NAME): $(OBJ) $(LIBFT) $(MLX)
-	@gcc $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	@gcc $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo ${GREEN}"[INFO] Compiled '$(NAME)' executable with success!"${RESET}
 
 $(MLX):

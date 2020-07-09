@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
+#include "mlx.h"
 #include <math.h>
 #include "utils.h"
 #include "color.h"

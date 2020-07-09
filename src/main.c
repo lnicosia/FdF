@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
+#include "mlx.h"
 #include "mlx_keycode.h"
 #include "libft.h"
 #include "color.h"
