@@ -1,13 +1,15 @@
 # Fdf
 
+![](docs/fdf1.png)
+
 This is my version of Fdf project from 42. This software provides a wireframe representation of 3D terrains.
 
 ## User Guide
-	
+
 How to use Fdf
 
 ### Prerequisites
-	
+
 Only working on MacOSX atm. The following frameworks/libs are needed
 ```
 OpenGL
@@ -16,19 +18,19 @@ X11
 ```
 
 ### Installing
-		
+
 ```
 make
 ```
 
 ### Using Fdf
-		
+
 ```
 run ./fdf with one of any file given in test_maps/
 ```
 
 ## Features
-		
+
 * Map scaling and centering
 
 * Window resolution
@@ -119,5 +121,5 @@ Mouse drag (X and Z rotations)
 ```
 
 ## Authors
-		
+
 Lucas Nicosia
