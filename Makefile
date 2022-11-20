@@ -56,8 +56,10 @@ else
 	UNAME_S = $(shell uname -s)
     ifeq ($(UNAME_S), Darwin)
 		OPTI_FLAGS += -flto
+		MLX_DIR = minilibx_macos
     else
 		OPTI_FLAGS += -flto
+		MLX_DIR = minilibx-linux
     endif
 endif
 
@@ -72,13 +74,14 @@ all:
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE)
 	@mkdir -p $(OBJ_DIR)
-	@gcc -c $< -o $@ $(CFLAGS) 
+	gcc -c $< -o $@ $(CFLAGS) 
 
 $(BIN_DIR)/$(NAME): $(OBJ) $(LIBFT) $(MLX)
-	@gcc $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
+	gcc $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo ${GREEN}"[INFO] Compiled '$(NAME)' executable with success!"${RESET}
 
 $(MLX):
+	make -C $(MLX_DIR)
 	$(ROOT) cp $(MLX_DIR)/libmlx.a /usr/lib
 
 clean: 
