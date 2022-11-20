@@ -22,6 +22,7 @@ BIN_DIR = .
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = minilibx
+MLX_INIT = $(MLX_DIR)/mlx.h
 MLX = $(MLX_DIR)/libmlx.a
 ROOT = sudo
 
@@ -72,7 +73,7 @@ all:
 	@make -C $(LIBFT_DIR)
 	@make $(BIN_DIR)/$(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE) $(MLX_INIT)
 	@mkdir -p $(OBJ_DIR)
 	gcc -c $< -o $@ $(CFLAGS) 
 
@@ -80,7 +81,10 @@ $(BIN_DIR)/$(NAME): $(OBJ) $(LIBFT) $(MLX)
 	gcc $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo ${GREEN}"[INFO] Compiled '$(NAME)' executable with success!"${RESET}
 
-$(MLX):
+$(MLX_INIT):
+	git submodule update --init
+
+$(MLX): $(MLX_DIR)/mlx.h
 	make -C $(MLX_DIR)
 	$(ROOT) cp $(MLX_DIR)/libmlx.a /usr/lib
 
