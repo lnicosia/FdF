@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2019/01/31 17:45:20 by lnicosia         ###   ########.fr        #
+#    Updated: 2022/11/21 09:38:31 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ $(MLX_INIT):
 
 $(MLX): $(MLX_DIR)/mlx.h
 	make -C $(MLX_DIR)
-	$(ROOT) cp $(MLX_DIR)/libmlx.a /usr/lib
+	#$(ROOT) cp $(MLX_DIR)/libmlx.a /usr/lib
 
 clean: 
 	@rm -f $(OBJ)
