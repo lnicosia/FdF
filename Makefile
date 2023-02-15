@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2023/02/15 18:55:02 by lumenthi         ###   ########.fr        #
+#    Updated: 2023/02/15 19:04:19 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ CYAN := "\033[0;36m"
 RESET :="\033[0m"
 
 all:
+	@make -C $(LIBFT_DIR)
 	@make $(BIN_DIR)/$(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE) $(MLX_INIT) $(LIBFT_INIT)
