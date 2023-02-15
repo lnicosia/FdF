@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:30:01 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/30 16:22:58 by lnicosia         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:30:15 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,14 @@ int		key_press0(int key, t_env *data)
 	return (key_press1(key, data));
 }
 
+#include <stdio.h>
 int		key_press(int key, void *param)
 {
 	t_env	*data;
 
 	data = (t_env*)param;
 	data->input_buffers.esc = key == ESC_KEY ? 0 : data->input_buffers.esc;
+	printf("KEY PRESS. Key = %d, F key = %d\n", key, ESC_KEY);
 	if (key == NKPL_KEY)
 	{
 		data->input_buffers.increase = 1;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_window.c                                       :+:      :+:    :+:   */
+/*   screen_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:59:42 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/01/30 18:14:09 by lnicosia         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:40:57 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	set_screen(t_env *data)
 
 void	redraw(t_env *data)
 {
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	//mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	set_screen(data);
 }

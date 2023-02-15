@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2022/11/21 09:38:31 by lnicosia         ###   ########.fr        #
+#    Updated: 2023/02/15 11:22:57 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC_RAW = main.c plot_line.c hook_more.c parser.c zoom.c event_utils.c \
 	  fill_computing.c
 
 HEADERS = utils.h color.h mlx_keycode.h user_functions.h coord_stack.h \
-		  color_pickers.h error.h fill_poly_utils.h buttons.h
+		  color_pickers.h error.h fill_poly_utils.h buttons.h keysymdef.h
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_RAW))
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_RAW:.c=.o))
@@ -46,7 +46,7 @@ INCLUDES = $(addprefix $(INCLUDES_DIR)/, $(HEADERS))
 OPTI_FLAGS = -O3
 
 CFLAGS =  -g3 $(OPTI_FLAGS) -Wall -Wextra -Werror -I $(INCLUDES_DIR) \
-		 -I $(LIBFT_DIR) -I $(MLX_DIR)
+		 -I $(LIBFT_DIR)/$(INCLUDES_DIR) -I $(MLX_DIR)
 
 #MLX = -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
 MLX_FLAGS = -lX11 -lXext -lm
