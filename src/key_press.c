@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 18:30:01 by lnicosia          #+#    #+#             */
-/*   Updated: 2023/02/15 18:04:03 by lumenthi         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:04:38 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ int		key_press0(int key, t_env *data)
 	return (key_press1(key, data));
 }
 
-#include <stdio.h>
 int		key_press(int key, void *param)
 {
 	t_env	*data;
