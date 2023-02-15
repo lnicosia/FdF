@@ -6,7 +6,7 @@
 #    By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/06 15:56:21 by lnicosia          #+#    #+#              #
-#    Updated: 2023/02/15 11:22:57 by lumenthi         ###   ########.fr        #
+#    Updated: 2023/02/15 18:55:02 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,10 +70,9 @@ CYAN := "\033[0;36m"
 RESET :="\033[0m"
 
 all:
-	@make -C $(LIBFT_DIR)
 	@make $(BIN_DIR)/$(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE) $(MLX_INIT)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) $(MAKEFILE) $(MLX_INIT) $(LIBFT_INIT)
 	@mkdir -p $(OBJ_DIR)
 	gcc -c $< -o $@ $(CFLAGS) 
 
@@ -84,9 +83,15 @@ $(BIN_DIR)/$(NAME): $(OBJ) $(LIBFT) $(MLX)
 $(MLX_INIT):
 	git submodule update --init
 
+$(LIBFT_INIT):
+	git submodule update --init
+
 $(MLX): $(MLX_DIR)/mlx.h
 	make -C $(MLX_DIR)
 	#$(ROOT) cp $(MLX_DIR)/libmlx.a /usr/lib
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
 
 clean: 
 	@rm -f $(OBJ)
