@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 13:19:12 by lnicosia          #+#    #+#             */
-/*   Updated: 2023/02/15 16:39:55 by lumenthi         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:12:26 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,7 +375,7 @@
 ** Arrow keys
 */
 
-# define UP_KEY XK_Left
+# define UP_KEY XK_Up
 # define DOWN_KEY XK_Down
 # define RIGHT_KEY XK_Right
 # define LEFT_KEY XK_Left
